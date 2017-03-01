@@ -23,10 +23,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'railties', '>= 3.2.6', '< 6.0'
   s.add_runtime_dependency 'devise', '>= 3.0.0', '< 5.0'
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
-  s.add_development_dependency 'sqlite3', '~> 1.3.10'
+  s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
   s.add_development_dependency 'rubocop', '~> 0'
-  s.add_development_dependency 'minitest'
+  s.add_development_dependency 'minitest', '~> 0'
   s.add_development_dependency 'easy_captcha', '~> 0'
   s.add_development_dependency 'rails_email_validator', '~> 0'
-  s.add_development_dependency 'coveralls'
+  s.add_development_dependency 'coveralls', '~> 0.8'
 end
