@@ -1,7 +1,7 @@
-module DeviseSecurityExtension
+module DeviseSecurity
   module Patches
-    autoload :ControllerCaptcha, 'devise_security_extension/patches/controller_captcha'
-    autoload :ControllerSecurityQuestion, 'devise_security_extension/patches/controller_security_question'
+    autoload :ControllerCaptcha, 'devise-security/patches/controller_captcha'
+    autoload :ControllerSecurityQuestion, 'devise-security/patches/controller_security_question'
 
     class << self
       def apply

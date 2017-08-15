@@ -1,3 +1,3 @@
 class SecurityQuestion::UnlocksController < Devise::UnlocksController
-  include DeviseSecurityExtension::Patches::ControllerSecurityQuestion
+  include DeviseSecurity::Patches::ControllerSecurityQuestion
 end

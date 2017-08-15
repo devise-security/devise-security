@@ -6,7 +6,7 @@ Coveralls.wear!
 require 'dummy/config/environment'
 require 'minitest/autorun'
 require 'rails/test_help'
-require 'devise_security_extension'
+require 'devise-security'
 
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.logger = Logger.new(nil)

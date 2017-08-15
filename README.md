@@ -1,12 +1,12 @@
 # Devise Security Extension
 
-[![Build Status](https://travis-ci.org/phatworx/devise_security_extension.svg?branch=master)](https://travis-ci.org/phatworx/devise_security_extension)
+[![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
 
 An enterprise security extension for [Devise](https://github.com/plataformatec/devise), trying to meet industrial standard security demands for web applications.
 
 It is composed of 7 additional Devise modules:
 
-* `:password_expirable` - passwords will expire after a configured time (and will need an update). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175) immediately as the new password.
+* `:password_expirable` - passwords will expire after a configured time (and will need an update). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise-security/issues/175) immediately as the new password.
 * `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
 * `:password_archivable` - save used passwords in an `old_passwords` table for history checks (don't be able to use a formerly used password)
 * `:session_limitable` - ensures, that there is only one session usable per account at once
@@ -25,7 +25,7 @@ Configuration and database schema for each module below.
 Devise Security Extension works with Devise on Rails 3.2 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
 
 ```ruby
-gem 'devise_security_extension'
+gem 'devise-security'
 ```
 
 Run the bundle command to install it.
@@ -33,7 +33,7 @@ Run the bundle command to install it.
 After you installed Devise Security Extension you need to run the generator:
 
 ```console
-rails generate devise_security_extension:install
+rails generate devise-security:install
 ```
 
 The generator adds optional configurations to `config/initializers/devise.rb`. Enable
@@ -99,7 +99,7 @@ end
 ```
 
 ## Captcha-Support
-The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_captcha). See further documention there.
+The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_captcha). See further documentation there.
 
 ### Installation
 
@@ -175,7 +175,7 @@ add_index :the_resources, :paranoid_verification_code
 add_index :the_resources, :paranoid_verified_at
 ```
 
-[Documentation for Paranoid Verifiable module]( https://github.com/phatworx/devise_security_extension/wiki/Paranoid-Verification)
+[Documentation for Paranoid Verifiable module]( https://github.com/devise-security/devise-security/wiki/Paranoid-Verification)
 
 ### Security questionable
 
@@ -242,16 +242,13 @@ end
 * 0.6 expirable module
 * 0.7 security questionable module for recover and unlock
 * 0.8 Support for Rails 4 (+ variety of patches)
+* 0.11 Support for Rails 5. Forked to allow project maintenance and features
 
 ## Maintainers
 
-* Team Phatworx (https://github.com/phatworx)
-* Alexander Dreher (https://github.com/alexdreher)
-* Christoph Chilian (https://github.com/cc-web)
-* Marco Scholl (https://github.com/traxanos)
-* Thomas Powell (https://github.com/stringsn88keys)
+* Nate Bird (https://github.com/natebird)
 
-## Contributing to devise_security_extension
+## Contributing to devise-security
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -263,4 +260,4 @@ end
 
 ## Copyright
 
-Copyright (c) 2011-2015 Marco Scholl. See LICENSE.txt for further details.
+Copyright (c) 2011-2017 Marco Scholl. See LICENSE.txt for further details.

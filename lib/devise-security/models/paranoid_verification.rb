@@ -1,4 +1,4 @@
-require 'devise_security_extension/hooks/paranoid_verification'
+require 'devise-security/hooks/paranoid_verification'
 
 module Devise
   module Models

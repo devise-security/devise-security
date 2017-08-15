@@ -1,4 +1,4 @@
-module DeviseSecurityExtension::Patches
+module DeviseSecurity::Patches
   module ControllerSecurityQuestion
     extend ActiveSupport::Concern
 

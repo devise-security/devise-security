@@ -78,29 +78,29 @@ module Devise
 end
 
 # an security extension for devise
-module DeviseSecurityExtension
-  autoload :Schema, 'devise_security_extension/schema'
-  autoload :Patches, 'devise_security_extension/patches'
+module DeviseSecurity
+  autoload :Schema, 'devise-security/schema'
+  autoload :Patches, 'devise-security/patches'
 
   module Controllers
-    autoload :Helpers, 'devise_security_extension/controllers/helpers'
+    autoload :Helpers, 'devise-security/controllers/helpers'
   end
 end
 
 # modules
-Devise.add_module :password_expirable, controller: :password_expirable, model: 'devise_security_extension/models/password_expirable', route: :password_expired
-Devise.add_module :secure_validatable, model: 'devise_security_extension/models/secure_validatable'
-Devise.add_module :password_archivable, model: 'devise_security_extension/models/password_archivable'
-Devise.add_module :session_limitable, model: 'devise_security_extension/models/session_limitable'
-Devise.add_module :session_non_transferable, model: 'devise_security_extension/models/session_non_transferable'
-Devise.add_module :expirable, model: 'devise_security_extension/models/expirable'
-Devise.add_module :security_questionable, model: 'devise_security_extension/models/security_questionable'
-Devise.add_module :paranoid_verification, controller: :paranoid_verification_code, model: 'devise_security_extension/models/paranoid_verification', route: :verification_code
+Devise.add_module :password_expirable, controller: :password_expirable, model: 'devise-security/models/password_expirable', route: :password_expired
+Devise.add_module :secure_validatable, model: 'devise-security/models/secure_validatable'
+Devise.add_module :password_archivable, model: 'devise-security/models/password_archivable'
+Devise.add_module :session_limitable, model: 'devise-security/models/session_limitable'
+Devise.add_module :session_non_transferable, model: 'devise-security/models/session_non_transferable'
+Devise.add_module :expirable, model: 'devise-security/models/expirable'
+Devise.add_module :security_questionable, model: 'devise-security/models/security_questionable'
+Devise.add_module :paranoid_verification, controller: :paranoid_verification_code, model: 'devise-security/models/paranoid_verification', route: :verification_code
 
 # requires
-require 'devise_security_extension/routes'
-require 'devise_security_extension/rails'
-require 'devise_security_extension/orm/active_record'
-require 'devise_security_extension/models/old_password'
-require 'devise_security_extension/models/database_authenticatable_patch'
-require 'devise_security_extension/models/paranoid_verification'
+require 'devise-security/routes'
+require 'devise-security/rails'
+require 'devise-security/orm/active_record'
+require 'devise-security/models/old_password'
+require 'devise-security/models/database_authenticatable_patch'
+require 'devise-security/models/paranoid_verification'

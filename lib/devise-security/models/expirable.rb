@@ -1,4 +1,4 @@
-require 'devise_security_extension/hooks/expirable'
+require 'devise-security/hooks/expirable'
 
 module Devise
   module Models

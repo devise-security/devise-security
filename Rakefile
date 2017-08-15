@@ -3,9 +3,9 @@ require 'rubygems'
 require 'bundler'
 require 'rake/testtask'
 require 'rdoc/task'
-require 'devise_security_extension/version'
+require 'devise-security/version'
 
-desc 'Default: Run DeviseSecurityExtension unit tests'
+desc 'Default: Run DeviseSecurity unit tests'
 task default: :test
 
 Rake::TestTask.new(:test) do |t|
@@ -17,10 +17,10 @@ Rake::TestTask.new(:test) do |t|
 end
 
 Rake::RDocTask.new do |rdoc|
-  version = DeviseSecurityExtension::VERSION.dup
+  version = DeviseSecurity::VERSION.dup
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "devise_security_extension #{version}"
+  rdoc.title = "devise-security #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

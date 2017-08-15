@@ -1,19 +1,17 @@
 # -*- encoding: utf-8 -*-
 $LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
-require 'devise_security_extension/version'
+require 'devise-security/version'
 
 Gem::Specification.new do |s|
-  s.name = 'devise_security_extension'
-  s.version     = DeviseSecurityExtension::VERSION.dup
+  s.name = 'devise-security'
+  s.version     = DeviseSecurity::VERSION.dup
   s.platform    = Gem::Platform::RUBY
   s.licenses    = ['MIT']
   s.summary     = 'Security extension for devise'
-  s.email       = 'team@phatworx.de'
-  s.homepage    = 'https://github.com/phatworx/devise_security_extension'
+  s.email       = 'natebird@gmail.com'
+  s.homepage    = 'https://github.com/devise-security/devise-security'
   s.description = 'An enterprise security extension for devise, trying to meet industrial standard security demands for web applications.'
-  s.authors     = ['Marco Scholl', 'Alexander Dreher']
-
-  s.rubyforge_project = 'devise_security_extension'
+  s.authors     = ['Marco Scholl', 'Alexander Dreher', 'Nate Bird']
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
@@ -29,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
   s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
   s.add_development_dependency 'rubocop', '~> 0'
-  s.add_development_dependency 'minitest', '~> 0'
+  s.add_development_dependency 'minitest', '~> 5.0'
   s.add_development_dependency 'easy_captcha', '~> 0'
   s.add_development_dependency 'rails_email_validator', '~> 0'
   s.add_development_dependency 'coveralls', '~> 0.8'

@@ -1,3 +1,3 @@
 class Captcha::SessionsController < Devise::SessionsController
-  include DeviseSecurityExtension::Patches::ControllerCaptcha
+  include DeviseSecurity::Patches::ControllerCaptcha
 end

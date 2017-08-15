@@ -1,4 +1,4 @@
-module DeviseSecurityExtension
+module DeviseSecurity
   module Generators
     # Generator for Rails to create or append to a Devise initializer.
     class InstallGenerator < Rails::Generators::Base
@@ -8,8 +8,8 @@ module DeviseSecurityExtension
       desc 'Install the devise security extension'
 
       def copy_initializer
-        template('devise_security_extension.rb',
-                 'config/initializers/devise_security_extension.rb',
+        template('devise-security.rb',
+                 'config/initializers/devise-security.rb',
         )
       end
 

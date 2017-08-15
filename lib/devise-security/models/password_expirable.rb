@@ -1,4 +1,4 @@
-require 'devise_security_extension/hooks/password_expirable'
+require 'devise-security/hooks/password_expirable'
 
 module Devise
   module Models
