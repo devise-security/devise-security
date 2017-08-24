@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
 
-A [Devise](https://github.com/plataformatec/devise) extension to add additional security features required by modern web applications. Forked from [Devise Security Extension] (https://github.com/phatworx/devise_security_extension)
+A [Devise](https://github.com/plataformatec/devise) extension to add additional security features required by modern web applications. Forked from [Devise Security Extension](https://github.com/phatworx/devise_security_extension)
 
 It is composed of 7 additional Devise modules:
 
