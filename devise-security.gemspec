@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
 require 'devise-security/version'
 
 Gem::Specification.new do |s|
-  s.name = 'devise-security'
+  s.name        = 'devise-security'
   s.version     = DeviseSecurity::VERSION.dup
   s.platform    = Gem::Platform::RUBY
   s.licenses    = ['MIT']
@@ -11,7 +11,9 @@ Gem::Specification.new do |s|
   s.email       = 'natebird@gmail.com'
   s.homepage    = 'https://github.com/devise-security/devise-security'
   s.description = 'An enterprise security extension for devise, trying to meet industrial standard security demands for web applications.'
-  s.authors     = ['Marco Scholl', 'Alexander Dreher', 'Nate Bird']
+  s.authors     = [
+    'Marco Scholl', 'Alexander Dreher', 'Nate Bird', 'Dillon Welch'
+  ]
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
