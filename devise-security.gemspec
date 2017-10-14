@@ -18,17 +18,12 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
   s.require_paths = ['lib']
-  s.required_ruby_version = '>= 2.1.0'
+  s.required_ruby_version = '>= 2.2.2'
 
   if RUBY_VERSION >= '2.4'
     s.add_runtime_dependency 'rails', '>= 4.2.8', '< 6.0'
   else
-    # TODO do we want to drop support for this? Rails 5 requires >= 2.2.2
-    if RUBY_VERSION >= '2.2.2'
-      s.add_runtime_dependency 'railties', '>= 3.2.6', '< 6.0'
-    else
-      s.add_runtime_dependency 'railties', '>= 3.2.6', '< 5.0'
-    end
+    s.add_runtime_dependency 'railties', '>= 3.2.6', '< 6.0'
   end
   s.add_runtime_dependency 'devise', '>= 3.0.0', '< 5.0'
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
