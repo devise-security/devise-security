@@ -22,7 +22,7 @@ Configuration and database schema for each module below.
 
 ## Getting started
 
-Devise Security Extension works with Devise on Rails 3.2 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
+Devise Security works with Devise on Rails 3.2 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
 
 ```ruby
 gem 'devise-security'
@@ -30,14 +30,14 @@ gem 'devise-security'
 
 Run the bundle command to install it.
 
-After you installed Devise Security Extension you need to run the generator:
+After you installed Devise Security you need to run the generator:
 
 ```console
 rails generate devise-security:install
 ```
 
 The generator adds optional configurations to `config/initializers/devise.rb`. Enable
-the modules you wish to use in the initializer you are ready to add Devise Security Extension modules on top of Devise modules to any of your Devise models:
+the modules you wish to use in the initializer you are ready to add Devise Security modules on top of Devise modules to any of your Devise models:
 
 ```ruby
 devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :expirable
@@ -111,7 +111,7 @@ gem 'easy_captcha'
 ```ruby
 rails generate easy_captcha:install
 ```
-3. Enable captcha - see "Configuration" of Devise Security Extension above.
+3. Enable captcha - see "Configuration" of Devise Security above.
 4. Add the captcha in the generated devise views for each controller you have activated
 ```erb
 <p><%= captcha_tag %></p>
