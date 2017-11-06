@@ -3,7 +3,7 @@ module DeviseSecurity::Patches
     extend ActiveSupport::Concern
     included do
       define_method :create do |&block|
-        if ((defined? verify_recaptcha) && (verify_recaptcha)) || ((defined? valid_captcha?) && (valid_captcha? params[:captcha]))
+        if valid_captcha_if_defined?(params[:captcha])
           self.resource = warden.authenticate!(auth_options)
           set_flash_message(:notice, :signed_in) if is_flashing_format?
           sign_in(resource_name, resource)

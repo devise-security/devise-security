@@ -5,7 +5,7 @@ module DeviseSecurity::Patches
       define_method :create do |&block|
         build_resource(sign_up_params)
 
-        if ((defined? verify_recaptcha) && (verify_recaptcha)) || ((defined? valid_captcha?) && (valid_captcha? params[:captcha]))
+        if valid_captcha_if_defined?(params[:captcha])
           if resource.save
             block.call(resource) if block
             if resource.active_for_authentication?
