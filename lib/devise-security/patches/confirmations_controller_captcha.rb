@@ -3,7 +3,7 @@ module DeviseSecurity::Patches
     extend ActiveSupport::Concern
     included do
       define_method :create do
-        if ((defined? verify_recaptcha) && (verify_recaptcha)) || ((defined? valid_captcha?) && (valid_captcha? params[:captcha]))
+        if valid_captcha_if_defined?(params[:captcha])
           self.resource = resource_class.send_confirmation_instructions(params[resource_name])
 
           if successfully_sent?(resource)

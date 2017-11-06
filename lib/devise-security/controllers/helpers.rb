@@ -21,6 +21,11 @@ module DeviseSecurity
         end
       end
 
+      def valid_captcha_if_defined?(captcha)
+        defined?(verify_recaptcha) && verify_recaptcha ||
+          defined?(valid_captcha?) && valid_captcha?(captcha)
+      end
+
       # controller instance methods
 
         private
@@ -88,9 +93,6 @@ module DeviseSecurity
         def ignore_password_expire?
           false
         end
-
-
     end
   end
-
 end
