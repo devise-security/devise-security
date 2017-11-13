@@ -33,7 +33,7 @@ Run the bundle command to install it.
 After you installed Devise Security you need to run the generator:
 
 ```console
-rails generate devise-security:install
+rails generate devise_security:install
 ```
 
 The generator adds optional configurations to `config/initializers/devise.rb`. Enable
