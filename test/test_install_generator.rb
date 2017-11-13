@@ -1,6 +1,6 @@
 require 'test_helper'
 require 'rails/generators/test_case'
-require 'generators/devise-security/install_generator'
+require 'generators/devise_security/install_generator'
 
 class TestInstallGenerator < Rails::Generators::TestCase
   tests DeviseSecurity::Generators::InstallGenerator
