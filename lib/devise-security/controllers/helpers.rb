@@ -26,6 +26,11 @@ module DeviseSecurity
           defined?(valid_captcha?) && valid_captcha?(captcha)
       end
 
+      def valid_security_question_answer?(resource, answer)
+        resource.security_question_answer.present? &&
+          resource.security_question_answer == answer
+      end
+
       # controller instance methods
 
         private
