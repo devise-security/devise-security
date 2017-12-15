@@ -27,13 +27,12 @@ Gem::Specification.new do |s|
   end
   s.add_runtime_dependency 'devise', '>= 4.2.0', '< 5.0'
 
-  s.add_development_dependency 'm'
-  s.add_development_dependency 'byebug'
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
-  s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
-  s.add_development_dependency 'rubocop', '~> 0'
-  s.add_development_dependency 'minitest', '~> 5.0'
-  s.add_development_dependency 'easy_captcha', '~> 0'
-  s.add_development_dependency 'rails_email_validator', '~> 0'
   s.add_development_dependency 'coveralls', '~> 0.8'
+  s.add_development_dependency 'easy_captcha', '~> 0'
+  s.add_development_dependency 'm'
+  s.add_development_dependency 'minitest', '~> 5.0'
+  s.add_development_dependency 'rails_email_validator', '~> 0'
+  s.add_development_dependency 'rubocop', '~> 0'
+  s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
 end
