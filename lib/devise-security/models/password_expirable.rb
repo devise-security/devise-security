@@ -24,7 +24,7 @@ module Devise
       def need_change_password!
         if expired_password_after_numeric?
           need_change_password
-          self.save(:validate => false)
+          self.save(validate: false)
         end
       end
 

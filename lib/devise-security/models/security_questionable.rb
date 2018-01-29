@@ -12,7 +12,6 @@ module Devise
     # f.text_field :security_question_answer
     module SecurityQuestionable
       extend ActiveSupport::Concern
-
     end
   end
 end

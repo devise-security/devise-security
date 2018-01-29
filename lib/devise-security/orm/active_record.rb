@@ -9,8 +9,6 @@ module DeviseSecurity
     module ActiveRecord
       module Schema
         include DeviseSecurity::Schema
-
-
       end
     end
   end
