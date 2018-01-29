@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
   Include:
     - '**/Rakefile'
     - '**/config.ru'
@@ -19,6 +19,18 @@ Rails:
 # complexity.
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  SupportedStyles:
+    - nested
+    - compact
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
 
 # Trailing commas make for clearer diffs because the last line won't appear
 # to have been changed, as it would if it lacked a comma and had one added.
