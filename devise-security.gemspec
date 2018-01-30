@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
-$LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
+# frozen_string_literal: true
+
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'devise-security/version'
 
 Gem::Specification.new do |s|
@@ -10,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Security extension for devise'
   s.email       = 'natebird@gmail.com'
   s.homepage    = 'https://github.com/devise-security/devise-security'
-  s.description = 'An enterprise security extension for devise, trying to meet industrial standard security demands for web applications.'
+  s.description = 'An enterprise security extension for devise.'
   s.authors     = [
     'Marco Scholl', 'Alexander Dreher', 'Nate Bird', 'Dillon Welch'
   ]
@@ -23,7 +25,7 @@ Gem::Specification.new do |s|
   if RUBY_VERSION >= '2.4'
     s.add_runtime_dependency 'rails', '>= 4.2.8', '< 6.0'
   else
-    s.add_runtime_dependency 'railties', '>= 3.2.6', '< 6.0'
+    s.add_runtime_dependency 'railties', '>= 4.1.0', '< 6.0'
   end
   s.add_runtime_dependency 'devise', '>= 4.2.0', '< 5.0'
 

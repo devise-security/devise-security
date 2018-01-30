@@ -18,7 +18,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   test 'cannot use same password' do
     user = User.create password: 'password1', password_confirmation: 'password1'
 
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user, 'password1') }
   end
 
   test 'cannot use archived passwords' do
@@ -27,20 +27,20 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     user = User.create password: 'password1', password_confirmation: 'password1'
     assert_equal 0, OldPassword.count
 
-    set_password(user,  'password2')
+    set_password(user, 'password2')
     assert_equal 1, OldPassword.count
 
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user, 'password1') }
 
-    set_password(user,  'password3')
+    set_password(user, 'password3')
     assert_equal 2, OldPassword.count
 
     # rotate first password out of archive
-    assert set_password(user,  'password4')
+    assert set_password(user, 'password4')
 
     # archive count was 2, so first password should work again
-    assert set_password(user,  'password1')
-    assert set_password(user,  'password2')
+    assert set_password(user, 'password1')
+    assert set_password(user, 'password2')
   end
 
   test 'the option should be dynamic during runtime' do
@@ -52,10 +52,10 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     user = User.create password: 'password1', password_confirmation: 'password1'
 
-    assert set_password(user,  'password2')
+    assert set_password(user, 'password2')
 
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password2') }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user, 'password2') }
 
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'password1') }
+    assert_raises(ActiveRecord::RecordInvalid) { set_password(user, 'password1') }
   end
 end

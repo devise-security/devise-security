@@ -4,7 +4,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   setup do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     @user = User.create(username: 'hello', email: 'hello@path.travel',
                         password: '1234', password_changed_at: 4.months.ago)
 
