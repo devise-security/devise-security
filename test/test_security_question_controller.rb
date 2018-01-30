@@ -15,7 +15,7 @@ class TestWithSecurityQuestion < ActionController::TestCase
   test 'When security question is enabled, it is inserted correctly' do
     post :create, params: {
       security_question_user: { email: @user.email },
-      security_question_answer: 'wrong answer'
+      security_question_answer: 'wrong answer',
     }
 
     assert_equal 'The security question answer was invalid.', flash[:alert]
@@ -25,7 +25,7 @@ class TestWithSecurityQuestion < ActionController::TestCase
   test 'When security_question is valid, it runs as normal' do
     post :create, params: {
       security_question_user: { email: @user.email },
-      security_question_answer: @user.security_question_answer
+      security_question_answer: @user.security_question_answer,
     }
 
     assert_equal 'You will receive an email with instructions for how to unlock your account in a few minutes.', flash[:notice]
@@ -47,7 +47,7 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
 
   test 'When security question is not enabled it is not inserted' do
     post :create, params: {
-      user: { email: @user.email }
+      user: { email: @user.email },
     }
 
     assert_equal 'You will receive an email with instructions for how to unlock your account in a few minutes.', flash[:notice]
