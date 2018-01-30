@@ -23,11 +23,17 @@ Metrics/MethodLength:
 Metrics/LineLength:
   Max: 100
 
+Naming/FileName:
+  Exclude: ["devise-security.gemspec"]
+
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
   SupportedStyles:
     - nested
     - compact
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
 
 Style/SymbolArray:
   EnforcedStyle: brackets
