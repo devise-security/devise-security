@@ -133,12 +133,12 @@ add_index :the_resources, :password_changed_at
 ### Password archivable
 ```ruby
 create_table :old_passwords do |t|
-  t.string :encrypted_password, :null => false
-  t.string :password_archivable_type, :null => false
-  t.integer :password_archivable_id, :null => false
+  t.string :encrypted_password, null: false
+  t.string :password_archivable_type, null: false
+  t.integer :password_archivable_id, null: false
   t.datetime :created_at
 end
-add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
+add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: :index_password_archivable
 ```
 
 ### Session limitable
@@ -146,7 +146,7 @@ add_index :old_passwords, [:password_archivable_type, :password_archivable_id], 
 create_table :the_resources do |t|
   # other devise fields
 
-  t.string :unique_session_id, :limit => 20
+  t.string :unique_session_id, limit: 20
 end
 ```
 
@@ -189,8 +189,8 @@ end
 
 ```ruby
 create_table :security_questions do |t|
-  t.string :locale, :null => false
-  t.string :name, :null => false
+  t.string :locale, null: false
+  t.string :name, null: false
 end
 
 SecurityQuestion.create! locale: :de, name: 'Wie lautet der Geburstname Ihrer Mutter?'
