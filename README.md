@@ -36,7 +36,7 @@ After you installed Devise Security you need to run the generator:
 rails generate devise_security:install
 ```
 
-The generator adds optional configurations to `config/initializers/devise.rb`. Enable
+The generator adds optional configurations to `config/initializers/devise-security.rb`. Enable
 the modules you wish to use in the initializer you are ready to add Devise Security modules on top of Devise modules to any of your Devise models:
 
 ```ruby
