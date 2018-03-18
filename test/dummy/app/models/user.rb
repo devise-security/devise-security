@@ -1,5 +1,20 @@
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :password_archivable, :lockable,
-         :paranoid_verification, :password_expirable,
-         :security_questionable
+class User < ApplicationRecord
+
+  devise :database_authenticatable,
+         :confirmable,
+         :expirable,
+         :lockable,
+         :omniauthable,
+         :paranoid_verification,
+         :password_archivable,
+         :password_expirable,
+         :recoverable,
+         :registerable,
+         :rememberable,
+         :secure_validatable,
+         :security_questionable,
+         :session_limitable,
+         :timeoutable,
+         :trackable,
+         :validatable
 end
