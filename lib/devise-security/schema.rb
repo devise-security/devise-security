@@ -55,5 +55,10 @@ module DeviseSecurity
     def session_limitable
       apply_devise_schema :unique_session_id, String, :limit => 20
     end
+
+    def expirable
+      apply_devise_schema :expired_at, DateTime
+      apply_devise_schema :last_activity_at, DateTime
+    end
   end
 end
