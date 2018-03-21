@@ -13,6 +13,7 @@ module Devise
     #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
     #
     module SecureValidatable
+      include Devise::Models::Compatibility
 
       def self.included(base)
         base.extend ClassMethods
