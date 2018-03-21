@@ -17,4 +17,6 @@ class User < ApplicationRecord
          :timeoutable,
          :trackable,
          :validatable
+
+  has_many :widgets
 end

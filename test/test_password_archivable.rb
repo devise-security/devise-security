@@ -20,10 +20,19 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'Password1') }
   end
 
+  test 'indirectly saving associated user does not cause deprecation warning' do
+    old_behavior = ActiveSupport::Deprecation.behavior
+    ActiveSupport::Deprecation.behavior = :raise
+    user = User.new email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    widget = Widget.new(user: user)
+    widget.save
+    ActiveSupport::Deprecation.behavior = old_behavior
+  end
+
   test 'cannot use archived passwords' do
     assert_equal 2, Devise.password_archiving_count
 
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create! email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
     assert_equal 0, OldPassword.count
 
     set_password(user,  'Password2')

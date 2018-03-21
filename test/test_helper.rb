@@ -7,7 +7,7 @@ require 'dummy/config/environment'
 require 'minitest/autorun'
 require 'rails/test_help'
 require 'devise-security'
-require 'pry'
+require 'pry-rescue/minitest'
 
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.logger = Logger.new(nil)
