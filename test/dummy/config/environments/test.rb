@@ -26,7 +26,7 @@ RailsApp::Application.configure do
   config.active_support.test_order = :sorted
   config.log_level = :debug
   if Rails.version < '5'
-    # TODO: this needs to be addressed
+    # Turning this off will raise a deprecation warning in Rails 4.2
     config.active_record.raise_in_transactional_callbacks = true
   end
 end

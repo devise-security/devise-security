@@ -30,8 +30,8 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'does not save an OldPassword if user password was originally nil' do
-    user = User.create password: nil, password_confirmation: nil
-    set_password(user, 'password1')
+    user = User.new(email: 'bob@microsoft.com', password: nil, password_confirmation: nil)
+    set_password(user, 'Password1')
     assert_equal 0, OldPassword.count
   end
 

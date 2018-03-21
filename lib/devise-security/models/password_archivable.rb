@@ -5,8 +5,8 @@ module Devise
     # PasswordArchivable, this depends on the DatabaseAuthenticatable module from devise
     module PasswordArchivable
       extend ActiveSupport::Concern
-      include Devise::Models::DatabaseAuthenticatable
       include Devise::Models::Compatibility
+      include Devise::Models::DatabaseAuthenticatable
 
       included do
         has_many :old_passwords, as: :password_archivable, dependent: :destroy

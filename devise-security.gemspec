@@ -33,10 +33,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'easy_captcha', '~> 0'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest', '5.10.3' # see https://github.com/seattlerb/minitest/issues/730
+  s.add_development_dependency 'pry-byebug'
+  s.add_development_dependency 'pry-rescue'
+  s.add_development_dependency 'pry'
   s.add_development_dependency 'rails_email_validator', '~> 0'
   s.add_development_dependency 'rubocop', '~> 0'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'pry-rescue'
-  s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
 end
