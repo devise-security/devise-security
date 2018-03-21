@@ -5,9 +5,14 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
 
   setup do
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = User.create(username: 'hello', email: 'hello@path.travel',
-                        password: '1234', password_changed_at: 4.months.ago)
-
+    @user = User.create!(
+      username: 'hello',
+      email: 'hello@path.travel',
+      password: 'Password4',
+      password_changed_at: 4.months.ago,
+      confirmed_at: 5.months.ago
+    )
+    assert @user.valid?
     sign_in(@user)
   end
 
@@ -16,14 +21,24 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     assert_includes @response.body, 'Renew your password'
   end
 
-  test 'shold update password' do
-    put :update, params: {
-      user: {
-        current_password: '1234',
-        password: '12345',
-        password_confirmation: '12345'
+  test 'should update password' do
+    if Rails.version < "5"
+      put :update, {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
+        }
       }
-    }
+    else
+      put :update, params: {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
+        }
+      }
+    end
     assert_redirected_to root_path
   end
 end

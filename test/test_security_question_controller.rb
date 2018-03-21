@@ -13,22 +13,38 @@ class TestWithSecurityQuestion < ActionController::TestCase
   end
 
   test 'When security question is enabled, it is inserted correctly' do
-    post :create, params: {
-      security_question_user: {
-        email: @user.email
-      }, security_question_answer: "wrong answer"
-    }
+    if Rails.version < "5"
+      post :create, {
+        security_question_user: {
+          email: @user.email
+        }, security_question_answer: "wrong answer"
+      }
+    else
+      post :create, params: {
+        security_question_user: {
+          email: @user.email
+        }, security_question_answer: "wrong answer"
+      }
+    end
 
     assert_equal "The security question answer was invalid.", flash[:alert]
     assert_redirected_to new_security_question_user_unlock_path
   end
 
   test 'When security_question is valid, it runs as normal' do
-    post :create, params: {
-      security_question_user: {
-        email: @user.email
-      }, security_question_answer: @user.security_question_answer
-    }
+    if Rails.version < "5"
+      post :create, {
+        security_question_user: {
+          email: @user.email
+        }, security_question_answer: @user.security_question_answer
+      }
+    else
+      post :create, params: {
+        security_question_user: {
+          email: @user.email
+        }, security_question_answer: @user.security_question_answer
+      }
+    end
 
     assert_equal "You will receive an email with instructions for how to unlock your account in a few minutes.", flash[:notice]
     assert_redirected_to new_security_question_user_session_path
@@ -48,11 +64,19 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
   end
 
   test 'When security question is not enabled it is not inserted' do
-    post :create, params: {
-      user: {
-        email: @user.email
+    if Rails.version < "5"
+      post :create, {
+        user: {
+          email: @user.email
+        }
       }
-    }
+    else
+      post :create, params: {
+        user: {
+          email: @user.email
+        }
+      }
+    end
 
     assert_equal "You will receive an email with instructions for how to unlock your account in a few minutes.", flash[:notice]
     assert_redirected_to new_user_session_path

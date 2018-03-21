@@ -37,3 +37,4 @@ log
 test/tmp/*
 *.gem
 Gemfile.lock
+*.lock

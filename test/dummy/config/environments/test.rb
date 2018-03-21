@@ -2,7 +2,7 @@ RailsApp::Application.configure do
   config.cache_classes = true
   config.eager_load = false
 
-  if Rails.version > "5"
+  if Rails.version > '5'
     config.public_file_server.enabled = true
     config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
   else
@@ -15,7 +15,7 @@ RailsApp::Application.configure do
 
   config.action_dispatch.show_exceptions = false
 
-  config.action_controller.allow_forgery_protection    = false
+  config.action_controller.allow_forgery_protection = false
 
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = { host: 'test.host' }
@@ -24,4 +24,10 @@ RailsApp::Application.configure do
   I18n.enforce_available_locales = false
 
   config.active_support.test_order = :sorted
+  config.log_level = :debug
+  if Rails.version < '5'
+    # Turning this off will raise a deprecation warning in Rails 4.2
+    config.active_record.raise_in_transactional_callbacks = true
+  end
 end
+ActiveSupport::Deprecation.debug = true

@@ -10,7 +10,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'password expires' do
-    user = User.create password: 'password1', password_confirmation: 'password1'
+    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
     refute user.need_change_password?
 
     user.update(password_changed_at: Time.now.ago(3.month))
@@ -18,7 +18,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'override expire after at runtime' do
-    user = User.new password: 'password1', password_confirmation: 'password1'
+    user = User.new email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
     user.instance_eval do
       def expire_password_after
         4.month
