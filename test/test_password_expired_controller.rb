@@ -22,13 +22,23 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   end
 
   test 'should update password' do
-    put :update, params: {
-      user: {
-        current_password: 'Password4',
-        password: 'Password5',
-        password_confirmation: 'Password5'
+    if Rails.version < "5"
+      put :update, {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
+        }
       }
-    }
+    else
+      put :update, params: {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
+        }
+      }
+    end
     assert_redirected_to root_path
   end
 end
