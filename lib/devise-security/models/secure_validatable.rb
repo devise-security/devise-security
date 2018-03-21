@@ -1,3 +1,5 @@
+require_relative 'compatibility'
+
 module Devise
   module Models
     # SecureValidatable creates better validations with more validation for security
@@ -11,6 +13,7 @@ module Devise
     #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
     #
     module SecureValidatable
+      include Devise::Models::Compatibility
 
       def self.included(base)
         base.extend ClassMethods
@@ -55,12 +58,11 @@ module Devise
       end
 
       def current_equal_password_validation
-        if !self.new_record? && !self.encrypted_password_change.nil?
-          dummy = self.class.new
-          dummy.encrypted_password = self.encrypted_password_change.first
-          dummy.password_salt = self.password_salt_change.first if self.respond_to?(:password_salt_change) && !self.password_salt_change.nil?
-          self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
+        return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
+        dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
+          user.password_salt = password_salt_was if respond_to?(:password_salt)
         end
+        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
       end
 
       protected
