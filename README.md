@@ -223,7 +223,7 @@ end
 ## Requirements
 
 * Devise (https://github.com/plataformatec/devise)
-* Rails 3.2 onwards (http://github.com/rails/rails)
+* Rails 4.1 onwards (http://github.com/rails/rails)
 * recommendations:
   * `autocomplete-off` (http://github.com/phatworx/autocomplete-off)
   * `easy_captcha` (http://github.com/phatworx/easy_captcha)
