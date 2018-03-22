@@ -20,10 +20,10 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
   s.require_paths = ['lib']
-  s.required_ruby_version = '>= 2.2.2'
+  s.required_ruby_version = '>= 2.2.9'
 
   if RUBY_VERSION >= '2.4'
-    s.add_runtime_dependency 'rails', '>= 4.2.8', '< 6.0'
+    s.add_runtime_dependency 'rails', '>= 4.1.0', '< 6.0'
   else
     s.add_runtime_dependency 'railties', '>= 4.1.0', '< 6.0'
   end

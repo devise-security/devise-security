@@ -23,7 +23,7 @@ Configuration and database schema for each module below.
 
 ## Getting started
 
-Devise Security works with Devise on Rails 3.2 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
+Devise Security works with Devise on Rails 4.1 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
 
 ```ruby
 gem 'devise-security'
@@ -121,6 +121,8 @@ rails generate easy_captcha:install
 
 ## Schema
 
+Note: Unlike Devise, devise-security does not currently support mongoid.  Pull requests are welcome!
+
 ### Password expirable
 ```ruby
 create_table :the_resources do |t|
@@ -137,7 +139,7 @@ create_table :old_passwords do |t|
   t.string :encrypted_password, null: false
   t.string :password_archivable_type, null: false
   t.integer :password_archivable_id, null: false
-  t.string :password_salt
+  t.string :password_salt # Optional. bcrypt stores the salt in the encrypted password field so this column may not be necessary.
   t.datetime :created_at
 end
 add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: :index_password_archivable
@@ -224,7 +226,7 @@ end
 ## Requirements
 
 * Devise (https://github.com/plataformatec/devise)
-* Rails 3.2 onwards (http://github.com/rails/rails)
+* Rails 4.1 onwards (http://github.com/rails/rails)
 * recommendations:
   * `autocomplete-off` (http://github.com/phatworx/autocomplete-off)
   * `easy_captcha` (http://github.com/phatworx/easy_captcha)
