@@ -14,7 +14,6 @@ matrix:
     - rvm: ruby-head
     - gemfile: gemfiles/rails_5.2_rc1.gemfile
 gemfile:
-  - Gemfile
   - gemfiles/rails_4.1_stable.gemfile
   - gemfiles/rails_4.2_stable.gemfile
   - gemfiles/rails_5.0_stable.gemfile
