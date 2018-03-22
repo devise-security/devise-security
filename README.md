@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
 [![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
 A [Devise](https://github.com/plataformatec/devise) extension to add additional security features required by modern web applications. Forked from [Devise Security Extension](https://github.com/phatworx/devise_security_extension)
 
