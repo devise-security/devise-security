@@ -3,8 +3,8 @@ module DeviseSecurity
     ActiveSupport.on_load(:action_controller) do
       include DeviseSecurity::Controllers::Helpers
     end
-    
-    if Rails.version > "5"
+
+    if Rails.version > '5'
       ActiveSupport::Reloader.to_prepare do
         DeviseSecurity::Patches.apply
       end

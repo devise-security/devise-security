@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
 [![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
 A [Devise](https://github.com/plataformatec/devise) extension to add additional security features required by modern web applications. Forked from [Devise Security Extension](https://github.com/phatworx/devise_security_extension)
 
@@ -136,13 +137,13 @@ add_index :the_resources, :password_changed_at
 ### Password archivable
 ```ruby
 create_table :old_passwords do |t|
-  t.string :encrypted_password, :null => false
-  t.string :password_archivable_type, :null => false
-  t.integer :password_archivable_id, :null => false
-  t.string :password_salt # optional bcrypt stores the salt in the encrypted password field so this column may not be necessary.
+  t.string :encrypted_password, null: false
+  t.string :password_archivable_type, null: false
+  t.integer :password_archivable_id, null: false
+  t.string :password_salt # Optional. bcrypt stores the salt in the encrypted password field so this column may not be necessary.
   t.datetime :created_at
 end
-add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
+add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: :index_password_archivable
 ```
 
 ### Session limitable
@@ -150,7 +151,7 @@ add_index :old_passwords, [:password_archivable_type, :password_archivable_id], 
 create_table :the_resources do |t|
   # other devise fields
 
-  t.string :unique_session_id, :limit => 20
+  t.string :unique_session_id, limit: 20
 end
 ```
 
@@ -193,8 +194,8 @@ end
 
 ```ruby
 create_table :security_questions do |t|
-  t.string :locale, :null => false
-  t.string :name, :null => false
+  t.string :locale, null: false
+  t.string :name, null: false
 end
 
 SecurityQuestion.create! locale: :de, name: 'Wie lautet der Geburstname Ihrer Mutter?'

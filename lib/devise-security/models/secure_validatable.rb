@@ -26,27 +26,27 @@ module Devise
           unless has_uniqueness_validation_of_login?
             validation_condition = "#{login_attribute}_changed?".to_sym
 
-            validates login_attribute, :uniqueness => {
-                                          :scope          => authentication_keys[1..-1],
-                                          :case_sensitive => !!case_insensitive_keys
+            validates login_attribute, uniqueness: {
+                                          scope:          authentication_keys[1..-1],
+                                          case_sensitive: !!case_insensitive_keys
                                         },
-                                        :if => validation_condition
+                                        if: validation_condition
 
             already_validated_email = login_attribute.to_s == 'email'
           end
 
           unless devise_validation_enabled?
-            validates :email, :presence => true, :if => :email_required?
+            validates :email, presence: true, if: :email_required?
             unless already_validated_email
-              validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
+              validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
             end
 
-            validates :password, :presence => true, :length => password_length, :confirmation => true, :if => :password_required?
+            validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
           end
 
           # extra validations
-          validates :email,    :email  => email_validation if email_validation # use rails_email_validator or similar
-          validates :password, :format => { :with => password_regex, :message => :password_format }, :if => :password_required?
+          validates :email, email: email_validation if email_validation # use rails_email_validator or similar
+          validates :password, format: { with: password_regex, message: :password_format }, if: :password_required?
 
           # don't allow use same password
           validate :current_equal_password_validation
