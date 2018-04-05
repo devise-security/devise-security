@@ -8,7 +8,12 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   setup do
-    Devise.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
+    Devise.password_complexity = {
+      digit: 1,
+      lower: 1,
+      upper: 1
+    }
+    # Devise.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
   end
 
   test 'email cannot be blank' do
@@ -31,24 +36,24 @@ class TestSecureValidatable < ActiveSupport::TestCase
     end
   end
 
-  test 'valid both email and password' do
-    msgs = ['Email is invalid', 'Password must contain big, small letters and digits']
-    user = User.create email: 'bob@foo.tv', password: 'password1', password_confirmation: 'password1'
+  test 'validate both email and password' do
+    msgs = ['Email is invalid', 'Password must contain at least one upper-case letter']
+    user = User.create email: 'bob@@foo.tv', password: 'password1', password_confirmation: 'password1'
     assert_equal(false, user.valid?)
     assert_equal(msgs, user.errors.full_messages)
     assert_raises(ActiveRecord::RecordInvalid) { user.save! }
   end
 
   test 'password must have capital letter' do
-    msgs = ['Email is invalid', 'Password must contain big, small letters and digits']
-    user = User.create email: 'bob@example.org', password: 'password1', password_confirmation: 'password1'
+    msgs = ['Password must contain at least one upper-case letter']
+    user = User.create email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1'
     assert_equal(false, user.valid?)
     assert_equal(msgs, user.errors.full_messages)
     assert_raises(ActiveRecord::RecordInvalid) { user.save! }
   end
 
   test 'password must have lowercase letter' do
-    msg = 'Password must contain big, small letters and digits'
+    msg = 'Password must contain at least one lower-case letter'
     user = User.create email: 'bob@microsoft.com', password: 'PASSWORD1', password_confirmation: 'PASSWORD1'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
@@ -56,7 +61,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'password must have number' do
-    msg = 'Password must contain big, small letters and digits'
+    msg = 'Password must contain at least one numeral'
     user = User.create email: 'bob@microsoft.com', password: 'PASSword', password_confirmation: 'PASSword'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)

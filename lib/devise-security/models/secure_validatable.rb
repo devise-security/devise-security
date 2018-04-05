@@ -1,4 +1,5 @@
 require_relative 'compatibility'
+require_relative '../validators/complexity_validator'
 
 module Devise
   module Models
@@ -46,7 +47,7 @@ module Devise
 
           # extra validations
           validates :email, email: email_validation if email_validation # use rails_email_validator or similar
-          validates :password, format: { with: password_regex, message: :password_format }, if: :password_required?
+          validates :password, 'devise_security/complexity': password_complexity, if: :password_required?
 
           # don't allow use same password
           validate :current_equal_password_validation
@@ -79,9 +80,10 @@ module Devise
       end
 
       module ClassMethods
-        Devise::Models.config(self, :password_regex, :password_length, :email_validation)
+        Devise::Models.config(self, :password_complexity, :password_length, :email_validation)
 
-      private
+        private
+
         def has_uniqueness_validation_of_login?
           validators.any? do |validator|
             validator.kind_of?(ActiveRecord::Validations::UniquenessValidator) &&
