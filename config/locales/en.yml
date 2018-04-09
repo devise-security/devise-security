@@ -10,7 +10,7 @@ en:
         lower:
           one: must contain at least one lower-case letter
           other: must contain at least %{count} lower-case letters
-        punct:
+        symbol:
           one: must contain at least one punctuation mark or symbol
           other: must contain at least %{count} puncutation marks or symbols
         upper:

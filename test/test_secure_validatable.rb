@@ -7,18 +7,10 @@ class TestSecureValidatable < ActiveSupport::TestCase
            :paranoid_verification, :password_expirable, :secure_validatable
   end
 
-  setup do
-    Devise.password_complexity = {
-      digit: 1,
-      lower: 1,
-      upper: 1
-    }
-    # Devise.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
-  end
-
   test 'email cannot be blank' do
     msg = "Email can't be blank"
     user = User.create password: 'passWord1', password_confirmation: 'passWord1'
+
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ActiveRecord::RecordInvalid) do

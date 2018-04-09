@@ -10,7 +10,7 @@ de:
         lower:
           one: muss mindestens eine Kleinbuchstabe enthalten
           other: muss mindestens %{count} Kleinbuchstaben enthalten
-        punct:
+        symbol:
           one: muss mindestens eine Satzzeichen enthalten
           other: muss mindestens %{count} Satzzeichen enthalten
         upper:

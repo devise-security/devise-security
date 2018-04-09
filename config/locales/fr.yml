@@ -10,7 +10,7 @@ fr:
         lower:
           one: doit containir en moins d'un miniscule
           other: doit containir en moins de %{count} miniscules
-        punct:
+        symbol:
           one: doit containir en moins d'un signe de ponctuation
           other: doit containir en moins de %{count} signes de ponctuation
         upper:

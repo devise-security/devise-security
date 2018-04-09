@@ -10,7 +10,7 @@ es:
         lower:
           one: tiene que contener al menos un minúscula
           other: tiene que contener al menos %{count} minúsculas
-        punct:
+        symbol:
           one: tiene que contener al menos un signo de puntuación
           other: tiene que contener al menos %{count} signos de puntuación
         upper:
