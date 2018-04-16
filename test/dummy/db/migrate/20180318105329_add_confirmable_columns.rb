@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddConfirmableColumns < MIGRATION_CLASS
   def change
     add_column :users, :confirmation_token, :string

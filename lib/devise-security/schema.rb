@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseSecurity
   # add schema helper for migrations
   module Schema
