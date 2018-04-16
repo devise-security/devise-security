@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
-class SecureUser < ActiveRecord::Base
+class SecureUser < ApplicationRecord
+>>>>>>> origin/master
   devise :database_authenticatable, :secure_validatable, email_validation: false
 end
