@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require_relative 'compatibility'
+
 module Devise
   module Models
     # SecureValidatable creates better validations with more validation for security
@@ -11,6 +15,7 @@ module Devise
     #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
     #
     module SecureValidatable
+      include Devise::Models::Compatibility
 
       def self.included(base)
         base.extend ClassMethods
@@ -23,27 +28,27 @@ module Devise
           unless has_uniqueness_validation_of_login?
             validation_condition = "#{login_attribute}_changed?".to_sym
 
-            validates login_attribute, :uniqueness => {
-                                          :scope          => authentication_keys[1..-1],
-                                          :case_sensitive => !!case_insensitive_keys
+            validates login_attribute, uniqueness: {
+                                          scope:          authentication_keys[1..-1],
+                                          case_sensitive: !!case_insensitive_keys
                                         },
-                                        :if => validation_condition
+                                        if: validation_condition
 
             already_validated_email = login_attribute.to_s == 'email'
           end
 
           unless devise_validation_enabled?
-            validates :email, :presence => true, :if => :email_required?
+            validates :email, presence: true, if: :email_required?
             unless already_validated_email
-              validates :email, :uniqueness => true, :allow_blank => true, :if => :email_changed? # check uniq for email ever
+              validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
             end
 
-            validates :password, :presence => true, :length => password_length, :confirmation => true, :if => :password_required?
+            validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
           end
 
           # extra validations
-          validates :email,    :email  => email_validation if email_validation # use rails_email_validator or similar
-          validates :password, :format => { :with => password_regex, :message => :password_format }, :if => :password_required?
+          validates :email, email: email_validation if email_validation # use rails_email_validator or similar
+          validates :password, format: { with: password_regex, message: :password_format }, if: :password_required?
 
           # don't allow use same password
           validate :current_equal_password_validation
@@ -55,12 +60,11 @@ module Devise
       end
 
       def current_equal_password_validation
-        if !self.new_record? && !self.encrypted_password_change.nil?
-          dummy = self.class.new
-          dummy.encrypted_password = self.encrypted_password_change.first
-          dummy.password_salt = self.password_salt_change.first if self.respond_to?(:password_salt_change) && !self.password_salt_change.nil?
-          self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(self.password)
+        return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
+        dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
+          user.password_salt = password_salt_was if respond_to?(:password_salt)
         end
+        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
       end
 
       protected

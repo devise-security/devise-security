@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'devise-security/hooks/expirable'
 
 module Devise
   module Models
-    # Deactivate the account after a configurable amount of time.  To be able to 
+    # Deactivate the account after a configurable amount of time.  To be able to
     # tell, it tracks activity about your account with the following columns:
     #
     # * last_activity_at - A timestamp updated when the user requests a page (only signed in)
@@ -11,10 +13,10 @@ module Devise
     # +:expire_after+ - Time interval to expire accounts after
     #
     # == Additions
-    # Best used with two cron jobs. One for expiring accounts after inactivity, 
-    # and another, that deletes accounts, which have expired for a given amount 
+    # Best used with two cron jobs. One for expiring accounts after inactivity,
+    # and another, that deletes accounts, which have expired for a given amount
     # of time (for example 90 days).
-    # 
+    #
     module Expirable
       extend ActiveSupport::Concern
 
@@ -37,13 +39,13 @@ module Devise
 
       # Expire an account. This is for cron jobs and manually expiring of accounts.
       #
-      # @example 
+      # @example
       #   User.expire!
       #   User.expire! 1.week.from_now
       # @note +expired_at+ can be in the future as well
       def expire!(at = Time.now.utc)
         self.expired_at = at
-        save(:validate => false)
+        save(validate: false)
       end
 
       # Overwrites active_for_authentication? from Devise::Models::Activatable
@@ -55,7 +57,7 @@ module Devise
         super && !self.expired?
       end
 
-      # The message sym, if {#active_for_authentication?} returns +false+. E.g. needed 
+      # The message sym, if {#active_for_authentication?} returns +false+. E.g. needed
       # for i18n.
       def inactive_message
         !self.expired? ? super : :expired
@@ -82,17 +84,17 @@ module Devise
           where('expired_at < ?', time.seconds.ago)
         end
 
-        # Sample method for daily cron to delete all expired entries after a 
+        # Sample method for daily cron to delete all expired entries after a
         # given amount of +time+.
         #
-        # In your overwritten method you can "blank out" the object instead of 
+        # In your overwritten method you can "blank out" the object instead of
         # deleting it.
         #
         # *Word of warning*: You have to handle the dependent method
-        # on the +resource+ relations (+:destroy+ or +:nullify+) and catch this 
+        # on the +resource+ relations (+:destroy+ or +:nullify+) and catch this
         # behavior (see  http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#label-Deleting+from+associations).
         #
-        # @example 
+        # @example
         #   Resource.delete_all_expired_for 90.days
         # @example You can overide this in your +resource+ model
         #   def self.delete_all_expired_for(time = 90.days)
@@ -108,7 +110,7 @@ module Devise
           expired_for(time).delete_all
         end
 
-        # Version of {#delete_all_expired_for} without arguments (uses 
+        # Version of {#delete_all_expired_for} without arguments (uses
         # configured +delete_expired_after+ default value).
         # @see #delete_all_expired_for
         def delete_all_expired

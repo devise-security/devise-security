@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Devise::PasswordExpiredController < DeviseController
   skip_before_action :handle_password_change
   before_action :skip_password_change, only: [:show, :update]
-  prepend_before_action :authenticate_scope!, :only => [:show, :update]
+  prepend_before_action :authenticate_scope!, only: [:show, :update]
 
   def show
     respond_with(resource)

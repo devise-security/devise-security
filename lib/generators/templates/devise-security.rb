@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Devise.setup do |config|
   # ==> Security Extension
   # Configure security extension for devise

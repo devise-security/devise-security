@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Devise
   module Models
     # SecurityQuestionable is an accessible add-on for visually handicapped people,
@@ -12,7 +14,6 @@ module Devise
     # f.text_field :security_question_answer
     module SecurityQuestionable
       extend ActiveSupport::Concern
-
     end
   end
 end

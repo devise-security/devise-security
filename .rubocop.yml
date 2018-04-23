@@ -1,11 +1,12 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
   Include:
     - '**/Rakefile'
     - '**/config.ru'
     - 'lib/tasks/**/*'
   Exclude:
     - Gemfile*
+    - README
     - 'db/**/*'
     - 'config/**/*'
     - 'bin/**/*'
@@ -20,9 +21,29 @@ Rails:
 Metrics/MethodLength:
   Enabled: false
 
+Metrics/LineLength:
+  Max: 100
+
+Naming/FileName:
+  Exclude: ["devise-security.gemspec"]
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  SupportedStyles:
+    - nested
+    - compact
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
 # Trailing commas make for clearer diffs because the last line won't appear
 # to have been changed, as it would if it lacked a comma and had one added.
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma

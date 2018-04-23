@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseSecurity
   module Controllers
     module Helpers
@@ -21,9 +23,19 @@ module DeviseSecurity
         end
       end
 
+      def valid_captcha_or_security_question?(resource, params)
+        valid_captcha_if_defined?(params[:captcha]) ||
+          valid_security_question_answer?(resource, params[:security_question_answer])
+      end
+
       def valid_captcha_if_defined?(captcha)
         defined?(verify_recaptcha) && verify_recaptcha ||
           defined?(valid_captcha?) && valid_captcha?(captcha)
+      end
+
+      def valid_security_question_answer?(resource, answer)
+        resource.security_question_answer.present? &&
+          resource.security_question_answer == answer
       end
 
       # controller instance methods
@@ -67,11 +79,11 @@ module DeviseSecurity
 
         # redirect for password update with alert message
         def redirect_for_password_change(scope)
-          redirect_to change_password_required_path_for(scope), :alert => I18n.t('change_required', {:scope => 'devise.password_expired'})
+          redirect_to change_password_required_path_for(scope), alert: I18n.t('change_required', {scope: 'devise.password_expired'})
         end
 
         def redirect_for_paranoid_verification(scope)
-          redirect_to paranoid_verification_code_path_for(scope), :alert => I18n.t('code_required', {:scope => 'devise.paranoid_verify'})
+          redirect_to paranoid_verification_code_path_for(scope), alert: I18n.t('code_required', {scope: 'devise.paranoid_verify'})
         end
 
         # path for change password

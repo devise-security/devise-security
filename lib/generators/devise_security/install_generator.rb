@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseSecurity
   module Generators
     # Generator for Rails to create or append to a Devise initializer.

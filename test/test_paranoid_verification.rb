@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TestParanoidVerification < ActiveSupport::TestCase
@@ -22,7 +24,7 @@ class TestParanoidVerification < ActiveSupport::TestCase
     assert_equal(0, user.paranoid_verification_attempt)
   end
 
-  test "generate code must reset attempt counter" do
+  test 'generate code must reset attempt counter' do
     user = User.new
     user.generate_paranoid_code
     # default generator generates 5 char string
@@ -30,7 +32,7 @@ class TestParanoidVerification < ActiveSupport::TestCase
     assert_equal(user.paranoid_verification_code.length, 5)
   end
 
-  test "when code match upon verify code, should mark record that it's no loger needed to verify" do
+  test 'when code match upon verify code, should mark record that it\'s no loger needed to verify' do
     user = User.new(paranoid_verification_code: 'abcde')
 
     assert_equal(true, user.need_paranoid_verification?)

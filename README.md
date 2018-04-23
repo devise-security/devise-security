@@ -1,12 +1,14 @@
 # Devise Security
 
 [![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
+[![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
 A [Devise](https://github.com/plataformatec/devise) extension to add additional security features required by modern web applications. Forked from [Devise Security Extension](https://github.com/phatworx/devise_security_extension)
 
 It is composed of 7 additional Devise modules:
 
-* `:password_expirable` - passwords will expire after a configured time (and will need an update). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise-security/issues/175) immediately as the new password.
+* `:password_expirable` - passwords will expire after a configured time (and will need an update). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175) immediately as the new password.
 * `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
 * `:password_archivable` - save used passwords in an `old_passwords` table for history checks (don't be able to use a formerly used password)
 * `:session_limitable` - ensures, that there is only one session usable per account at once
@@ -22,7 +24,7 @@ Configuration and database schema for each module below.
 
 ## Getting started
 
-Devise Security works with Devise on Rails 3.2 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
+Devise Security works with Devise on Rails 4.1 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
 
 ```ruby
 gem 'devise-security'
@@ -36,7 +38,7 @@ After you installed Devise Security you need to run the generator:
 rails generate devise_security:install
 ```
 
-The generator adds optional configurations to `config/initializers/devise.rb`. Enable
+The generator adds optional configurations to `config/initializers/devise-security.rb`. Enable
 the modules you wish to use in the initializer you are ready to add Devise Security modules on top of Devise modules to any of your Devise models:
 
 ```ruby
@@ -124,6 +126,8 @@ rails generate easy_captcha:install
 
 ## Schema
 
+Note: Unlike Devise, devise-security does not currently support mongoid.  Pull requests are welcome!
+
 ### Password expirable
 ```ruby
 create_table :the_resources do |t|
@@ -137,12 +141,13 @@ add_index :the_resources, :password_changed_at
 ### Password archivable
 ```ruby
 create_table :old_passwords do |t|
-  t.string :encrypted_password, :null => false
-  t.string :password_archivable_type, :null => false
-  t.integer :password_archivable_id, :null => false
+  t.string :encrypted_password, null: false
+  t.string :password_archivable_type, null: false
+  t.integer :password_archivable_id, null: false
+  t.string :password_salt # Optional. bcrypt stores the salt in the encrypted password field so this column may not be necessary.
   t.datetime :created_at
 end
-add_index :old_passwords, [:password_archivable_type, :password_archivable_id], :name => :index_password_archivable
+add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: :index_password_archivable
 ```
 
 ### Session limitable
@@ -150,7 +155,7 @@ add_index :old_passwords, [:password_archivable_type, :password_archivable_id], 
 create_table :the_resources do |t|
   # other devise fields
 
-  t.string :unique_session_id, :limit => 20
+  t.string :unique_session_id, limit: 20
 end
 ```
 
@@ -193,8 +198,8 @@ end
 
 ```ruby
 create_table :security_questions do |t|
-  t.string :locale, :null => false
-  t.string :name, :null => false
+  t.string :locale, null: false
+  t.string :name, null: false
 end
 
 SecurityQuestion.create! locale: :de, name: 'Wie lautet der Geburstname Ihrer Mutter?'
@@ -226,7 +231,7 @@ end
 ## Requirements
 
 * Devise (https://github.com/plataformatec/devise)
-* Rails 3.2 onwards (http://github.com/rails/rails)
+* Rails 4.1 onwards (http://github.com/rails/rails)
 * recommendations:
   * `autocomplete-off` (http://github.com/phatworx/autocomplete-off)
   * `easy_captcha` (http://github.com/phatworx/easy_captcha)
