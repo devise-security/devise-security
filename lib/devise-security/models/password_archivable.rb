@@ -39,7 +39,7 @@ module Devise
       # @return [false] if disabled or not previously used
       def password_archive_included?
         return false unless max_old_passwords > 0
-        old_passwords_including_cur_change = old_passwords.order(:id).reverse_order.limit(max_old_passwords).pluck(:encrypted_password)
+        old_passwords_including_cur_change = old_passwords_to_be_denied.pluck(:encrypted_password)
         old_passwords_including_cur_change << encrypted_password_was # include most recent change in list, but don't save it yet!
         old_passwords_including_cur_change.any? do |old_password|
           self.class.new(encrypted_password: old_password).valid_password?(password)
@@ -47,20 +47,38 @@ module Devise
       end
 
       def deny_old_passwords
-        self.class.deny_old_passwords
-      end
-
-      def deny_old_passwords=(count)
-        self.class.deny_old_passwords = count
+        case self.class.deny_old_passwords
+        when Fixnum
+          self.class.deny_old_passwords
+        when TrueClass
+          self.class.deny_old_passwords = archive_count
+        else
+          self.class.deny_old_passwords = 0
+        end
       end
 
       def archive_count
         self.class.password_archiving_count
       end
 
+      def deny_newer_password_than
+        self.class.deny_newer_password_than.to_i
+      end
+
       private
 
-      # archive the last password before save and delete all to old passwords from archive
+      def old_passwords_to_be_denied
+        if deny_newer_password_than > 0
+          rel = old_passwords.where("created_at > ?", Time.now - deny_newer_password_than)
+          # if there are more archived passwords within the configured timeframe
+          # than what you would otherwise deny take that list.
+          return rel if rel.count > deny_old_passwords
+        end
+        # less passwords were found, use default last X passwords to be denied.
+        old_passwords.order(:id).reverse_order.limit(deny_old_passwords)
+      end
+
+      # archive the last password before save and delete all too old passwords from archive
       def archive_password
         if max_old_passwords > 0
           old_passwords.create!(encrypted_password: encrypted_password_was) if encrypted_password_was.present?
@@ -71,7 +89,10 @@ module Devise
       end
 
       module ClassMethods
-        ::Devise::Models.config(self, :password_archiving_count, :deny_old_passwords)
+        ::Devise::Models.config(self,
+          :password_archiving_count,
+          :deny_old_passwords,
+          :deny_newer_password_than)
       end
     end
   end
