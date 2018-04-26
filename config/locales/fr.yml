@@ -3,7 +3,7 @@ fr:
     messages:
       taken_in_past: a été utilisé trop récemment - s'il vous plaît, choisissez un autre
       equal_to_current_password: doit être différent du l'actuel
-      complexity:
+      password_complexity:
         digit:
           one: doit containir en moins d'un chiffre
           other: doit containir en moins de %{count} chiffres

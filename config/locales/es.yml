@@ -3,7 +3,7 @@ es:
     messages:
       taken_in_past: 'la contraseña fue usada previamente, favor elegir otra.'
       equal_to_current_password: 'tiene que ser diferente a la contraseña actual.'
-      complexity:
+      password_complexity:
         digit:
           one: tiene que contener al menos un digito
           other: tiene que contener al menos %{count} digitos

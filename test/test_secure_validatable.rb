@@ -53,7 +53,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'password must have number' do
-    msg = 'Password must contain at least one numeral'
+    msg = 'Password must contain at least one digit'
     user = User.create email: 'bob@microsoft.com', password: 'PASSword', password_confirmation: 'PASSword'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)

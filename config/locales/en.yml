@@ -3,9 +3,9 @@ en:
     messages:
       taken_in_past: 'was used previously.'
       equal_to_current_password: 'must be different than the current password.'
-      complexity:
+      password_complexity:
         digit:
-          one: must contain at least one numeral
+          one: must contain at least one digit
           other: must contain at least %{count} numerals
         lower:
           one: must contain at least one lower-case letter

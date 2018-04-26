@@ -1,17 +1,18 @@
 module DeviseSecurity
-  # String complexity validator
-  # Validates complexity of e.g. passwords
+  # Passowrd complexity validator
   # Options:
   # - digit:  minimum number of digits in the validated string
   # - lower:  minimum number of lower-case letters in the validated string
   # - symbol: minimum number of punctuation characters or symbols in the validated string
   # - upper:  minimum number of upper-case letters in the validated string
-  class ComplexityValidator < ActiveModel::EachValidator
+  class PasswordComplexityValidator < ActiveModel::EachValidator
     PATTERNS = {
       digit: /\p{Digit}/,
+      digits: /\p{Digit}/,
       lower: /\p{Lower}/,
       upper: /\p{Upper}/,
       symbol: /\p{Punct}|\p{S}/,
+      symbols: /\p{Punct}|\p{S}/,
     }.freeze
 
     def validate_each(record, attribute, value)
@@ -20,7 +21,7 @@ module DeviseSecurity
         pattern = Regexp.new PATTERNS[key]
 
         unless (value || '').scan(pattern).size >= minimum
-          record.errors.add attribute, :"complexity.#{key}", count: minimum
+          record.errors.add attribute, :"password_complexity.#{key}", count: minimum
         end
       end
     end

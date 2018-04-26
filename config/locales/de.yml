@@ -3,7 +3,7 @@ de:
     messages:
       taken_in_past: 'wurde bereits in der Vergangenheit verwendet!'
       equal_to_current_password: 'darf nicht dem aktuellen Passwort entsprechen!'
-      complexity:
+      password_complexity:
         digit:
           one: muss mindestens eine Nummer enthalten
           other: muss mindestens %{count} Zahlen enthalten
