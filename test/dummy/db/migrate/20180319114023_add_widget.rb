@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddWidget < MIGRATION_CLASS
   def change
     create_table :widgets do |t|

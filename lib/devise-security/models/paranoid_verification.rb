@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'devise-security/hooks/paranoid_verification'
 
 module Devise

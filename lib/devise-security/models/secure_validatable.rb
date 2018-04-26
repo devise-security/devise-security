@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'compatibility'
 require_relative '../validators/password_complexity_validator'
 
