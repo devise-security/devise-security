@@ -47,7 +47,9 @@ module Devise
 
           # extra validations
           validates :email, email: email_validation if email_validation # use rails_email_validator or similar
-          validates :password, 'devise_security/password_complexity': password_complexity, if: :password_required?
+          validates :password,
+                    'devise_security/password_complexity': password_complexity,
+                    if: :password_required?
 
           # don't allow use same password
           validate :current_equal_password_validation
