@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddExpireableColumns < MIGRATION_CLASS
   def change
     add_column :users, :expired_at, :datetime

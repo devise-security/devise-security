@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSecurityQuestionsFields < MIGRATION_CLASS
   def change
     add_column :users, :locked_at, :datetime
