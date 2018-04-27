@@ -9,4 +9,10 @@ Devise.setup do |config|
   config.case_insensitive_keys = [:email]
 
   config.strip_whitespace_keys = [:email]
+
+  config.password_complexity = {
+    digit: 1,
+    lower: 1,
+    upper: 1,
+  }
 end
