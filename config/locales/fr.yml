@@ -1,0 +1,29 @@
+fr:
+  errors:
+    messages:
+      taken_in_past: a été utilisé trop récemment - s'il vous plaît, choisissez un autre
+      equal_to_current_password: doit être différent du l'actuel
+      password_complexity:
+        digit:
+          one: doit containir en moins d'un chiffre
+          other: doit containir en moins de %{count} chiffres
+        lower:
+          one: doit containir en moins d'un miniscule
+          other: doit containir en moins de %{count} miniscules
+        symbol:
+          one: doit containir en moins d'un signe de ponctuation
+          other: doit containir en moins de %{count} signes de ponctuation
+        upper:
+          one: doit containir en moins d'un majuscule
+          other: doit containir en moins de %{count} majuscules
+  devise:
+    invalid_captcha: Le captcha n'est pas valide
+    invalid_security_question: La réponse à la question de sécurité était invalide
+    paranoid_verify:
+      code_required: Veuillez entrer le code fourni par notre équipe de support
+    password_expired:
+      updated: Votre nouveau mot de passe est enregistré
+      change_required: Votre mot de passe a expiré - s'il vous plaît, choisissez un autre
+    failure:
+      session_limited: Vos identifiants de connexion ont été utilisés dans un autre navigateur. Veuillez vous reconnecter pour continuer dans ce navigateur
+      expired: Votre compte a expiré en raison de l'inactivité. Veuillez contacter l'administrateur du site
