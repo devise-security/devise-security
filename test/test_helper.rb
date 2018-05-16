@@ -13,9 +13,8 @@ require 'devise-security'
 
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.logger = Logger.new(nil)
-if Rails.version == '5.2.0'
-  mc = ActiveRecord::MigrationContext.new(File.expand_path('../dummy/db/migrate', __FILE__))
-  mc.migrate
+if Rails.version >= '5.2.0'
+  ActiveRecord::MigrationContext.new(File.expand_path('../dummy/db/migrate', __FILE__)).migrate
 else
   ActiveRecord::Migrator.migrate(File.expand_path('../dummy/db/migrate', __FILE__))
 end
