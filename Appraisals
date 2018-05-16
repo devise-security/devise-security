@@ -14,10 +14,6 @@ appraise 'rails-5.1-stable' do
   gem 'rails', '~> 5.1.0'
 end
 
-appraise 'rails-5.2-rc1' do
-  gem 'rails', '~> 5.2.0.rc1'
-end
-
 appraise 'rails-5.2.0' do
   gem 'rails', '~> 5.2.0'
 end
