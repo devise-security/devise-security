@@ -13,7 +13,11 @@ require 'devise-security'
 
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.logger = Logger.new(nil)
-ActiveRecord::Migrator.migrate(File.expand_path('../dummy/db/migrate', __FILE__))
+if Rails.gem_version >= Gem::Version.new('5.2.0')
+  ActiveRecord::MigrationContext.new(File.expand_path('../dummy/db/migrate', __FILE__)).migrate
+else
+  ActiveRecord::Migrator.migrate(File.expand_path('../dummy/db/migrate', __FILE__))
+end
 
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start do
