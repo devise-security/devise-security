@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseSecurity::Patches
   module ControllerSecurityQuestion
     extend ActiveSupport::Concern

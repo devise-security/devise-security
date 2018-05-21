@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_email_validator'
 Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
@@ -7,4 +9,10 @@ Devise.setup do |config|
   config.case_insensitive_keys = [:email]
 
   config.strip_whitespace_keys = [:email]
+
+  config.password_complexity = {
+    digit: 1,
+    lower: 1,
+    upper: 1,
+  }
 end

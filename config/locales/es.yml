@@ -3,7 +3,19 @@ es:
     messages:
       taken_in_past: 'la contraseña fue usada previamente, favor elegir otra.'
       equal_to_current_password: 'tiene que ser diferente a la contraseña actual.'
-      password_format: 'tiene que contener mayúsculas, minúsculas y digitos '
+      password_complexity:
+        digit:
+          one: tiene que contener al menos un digito
+          other: tiene que contener al menos %{count} digitos
+        lower:
+          one: tiene que contener al menos un minúscula
+          other: tiene que contener al menos %{count} minúsculas
+        symbol:
+          one: tiene que contener al menos un signo de puntuación
+          other: tiene que contener al menos %{count} signos de puntuación
+        upper:
+          one: tiene que contener al menos un mayúscula
+          other: tiene que contener al menos %{count} mayúsculas
   devise:
     invalid_captcha: 'El captcha ingresado es inválido.'
     invalid_security_question: 'La respuesta a la pregunta de suguridad fue incorrecta.'

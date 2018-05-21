@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Devise
   module Models
     # SecurityQuestionable is an accessible add-on for visually handicapped people,

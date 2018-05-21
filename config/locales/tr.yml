@@ -1,0 +1,17 @@
+tr:
+  errors:
+    messages:
+      taken_in_past: "daha önce kullanıldı."
+      equal_to_current_password: "mevcut paroladan farklı olmalı."
+      password_format: "büyük, küçük harfler ve sayılar içermeli."
+  devise:
+    invalid_captcha: "Captcha hatalı."
+    invalid_security_question: "Güvenlik sorusunun cevabı yanlış."
+    paranoid_verify:
+      code_required: "Destek ekibimizden aldığınız kodu girin."
+    password_expired:
+      updated: "Yeni parolanız kaydedildi."
+      change_required: "Parolanızın geçerlilik süresi dolmuş. Lütfen parolanızı yenileyin."
+    failure:
+      session_limited: 'Hesabınıza başka bir tarayıcıdan giriş yapılmış. Lütfen devam etmek için yeniden giriş yapın.'
+      expired: 'Hesabınız aktif olarak kullanılmadığı için artık geçerli değil. Lütfen yönetici ile irtibata geçin.'

@@ -3,7 +3,19 @@ de:
     messages:
       taken_in_past: 'wurde bereits in der Vergangenheit verwendet!'
       equal_to_current_password: 'darf nicht dem aktuellen Passwort entsprechen!'
-      password_format: 'müssen große, kleine Buchstaben und Ziffern enthalten'
+      password_complexity:
+        digit:
+          one: muss mindestens eine Nummer enthalten
+          other: muss mindestens %{count} Zahlen enthalten
+        lower:
+          one: muss mindestens eine Kleinbuchstabe enthalten
+          other: muss mindestens %{count} Kleinbuchstaben enthalten
+        symbol:
+          one: muss mindestens eine Satzzeichen enthalten
+          other: muss mindestens %{count} Satzzeichen enthalten
+        upper:
+          one: muss mindestens eine Großbuchstabe enthalten
+          other: muss mindestens %{count} Großbuchstaben enthalten
   devise:
     invalid_captcha: 'Die Captchaeingabe ist nicht gültig!'
     paranoid_verify:

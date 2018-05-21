@@ -61,8 +61,8 @@ Devise.setup do |config|
   # Should the password expire (e.g 3.months)
   # config.expire_password_after = 3.months
 
-  # Need 1 char of A-Z, a-z and 0-9
-  # config.password_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
+  # Need 1 char each of: A-Z, a-z, 0-9, and a punctuation mark or symbol
+  # config.password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
 
   # Number of old passwords in archive
   # config.password_archiving_count = 5

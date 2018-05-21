@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseSecurity
   module Patches
     autoload :ControllerCaptcha, 'devise-security/patches/controller_captcha'

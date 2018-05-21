@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Updates the last_activity_at fields from the record. Only when the user is active 
 # for authentication and authenticated.
 # An expiry of the account is only checked on sign in OR on manually setting the 

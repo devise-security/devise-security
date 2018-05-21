@@ -6,6 +6,7 @@ AllCops:
     - 'lib/tasks/**/*'
   Exclude:
     - Gemfile*
+    - README
     - 'db/**/*'
     - 'config/**/*'
     - 'bin/**/*'
