@@ -7,7 +7,7 @@ rvm:
   - 2.2.9
   - 2.3.6
   - 2.4.3
-  - 2.5.0
+  - 2.5.1
   - ruby-head
 matrix:
   allow_failures:
@@ -15,7 +15,7 @@ matrix:
     - gemfile: gemfiles/rails_5.2_rc1.gemfile
     - rvm: 2.4.3
       gemfile: gemfiles/rails_4.1_stable.gemfile
-    - rvm: 2.5.0
+    - rvm: 2.5.1
       gemfile: gemfiles/rails_4.1_stable.gemfile
 gemfile:
   - gemfiles/rails_4.1_stable.gemfile
