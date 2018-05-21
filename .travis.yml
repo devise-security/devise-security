@@ -4,16 +4,16 @@ install: bundle install --jobs=3 --retry=3
 before_script: bundle install
 script: bundle exec rake
 rvm:
-  - 2.2.9
-  - 2.3.6
-  - 2.4.3
+  - 2.2.10
+  - 2.3.7
+  - 2.4.4
   - 2.5.1
   - ruby-head
 matrix:
   allow_failures:
     - rvm: ruby-head
     - gemfile: gemfiles/rails_5.2_rc1.gemfile
-    - rvm: 2.4.3
+    - rvm: 2.4.4
       gemfile: gemfiles/rails_4.1_stable.gemfile
     - rvm: 2.5.1
       gemfile: gemfiles/rails_4.1_stable.gemfile
