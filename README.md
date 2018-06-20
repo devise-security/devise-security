@@ -158,6 +158,14 @@ add_index :the_resources, :password_changed_at
 ```
 
 ### Password archivable
+
+`app/models/old_password.rb`
+**ActiveRecord**
+```ruby
+class OldPassword < ActiveRecord::Base
+  belongs_to :password_archivable, polymorphic: true
+end
+```
 ```ruby
 create_table :old_passwords do |t|
   t.string :encrypted_password, null: false
@@ -167,6 +175,24 @@ create_table :old_passwords do |t|
   t.datetime :created_at
 end
 add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: :index_password_archivable
+```
+
+
+**MongoId**
+```ruby
+class OldPassword
+  include Mongoid::Document
+  
+  belongs_to :password_archivable, polymorphic: true
+
+  field :encrypted_password, type: String
+  field :password_archivable_type, type: String
+  field :password_archivable_id, type: Integer
+  field :password_salt, type: String
+  field :created_at, type: DateTime
+
+  index( {password_archivable_type: 1, password_archivable_id: 1}, {background: true, name: :index_password_archivable} )
+end
 ```
 
 ### Session limitable
@@ -207,20 +233,48 @@ add_index :the_resources, :paranoid_verified_at
 
 ### Security questionable
 
+`app/models/security_question.rb`
+**ActiveRecord**
 ```ruby
-# app/models/security_question.rb
 class SecurityQuestion < ActiveRecord::Base
   validates :locale, presence: true
   validates :name, presence: true, uniqueness: true
 end
 ```
-
 ```ruby
 create_table :security_questions do |t|
   t.string :locale, null: false
   t.string :name, null: false
 end
 
+add_column :the_resources, :security_question_id, :integer
+add_column :the_resources, :security_question_answer, :string
+```
+or
+
+```ruby
+create_table :the_resources do |t|
+  # other devise fields
+  t.integer :security_question_id
+  t.string :security_question_answer
+end
+```
+
+**MongoId**
+```ruby
+class SecurityQuestion < ActiveRecord::Base
+  include Mongoid::Document
+  
+  field :locale, type: String
+  field :name, type: String
+
+  validates :locale, presence: true
+  validates :name, presence: true, uniqueness: true
+end
+```
+
+**Seed Example**
+```ruby
 SecurityQuestion.create! locale: :de, name: 'Wie lautet der Geburstname Ihrer Mutter?'
 SecurityQuestion.create! locale: :de, name: 'Wo sind sie geboren?'
 SecurityQuestion.create! locale: :de, name: 'Wie lautet der Name Ihres ersten Haustieres?'
@@ -228,23 +282,14 @@ SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblingsfilm?'
 SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblingsbuch?'
 SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblingstier?'
 SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblings-Reiseland?'
-```
 
-
-```ruby
-add_column :the_resources, :security_question_id, :integer
-add_column :the_resources, :security_question_answer, :string
-```
-
-or
-
-```ruby
-create_table :the_resources do |t|
-  # other devise fields
-
-  t.integer :security_question_id
-  t.string :security_question_answer
-end
+SecurityQuestion.create! locale: :'pt-BR', name: 'Qual é o nome de nascimento da sua mãe?'
+SecurityQuestion.create! locale: :'pt-BR', name: 'Onde você nasceu?'
+SecurityQuestion.create! locale: :'pt-BR', name: 'Qual é o nome do seu primeiro animal de estimação?'
+SecurityQuestion.create! locale: :'pt-BR', name: 'Qual é o seu filme favorito?'
+SecurityQuestion.create! locale: :'pt-BR', name: 'Qual é o seu livro favorito?'
+SecurityQuestion.create! locale: :'pt-BR', name: 'Qual é o seu animal favorito?'
+SecurityQuestion.create! locale: :'pt-BR', name: 'Qual é o seu destino de viagem preferido?'
 ```
 
 ## Requirements
