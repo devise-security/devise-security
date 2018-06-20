@@ -122,7 +122,30 @@ rails generate easy_captcha:install
 
 ## Schema
 
-Note: Unlike Devise, devise-security does not currently support mongoid.  Pull requests are welcome!
+### Mongoid Field Definitions
+If you are using Mongoid, define the following fields and indexes within your user model:
+
+```ruby
+    # DeviseSecurity
+    field :password_changed_at,     type: DateTime
+    field :unique_session_id,       type: String
+    field :last_activity_at,        type: DateTime
+    field :expired_at,              type: DateTime
+    index( {last_activity_at: 1}, {:background => true} )
+    index( {expired_at: 1}, {:background => true} )
+    
+    field :paranoid_verification_code,        type: String
+    field :paranoid_verification_attempt,     type: Integer, default: 0
+    field :paranoid_verified_at,              type: DateTime
+    index( {paranoid_verification_code: 1}, {:background => true} )
+    index( {paranoid_verified_at: 1}, {:background => true} )
+    
+    field :security_question_answer,        type: String
+    field :security_question_id,            type: Integer
+```
+
+Remember to create indexes within the MongoDB database after deploying your changes.
+  rake db:mongoid:create_indexes
 
 ### Password expirable
 ```ruby

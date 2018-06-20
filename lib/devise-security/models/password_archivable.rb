@@ -11,7 +11,11 @@ module Devise
       include Devise::Models::DatabaseAuthenticatable
 
       included do
-        has_many :old_passwords, as: :password_archivable, dependent: :destroy
+        if defined?(ActiveRecord) && defined?(ActiveRecord::Base) && self < ActiveRecord::Base
+          has_many :old_passwords, as: :password_archivable, dependent: :destroy
+        elsif defined?(Mongoid) && defined?(Mongoid::Document) && self < Mongoid::Document
+          has_many :old_passwords, as: :password_archivable, dependent: :destroy, validate: false
+        end
         before_update :archive_password, if: :will_save_change_to_encrypted_password?
         validate :validate_password_archive, if: :password_present?
       end
