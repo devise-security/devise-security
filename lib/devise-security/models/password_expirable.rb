@@ -78,7 +78,7 @@ module Devise
         expire_password_after == true
       end
 
-      class_methods do
+      module ClassMethods
         ::Devise::Models.config(self, :expire_password_after)
       end
     end
