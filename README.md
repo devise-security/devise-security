@@ -1,28 +1,29 @@
-# Devise Security
+Devise Security
+===============
 
-[![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
-[![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
+[![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)[![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
 A [Devise](https://github.com/plataformatec/devise) extension to add additional security features required by modern web applications. Forked from [Devise Security Extension](https://github.com/phatworx/devise_security_extension)
 
 It is composed of 7 additional Devise modules:
 
-* `:password_expirable` - passwords will expire after a configured time (and will need an update). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175) immediately as the new password.
-* `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
-* `:password_archivable` - save used passwords in an `old_passwords` table for history checks (don't be able to use a formerly used password)
-* `:session_limitable` - ensures, that there is only one session usable per account at once
-* `:expirable` - expires a user account after x days of inactivity (default 90 days)
-* `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
-* `:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he wont be able to use the application.
+-	`:password_expirable` - passwords will expire after a configured time (and will need to be changed by the user). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175) immediately as the new password.
+-	`:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
+-	`:password_archivable` - save used passwords in an `old_passwords` table for history checks (don't be able to use a formerly used password)
+-	`:session_limitable` - ensures, that there is only one session usable per account at once
+-	`:expirable` - expires a user account after x days of inactivity (default 90 days)
+-	`:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
+-	`:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he wont be able to use the application.
 
 Configuration and database schema for each module below.
 
-## Additional features
+Additional features
+-------------------
 
-* **captcha support** for `sign_up`, `sign_in`, `recover` and `unlock` (to make automated mass creation and brute forcing of accounts harder)
+-	**captcha support** for `sign_up`, `sign_in`, `recover` and `unlock` (to make automated mass creation and brute forcing of accounts harder)
 
-## Getting started
+Getting started
+---------------
 
 Devise Security works with Devise on Rails 4.1 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
 
@@ -38,8 +39,7 @@ After you installed Devise Security you need to run the generator:
 rails generate devise_security:install
 ```
 
-The generator adds optional configurations to `config/initializers/devise-security.rb`. Enable
-the modules you wish to use in the initializer you are ready to add Devise Security modules on top of Devise modules to any of your Devise models:
+The generator adds optional configurations to `config/initializers/devise-security.rb`. Enable the modules you wish to use in the initializer you are ready to add Devise Security modules on top of Devise modules to any of your Devise models:
 
 ```ruby
 devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :expirable
@@ -51,15 +51,19 @@ for `:secure_validatable` you need to add
 gem 'rails_email_validator'
 ```
 
-## Configuration
+Configuration
+-------------
 
 ```ruby
 Devise.setup do |config|
   # ==> Security Extension
   # Configure security extension for devise
 
-  # Should the password expire (e.g 3.months)
-  # config.expire_password_after = 3.months
+  # Password expires after a configurable time (in seconds).
+  # Or expire passwords on demand by setting this configuration to `true`
+  # Use `user.need_password_change!` to expire a password.
+  # Setting the configuration to `false` will completely disable expiration checks.
+  # config.expire_password_after = 3.months | true | false
 
   # Need 1 char each of: A-Z, a-z, 0-9, and a punctuation mark or symbol
   # config.password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
@@ -100,31 +104,40 @@ Devise.setup do |config|
 end
 ```
 
-## Captcha-Support
+Captcha-Support
+---------------
+
 The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_captcha). See further documentation there.
 
 ### Installation
 
-1. Add EasyCaptcha to your `Gemfile` with
+1.	Add EasyCaptcha to your `Gemfile` with
+
 ```ruby
 gem 'easy_captcha'
 ```
-2. Run the initializer
+
+1.	Run the initializer
+
 ```ruby
 rails generate easy_captcha:install
 ```
-3. Enable captcha - see "Configuration" of Devise Security above.
-4. Add the captcha in the generated devise views for each controller you have activated
+
+1.	Enable captcha - see "Configuration" of Devise Security above.
+2.	Add the captcha in the generated devise views for each controller you have activated
+
 ```erb
 <p><%= captcha_tag %></p>
 <p><%= text_field_tag :captcha %></p>
 ```
 
-## Schema
+Schema
+------
 
-Note: Unlike Devise, devise-security does not currently support mongoid.  Pull requests are welcome!
+Note: Unlike Devise, devise-security does not currently support mongoid. Pull requests are welcome!
 
 ### Password expirable
+
 ```ruby
 create_table :the_resources do |t|
   # other devise fields
@@ -134,7 +147,10 @@ end
 add_index :the_resources, :password_changed_at
 ```
 
+Note: setting `password_changed_at` to `nil` will require the user to change their password.
+
 ### Password archivable
+
 ```ruby
 create_table :old_passwords do |t|
   t.string :encrypted_password, null: false
@@ -147,6 +163,7 @@ add_index :old_passwords, [:password_archivable_type, :password_archivable_id], 
 ```
 
 ### Session limitable
+
 ```ruby
 create_table :the_resources do |t|
   # other devise fields
@@ -156,6 +173,7 @@ end
 ```
 
 ### Expirable
+
 ```ruby
 create_table :the_resources do |t|
   # other devise fields
@@ -168,6 +186,7 @@ add_index :the_resources, :expired_at
 ```
 
 ### Paranoid verifiable
+
 ```ruby
 create_table :the_resources do |t|
   # other devise fields
@@ -180,7 +199,7 @@ add_index :the_resources, :paranoid_verification_code
 add_index :the_resources, :paranoid_verified_at
 ```
 
-[Documentation for Paranoid Verifiable module]( https://github.com/devise-security/devise-security/wiki/Paranoid-Verification)
+[Documentation for Paranoid Verifiable module](https://github.com/devise-security/devise-security/wiki/Paranoid-Verification)
 
 ### Security questionable
 
@@ -207,7 +226,6 @@ SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblingstier?'
 SecurityQuestion.create! locale: :de, name: 'Was ist Ihr Lieblings-Reiseland?'
 ```
 
-
 ```ruby
 add_column :the_resources, :security_question_id, :integer
 add_column :the_resources, :security_question_answer, :string
@@ -224,45 +242,52 @@ create_table :the_resources do |t|
 end
 ```
 
-## Requirements
+Requirements
+------------
 
-* Devise (https://github.com/plataformatec/devise)
-* Rails 4.1 onwards (http://github.com/rails/rails)
-* recommendations:
-  * `autocomplete-off` (http://github.com/phatworx/autocomplete-off)
-  * `easy_captcha` (http://github.com/phatworx/easy_captcha)
-  * `rails_email_validator` (http://github.com/phatworx/rails_email_validator)
+-	Devise (https://github.com/plataformatec/devise\)
+-	Rails 4.1 onwards (http://github.com/rails/rails\)
+-	recommendations:
+	-	`autocomplete-off` (http://github.com/phatworx/autocomplete-off\)
+	-	`easy_captcha` (http://github.com/phatworx/easy_captcha\)
+	-	`rails_email_validator` (http://github.com/phatworx/rails_email_validator\)
 
+Todo
+----
 
-## Todo
+-	see the github issues (feature requests)
 
-* see the github issues (feature requests)
+History
+-------
 
-## History
-* 0.1 expire passwords
-* 0.2 strong password validation
-* 0.3 password archivable with validation
-* 0.4 captcha support for sign_up, sign_in, recover and unlock
-* 0.5 session_limitable module
-* 0.6 expirable module
-* 0.7 security questionable module for recover and unlock
-* 0.8 Support for Rails 4 (+ variety of patches)
-* 0.11 Support for Rails 5. Forked to allow project maintenance and features
+-	0.1 expire passwords
+-	0.2 strong password validation
+-	0.3 password archivable with validation
+-	0.4 captcha support for sign_up, sign_in, recover and unlock
+-	0.5 session_limitable module
+-	0.6 expirable module
+-	0.7 security questionable module for recover and unlock
+-	0.8 Support for Rails 4 (+ variety of patches)
+-	0.11 Support for Rails 5. Forked to allow project maintenance and features
 
-## Maintainers
+Maintainers
+-----------
 
-* Nate Bird (https://github.com/natebird)
+-	Nate Bird (https://github.com/natebird\)
+-	Kevin Olbrich (http://github.com/olbrich\)
 
-## Contributing to devise-security
+Contributing to devise-security
+-------------------------------
 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+-	Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+-	Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+-	Fork the project
+-	Start a feature/bugfix branch
+-	Commit and push until you are happy with your contribution
+-	Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+-	Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-## Copyright
+Copyright
+---------
 
 Copyright (c) 2011-2017 Marco Scholl. See LICENSE.txt for further details.
