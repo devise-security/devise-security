@@ -4,7 +4,8 @@ require 'devise-security/hooks/password_expirable'
 
 module Devise
   module Models
-    # PasswordExpirable takes care of change password after
+    # PasswordExpirable makes passwords expire after a configurable amount of
+    # time, or on demand
     module PasswordExpirable
       extend ActiveSupport::Concern
 
@@ -12,53 +13,72 @@ module Devise
         before_save :update_password_changed
       end
 
-      # is an password change required?
+      # Is a password change required?
+      # @return [Boolean]
+      # @return [true] if +password_changed_at+ has not been set or if it is old
+      #   enough based on +expire_password_after+ configuration.
       def need_change_password?
-        if expired_password_after_numeric?
-          password_changed_at.nil? || password_changed_at < expire_password_after.seconds.ago
+        if enabled?
+          if expire_on_demand?
+            # Only expire when password_changed_at is nil
+            password_changed_at.nil?
+          else
+            # Expire when password_changed_at is nil or when the last time the
+            # password was changed is sufficiently old
+            password_changed_at.nil? || password_changed_at < expire_password_after.seconds.ago
+          end
         else
           false
         end
       end
 
-      # set a fake datetime so a password change is needed and save the record
+      # Adjust the +password_changed_at+ field so that it will require a
+      # password update and save the record (without validations)
+      # @return [Boolean]
       def need_change_password!
-        if expired_password_after_numeric?
-          need_change_password
-          save(validate: false)
-        end
+        return unless enabled?
+        need_change_password
+        save(validate: false)
       end
 
-      # set a fake datetime so a password change is needed
+      # Clear the +password_changed_at+ field so that it will require a
+      # password update.
+      # @return [void]
       def need_change_password
-        if expired_password_after_numeric?
-          self.password_changed_at = expire_password_after.seconds.ago
-        end
-
-        # is date not set it will set default to need set new password next login
-        need_change_password if password_changed_at.nil?
-
-        password_changed_at
+        return unless enabled?
+        self.password_changed_at = nil
       end
 
+      # Set this value to a number of seconds to have passwords expire after a time
+      # Set to +true+ if you want to be able to manually expire passwords on demand
+      # without a time limit.
+      # @return [Numeric, true]
       def expire_password_after
         self.class.expire_password_after
       end
 
       private
 
-      # is password changed then update password_cahanged_at
+      # is password changed then update password_changed_at
+      # @note called as a +before_save+ hook
       def update_password_changed
-        self.password_changed_at = Time.now if (new_record? || encrypted_password_changed?) && !password_changed_at_changed?
+        return unless (new_record? || encrypted_password_changed?) && !password_changed_at_changed?
+        self.password_changed_at = Time.zone.now
       end
 
-      def expired_password_after_numeric?
-        return @_numeric if defined?(@_numeric)
-        @_numeric ||= expire_password_after.is_a?(1.class) ||
-                      expire_password_after.is_a?(Float)
+      # Enabled if configuration +expire_password_after+ is set to an {Integer}, {Float}, or {true}
+      def enabled?
+        return @enabled if defined?(@enabled)
+        @enabled = expire_password_after.is_a?(1.class) ||
+                   expire_password_after.is_a?(Float) ||
+                   expire_password_after == true
       end
 
-      module ClassMethods
+      def expire_on_demand?
+        expire_password_after == true
+      end
+
+      class_methods do
         ::Devise::Models.config(self, :expire_password_after)
       end
     end
