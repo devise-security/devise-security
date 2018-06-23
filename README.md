@@ -270,6 +270,8 @@ History
 -	0.8 Support for Rails 4 (+ variety of patches)
 -	0.11 Support for Rails 5. Forked to allow project maintenance and features
 
+See also [Github Releases](https://github.com/devise-security/devise-security/releases)
+
 Maintainers
 -----------
 
