@@ -10,6 +10,10 @@ module Devise
       extend ActiveSupport::Concern
 
       included do
+        scope :with_password_change_requested, -> { where(password_changed_at: nil) }
+        scope :without_password_change_requested, -> { where.not(password_changed_at: nil) }
+        scope :with_expired_password, -> { where('password_changed_at is NULL OR password_changed_at < ?', expire_password_after.seconds.ago) }
+        scope :without_expired_password, -> { without_password_change_requested.where('password_changed_at >= ?', expire_password_after.seconds.ago) }
         before_save :update_password_changed
       end
 
