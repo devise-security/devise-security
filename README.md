@@ -6,19 +6,19 @@ A [Devise](https://github.com/plataformatec/devise) extension to add additional 
 
 It is composed of 7 additional Devise modules:
 
--   `:password_expirable` - passwords will expire after a configured time (and will need to be changed by the user). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175) immediately as the new password.
--   `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
--   `:password_archivable` - save used passwords in an `old_passwords` table for history checks (don't be able to use a formerly used password)
--   `:session_limitable` - ensures, that there is only one session usable per account at once
--   `:expirable` - expires a user account after x days of inactivity (default 90 days)
--   `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
--   `:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he wont be able to use the application.
+- `:password_expirable` - passwords will expire after a configured time (and will need to be changed by the user). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175) immediately as the new password.
+- `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
+- `:password_archivable` - save used passwords in an `old_passwords` table for history checks (don't be able to use a formerly used password)
+- `:session_limitable` - ensures, that there is only one session usable per account at once
+- `:expirable` - expires a user account after x days of inactivity (default 90 days)
+- `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
+- `:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he wont be able to use the application.
 
 Configuration and database schema for each module below.
 
 ## Additional features
 
--   **captcha support** for `sign_up`, `sign_in`, `recover` and `unlock` (to make automated mass creation and brute forcing of accounts harder)
+- **captcha support** for `sign_up`, `sign_in`, `recover` and `unlock` (to make automated mass creation and brute forcing of accounts harder)
 
 ## Getting started
 
@@ -106,20 +106,20 @@ The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_ca
 
 ### Installation
 
-1.  Add EasyCaptcha to your `Gemfile` with
+1. Add EasyCaptcha to your `Gemfile` with
 
 ```ruby
 gem 'easy_captcha'
 ```
 
-1.  Run the initializer
+1. Run the initializer
 
 ```ruby
 rails generate easy_captcha:install
 ```
 
-1.  Enable captcha - see "Configuration" of Devise Security above.
-2.  Add the captcha in the generated devise views for each controller you have activated
+1. Enable captcha - see "Configuration" of Devise Security above.
+1. Add the captcha in the generated devise views for each controller you have activated
 
 ```erb
 <p><%= captcha_tag %></p>
@@ -238,45 +238,45 @@ end
 
 ## Requirements
 
--   Devise (<https://github.com/plataformatec/devise>)
--   Rails 4.1 onwards (<http://github.com/rails/rails>)
--   recommendations:
-    -   `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
-    -   `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
-    -   `rails_email_validator` (<http://github.com/phatworx/rails_email_validator>)
+- Devise (<https://github.com/plataformatec/devise>)
+- Rails 4.1 onwards (<http://github.com/rails/rails>)
+- recommendations:
+  - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
+  - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
+  - `rails_email_validator` (<http://github.com/phatworx/rails_email_validator>)
 
 ## Todo
 
--   see the github issues (feature requests)
+- see the github issues (feature requests)
 
 ## History
 
--   0.1 expire passwords
--   0.2 strong password validation
--   0.3 password archivable with validation
--   0.4 captcha support for sign_up, sign_in, recover and unlock
--   0.5 session_limitable module
--   0.6 expirable module
--   0.7 security questionable module for recover and unlock
--   0.8 Support for Rails 4 (+ variety of patches)
--   0.11 Support for Rails 5. Forked to allow project maintenance and features
+- 0.1 expire passwords
+- 0.2 strong password validation
+- 0.3 password archivable with validation
+- 0.4 captcha support for sign_up, sign_in, recover and unlock
+- 0.5 session_limitable module
+- 0.6 expirable module
+- 0.7 security questionable module for recover and unlock
+- 0.8 Support for Rails 4 (+ variety of patches)
+- 0.11 Support for Rails 5. Forked to allow project maintenance and features
 
 See also [Github Releases](https://github.com/devise-security/devise-security/releases)
 
 ## Maintainers
 
--   Nate Bird (<https://github.com/natebird>)
--   Kevin Olbrich (<http://github.com/olbrich>)
+- Nate Bird (<https://github.com/natebird>)
+- Kevin Olbrich (<http://github.com/olbrich>)
 
 ## Contributing to devise-security
 
--   Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
--   Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
--   Fork the project
--   Start a feature/bugfix branch
--   Commit and push until you are happy with your contribution
--   Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
--   Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+- Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+- Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+- Fork the project
+- Start a feature/bugfix branch
+- Commit and push until you are happy with your contribution
+- Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+- Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 ## Copyright
 
