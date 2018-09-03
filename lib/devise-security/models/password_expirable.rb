@@ -96,8 +96,8 @@ module Devise::Models
     # {Float}, or {true}
     def password_expiration_enabled?
       expire_password_after.is_a?(1.class) ||
-      expire_password_after.is_a?(Float) ||
-      expire_password_on_demand?
+        expire_password_after.is_a?(Float) ||
+        expire_password_on_demand?
     end
 
     # When +expire_password_after+ is set to +true+ then only expire passwords
