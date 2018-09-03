@@ -5,7 +5,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 SimpleCov.start do
   add_filter 'gemfiles'
-  add_filter 'test'
+  add_group 'Tests', 'test'
   add_group 'Password Expireable', "password_expirable"
 end
 

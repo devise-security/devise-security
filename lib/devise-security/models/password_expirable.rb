@@ -4,7 +4,16 @@ require 'devise-security/hooks/password_expirable'
 
 module Devise::Models
   # PasswordExpirable makes passwords expire after a configurable amount of
-  # time, or on demand
+  # time, or on demand.
+  #
+  # == Configuration
+  # Set +expire_password_after+ to the number of seconds a password is valid for
+  # (example: +3.months+). Setting it to +true+ will allow passwords to be expired
+  # on-demand only, and +false+ disables this feature.
+  #
+  # == Expire On-Demand
+  # This is useful to force users to change passwords for complex business reasons.
+  # Call +need_change_password+ to indicate a record needs a new password.
   module PasswordExpirable
     extend ActiveSupport::Concern
 
@@ -24,8 +33,9 @@ module Devise::Models
       password_change_requested? || password_too_old?
     end
 
-    # Adjust the +password_changed_at+ field so that it will require a
-    # password update and save the record (without validations)
+    # Clear the +password_changed_at+ field so that the user will be required to
+    # update their password.
+    # @note Saves the record (without validations)
     # @return [Boolean]
     def need_change_password!
       return unless password_expiration_enabled?
@@ -35,8 +45,9 @@ module Devise::Models
     alias expire_password! need_change_password!
     alias request_password_change! need_change_password!
 
-    # Clear the +password_changed_at+ field so that it will require a
-    # password update.
+    # Clear the +password_changed_at+ field so that the user will be required to
+    #   update their password.
+    # @note Does not save the record
     # @return [void]
     def need_change_password
       return unless password_expiration_enabled?
@@ -45,15 +56,14 @@ module Devise::Models
     alias expire_password need_change_password
     alias request_password_change need_change_password
 
-    # Set this value to a number of seconds to have passwords expire after a time
-    # Set to +true+ if you want to be able to manually expire passwords on demand
-    # without a time limit.
-    # @return [Numeric, Boolean]
+    # @return [Integer] number of seconds passwords are valid for
+    # @return [true] passwords are expired 'on demand' only.
+    # @return [false] passwords never expire (this feature is disabled)
     def expire_password_after
       self.class.expire_password_after
     end
 
-    # When +password_changed_at+ is set to null in the database
+    # When +password_changed_at+ is set to +NULL+ in the database
     # the user is required to change their password.  This only happens
     # on demand or when the column is first added to the table.
     # @return [Boolean]
@@ -63,7 +73,7 @@ module Devise::Models
       password_changed_at.nil?
     end
 
-    # Is this password older than the configured expiration timeout
+    # Is this password older than the configured expiration timeout?
     # @return [Boolean]
     def password_too_old?
       return false if new_record?
@@ -75,26 +85,27 @@ module Devise::Models
 
     private
 
-    # is password changed then update password_changed_at
+    # Update +password_changed_at+ for new records and changed passwords.
     # @note called as a +before_save+ hook
     def update_password_changed
       return unless (new_record? || encrypted_password_changed?) && !password_changed_at_changed?
       self.password_changed_at = Time.zone.now
     end
 
-    # Enabled if configuration +expire_password_after+ is set to an {Integer}, {Float}, or {true}
+    # Enabled if configuration +expire_password_after+ is set to an {Integer},
+    # {Float}, or {true}
     def password_expiration_enabled?
-      expire_password_after.present? &&
-        expire_password_after.is_a?(1.class) ||
-        expire_password_after.is_a?(Float) ||
-        expire_password_on_demand?
+      expire_password_after.is_a?(1.class) ||
+      expire_password_after.is_a?(Float) ||
+      expire_password_on_demand?
     end
 
+    # When +expire_password_after+ is set to +true+ then only expire passwords
+    # on demand.
     def expire_password_on_demand?
       expire_password_after.present? && expire_password_after == true
     end
 
-    # class methods used for configuration
     module ClassMethods
       ::Devise::Models.config(self, :expire_password_after)
     end
