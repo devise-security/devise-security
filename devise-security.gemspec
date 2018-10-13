@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
-  s.add_development_dependency 'coveralls', '~> 0.8'
+  s.add_development_dependency 'coveralls'
   s.add_development_dependency 'easy_captcha', '~> 0'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
