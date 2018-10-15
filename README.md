@@ -22,7 +22,7 @@ Configuration and database schema for each module below.
 
 ## Getting started
 
-Devise Security works with Devise on Rails 4.1 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
+Devise Security works with Devise on Rails 4.2 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
 
 ```ruby
 gem 'devise-security'
