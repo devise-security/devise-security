@@ -23,15 +23,15 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.2.9'
 
   if RUBY_VERSION >= '2.4'
-    s.add_runtime_dependency 'rails', '>= 4.1.0', '< 6.0'
+    s.add_runtime_dependency 'rails', '>= 4.2.0', '< 6.0'
   else
-    s.add_runtime_dependency 'railties', '>= 4.1.0', '< 6.0'
+    s.add_runtime_dependency 'railties', '>= 4.2.0', '< 6.0'
   end
   s.add_runtime_dependency 'devise', '>= 4.2.0', '< 5.0'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
-  s.add_development_dependency 'coveralls', '~> 0.8'
+  s.add_development_dependency 'coveralls'
   s.add_development_dependency 'easy_captcha', '~> 0'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'

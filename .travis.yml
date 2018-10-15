@@ -13,11 +13,10 @@ matrix:
     - rvm: ruby-head
     - gemfile: gemfiles/rails_5.2_rc1.gemfile
     - rvm: 2.4.4
-      gemfile: gemfiles/rails_4.1_stable.gemfile
+      gemfile: gemfiles/rails_4.2_stable.gemfile
     - rvm: 2.5.1
-      gemfile: gemfiles/rails_4.1_stable.gemfile
+      gemfile: gemfiles/rails_4.2_stable.gemfile
 gemfile:
-  - gemfiles/rails_4.1_stable.gemfile
   - gemfiles/rails_4.2_stable.gemfile
   - gemfiles/rails_5.0_stable.gemfile
   - gemfiles/rails_5.1_stable.gemfile

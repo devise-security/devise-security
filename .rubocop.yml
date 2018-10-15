@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.2
   Include:
     - '**/Rakefile'
     - '**/config.ru'
@@ -22,7 +22,7 @@ Metrics/MethodLength:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 100
+  Enabled: false
 
 Naming/FileName:
   Exclude: ["devise-security.gemspec"]
