@@ -8,7 +8,9 @@ require 'devise'
 
 module Devise
 
-  # Should the password expire (e.g 3.months)
+  # Number of seconds that passwords are valid (e.g 3.months)
+  # Disable pasword expiration with +false+
+  # Expire only on demand with +true+
   mattr_accessor :expire_password_after
   @@expire_password_after = 3.months
 
