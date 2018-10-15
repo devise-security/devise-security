@@ -243,7 +243,7 @@ end
 ## Requirements
 
 - Devise (<https://github.com/plataformatec/devise>)
-- Rails 4.1 onwards (<http://github.com/rails/rails>)
+- Rails 4.2 onwards (<http://github.com/rails/rails>)
 - recommendations:
   - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
   - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
@@ -270,6 +270,7 @@ See also [Github Releases](https://github.com/devise-security/devise-security/re
 
 - Nate Bird (<https://github.com/natebird>)
 - Kevin Olbrich (<http://github.com/olbrich>)
+- Dillon Welch (<http://github.com/oniofchaos>)
 
 ## Contributing to devise-security
 
