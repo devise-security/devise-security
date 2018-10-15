@@ -48,7 +48,7 @@ module Devise
           end
 
           # extra validations
-          validates :email, email: email_validation if email_validation # use rails_email_validator or similar
+          validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
           validates :password,
                     'devise_security/password_complexity': password_complexity,
                     if: :password_required?

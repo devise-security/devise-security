@@ -42,11 +42,15 @@ The generator adds optional configurations to `config/initializers/devise-securi
 devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :expirable
 ```
 
-for `:secure_validatable` you need to add
+### E-mail Validation
 
-```ruby
-gem 'rails_email_validator'
-```
+for `:secure_validatable` you need to have a way to validate an e-mail. There are multiple libraries that support this, and even a way built into Ruby!
+
+[Ruby Constant](http://yogodoshi.com/ruby-already-has-its-own-regular-expression-to-validate-emails/)
+  * Note: This method would require a `email_validation` method to be defined in order to hook into the `validates` method defined here.
+[email_address](https://github.com/afair/email_address) gem
+[valid_email2](https://github.com/micke/valid_email2) gem
+[rails_email_validator](https://github.com/phatworx/rails_email_validator) gem (deprecated)
 
 ## Configuration
 
@@ -243,7 +247,6 @@ end
 - recommendations:
   - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
   - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
-  - `rails_email_validator` (<http://github.com/phatworx/rails_email_validator>)
 
 ## Todo
 
