@@ -39,6 +39,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rails_email_validator'
-  s.add_development_dependency 'rubocop', '~> 0.58.0'
+  s.add_development_dependency 'rubocop'
   s.add_development_dependency 'sqlite3'
 end
