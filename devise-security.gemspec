@@ -14,7 +14,11 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/devise-security/devise-security'
   s.description = 'An enterprise security extension for devise.'
   s.authors     = [
-    'Marco Scholl', 'Alexander Dreher', 'Nate Bird', 'Dillon Welch'
+    'Marco Scholl',
+    'Alexander Dreher',
+    'Nate Bird',
+    'Dillon Welch',
+    'Kevin Olbrich'
   ]
 
   s.files         = `git ls-files`.split("\n")
