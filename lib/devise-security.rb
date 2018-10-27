@@ -14,7 +14,7 @@ module Devise
   mattr_accessor :expire_password_after
   @@expire_password_after = 3.months
 
-  # Validate password for strongness
+  # Validate password strength
   mattr_accessor :password_complexity
   @@password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
 

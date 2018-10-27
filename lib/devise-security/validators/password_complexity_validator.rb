@@ -17,17 +17,26 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
   }.freeze
 
   def validate_each(record, attribute, value)
-    active_pattern_keys.each do |key|
-      minimum = [0, options[key].to_i].max
+    active_pattern_keys(record).each do |key|
+      minimum = [0, constraints(record).fetch(key).to_i].max
       pattern = Regexp.new PATTERNS[key]
 
-      unless (value || '').scan(pattern).size >= minimum
+      unless value.to_s.scan(pattern).size >= minimum
         record.errors.add attribute, :"password_complexity.#{key}", count: minimum
       end
     end
   end
 
-  def active_pattern_keys
-    options.keys & PATTERNS.keys
+  def constraints(record)
+    case options[:constraints]
+    when Proc
+      options[:constraints].call(record)
+    else
+      options[:constraints]
+    end
+  end
+
+  def active_pattern_keys(record)
+    constraints(record).keys & PATTERNS.keys
   end
 end

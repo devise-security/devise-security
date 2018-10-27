@@ -12,7 +12,7 @@ module Devise
     # SecureValidatable adds the following options to devise_for:
     #
     #   * +email_regexp+: the regular expression used to validate e-mails;
-    #   * +password_length+: a range expressing password length. Defaults from devise
+    #   * +password_length+: a {Range} expressing password length. Defaults from devise
     #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
     #
     module SecureValidatable
@@ -44,13 +44,18 @@ module Devise
               validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
             end
 
-            validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
+            validates :password, presence: true, length: {
+              minimum: Proc.new { |user| user.class.password_length.min },
+              maximum: Proc.new { |user| user.class.password_length.max }
+            }, confirmation: true, if: :password_required?
           end
 
           # extra validations
           validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
           validates :password,
-                    'devise_security/password_complexity': password_complexity,
+                    'devise_security/password_complexity': {
+                      constraints: Proc.new { |user| user.class.password_complexity }
+                    },
                     if: :password_required?
 
           # don't allow use same password

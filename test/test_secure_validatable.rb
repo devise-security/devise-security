@@ -9,6 +9,17 @@ class TestSecureValidatable < ActiveSupport::TestCase
            :paranoid_verification, :password_expirable, :secure_validatable
   end
 
+  # Some configurations can be overridden in subclasses
+  class ModifiedUser < User
+    def self.password_length
+      10..128
+    end
+
+    def self.password_complexity
+      { digit: 10 }
+    end
+  end
+
   test 'email cannot be blank' do
     msg = "Email can't be blank"
     user = User.create password: 'passWord1', password_confirmation: 'passWord1'
@@ -62,11 +73,27 @@ class TestSecureValidatable < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordInvalid) { user.save! }
   end
 
+  test 'subclasses can override complexity requirements' do
+    msg = 'Password must contain at least 10 digits'
+    user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
+    assert_equal(false, user.valid?)
+    assert_equal([msg], user.errors.full_messages)
+    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+  end
+
   test 'password must have minimum length' do
     msg = 'Password is too short (minimum is 6 characters)'
     user = User.create email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
+    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+  end
+
+  test 'password length can be overridden in a subclass' do
+    msg = 'Password is too short (minimum is 10 characters)'
+    user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
+    assert_equal(false, user.valid?)
+    assert_includes(user.errors.full_messages, msg)
     assert_raises(ActiveRecord::RecordInvalid) { user.save! }
   end
 

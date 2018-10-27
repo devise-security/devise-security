@@ -6,7 +6,7 @@ en:
       password_complexity:
         digit:
           one: must contain at least one digit
-          other: must contain at least %{count} numerals
+          other: must contain at least %{count} digits
         lower:
           one: must contain at least one lower-case letter
           other: must contain at least %{count} lower-case letters
