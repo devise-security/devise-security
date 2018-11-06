@@ -7,6 +7,7 @@ SimpleCov.start do
   add_filter 'gemfiles'
   add_group 'Tests', 'test'
   add_group 'Password Expireable', "password_expirable"
+  add_group 'Secure Validateable', 'secure_validatable'
 end
 
 if ENV['CI']

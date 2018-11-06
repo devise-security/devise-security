@@ -5,8 +5,7 @@ require 'rails_email_validator'
 
 class TestSecureValidatable < ActiveSupport::TestCase
   class User < ActiveRecord::Base
-    devise :database_authenticatable, :password_archivable,
-           :paranoid_verification, :password_expirable, :secure_validatable
+    devise :secure_validatable
   end
 
   # Some configurations can be overridden in subclasses
@@ -18,6 +17,10 @@ class TestSecureValidatable < ActiveSupport::TestCase
     def self.password_complexity
       { digit: 10 }
     end
+  end
+
+  test 'secure_validatable includes database_authenticatable' do
+    assert User.devise_modules.include?(:database_authenticatable)
   end
 
   test 'email cannot be blank' do
@@ -42,7 +45,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'validate both email and password' do
-    msgs = ['Email is invalid', 'Password must contain at least one upper-case letter']
+    msgs = ['Email is invalid', 'Password must contain at least one uppercase letter']
     user = User.create email: 'bob@@foo.tv', password: 'password1', password_confirmation: 'password1'
     assert_equal(false, user.valid?)
     assert_equal(msgs, user.errors.full_messages)
@@ -50,7 +53,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'password must have capital letter' do
-    msgs = ['Password must contain at least one upper-case letter']
+    msgs = ['Password must contain at least one uppercase letter']
     user = User.create email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1'
     assert_equal(false, user.valid?)
     assert_equal(msgs, user.errors.full_messages)
@@ -58,7 +61,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'password must have lowercase letter' do
-    msg = 'Password must contain at least one lower-case letter'
+    msg = 'Password must contain at least one lowercase letter'
     user = User.create email: 'bob@microsoft.com', password: 'PASSWORD1', password_confirmation: 'PASSWORD1'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
@@ -107,5 +110,14 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = SecureUser.new(options)
     refute user.valid?
     assert_equal ['Email has already been taken'], user.errors.full_messages
+  end
+
+  test 'cannot change password to be the same as the current one' do
+    user = User.create!(email: 'bob@microsoft.com', password: 'Test12345', password_confirmation: 'Test12345')
+    user.password = 'Test12345'
+    user.password_confirmation = 'Test12345'
+    refute user.valid?
+    #binding.pry
+    assert_equal [], user.errors.full_messages
   end
 end
