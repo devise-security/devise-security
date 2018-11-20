@@ -14,9 +14,16 @@ module Devise
     # additional keys). This respects the +Devise.case_sensitive_keys+
     # configuration.  This validation is skipped if the model already declares a
     # +validates_uniqueness_of+ validator on the first +authentication_key+.
+    # @note You should ensure that there is a unique index on +login_attribute+
+    #   to avoid race conditions.
     #
     # === Email validation
+    # If the model requires an email address (i.e, +email_required?+ return +true+),
+    # then the email address is verified to be present and unique.
+    #
     # === Password Complexity
+    # Enforces password complexity requirements as described in {PasswordComplexityValidator}.
+    #
     # === Password re-use
     # Disallows re-using current password when changing the password.  This
     # validation is disabled if the {PasswordArchivable} module is used because
@@ -29,7 +36,7 @@ module Devise
     # * +password_complexity+: descriptor of the minimum character classes
     #   required for password complexity, i.e.:
     #    { digits: 1, lower: 1, upper: 1, symbol 1}
-    # * +email_validation+: the regular expression used to validate e-mails;
+    # * +email_validation+: the validation options to be passed to the email validator
     # * +password_length+: a +Range+ expressing password length. Defaults from devise
     #
     module SecureValidatable
@@ -43,16 +50,19 @@ module Devise
 
         already_validated_email = false
 
+        # login attribute should be unique
         unless has_uniqueness_validation_of_login?
-          # validate this every time the record is updated or created.
+          # Only perform uniqueness check when the login attribute is dirty so
+          # we can avoid hitting the database unnecessarily.
           validates login_attribute, uniqueness: {
             scope:          authentication_keys[1..-1],
             case_sensitive: !case_insensitive_keys.include?(login_attribute),
-          }, unless
+          }, if: -> { will_save_change_to_attribute?(self.class.login_attribute) }
 
           already_validated_email = login_attribute.to_s == 'email'
         end
 
+        # Don't do these validations if the core :validateable is enabled
         unless devise_validation_enabled?
           validates :email, presence: true, if: :email_required?
           unless already_validated_email

@@ -117,7 +117,6 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user.password = 'Test12345'
     user.password_confirmation = 'Test12345'
     refute user.valid?
-    #binding.pry
-    assert_equal [], user.errors.full_messages
+    assert_equal ["Password must be different from the current password."], user.errors.full_messages
   end
 end
