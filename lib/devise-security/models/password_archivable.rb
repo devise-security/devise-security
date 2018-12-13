@@ -38,11 +38,14 @@ module Devise
       # @return [true] if current password was used previously
       # @return [false] if disabled or not previously used
       def password_archive_included?
-        return false unless max_old_passwords > 0
+        return false unless max_old_passwords.positive?
+
         old_passwords_including_cur_change = old_passwords.order(:id).reverse_order.limit(max_old_passwords).pluck(:encrypted_password)
         old_passwords_including_cur_change << encrypted_password_was # include most recent change in list, but don't save it yet!
         old_passwords_including_cur_change.any? do |old_password|
-          self.class.new(encrypted_password: old_password).valid_password?(password)
+          old_password_validator = self.class.new
+          old_password_validator.encrypted_password = old_password
+          old_password_validator.valid_password?(password)
         end
       end
 
