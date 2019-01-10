@@ -12,13 +12,19 @@ rvm:
 matrix:
   include:
     - rvm: 2.3.8
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      before_install: gem install bundler -v '1.16.1'
+    - rvm: 2.4.5
+      gemfile: gemfiles/rails_4.2_stable.gemfile
       before_install: gem install bundler -v '1.16.1'
   allow_failures:
     - rvm: ruby-head
     - gemfile: gemfiles/rails_5.2_stable.gemfile
-    - rvm: 2.4.4
+    - rvm: 2.4.5
       gemfile: gemfiles/rails_4.2_stable.gemfile
     - rvm: 2.5.3
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+    - rvm: 2.6.0
       gemfile: gemfiles/rails_4.2_stable.gemfile
 gemfile:
   - gemfiles/rails_4.2_stable.gemfile
