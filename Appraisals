@@ -1,4 +1,5 @@
 appraise 'rails-4.2-stable' do
+  gem 'bundler', '< 2.0'
   gem 'rails', '~> 4.2.0'
 end
 
