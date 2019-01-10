@@ -10,6 +10,9 @@ rvm:
   - 2.6.0
   - ruby-head
 matrix:
+  include:
+    - rvm: 2.3.8
+      before_install: gem install bundler -v '1.16.1'
   allow_failures:
     - rvm: ruby-head
     - gemfile: gemfiles/rails_5.2_stable.gemfile
