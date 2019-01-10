@@ -1,5 +1,5 @@
 language: ruby
-before_install: gem install bundler && bundle -v
+before_install: gem install bundler -v '1.17.3' && bundle -v
 install: bundle install --jobs=3 --retry=3
 before_script: bundle install
 script: bundle exec rake
@@ -10,13 +10,6 @@ rvm:
   - 2.6.0
   - ruby-head
 matrix:
-  include:
-    - rvm: 2.3.8
-      gemfile: gemfiles/rails_4.2_stable.gemfile
-      before_install: gem install bundler -v '1.16.1'
-    - rvm: 2.4.5
-      gemfile: gemfiles/rails_4.2_stable.gemfile
-      before_install: gem install bundler -v '1.16.1'
   allow_failures:
     - rvm: ruby-head
     - gemfile: gemfiles/rails_5.2_stable.gemfile
