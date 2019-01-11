@@ -1,7 +1,6 @@
 language: ruby
-before_install: gem install bundler -v '1.17.3' && bundle -v
+before_install: gem install bundler -v '< 2'
 install: bundle install --jobs=3 --retry=3
-before_script: bundle install
 script: bundle exec rake
 rvm:
   - 2.3
