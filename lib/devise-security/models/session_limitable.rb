@@ -18,6 +18,12 @@ module Devise
         save(validate: false)
       end
 
+      # Should session_limitable be skipped for this instance?
+      # @return [Boolean]
+      # @return [false] by default. This can be overridden by application logic as necessary.
+      def skip_session_limitable?
+        false
+      end
     end
   end
 end
