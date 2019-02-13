@@ -25,7 +25,7 @@ unless defined?(DEVISE_ORM)
   DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
   #DEVISE_ORM = :mongoid
 end
-ENV['DEVISE_ORM'] ||= 'activerecord'
+ENV['DEVISE_ORM'] ||= 'active_record'
 DEVISE_ORM = ENV['DEVISE_ORM'].to_sym
 if DEVISE_ORM == :mongoid
   $:.unshift File.dirname(__FILE__)
