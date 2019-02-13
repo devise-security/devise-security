@@ -55,7 +55,7 @@ Gem::Specification.new do |s|
     #s.add_development_dependency 'minitest-reporters'
     #s.add_development_dependency 'minitest-matchers'
   elsif DEVISE_ORM == :active_record
-    s.add_development_dependency 'sqlite3'
+    s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
   end
   puts '*' * 80
   puts "current_orm => #{DEVISE_ORM}"

@@ -9,6 +9,141 @@ rvm:
   - 2.6
   - ruby-head
 matrix:
+  include:
+    #2.3 active_record
+    - rvm: 2.3
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.3
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.3
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.3
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    #2.3 mongoid
+    - rvm: 2.3
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.3
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.3
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.3
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+
+    #2.4 active_record
+    - rvm: 2.4
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.4
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.4
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.4
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    #2.4 mongoid
+    - rvm: 2.4
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.4
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.4
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.4
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+
+    #2.5 active_record
+    - rvm: 2.5
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.5
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.5
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.5
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    #2.5 mongoid
+    - rvm: 2.5
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.5
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.5
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.5
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+
+    #2.6 active_record
+    - rvm: 2.6
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.6
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.6
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: 2.6
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    #2.6 mongoid
+    - rvm: 2.6
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.6
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.6
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: 2.6
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+
+    #ruby-head active_record
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=active_record
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=active_record
+    #ruby-head mongoid
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_4.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_5.1_stable.gemfile
+      env: DEVISE_ORM=mongoid
+    - rvm: ruby-head
+      gemfile: gemfiles/rails_5.2_stable.gemfile
+      env: DEVISE_ORM=mongoid
   allow_failures:
     - rvm: ruby-head
     - rvm: 2.6
@@ -18,3 +153,7 @@ gemfile:
   - gemfiles/rails_5.0_stable.gemfile
   - gemfiles/rails_5.1_stable.gemfile
   - gemfiles/rails_5.2_stable.gemfile
+  - gemfiles/rails_4.2_stable_mongoid.gemfile
+  - gemfiles/rails_5.0_stable_mongoid.gemfile
+  - gemfiles/rails_5.1_stable_mongoid.gemfile
+  - gemfiles/rails_5.2_stable_mongoid.gemfile
