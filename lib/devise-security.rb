@@ -1,6 +1,34 @@
 # frozen_string_literal: true
 
-require 'active_record'
+unless defined?(DEVISE_ORM)
+  DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
+  DEVISE_ORM = :mongoid
+end
+
+if DEVISE_ORM == :mongoid
+  # alias :orig_require :require
+  #
+  # def require s
+  #   if s.include?('active_record')
+  #     if DEVISE_ORM == :mongoid
+  #       puts ''
+  #       puts '*' * 80
+  #       print "* Requires #{s}\n"
+  #       puts '*' * 80
+  #       puts Thread.current.backtrace[2..Thread.current.backtrace.size]
+  #       puts '*' * 80
+  #       puts ''
+  #     end
+  #   end
+  #   #print "Requires #{s}\n" if orig_require(s)
+  #   orig_require(s)
+  # end
+
+  require 'mongoid'
+  Mongoid.load!(File.expand_path('../../test/dummy/config/mongoid.yml', __FILE__))
+elsif DEVISE_ORM == :active_record
+  require 'active_record'
+end
 require 'active_support/core_ext/integer'
 require 'active_support/ordered_hash'
 require 'active_support/concern'
@@ -102,7 +130,7 @@ Devise.add_module :paranoid_verification, controller: :paranoid_verification_cod
 # requires
 require 'devise-security/routes'
 require 'devise-security/rails'
-require 'devise-security/orm/active_record'
-require 'devise-security/models/old_password'
+require "devise-security/orm/#{DEVISE_ORM}" if defined? DEVISE_ORM
+require 'devise-security/models/old_password'  if defined? DEVISE_ORM
 require 'devise-security/models/database_authenticatable_patch'
 require 'devise-security/models/paranoid_verification'

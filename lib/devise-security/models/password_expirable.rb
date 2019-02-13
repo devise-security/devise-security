@@ -48,16 +48,16 @@ module Devise
 
       private
 
-        # is password changed then update password_cahanged_at
-        def update_password_changed
-          self.password_changed_at = Time.now if (self.new_record? || self.encrypted_password_changed?) && !self.password_changed_at_changed?
-        end
+      # is password changed then update password_cahanged_at
+      def update_password_changed
+        self.password_changed_at = Time.now if (self.new_record? || self.encrypted_password_changed?) && !self.password_changed_at_changed?
+      end
 
-        def expired_password_after_numeric?
-          return @_numeric if defined?(@_numeric)
-          @_numeric ||= self.expire_password_after.is_a?(1.class) ||
-            self.expire_password_after.is_a?(Float)
-        end
+      def expired_password_after_numeric?
+        return @_numeric if defined?(@_numeric)
+        @_numeric ||= self.expire_password_after.is_a?(1.class) ||
+          self.expire_password_after.is_a?(Float)
+      end
 
       module ClassMethods
         ::Devise::Models.config(self, :expire_password_after)

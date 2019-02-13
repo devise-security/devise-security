@@ -40,5 +40,20 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rails_email_validator', '~> 0'
   s.add_development_dependency 'rubocop', '~> 0.54.0'
-  s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
+  unless defined? DEVISE_ORM
+    DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
+    DEVISE_ORM = :mongoid
+  end
+  if DEVISE_ORM == :mongoid
+    s.add_development_dependency 'mongoid' #, '~> 7.0.1'
+    puts '*' * 80
+    puts DEVISE_ORM
+    puts '*' * 80
+    s.add_dependency("orm_adapter")
+    #s.add_development_dependency 'mongoid-minitest'
+    #s.add_development_dependency 'minitest-reporters'
+    #s.add_development_dependency 'minitest-matchers'
+  elsif DEVISE_ORM == :active_record
+    s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
+  end
 end

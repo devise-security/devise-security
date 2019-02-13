@@ -7,10 +7,11 @@ class TestWithSecurityQuestion < ActionController::TestCase
   tests SecurityQuestion::UnlocksController
 
   setup do
-    @user = User.create(username: 'hello', email: 'hello@path.travel',
-                        password: '1234', security_question_answer: 'Right Answer')
+    Mongoid.purge! if DEVISE_ORM == :mongoid
+    @user = User.create!(username: 'hello', email: 'hello@microsoft.com',
+                        password: 'A1234567z!', security_question_answer: 'Right Answer')
     @user.lock_access!
-
+    assert_equal(true, @user.locked_at.present?)
     @request.env['devise.mapping'] = Devise.mappings[:security_question_user]
   end
 

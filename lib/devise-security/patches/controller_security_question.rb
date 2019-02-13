@@ -11,6 +11,7 @@ module DeviseSecurity::Patches
     private
     def check_security_question
       # only find via email, not login
+      #resource = resource_class.find_or_initialize_with_errors([:email, :security_question_answer], params[resource_name].merge({ security_question_answer: params[:security_question_answer] }), :not_found)
       resource = resource_class.find_or_initialize_with_error_by(:email, params[resource_name][:email], :not_found)
       return if valid_security_question_answer?(resource, params[:security_question_answer])
 
