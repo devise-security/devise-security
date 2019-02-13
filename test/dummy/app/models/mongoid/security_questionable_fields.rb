@@ -1,6 +1,4 @@
 module SecurityQuestionableFields
-  # def self.included(base)
-
   extend ::ActiveSupport::Concern
 
   included do
