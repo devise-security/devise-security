@@ -8,7 +8,7 @@ Coveralls.wear!
 
 unless defined?(DEVISE_ORM)
   DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
-  DEVISE_ORM = :mongoid
+  #DEVISE_ORM = :mongoid
 end
 
 require 'dummy/config/environment'
