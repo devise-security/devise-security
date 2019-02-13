@@ -13,11 +13,15 @@ Devise.setup do |config|
   # How many passwords to keep in archive
   # config.password_archiving_count = 5
 
-  # Deny old password (true, false, count)
+  # Deny old passwords (true, false, number_of_old_passwords_to_check)
+  # Examples:
+  # config.deny_old_passwords = false # allow old passwords
+  # config.deny_old_passwords = true # will deny all the old passwords
+  # config.deny_old_passwords = 3 # will deny new passwords that matches with the last 3 passwords
   # config.deny_old_passwords = true
 
   # enable email validation for :secure_validatable. (true, false, validation_options)
-  # dependency: need an email validator like rails_email_validator
+  # dependency: see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
   # config.email_validation = true
 
   # captcha integration for recover form

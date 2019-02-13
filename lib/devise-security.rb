@@ -36,7 +36,9 @@ require 'devise'
 
 module Devise
 
-  # Should the password expire (e.g 3.months)
+  # Number of seconds that passwords are valid (e.g 3.months)
+  # Disable pasword expiration with +false+
+  # Expire only on demand with +true+
   mattr_accessor :expire_password_after
   @@expire_password_after = 3.months
 
@@ -53,7 +55,7 @@ module Devise
   @@deny_old_passwords = true
 
   # enable email validation for :secure_validatable. (true, false, validation_options)
-  # dependency: need an email validator like rails_email_validator
+  # dependency: need an email validator, see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
   mattr_accessor :email_validation
   @@email_validation = true
 

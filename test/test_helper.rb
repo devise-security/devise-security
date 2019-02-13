@@ -1,20 +1,32 @@
 # frozen_string_literal: true
 
-ENV['RAILS_ENV'] = 'test'
+ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
-require 'coveralls'
-Coveralls.wear!
+SimpleCov.start do
+  add_filter 'gemfiles'
+  add_group 'Tests', 'test'
+  add_group 'Password Expireable', "password_expirable"
+end
 
-unless defined?(DEVISE_ORM)
-  DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
-  #DEVISE_ORM = :mongoid
+if ENV['CI']
+  require 'coveralls'
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+  Coveralls.wear!
 end
 
 require 'dummy/config/environment'
 require 'minitest/autorun'
 require 'rails/test_help'
 require 'devise-security'
+require 'pry'
+
+unless defined?(DEVISE_ORM)
+  DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
+  #DEVISE_ORM = :mongoid
+end
+ENV['DEVISE_ORM'] ||= 'activerecord'
+DEVISE_ORM = ENV['DEVISE_ORM']
 if DEVISE_ORM == :mongoid
   $:.unshift File.dirname(__FILE__)
   puts "\n==> Devise.orm = #{DEVISE_ORM.inspect}" if DEVISE_ORM == :mongoid
@@ -51,10 +63,4 @@ elsif DEVISE_ORM == :active_record
   else
     ActiveRecord::Migrator.migrate(File.expand_path('../dummy/db/migrate', __FILE__))
   end
-end
-
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-SimpleCov.start do
-  add_filter 'test/dummy'
-  add_filter 'gemfiles'
 end
