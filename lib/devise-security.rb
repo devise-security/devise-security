@@ -2,28 +2,9 @@
 
 unless defined?(DEVISE_ORM)
   DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
-  DEVISE_ORM = :mongoid
 end
 
 if DEVISE_ORM == :mongoid
-  # alias :orig_require :require
-  #
-  # def require s
-  #   if s.include?('active_record')
-  #     if DEVISE_ORM == :mongoid
-  #       puts ''
-  #       puts '*' * 80
-  #       print "* Requires #{s}\n"
-  #       puts '*' * 80
-  #       puts Thread.current.backtrace[2..Thread.current.backtrace.size]
-  #       puts '*' * 80
-  #       puts ''
-  #     end
-  #   end
-  #   #print "Requires #{s}\n" if orig_require(s)
-  #   orig_require(s)
-  # end
-
   require 'mongoid'
   Mongoid.load!(File.expand_path('../../test/dummy/config/mongoid.yml', __FILE__))
 elsif DEVISE_ORM == :active_record
