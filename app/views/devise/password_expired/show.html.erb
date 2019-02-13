@@ -1,7 +1,7 @@
 <h2>Renew your password</h2>
 
 <%= form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render 'devise/shared/error_messages', resource: resource %>
 
   <p><%= f.label :current_password, 'Current password' %><br />
   <%= f.password_field :current_password %></p>
