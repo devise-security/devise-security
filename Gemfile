@@ -4,4 +4,3 @@ gem 'omniauth'
 group :development do
   gem 'wwtd'
 end
-gem 'rb-readline'

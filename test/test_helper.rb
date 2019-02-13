@@ -26,7 +26,7 @@ unless defined?(DEVISE_ORM)
   #DEVISE_ORM = :mongoid
 end
 ENV['DEVISE_ORM'] ||= 'activerecord'
-DEVISE_ORM = ENV['DEVISE_ORM']
+DEVISE_ORM = ENV['DEVISE_ORM'].to_sym
 if DEVISE_ORM == :mongoid
   $:.unshift File.dirname(__FILE__)
   puts "\n==> Devise.orm = #{DEVISE_ORM.inspect}" if DEVISE_ORM == :mongoid

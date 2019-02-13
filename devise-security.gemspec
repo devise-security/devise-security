@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop', '~> 0.59.2'
   unless defined? DEVISE_ORM
     DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
-    DEVISE_ORM = :mongoid
+    #DEVISE_ORM = :mongoid
   end
   if DEVISE_ORM == :mongoid
     s.add_development_dependency 'mongoid' #, '~> 7.0.1'

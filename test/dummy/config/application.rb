@@ -2,6 +2,10 @@
 
 require File.expand_path('../boot', __FILE__)
 
+unless defined? DEVISE_ORM
+  DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
+  #DEVISE_ORM = :mongoid
+end
 if DEVISE_ORM == :active_record
   require 'rails/all'
   require 'devise-security'
