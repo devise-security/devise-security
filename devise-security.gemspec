@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.3.0'
 
   if RUBY_VERSION >= '2.4'
-    s.add_runtime_dependency 'rails', '>= 4.2.0', '< 6.0'
+    s.add_runtime_dependency 'rails', '>= 4.2.0', '< 7.0'
   else
     s.add_runtime_dependency 'railties', '>= 4.2.0', '< 6.0'
   end
