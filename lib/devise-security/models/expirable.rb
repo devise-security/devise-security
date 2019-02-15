@@ -107,7 +107,7 @@ module Devise
         # @example Overwritten version to blank out the object.
         #   def self.delete_all_expired_for(time = 90.days)
         #     expired_for(time).each do |u|
-        #       u.update_attributes first_name: nil, last_name: nil
+        #       u.update first_name: nil, last_name: nil
         #     end
         #   end
         def delete_all_expired_for(time)
