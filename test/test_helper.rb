@@ -22,11 +22,9 @@ require 'rails/test_help'
 require 'devise-security'
 require 'pry'
 
-unless defined?(DEVISE_ORM)
-  DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
+unless defined? DEVISE_ORM
+  DEVISE_ORM = (ENV['DEVISE_ORM'] || 'active_record').to_sym
 end
-ENV['DEVISE_ORM'] ||= 'active_record'
-DEVISE_ORM = ENV['DEVISE_ORM'].to_sym
 if DEVISE_ORM == :mongoid
   $:.unshift File.dirname(__FILE__)
   puts "\n==> Devise.orm = #{DEVISE_ORM.inspect}" if DEVISE_ORM == :mongoid
@@ -37,7 +35,6 @@ if DEVISE_ORM == :mongoid
   if DEVISE_ORM == :mongoid
     require 'mongoid'
   end
-  #require 'devise-security'
 elsif DEVISE_ORM == :active_record
   ActiveRecord::Migration.verbose = false
   ActiveRecord::Base.logger = Logger.new(nil)

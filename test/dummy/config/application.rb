@@ -4,7 +4,6 @@ require File.expand_path('../boot', __FILE__)
 
 unless defined? DEVISE_ORM
   DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
-  #DEVISE_ORM = :mongoid
 end
 if DEVISE_ORM == :active_record
   require 'rails/all'
@@ -13,28 +12,7 @@ elsif DEVISE_ORM == :mongoid
   require "rails"
   require "#{DEVISE_ORM}"
   require 'devise-security'
-  all_railties = [
-    'active_model/railtie',
-    "#{DEVISE_ORM}/railtie",
-    'active_job/railtie',
-    'action_controller/railtie',
-    'action_mailer/railtie',
-    'action_view/railtie',
-    'sprockets/railtie',
-    #'rails/test_unit/railtie',
-    #'active_storage/engine',
-    #'action_cable/engine',
-  ]
-  #all_rails = all_rails.unshift 'active_record/railtie' if DEVISE_ORM && DEVISE_ORM != :mongoid
-  #all_railties.select! {|railtie| !railtie.include?('active_record')} if DEVISE_ORM && DEVISE_ORM == :mongoid
-  all_railties.each do |railtie|
-    begin
-      #require railtie
-    rescue LoadError
-    end
-  end
 
-#these are needed
   if defined?(Bundler)
     Bundler.require :default, DEVISE_ORM
   end
