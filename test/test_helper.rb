@@ -23,7 +23,7 @@ require 'devise-security'
 require 'pry'
 
 unless defined? DEVISE_ORM
-  DEVISE_ORM = (ENV['DEVISE_ORM'] || 'active_record').to_sym
+  DEVISE_ORM = ENV.fetch('DEVISE_ORM',  'active_record').to_sym
 end
 if DEVISE_ORM == :mongoid
   $:.unshift File.dirname(__FILE__)
@@ -32,9 +32,7 @@ if DEVISE_ORM == :mongoid
   require 'mongoid'
   require "orm/#{DEVISE_ORM}"
 
-  if DEVISE_ORM == :mongoid
-    require 'mongoid'
-  end
+  require 'mongoid'
 elsif DEVISE_ORM == :active_record
   ActiveRecord::Migration.verbose = false
   ActiveRecord::Base.logger = Logger.new(nil)

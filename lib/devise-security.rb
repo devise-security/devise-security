@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 unless defined?(DEVISE_ORM)
-  DEVISE_ORM = (ENV["DEVISE_ORM"] || :active_record).to_sym
+  DEVISE_ORM = ENV.fetch('DEVISE_ORM',  'active_record').to_sym
 end
 
 if DEVISE_ORM == :mongoid
   require 'mongoid'
-  Mongoid.load!(File.expand_path('../../test/dummy/config/mongoid.yml', __FILE__))
 elsif DEVISE_ORM == :active_record
   require 'active_record'
 end
