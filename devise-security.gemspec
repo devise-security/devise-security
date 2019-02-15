@@ -51,7 +51,7 @@ Gem::Specification.new do |s|
     s.add_development_dependency 'mongoid' #, '~> 7.0.1'
     s.add_dependency("orm_adapter")
   elsif DEVISE_ORM == :active_record
-    s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.10'
+    s.add_development_dependency 'sqlite3'
   end
   puts '*' * 80
   puts "current_orm => #{DEVISE_ORM}"
