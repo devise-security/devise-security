@@ -6,7 +6,12 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   setup do
-    Mongoid.purge! if DEVISE_ORM == :mongoid
+    if DEVISE_ORM == :mongoid
+      Mongoid.purge!
+      User.destroy_all
+    end
+
+    User.destroy_all if DEVISE_ORM == :active_record
     @request.env["devise.mapping"] = Devise.mappings[:user]
     @user = User.create!(
       username: 'hello',

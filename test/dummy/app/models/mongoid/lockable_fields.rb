@@ -4,17 +4,11 @@ module LockableFields
   included do
     include Mongoid::Document
 
-    ## Database authenticatable
-    field :email, type: String, default: ""
-    validates_presence_of :email
-
-    field :encrypted_password, type: String, default: ""
-    validates_presence_of :encrypted_password
-
-    field :password_changed_at, type: Time
-    index({ password_changed_at: 1 }, {})
-    index({ email: 1 }, {})
+    field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
+    field :unlock_token, type: String # Only if unlock strategy is :email or :both
+    field :locked_at, type: Time
     include Mongoid::Timestamps
+    index({ unlock_token: 1 }, { unique: true })
   end
 
   module ClassMethods

@@ -1,5 +1,5 @@
 test:
-  clients:
+  sessions:
     default:
       database: devise_security_test
       hosts:

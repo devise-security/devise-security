@@ -7,8 +7,12 @@ class TestWithSecurityQuestion < ActionController::TestCase
   tests SecurityQuestion::UnlocksController
 
   setup do
-    Mongoid.purge! if DEVISE_ORM == :mongoid
-    @user = User.create!(username: 'hello', email: 'hello@microsoft.com',
+    if DEVISE_ORM == :mongoid
+      Mongoid.purge!
+      SecurityQuestionUser.destroy_all
+      User.destroy_all
+    end
+    @user = SecurityQuestionUser.create!(username: 'hello', email: 'hello@microsoft.com',
                         password: 'A1234567z!', security_question_answer: 'Right Answer')
     @user.lock_access!
     assert_equal(true, @user.locked_at.present?)
@@ -29,7 +33,6 @@ class TestWithSecurityQuestion < ActionController::TestCase
         }, security_question_answer: "wrong answer"
       }
     end
-
     assert_equal 'The security question answer was invalid.', flash[:alert]
     assert_redirected_to new_security_question_user_unlock_path
   end

@@ -21,7 +21,11 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   setup do
-    Mongoid.purge! if DEVISE_ORM == :mongoid
+    if DEVISE_ORM == :mongoid
+      Mongoid.purge!
+      User.destroy_all
+      SecureUser.destroy_all
+    end
   end
 
   test 'email cannot be blank' do
