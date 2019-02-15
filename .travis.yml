@@ -12,6 +12,8 @@ env:
   matrix:
     - DEVISE_ORM=active_record
     - DEVISE_ORM=mongoid
+services:
+  - mongodb
 matrix:
   allow_failures:
     - rvm: ruby-head
