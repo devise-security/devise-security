@@ -8,7 +8,7 @@ module Mongoid
         begin
           module_name = "#{devise_module_name.to_s.classify}Fields".constantize
           include module_name
-          puts "Module #{module_name} included"
+          puts "Module #{module_name} included" unless ENV['CI']
         rescue => e
           puts "#{module_name} #{devise_module_name} not found"
           raise e
