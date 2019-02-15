@@ -1,10 +1,6 @@
 test:
-  sessions:
+  <%= Mongoid::VERSION.to_i > 4 ? 'clients' : 'sessions' %>:
     default:
       database: devise_security_test
       hosts:
         - localhost:27017
-      options:
-        read:
-          mode: :primary
-        max_pool_size: 1
