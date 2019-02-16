@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
+DEVISE_ORM = ENV.fetch('DEVISE_ORM',  'active_record').to_sym
 
 require 'simplecov'
 SimpleCov.start do
@@ -15,30 +16,9 @@ if ENV['CI']
   Coveralls.wear!
 end
 
+require 'pry'
 require 'dummy/config/environment'
 require 'minitest/autorun'
 require 'rails/test_help'
-
 require 'devise-security'
-require 'pry'
-
-unless defined? DEVISE_ORM
-  DEVISE_ORM = ENV.fetch('DEVISE_ORM',  'active_record').to_sym
-end
-if DEVISE_ORM == :mongoid
-  $:.unshift File.dirname(__FILE__)
-  puts "\n==> Devise.orm = #{DEVISE_ORM.inspect}" if DEVISE_ORM == :mongoid
-
-  require 'mongoid'
-  require "orm/#{DEVISE_ORM}"
-
-  require 'mongoid'
-elsif DEVISE_ORM == :active_record
-  ActiveRecord::Migration.verbose = false
-  ActiveRecord::Base.logger = Logger.new(nil)
-  if Rails.gem_version >= Gem::Version.new('5.2.0')
-    ActiveRecord::MigrationContext.new(File.expand_path('../dummy/db/migrate', __FILE__)).migrate
-  else
-    ActiveRecord::Migrator.migrate(File.expand_path('../dummy/db/migrate', __FILE__))
-  end
-end
+require "orm/#{DEVISE_ORM}"
