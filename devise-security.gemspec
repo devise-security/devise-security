@@ -39,21 +39,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
+  s.add_development_dependency 'mongoid' #, '~> 7.0.1'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rails_email_validator'
   s.add_development_dependency 'rubocop', '~> 0.59.2'
-  unless defined? DEVISE_ORM
-    DEVISE_ORM ||= (ENV["DEVISE_ORM"] || :active_record).to_sym
-  end
-  if DEVISE_ORM == :mongoid
-    s.add_development_dependency 'mongoid' #, '~> 7.0.1'
-    s.add_dependency("orm_adapter")
-  elsif DEVISE_ORM == :active_record
-    s.add_development_dependency 'sqlite3'
-  end
-  puts '*' * 80
-  puts "current_orm => #{DEVISE_ORM}"
-  puts '*' * 80
+  s.add_development_dependency 'sqlite3'
 end
