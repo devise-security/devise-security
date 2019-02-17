@@ -66,7 +66,7 @@ module Devise
       #   mongoid will keep re-triggering this callback when we add an old password
       def archive_password
         if max_old_passwords > 0
-          return if old_passwords.where(encrypted_password: encrypted_password_was).exists?
+          return true if old_passwords.where(encrypted_password: encrypted_password_was).exists?
           old_passwords.create!(encrypted_password: encrypted_password_was) if encrypted_password_was.present?
           old_passwords.order(created_at: :desc).offset(max_old_passwords).destroy_all
         else
