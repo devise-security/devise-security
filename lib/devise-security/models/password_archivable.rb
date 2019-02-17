@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'compatibility'
+require_relative "#{DEVISE_ORM}/old_password"
 
 module Devise
   module Models
@@ -11,7 +12,7 @@ module Devise
       include Devise::Models::DatabaseAuthenticatable
 
       included do
-        has_many :old_passwords, as: :password_archivable, dependent: :destroy
+        has_many :old_passwords, class_name: 'OldPassword', as: :password_archivable, dependent: :destroy
         before_update :archive_password, if: :will_save_change_to_encrypted_password?
         validate :validate_password_archive, if: :password_present?
       end

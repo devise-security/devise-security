@@ -4,21 +4,13 @@ require 'test_helper'
 require 'rails_email_validator'
 
 class TestSecureValidatable < ActiveSupport::TestCase
-  if DEVISE_ORM == :active_record
-    class User < ActiveRecord::Base
-      if DEVISE_ORM == :active_record
-        devise :database_authenticatable, :password_archivable,
-               :paranoid_verification, :password_expirable, :secure_validatable
-      end
-    end
-  elsif DEVISE_ORM == :mongoid
-    class User < ApplicationRecord
-      include Mongoid::Document
-      devise :database_authenticatable, :password_archivable,
-             :paranoid_verification, :password_expirable, :secure_validatable
-      include Mongoid::Mappings
-    end
+  class User < ApplicationRecord
+    devise :database_authenticatable, :password_archivable,
+           :paranoid_verification, :password_expirable, :secure_validatable
+    include Mongoid::Mappings if DEVISE_ORM == :mongoid
   end
+
+  InvalidRecordException = DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations
 
   setup do
     if DEVISE_ORM == :mongoid
@@ -29,12 +21,13 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'email cannot be blank' do
+    binding.pry
     msg = "Email can't be blank"
     user = User.create password: 'passWord1', password_confirmation: 'passWord1'
 
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
-    assert_raises(DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations) do
+    assert_raises(InvalidRecordException) do
       user.save!
     end
   end
@@ -44,7 +37,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.create email: 'bob', password: 'passWord1', password_confirmation: 'passWord1'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
-    assert_raises(DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations) do
+    assert_raises(InvalidRecordException) do
       user.save!
     end
   end
@@ -54,7 +47,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.create email: 'bob@@foo.tv', password: 'password1', password_confirmation: 'password1'
     assert_equal(false, user.valid?)
     assert_equal(msgs, user.errors.full_messages)
-    assert_raises(DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations) { user.save! }
+    assert_raises(InvalidRecordException) { user.save! }
   end
 
   test 'password must have capital letter' do
@@ -62,7 +55,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.create email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1'
     assert_equal(false, user.valid?)
     assert_equal(msgs, user.errors.full_messages)
-    assert_raises(DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations) { user.save! }
+    assert_raises(InvalidRecordException) { user.save! }
   end
 
   test 'password must have lowercase letter' do
@@ -70,7 +63,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.create email: 'bob@microsoft.com', password: 'PASSWORD1', password_confirmation: 'PASSWORD1'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
-    assert_raises(DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations) { user.save! }
+    assert_raises(InvalidRecordException) { user.save! }
   end
 
   test 'password must have number' do
@@ -78,7 +71,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.create email: 'bob@microsoft.com', password: 'PASSword', password_confirmation: 'PASSword'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
-    assert_raises(DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations) { user.save! }
+    assert_raises(InvalidRecordException) { user.save! }
   end
 
   test 'password must have minimum length' do
@@ -86,7 +79,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.create email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
-    assert_raises(DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations) { user.save! }
+    assert_raises(InvalidRecordException) { user.save! }
   end
 
   test 'duplicate email validation message is added only once' do
