@@ -2,35 +2,15 @@
 
 require File.expand_path('../boot', __FILE__)
 
-unless defined? DEVISE_ORM
-  DEVISE_ORM = ENV.fetch('DEVISE_ORM',  'active_record').to_sym
-end
-if DEVISE_ORM == :active_record
-  require 'rails/all'
-  require 'devise-security'
-elsif DEVISE_ORM == :mongoid
-  require "rails"
-  require "#{DEVISE_ORM}"
-  require 'devise-security'
+require 'action_mailer/railtie'
+require "action_mailer/railtie"
+require "rails/test_unit/railtie"
 
-  if defined?(Bundler)
-    Bundler.require :default, DEVISE_ORM
-  end
-  begin
-    require "#{DEVISE_ORM}/railtie"
-  rescue LoadError
-  end
-  require 'sprockets/railtie'
-  require 'action_mailer/railtie'
-  require 'devise-security'
-end
+Bundler.require :default, DEVISE_ORM
+require "#{DEVISE_ORM}/railtie"
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(assets: %w[development test]))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+require 'rails/all'
+require 'devise-security'
 
 module RailsApp
   class Application < Rails::Application
