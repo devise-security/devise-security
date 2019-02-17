@@ -22,9 +22,7 @@ class User < ApplicationRecord
 
   has_many :widgets
 
-  if DEVISE_ORM == :active_record
-    # do nothing
-  elsif DEVISE_ORM == :mongoid
+  if DEVISE_ORM == :mongoid
     require './test/dummy/app/models/mongoid/mappings'
     include Mongoid::Mappings
   end
