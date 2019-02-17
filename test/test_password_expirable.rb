@@ -63,7 +63,6 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     user.password = "NewPassword1"
     user.password_confirmation = "NewPassword1"
     user.save
-    #binding.pry
     assert user.previous_changes.key?(:password_changed_at)
     refute user.password_change_requested?
   end

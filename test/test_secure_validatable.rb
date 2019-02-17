@@ -21,7 +21,6 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'email cannot be blank' do
-    binding.pry
     msg = "Email can't be blank"
     user = User.create password: 'passWord1', password_confirmation: 'passWord1'
 
