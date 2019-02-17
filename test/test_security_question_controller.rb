@@ -20,7 +20,7 @@ class TestWithSecurityQuestion < ActionController::TestCase
   end
 
   test 'When security question is enabled, it is inserted correctly' do
-    if Rails.version < "5"
+    if Rails.gem_version.release <= Gem::Version.new('5.0')
       post :create, {
         security_question_user: {
           email: @user.email
@@ -33,12 +33,12 @@ class TestWithSecurityQuestion < ActionController::TestCase
         }, security_question_answer: "wrong answer"
       }
     end
-    assert_equal 'The security question answer was invalid.', flash[:alert]
+    assert_equal I18n.t('devise.invalid_security_question'), flash[:alert]
     assert_redirected_to new_security_question_user_unlock_path
   end
 
   test 'When security_question is valid, it runs as normal' do
-    if Rails.version < "5"
+    if Rails.gem_version.release <= Gem::Version.new('5.0')
       post :create, {
         security_question_user: {
           email: @user.email
@@ -52,7 +52,7 @@ class TestWithSecurityQuestion < ActionController::TestCase
       }
     end
 
-    assert_equal 'You will receive an email with instructions for how to unlock your account in a few minutes.', flash[:notice]
+    assert_equal I18n.t('devise.unlocks.send_instructions'), flash[:notice]
     assert_redirected_to new_security_question_user_session_path
   end
 end
@@ -70,7 +70,7 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
   end
 
   test 'When security question is not enabled it is not inserted' do
-    if Rails.version < "5"
+    if Rails.gem_version.release <= Gem::Version.new('5.0')
       post :create, {
         user: {
           email: @user.email
@@ -84,7 +84,7 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
       }
     end
 
-    assert_equal 'You will receive an email with instructions for how to unlock your account in a few minutes.', flash[:notice]
+    assert_equal I18n.t('devise.unlocks.send_instructions'), flash[:notice]
     assert_redirected_to new_user_session_path
   end
 end
