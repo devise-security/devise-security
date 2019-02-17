@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
-unless defined?(DEVISE_ORM)
-  DEVISE_ORM = ENV.fetch('DEVISE_ORM',  'active_record').to_sym
-end
-
-if DEVISE_ORM == :mongoid
-  require 'mongoid'
-elsif DEVISE_ORM == :active_record
-  require 'active_record'
-end
+require DEVISE_ORM.to_s if DEVISE_ORM.in? %i[active_record mongoid]
 require 'active_support/core_ext/integer'
 require 'active_support/ordered_hash'
 require 'active_support/concern'
@@ -112,7 +104,6 @@ Devise.add_module :paranoid_verification, controller: :paranoid_verification_cod
 # requires
 require 'devise-security/routes'
 require 'devise-security/rails'
-require "devise-security/orm/#{DEVISE_ORM}" if defined? DEVISE_ORM
-require "devise-security/models/#{DEVISE_ORM}/old_password" if defined? DEVISE_ORM
+require "devise-security/orm/#{DEVISE_ORM}"
 require 'devise-security/models/database_authenticatable_patch'
 require 'devise-security/models/paranoid_verification'
