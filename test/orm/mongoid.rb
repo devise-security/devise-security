@@ -9,3 +9,4 @@ Mongoid.configure do |config|
 end
 
 DatabaseCleaner[:mongoid].strategy = :truncation
+ORMInvalidRecordException = Mongoid::Errors::Validations

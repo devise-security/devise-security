@@ -4,8 +4,6 @@ require 'test_helper'
 
 class TestPasswordArchivable < ActiveSupport::TestCase
 
-  InvalidRecordException = DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations
-
   setup do
     Devise.password_archiving_count = 2
   end
@@ -22,7 +20,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   test 'cannot use same password' do
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
-    assert_raises(InvalidRecordException) { set_password(user,  'Password1') }
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
   end
 
   test 'indirectly saving associated user does not cause deprecation warning' do
@@ -48,7 +46,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     set_password(user,  'Password2')
     assert_equal 1, OldPassword.count
 
-    assert_raises(InvalidRecordException) { set_password(user,  'Password1') }
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
     set_password(user,  'Password3')
     assert_equal 2, OldPassword.count
 
@@ -71,8 +69,8 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     assert set_password(user,  'Password2')
 
-    assert_raises(InvalidRecordException) { set_password(user,  'Password2') }
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password2') }
 
-    assert_raises(InvalidRecordException) { set_password(user,  'Password1') }
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
   end
 end
