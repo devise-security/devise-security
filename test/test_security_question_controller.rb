@@ -62,6 +62,12 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
   tests Devise::UnlocksController
 
   setup do
+    if DEVISE_ORM == :mongoid
+       Mongoid.purge!
+       SecurityQuestionUser.destroy_all
+       User.destroy_all
+       OldPassword.destroy_all
+    end
     @user = User.create(username: 'hello', email: 'hello@path.travel',
                         password: '1234', security_question_answer: 'Right Answer')
     @user.lock_access!
