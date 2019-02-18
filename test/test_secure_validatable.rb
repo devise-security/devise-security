@@ -12,14 +12,6 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   InvalidRecordException = DEVISE_ORM == :active_record ? ActiveRecord::RecordInvalid : Mongoid::Errors::Validations
 
-  setup do
-    if DEVISE_ORM == :mongoid
-      Mongoid.purge!
-      User.destroy_all
-      SecureUser.destroy_all
-    end
-  end
-
   test 'email cannot be blank' do
     msg = "Email can't be blank"
     user = User.create password: 'passWord1', password_confirmation: 'passWord1'

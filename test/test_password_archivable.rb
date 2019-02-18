@@ -8,10 +8,6 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   setup do
     Devise.password_archiving_count = 2
-    if DEVISE_ORM == :mongoid
-      Mongoid.purge!
-      User.destroy_all
-    end
   end
 
   teardown do

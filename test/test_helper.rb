@@ -7,7 +7,7 @@ require 'simplecov'
 SimpleCov.start do
   add_filter 'gemfiles'
   add_group 'Tests', 'test'
-  add_group 'Password Expireable', "password_expirable"
+  add_group 'Password Expirable', "password_expirable"
 end
 
 if ENV['CI']
@@ -21,4 +21,17 @@ require 'dummy/config/environment'
 require 'minitest/autorun'
 require 'rails/test_help'
 require 'devise-security'
+require 'database_cleaner'
 require "orm/#{DEVISE_ORM}"
+
+class Minitest::Test
+  def before_setup
+    DatabaseCleaner.start
+  end
+
+  def after_teardown
+    DatabaseCleaner.clean
+  end
+end
+
+DatabaseCleaner.clean

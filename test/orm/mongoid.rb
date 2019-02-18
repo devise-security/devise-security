@@ -8,8 +8,4 @@ Mongoid.configure do |config|
   config.include_root_in_json = true
 end
 
-class ActiveSupport::TestCase
-  setup do
-    #Mongoid.default_session.drop
-  end
-end
+DatabaseCleaner[:mongoid].strategy = :truncation
