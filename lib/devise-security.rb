@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require DEVISE_ORM.to_s if DEVISE_ORM.in? %i[active_record mongoid]
+require DEVISE_ORM.to_s if DEVISE_ORM.in? [:active_record, :mongoid]
 require 'active_support/core_ext/integer'
 require 'active_support/ordered_hash'
 require 'active_support/concern'
 require 'devise'
 
 module Devise
-
   # Number of seconds that passwords are valid (e.g 3.months)
   # Disable pasword expiration with +false+
   # Expire only on demand with +true+

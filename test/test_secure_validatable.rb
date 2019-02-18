@@ -7,7 +7,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   class User < ApplicationRecord
     devise :database_authenticatable, :password_archivable,
            :paranoid_verification, :password_expirable, :secure_validatable
-    include Mongoid::Mappings if DEVISE_ORM == :mongoid
+    include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
   end
 
   test 'email cannot be blank' do

@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'devise', '>= 4.2.0', '< 5.0'
 
   s.add_development_dependency 'appraisal'
-  s.add_development_dependency 'bundler', '< 2'
+  s.add_development_dependency 'bundler'
   s.add_development_dependency 'coveralls'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'easy_captcha'

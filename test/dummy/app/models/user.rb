@@ -24,6 +24,6 @@ class User < ApplicationRecord
 
   if DEVISE_ORM == :mongoid
     require './test/dummy/app/models/mongoid/mappings'
-    include Mongoid::Mappings
+    include ::Mongoid::Mappings
   end
 end

@@ -13,7 +13,7 @@ class OldPassword
 
   field :password_archivable_id, type: String
   validates_presence_of :password_archivable_id
-  index({ password_archivable_type: 1, password_archivable_id: 1 }, { name: :index_password_archivable })
+  index({ password_archivable_type: 1, password_archivable_id: 1 }, name: :index_password_archivable)
 
   include Mongoid::Timestamps
 
