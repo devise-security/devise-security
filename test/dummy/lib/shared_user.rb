@@ -24,7 +24,7 @@ module SharedUser
       super.tap do |user|
         if data = session["devise.facebook_data"]
           user.email = data["email"]
-          user.confirmed_at = Time.now
+          user.confirmed_at = Time.zone.now
         end
       end
     end

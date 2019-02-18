@@ -9,5 +9,4 @@ else
 end
 
 DatabaseCleaner[:active_record].strategy = :transaction
-
 ORMInvalidRecordException = ActiveRecord::RecordInvalid

@@ -10,12 +10,5 @@ module SharedVerificationColumns
 
     field :expired_at, type: Time
     field :last_activity_at, type: Time
-
-    # They need to be included after Devise is called.
-    extend ExtendMethods
-  end
-
-  module ExtendMethods
-
   end
 end

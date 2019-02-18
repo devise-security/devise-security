@@ -28,10 +28,10 @@ RailsApp::Application.configure do
   config.active_support.test_order = :sorted
   config.log_level = :debug
   if Rails.gem_version >= Gem::Version.new('4.2') && Rails.gem_version.release < Gem::Version.new('5.0')
-    config.active_record.raise_in_transactional_callbacks = true if DEVISE_ORM && DEVISE_ORM != :mongoid
+    config.active_record.raise_in_transactional_callbacks = true
   end
   if Rails.gem_version.release >= Gem::Version.new('5.2') && Rails.gem_version.release < Gem::Version.new('6.0')
-    config.active_record.sqlite3.represent_boolean_as_integer = true if DEVISE_ORM && DEVISE_ORM != :mongoid
+    config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end
 ActiveSupport::Deprecation.debug = true

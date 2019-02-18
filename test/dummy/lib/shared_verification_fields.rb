@@ -11,12 +11,5 @@ module SharedVerificationFields
     field :paranoid_verified_at, type: Time
     field :paranoid_verification_attempt, type: Integer, default: 0
     field :paranoid_verification_code, type: String
-
-    # They need to be included after Devise is called.
-    extend ExtendMethods
-  end
-
-  module ExtendMethods
-
   end
 end

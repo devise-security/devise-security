@@ -12,12 +12,5 @@ module SharedSecurityQuestionsFields
     field :unlock_token, type: String
     field :security_question_id, type: Integer
     field :security_question_answer, type: String
-
-    # They need to be included after Devise is called.
-    extend ExtendMethods
-  end
-
-  module ExtendMethods
-
   end
 end

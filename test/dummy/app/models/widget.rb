@@ -5,7 +5,6 @@ class Widget < ApplicationRecord
   validates_associated :user
 
   if DEVISE_ORM == :mongoid
-    include Mongoid::Document
     field :name, type: String
   end
 end
