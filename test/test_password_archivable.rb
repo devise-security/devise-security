@@ -59,11 +59,11 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'the option should be dynamic during runtime' do
-    #class ::User
-    #  def archive_count
-    #    1
-    #  end
-    #end
+    class ::User
+      def archive_count
+        1
+      end
+    end
 
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
 

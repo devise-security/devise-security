@@ -8,7 +8,7 @@ module Shim
     field :created_at, type: DateTime
   end
 
-  module ClassMethods
+  class_methods do
     def order(attribute)
       asc(attribute)
     end
