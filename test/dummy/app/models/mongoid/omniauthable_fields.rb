@@ -8,9 +8,4 @@ module OmniauthableFields
     field :username, type: String
     field :facebook_token, type: String
   end
-
-  module ClassMethods
-
-  end
-
 end

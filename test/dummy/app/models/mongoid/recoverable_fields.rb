@@ -8,9 +8,4 @@ module RecoverableFields
     field :reset_password_token, type: String
     field :reset_password_sent_at, type: Time
   end
-
-  module ClassMethods
-
-  end
-
 end

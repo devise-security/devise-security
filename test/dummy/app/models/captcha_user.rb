@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CaptchaUser < ApplicationUserRecord
-  self.table_name = 'users' if DEVISE_ORM == :active_record
   devise :database_authenticatable, :password_archivable,
          :paranoid_verification, :password_expirable
   if DEVISE_ORM == :mongoid

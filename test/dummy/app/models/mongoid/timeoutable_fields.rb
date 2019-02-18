@@ -6,9 +6,4 @@ module TimeoutableFields
 
     ## Timeoutable
   end
-
-  module ClassMethods
-
-  end
-
 end

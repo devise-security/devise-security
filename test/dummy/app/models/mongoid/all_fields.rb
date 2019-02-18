@@ -1,6 +1,4 @@
 module AllFields
-  # def self.included(base)
-
   extend ::ActiveSupport::Concern
 
   included do
@@ -66,12 +64,5 @@ module AllFields
     field :reset_password_sent_at, type: Time
 
     has_many :widgets
-
-    # Things like association macros here
-    # I.ex. belongs_to :foo
-  end
-
-  module ClassMethods
-
   end
 end

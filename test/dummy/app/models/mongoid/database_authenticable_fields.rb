@@ -14,9 +14,4 @@ module DatabaseAuthenticatableFields
 
     include Mongoid::Timestamps
   end
-
-  module ClassMethods
-
-  end
-
 end

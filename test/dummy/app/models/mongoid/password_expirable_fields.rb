@@ -7,9 +7,4 @@ module PasswordExpirableFields
     field :expired_at, type: Time
     field :last_activity_at, type: Time
   end
-
-  module ClassMethods
-
-  end
-
 end

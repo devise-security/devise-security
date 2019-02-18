@@ -3,10 +3,5 @@ module ValidatableFields
 
   included do
     include Mongoid::Document
-
-  end
-
-  module ClassMethods
-
   end
 end

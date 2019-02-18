@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 if DEVISE_ORM == :active_record
   class ApplicationUserRecord < ActiveRecord::Base
-    self.table_name = 'users' if DEVISE_ORM == :active_record
+    self.table_name = 'users'
   end
 else
   class ApplicationUserRecord

@@ -16,9 +16,4 @@ module RegisterableFields
     index({ email: 1 }, {})
     include Mongoid::Timestamps
   end
-
-  module ClassMethods
-
-  end
-
 end

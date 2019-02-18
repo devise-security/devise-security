@@ -7,9 +7,4 @@ module RememberableFields
     ## Rememberable
     field :remember_created_at, type: Time
   end
-
-  module ClassMethods
-
-  end
-
 end

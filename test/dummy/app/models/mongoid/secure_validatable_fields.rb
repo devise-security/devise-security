@@ -8,9 +8,4 @@ module SecureValidatableFields
     index({ password_changed_at: 1 }, {})
     include Mongoid::Timestamps
   end
-
-  module ClassMethods
-
-  end
-
 end

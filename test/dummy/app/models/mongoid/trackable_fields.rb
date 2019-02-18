@@ -11,9 +11,4 @@ module TrackableFields
     field :current_sign_in_ip, type: String
     field :last_sign_in_ip, type: String
   end
-
-  module ClassMethods
-
-  end
-
 end

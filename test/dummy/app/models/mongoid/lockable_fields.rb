@@ -10,9 +10,4 @@ module LockableFields
     include Mongoid::Timestamps
     index({ unlock_token: 1 }, { unique: true })
   end
-
-  module ClassMethods
-
-  end
-
 end

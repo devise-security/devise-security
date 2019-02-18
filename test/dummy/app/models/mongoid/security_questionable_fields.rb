@@ -10,8 +10,4 @@ module SecurityQuestionableFields
     field :security_question_id, type: Integer
     field :security_question_answer, type: String
   end
-
-  module ClassMethods
-
-  end
 end

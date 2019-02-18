@@ -6,9 +6,4 @@ module PasswordArchivableFields
 
     ## PasswordArchivableFields
   end
-
-  module ClassMethods
-
-  end
-
 end

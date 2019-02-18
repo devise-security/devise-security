@@ -7,9 +7,4 @@ module SessionLimitableFields
     ## Session Limitable
     field :unique_session_id, type: String
   end
-
-  module ClassMethods
-
-  end
-
 end

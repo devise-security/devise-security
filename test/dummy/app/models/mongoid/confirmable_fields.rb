@@ -10,8 +10,4 @@ module ConfirmableFields
     field :confirmation_sent_at, type: Time
     field :unconfirmed_email, type: String # Only if using reconfirmable
   end
-
-  module ClassMethods
-
-  end
 end
