@@ -116,6 +116,25 @@ For local development you will need to have MongoDB installed locally.
 
     brew install mongodb
 
+### Rails App setup example with Mongoid
+
+```ruby
+# inside config/application.rb
+require File.expand_path('../boot', __FILE__)
+#...
+DEVISE_ORM=:mongo_id
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+module MyApp
+  class Application < Rails::Application
+    #...
+  end
+end  
+```
+
 ## Captcha-Support
 
 The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_captcha). See further documentation there.
