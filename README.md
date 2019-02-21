@@ -122,7 +122,7 @@ For local development you will need to have MongoDB installed locally.
 # inside config/application.rb
 require File.expand_path('../boot', __FILE__)
 #...
-DEVISE_ORM=:mongo_id
+DEVISE_ORM=:mongoid
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
