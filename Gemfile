@@ -2,7 +2,7 @@ source "https://rubygems.org"
 gemspec
 gem 'bundler', '< 2'
 gem 'omniauth'
-gem 'rmagick', '< 3'
+gem 'rmagick'
 
 group :development do
   gem 'wwtd'

@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "bundler", "< 2"
 gem "omniauth"
-gem "rmagick", "< 3"
+gem "rmagick"
 gem "rails", "~> 5.1.0"
 
 group :development do

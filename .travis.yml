@@ -1,5 +1,15 @@
 language: ruby
-before_install: gem install bundler -v '1.17.3'
+before_install:
+  - gem install bundler -v '1.17.3'
+  - sudo apt-get install build-essential pkg-config
+  - sudo apt-get build-dep imagemagick -y
+  - sudo wget http://www.imagemagick.org/download/ImageMagick-6.9.10-28.tar.gz
+  - sudo tar xzvf ImageMagick-6.9.10-28.tar.gz
+  - cd ImageMagick-6.9.10-28
+  - sudo ./configure
+  - sudo make
+  - sudo make install
+  - sudo ldconfig /usr/local/lib
 install: bundle _1.17.3_ install --jobs=3 --retry=3
 script: bundle exec rake
 rvm:
