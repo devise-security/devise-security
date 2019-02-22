@@ -104,6 +104,37 @@ Devise.setup do |config|
 end
 ```
 
+## Other ORMs
+
+Devise-security supports [Mongoid](https://rubygems.org/gems/mongoid) as an alternative ORM to active_record.  To use this ORM, add this to your `Gemfile`.
+
+    gem 'mongoid'
+
+And then ensure that the environment variable `DEVISE_ORM=mongoid` is set.
+
+For local development you will need to have MongoDB installed locally.
+
+    brew install mongodb
+
+### Rails App setup example with Mongoid
+
+```ruby
+# inside config/application.rb
+require File.expand_path('../boot', __FILE__)
+#...
+DEVISE_ORM=:mongoid
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+module MyApp
+  class Application < Rails::Application
+    #...
+  end
+end  
+```
+
 ## Captcha-Support
 
 The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_captcha). See further documentation there.
@@ -131,8 +162,6 @@ rails generate easy_captcha:install
 ```
 
 ## Schema
-
-Note: Unlike Devise, devise-security does not currently support mongoid. Pull requests are welcome!
 
 ### Password expirable
 
@@ -242,11 +271,13 @@ end
 
 ## Requirements
 
-- Devise (<https://github.com/plataformatec/devise>)
-- Rails 4.2 onwards (<http://github.com/rails/rails>)
-- recommendations:
-  - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
-  - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
+* Devise (<https://github.com/plataformatec/devise>)
+* Rails 4.2 onwards (<http://github.com/rails/rails>)
+* recommendations:
+    - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
+    - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
+    - `mongodb` (<https://www.mongodb.com/>)
+    - `rvm` (<https://rvm.io/>)
 
 ## Todo
 
@@ -281,6 +312,14 @@ See also [Github Releases](https://github.com/devise-security/devise-security/re
 - Commit and push until you are happy with your contribution
 - Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 - Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+## Running tests
+
+Standard tests can be invoked using `rake`.  To run the tests against the `mongoid` ORM, use `DEVISE_ORM=mongoid rake` while `mongodb` is running.
+
+To locally simulate what travis-ci will run when you push code use:
+
+    $ wwtd
 
 ## Copyright
 

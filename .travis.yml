@@ -8,6 +8,12 @@ rvm:
   - 2.5
   - 2.6
   - ruby-head
+env:
+  matrix:
+    - DEVISE_ORM=active_record
+    - DEVISE_ORM=mongoid
+services:
+  - mongodb
 matrix:
   exclude:
     # Skip these combinations because they have incompatible dependencies

@@ -1,0 +1,6 @@
+test:
+  <%= Mongoid::VERSION.to_i > 4 ? 'clients' : 'sessions' %>:
+    default:
+      database: devise-test-suite
+      hosts:
+        - localhost:<%= ENV.fetch('MONGODB_PORT', '27017') %>
