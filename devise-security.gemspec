@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   else
     s.add_runtime_dependency 'railties', '>= 4.2.0', '< 6.0'
   end
-  s.add_runtime_dependency 'devise', '>= 4.2.0', '< 5.0'
+  s.add_runtime_dependency 'devise', '>= 4.3.0', '< 5.0'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler'
