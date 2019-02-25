@@ -8,7 +8,7 @@ group :development do
 end
 
 group :active_record do
-  gem 'sqlite3', '~> 1.3.0'
+  gem 'sqlite3', '~> 1.4.0'
 end
 
 group :mongoid do
