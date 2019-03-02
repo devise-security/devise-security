@@ -58,12 +58,14 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   test 'updating a record updates the time the password was changed if the password is changed' do
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user.update(password_changed_at: Time.now.ago(3.months))
+    original_password_changed_at = user.password_changed_at
     user.expire_password!
     assert user.password_change_requested?
     user.password = "NewPassword1"
     user.password_confirmation = "NewPassword1"
     user.save
-    assert user.previous_changes.key?(:password_changed_at)
+    assert user.password_changed_at > original_password_changed_at
     refute user.password_change_requested?
   end
 

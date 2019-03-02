@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-class SecurityQuestionUser < ApplicationRecord
-  self.table_name = 'users'
-  devise :database_authenticatable, :password_archivable, :lockable,
-         :paranoid_verification, :password_expirable, :security_questionable
+class SecurityQuestionUser < ApplicationUserRecord
+  devise :database_authenticatable, :lockable, :security_questionable
+  if DEVISE_ORM == :mongoid
+    require './test/dummy/app/models/mongoid/mappings'
+    include ::Mongoid::Mappings
+    field :security_question_answer, type: String
+  end
 end

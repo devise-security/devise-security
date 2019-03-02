@@ -21,4 +21,9 @@ class User < ApplicationRecord
          :validatable
 
   has_many :widgets
+
+  if DEVISE_ORM == :mongoid
+    require './test/dummy/app/models/mongoid/mappings'
+    include ::Mongoid::Mappings
+  end
 end
