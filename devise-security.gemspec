@@ -40,10 +40,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
+  s.add_development_dependency 'omniauth'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rescue'
-  s.add_development_dependency 'pry'
   s.add_development_dependency 'rails_email_validator'
   s.add_development_dependency 'rubocop', '~> 0.59.2'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'wwtd'
 end
