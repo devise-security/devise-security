@@ -1,6 +1,9 @@
 language: ruby
-before_install: gem install bundler -v '1.17.2'
-install: bundle _1.17.2_ install --jobs=2 --retry=2 --path=${BUNDLE_PATH:-vendor/bundle}
+dist: xenial
+before_install:
+  # install bundler < 2 because Rails 4.2 is incompatible with bundler >= 2
+  - gem install bundler -v '1.17.3'
+install: bundle _1.17.3_ install --jobs=2 --retry=2 --path=${BUNDLE_PATH:-vendor/bundle}
 cache: bundler
 script: bundle exec rake
 rvm:
