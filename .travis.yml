@@ -1,9 +1,9 @@
 language: ruby
 dist: xenial
-before_install:
-  # pin to bundler < 2 because Rails 4.2 is incompatible
-  - gem install bundler -v '1.17.3'
-install: bundle _1.17.3_ install --jobs=2 --retry=2 --path=${BUNDLE_PATH:-vendor/bundle}
+# before_install:
+#   # pin to bundler < 2 because Rails 4.2 is incompatible
+#   - gem install bundler -v '1.17.3'
+# install: bundle _1.17.3_ install --jobs=2 --retry=2 --path=${BUNDLE_PATH:-vendor/bundle}
 cache: bundler
 script: bundle exec rake
 rvm:
@@ -13,6 +13,8 @@ rvm:
   - 2.6
   - ruby-head
 env:
+  global:
+    - BUNDLER_VERSION=1.17.3
   matrix:
     - DEVISE_ORM=active_record
     - DEVISE_ORM=mongoid
