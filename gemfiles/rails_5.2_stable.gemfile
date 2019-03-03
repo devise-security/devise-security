@@ -2,7 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "bundler", "< 2"
 gem "omniauth"
 gem "rmagick"
 gem "rails", "~> 5.2.0"
