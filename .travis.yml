@@ -1,8 +1,8 @@
 language: ruby
 dist: xenial
-# before_install:
-#   # pin to bundler < 2 because Rails 4.2 is incompatible
-#   - gem install bundler -v '1.17.3'
+before_install:
+  # install bundler < 2 because Rails 4.2 is incompatible with bundler >= 2
+  - gem install bundler -v '1.17.3'
 # install: bundle _1.17.3_ install --jobs=2 --retry=2 --path=${BUNDLE_PATH:-vendor/bundle}
 cache: bundler
 script: bundle exec rake
