@@ -1,16 +1,8 @@
 language: ruby
 dist: xenial
 before_install:
+  # pin to bundler < 2 because Rails 4.2 is incompatible
   - gem install bundler -v '1.17.3'
-  # - sudo apt-get install build-essential pkg-config
-  # - sudo apt-get build-dep imagemagick -y
-  # - sudo wget http://www.imagemagick.org/download/ImageMagick-6.9.10-28.tar.gz
-  # - sudo tar xzvf ImageMagick-6.9.10-28.tar.gz
-  # - cd ImageMagick-6.9.10-28
-  # - sudo ./configure
-  # - sudo make
-  # - sudo make install
-  # - sudo ldconfig /usr/local/lib
 install: bundle _1.17.3_ install --jobs=2 --retry=2 --path=${BUNDLE_PATH:-vendor/bundle}
 cache: bundler
 script: bundle exec rake

@@ -1,5 +1,6 @@
 appraise 'rails-4.2-stable' do
   gem 'rails', '~> 4.2.0'
+  gem 'bundler', '< 2'
   group :mongoid do
     gem "mongoid", "~> 4.0"
   end
