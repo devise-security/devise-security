@@ -319,7 +319,8 @@ Standard tests can be invoked using `rake`.  To run the tests against the `mongo
 
 To locally simulate what travis-ci will run when you push code use:
 
-    $ wwtd
+    $ gem install bundler -v '1.17.3'
+    $ BUNDLER_VERSION=1.17.3 wwtd
 
 ## Copyright
 
