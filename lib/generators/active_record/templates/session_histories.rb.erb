@@ -1,0 +1,18 @@
+class Create<%= table_name.camelize %> < ActiveRecord::Migration<%= migration_version %>
+  def up
+    create_table :<%= table_name %> do |t|
+        t.string :token, null: false, index: { unique: true }
+    t.<%= ip_column -%> :ip_address, index: true
+    t.string :user_agent
+    t.datetime :last_accessed_at, null: false, index: true
+    t.boolean :active, default: true
+    t.belongs_to :owner, polymorphic: true, null: false, index: true
+
+    t.timestamps null: false
+  end
+  end
+
+  def down
+    drop_table :<%= table_name %>
+  end
+end

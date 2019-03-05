@@ -8,5 +8,15 @@ Mongoid.configure do |config|
   config.include_root_in_json = true
 end
 
+class ActiveSupport::TestCase
+  setup do
+    if Mongoid.respond_to?(:default_session)
+      Mongoid.default_session.drop
+    else
+      Mongoid.default_client.database.drop
+    end
+  end
+end
+
 DatabaseCleaner[:mongoid].strategy = :truncation
 ORMInvalidRecordException = Mongoid::Errors::Validations

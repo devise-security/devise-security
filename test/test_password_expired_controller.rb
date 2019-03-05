@@ -7,6 +7,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
 
   setup do
     @request.env["devise.mapping"] = Devise.mappings[:user]
+    @request.env['devise.skip_session_traceable'] = true
     @user = User.create!(
       username: 'hello',
       email: 'hello@path.travel',
