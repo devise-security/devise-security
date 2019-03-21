@@ -28,7 +28,7 @@ appraise 'rails-5.2-stable' do
 end
 
 appraise 'rails-6.0-beta' do
-  gem 'rails', '~> 6.0.0.beta1'
+  gem 'rails', '~> 6.0.0.beta3'
   group :mongoid do
     gem "mongoid", "~> 6.0"
   end
