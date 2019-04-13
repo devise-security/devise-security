@@ -31,6 +31,9 @@ matrix:
     - rvm: 2.4
       gemfile: gemfiles/rails_6.0_beta.gemfile
   allow_failures:
+    # no longer supported
+    - rvm: 2.3
+    # edge, not expected to pass
     - rvm: ruby-head
     - gemfile: gemfiles/rails_6.0_beta.gemfile
 gemfile:
