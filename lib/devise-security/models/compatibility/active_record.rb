@@ -1,6 +1,9 @@
 module Devise
   module Models
     module Compatibility
+
+      class NotPersistedError < ActiveRecord::ActiveRecordError; end
+
       module ActiveRecord
         extend ActiveSupport::Concern
         unless Devise.activerecord51?
@@ -23,6 +26,14 @@ module Devise
             changed_attributes['encrypted_password'].present?
           end
         end
+
+        # Updates the record with the value and does not trigger validations or callbacks
+        # @param name [Symbol] attribute to update
+        # @param value [String] value to set
+        def update_attribute_without_validatons_or_callbacks(name, value)
+          update_column(name, value)
+        end
+
       end
     end
   end

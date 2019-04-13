@@ -12,10 +12,14 @@ module Devise
     module SessionLimitable
       extend ActiveSupport::Concern
 
+      # Update the unique_session_id on the model.  This will be checked in
+      # the Warden after_set_user hook in {file:devise-security/hooks/session_limitable}
+      # @param unique_session_id [String]
+      # @return [void]
+      # @raise [Devise::Models::Compatibility::NotPersistedError] if record is unsaved
       def update_unique_session_id!(unique_session_id)
-        self.unique_session_id = unique_session_id
-
-        save(validate: false)
+        raise Devise::Models::Compatibility::NotPersistedError, 'cannot update a new record' unless persisted?
+        update_attribute_without_validatons_or_callbacks(:unique_session_id, unique_session_id)
       end
 
     end
