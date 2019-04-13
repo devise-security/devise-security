@@ -5,7 +5,9 @@ class CreateTables < MIGRATION_CLASS
     create_table :users do |t|
       t.string :username
       t.string :facebook_token
-      t.string :unique_session_id, :limit => 20
+
+      # session_limitable
+      t.string :unique_session_id
 
       ## Database authenticatable
       t.string :email,              null: false, default: ''
