@@ -7,7 +7,6 @@ install: bundle _1.17.3_ install --jobs=2 --retry=2 --path=${BUNDLE_PATH:-vendor
 cache: bundler
 script: bundle exec rake
 rvm:
-  - 2.3
   - 2.4
   - 2.5
   - 2.6
@@ -26,13 +25,9 @@ matrix:
       gemfile: gemfiles/rails_4.2_stable.gemfile
     - rvm: ruby-head
       gemfile: gemfiles/rails_4.2_stable.gemfile
-    - rvm: 2.3
-      gemfile: gemfiles/rails_6.0_beta.gemfile
     - rvm: 2.4
       gemfile: gemfiles/rails_6.0_beta.gemfile
   allow_failures:
-    # no longer supported
-    - rvm: 2.3
     # edge, not expected to pass
     - rvm: ruby-head
     - gemfile: gemfiles/rails_6.0_beta.gemfile
