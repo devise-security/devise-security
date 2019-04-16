@@ -1,5 +1,4 @@
 module IntegrationHelpers
-
   # login the user.  This will exercise all the Warden Hooks
   # @param user [User]
   # @param session [ActionDispatch::Integration::Session]
@@ -45,5 +44,4 @@ module IntegrationHelpers
       }
     end
   end
-
 end

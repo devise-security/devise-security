@@ -2,14 +2,13 @@ require 'test_helper'
 
 class TestSessionLimitableWorkflow < ActionDispatch::IntegrationTest
   include IntegrationHelpers
-  
+
   setup do
-    @user = User.create! password: 'passWord1',
-                        password_confirmation: 'passWord1',
-                        email: 'bob@microsoft.com'
+    @user = User.create!(password: 'passWord1',
+                         password_confirmation: 'passWord1',
+                         email: 'bob@microsoft.com')
     @user.confirm
   end
-
 
   test 'failed login' do
     assert_nil @user.unique_session_id
@@ -34,7 +33,6 @@ class TestSessionLimitableWorkflow < ActionDispatch::IntegrationTest
       assert_not_nil @user.reload.unique_session_id
     end
   end
-
 
   test 'session is logged out when another session is created' do
     first_session = open_session
