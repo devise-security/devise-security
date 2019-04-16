@@ -19,7 +19,9 @@ module Devise
       # @raise [Devise::Models::Compatibility::NotPersistedError] if record is unsaved
       def update_unique_session_id!(unique_session_id)
         raise Devise::Models::Compatibility::NotPersistedError, 'cannot update a new record' unless persisted?
-        update_attribute_without_validatons_or_callbacks(:unique_session_id, unique_session_id)
+        update_attribute_without_validatons_or_callbacks(:unique_session_id, unique_session_id).tap do
+          Rails.logger.debug { "[devise-security][session_limitable] unique_session_id=#{unique_session_id}"}
+        end
       end
 
     end
