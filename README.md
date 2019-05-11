@@ -195,7 +195,7 @@ add_index :old_passwords, [:password_archivable_type, :password_archivable_id], 
 create_table :the_resources do |t|
   # other devise fields
 
-  t.string :unique_session_id, limit: 20
+  t.string :unique_session_id
 end
 ```
 
