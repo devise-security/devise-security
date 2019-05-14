@@ -26,4 +26,11 @@ class User < ApplicationRecord
     require './test/dummy/app/models/mongoid/mappings'
     include ::Mongoid::Mappings
   end
+
+  # any method invoking ActiveRecord::...
+  def some_method_calling_active_record
+    ActiveRecord::Base.transaction do
+      # some transaction
+    end
+  end
 end
