@@ -43,7 +43,7 @@ checks:
 plugins:
  rubocop:
   enabled: true
-  channel: rubocop-0-59
+  channel: rubocop-0-66
  markdownlint:
   enabled: true
  brakeman:

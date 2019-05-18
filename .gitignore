@@ -40,3 +40,4 @@ Gemfile.lock
 *.lock
 bin/*
 .yardoc
+.idea

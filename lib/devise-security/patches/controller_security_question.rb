@@ -9,6 +9,7 @@ module DeviseSecurity::Patches
     end
 
     private
+
     def check_security_question
       # only find via email, not login
       resource = resource_class.find_or_initialize_with_error_by(:email, params[resource_name][:email], :not_found)
@@ -19,4 +20,3 @@ module DeviseSecurity::Patches
     end
   end
 end
-

@@ -29,7 +29,7 @@ module DeviseSecurity
     # create_table :old_passwords do
     #   t.password_archivable
     # end
-    # add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: :index_password_archivable
+    # add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: 'index_password_archivable'
     #
     def password_archivable
       apply_devise_schema :encrypted_password, String, limit: 128, null: false

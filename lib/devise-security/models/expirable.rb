@@ -22,7 +22,11 @@ module Devise
 
       # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
       def update_last_activity!
-        self.update_column(:last_activity_at, Time.now.utc)
+        if respond_to?(:update_column)
+          self.update_column(:last_activity_at, Time.now.utc)
+        elsif defined? Mongoid
+          self.update_attribute(:last_activity_at, Time.now.utc)
+        end
       end
 
       # Tells if the account has expired
@@ -103,7 +107,7 @@ module Devise
         # @example Overwritten version to blank out the object.
         #   def self.delete_all_expired_for(time = 90.days)
         #     expired_for(time).each do |u|
-        #       u.update_attributes first_name: nil, last_name: nil
+        #       u.update first_name: nil, last_name: nil
         #     end
         #   end
         def delete_all_expired_for(time)

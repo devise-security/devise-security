@@ -90,8 +90,8 @@ module Devise
 
         def has_uniqueness_validation_of_login?
           validators.any? do |validator|
-            validator.kind_of?(ActiveRecord::Validations::UniquenessValidator) &&
-              validator.attributes.include?(login_attribute)
+            validator_orm_klass = DEVISE_ORM == :active_record ? ActiveRecord::Validations::UniquenessValidator : ::Mongoid::Validatable::UniquenessValidator
+            validator.kind_of?(validator_orm_klass) && validator.attributes.include?(login_attribute)
           end
         end
 

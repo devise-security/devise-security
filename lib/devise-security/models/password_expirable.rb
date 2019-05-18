@@ -39,6 +39,7 @@ module Devise::Models
     # @return [Boolean]
     def need_change_password!
       return unless password_expiration_enabled?
+
       need_change_password
       save(validate: false)
     end
@@ -51,6 +52,7 @@ module Devise::Models
     # @return [void]
     def need_change_password
       return unless password_expiration_enabled?
+
       self.password_changed_at = nil
     end
     alias expire_password need_change_password
@@ -70,6 +72,7 @@ module Devise::Models
     def password_change_requested?
       return false unless password_expiration_enabled?
       return false if new_record?
+
       password_changed_at.nil?
     end
 
@@ -79,6 +82,7 @@ module Devise::Models
       return false if new_record?
       return false unless password_expiration_enabled?
       return false if expire_password_on_demand?
+
       password_changed_at < expire_password_after.seconds.ago
     end
     alias password_expired? password_too_old?
@@ -89,6 +93,7 @@ module Devise::Models
     # @note called as a +before_save+ hook
     def update_password_changed
       return unless (new_record? || encrypted_password_changed?) && !password_changed_at_changed?
+
       self.password_changed_at = Time.zone.now
     end
 
