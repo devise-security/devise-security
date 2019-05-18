@@ -4,7 +4,7 @@ module Devise
 
       class NotPersistedError < ActiveRecord::ActiveRecordError; end
 
-      module ActiveRecord
+      module ActiveRecordPatch
         extend ActiveSupport::Concern
         unless Devise.activerecord51?
           # When the record was saved, was the +encrypted_password+ changed?
