@@ -4,7 +4,7 @@ module Devise
 
       class NotPersistedError < Mongoid::Errors::MongoidError; end
 
-      module Mongoid
+      module MongoidPatch
         extend ActiveSupport::Concern
 
         # Will saving this record change the +email+ attribute?
