@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "compatibility/#{DEVISE_ORM}"
+require_relative "compatibility/#{DEVISE_ORM}_patch"
 
 module Devise
   module Models
@@ -9,7 +9,7 @@ module Devise
     # and/or older versions of ORMs.
     module Compatibility
       extend ActiveSupport::Concern
-      include "Devise::Models::Compatibility::#{DEVISE_ORM.to_s.classify}".constantize
+      include "Devise::Models::Compatibility::#{DEVISE_ORM.to_s.classify}Patch".constantize
     end
   end
 end
