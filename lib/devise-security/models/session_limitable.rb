@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'compatibility'
+require_relative 'compatibility'
 require 'devise-security/hooks/session_limitable'
 
 module Devise
@@ -13,7 +13,7 @@ module Devise
     module SessionLimitable
       extend ActiveSupport::Concern
       include Devise::Models::Compatibility
-      
+
       # Update the unique_session_id on the model.  This will be checked in
       # the Warden after_set_user hook in {file:devise-security/hooks/session_limitable}
       # @param unique_session_id [String]
