@@ -31,6 +31,8 @@ require 'rails/test_help'
 require 'devise-security'
 require 'database_cleaner'
 require "orm/#{DEVISE_ORM}"
+require 'rails-controller-testing'
+Rails::Controller::Testing.install
 require 'support/integration_helpers'
 
 class Minitest::Test

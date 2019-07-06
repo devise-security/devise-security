@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Devise::PasswordExpiredController < DeviseController
+  before_action :verify_requested_format!
   skip_before_action :handle_password_change
   before_action :skip_password_change, only: [:show, :update]
   prepend_before_action :authenticate_scope!, only: [:show, :update]
@@ -9,6 +10,14 @@ class Devise::PasswordExpiredController < DeviseController
     respond_with(resource)
   end
 
+  # Update the password stored on the `resource`.
+  # @note if a common data format like :json or :xml are requested
+  #   this will respond with a 204 No Content and set the Location header.
+  #   Useful for dealing with APIs when JS clients would otherwise automatically
+  #   follow the redirect, which can be problematic.
+  # @see https://stackoverflow.com/questions/228225/prevent-redirection-of-xmlhttprequest
+  # @see https://github.com/axios/axios/issues/932#issuecomment-307390761
+  # @see https://github.com/devise-security/devise-security/pull/111
   def update
     resource.extend(Devise::Models::DatabaseAuthenticatablePatch)
     if resource.update_with_password(resource_params)
