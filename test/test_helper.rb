@@ -31,8 +31,11 @@ require 'rails/test_help'
 require 'devise-security'
 require 'database_cleaner'
 require "orm/#{DEVISE_ORM}"
-require 'rails-controller-testing'
-Rails::Controller::Testing.install
+
+if Rails.gem_version >= Gem::Version.new('5.0.0')
+  require 'rails-controller-testing'
+  Rails::Controller::Testing.install
+end
 require 'support/integration_helpers'
 
 class Minitest::Test

@@ -7,6 +7,10 @@ group :active_record do
   gem 'sqlite3'
 end
 
+group :test do
+  gem 'rails-controller-testing'
+end
+
 group :mongoid do
   gem 'mongoid'
 end
