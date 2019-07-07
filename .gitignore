@@ -36,8 +36,13 @@ pkg
 log
 test/tmp/*
 *.gem
-Gemfile.lock
-*.lock
 bin/*
 .yardoc
 .idea
+
+# Don't ignore the Gemfile.lock
+# see https://bundler.io/man/bundle-install.1.html#THE-GEMFILE-LOCK
+
+# We do want the CI builds to fail when new dependencies ship breaking changes
+# so don't checkin the lockfiles used for the build.
+gemfiles/*.lock
