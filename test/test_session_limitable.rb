@@ -19,6 +19,15 @@ class TestSessionLimitable < ActiveSupport::TestCase
     assert_equal(true, modified_user.skip_session_limitable?)
   end
     
+  class SessionLimitableUser < User
+    devise :session_limitable
+    include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
+  end
+
+  test 'includes Devise::Models::Compatibility' do
+    assert_kind_of(Devise::Models::Compatibility, SessionLimitableUser.new)
+  end
+
   test '#update_unique_session_id!(value) updates valid record' do
     user = User.create! password: 'passWord1', password_confirmation: 'passWord1', email: 'bob@microsoft.com'
     assert user.persisted?
