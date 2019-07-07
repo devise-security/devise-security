@@ -48,7 +48,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     assert_equal response.content_type, 'text/html'
   end
 
-  test 'password confirmation does not match with default format' do
+  test 'password confirmation does not match' do
     if Rails.version < "5"
       put :update,
           {
@@ -74,7 +74,10 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   end
 
   test 'update password using JSON format' do
-    if Rails.version < "5"
+    if Rails.gem_version < Gem::Version.new('5.0')
+      # The responders gem that is compatible with Rails 4.2
+      # does not return a 204 No Content for common data formats
+      # This is the previously existing behavior so it is allowed
       put :update,
           {
             user: {
@@ -84,6 +87,8 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
             }
           },
           format: :json
+      assert_redirected_to root_path
+      assert_equal response.content_type, 'text/html'
     else
       put :update,
           format: :json,
@@ -94,14 +99,17 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
               password_confirmation: 'Password5'
             }
           }
+      assert_response 204
+      assert_equal root_url, response.location
+      assert_nil response.content_type, "No Content-Type header should be set for No Content response"
     end
-    assert_response 204
-    assert_equal root_url, response.location
-    assert_nil response.content_type, "No Content-Type header should be set for No Content response"
   end
 
   test 'update password using XML format' do
-    if Rails.version < "5"
+    if Rails.gem_version < Gem::Version.new('5.0')
+      # The responders gem that is compatible with Rails 4.2
+      # does not return a 204 No Content for common data formats
+      # This is the previously existing behavior so it is allowed
       put :update,
           {
             user: {
@@ -111,6 +119,9 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
             },
           },
           format: :xml
+      assert_redirected_to root_path
+      binding.pry
+      assert_equal response.content_type, 'text/html'
     else
       put :update,
           format: :xml,
@@ -121,9 +132,9 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
               password_confirmation: 'Password5'
             }
           }
+      assert_response 204
+      assert_equal root_url, response.location
+      assert_nil response.content_type, "No Content-Type header should be set for No Content response"
     end
-    assert_response 204
-    assert_equal root_url, response.location
-    assert_nil response.content_type, "No Content-Type header should be set for No Content response"
   end
 end
