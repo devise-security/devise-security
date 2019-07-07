@@ -25,7 +25,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   end
 
   test 'update password with default format' do
-    if Rails.version < "5"
+    if Rails.gem_version < Gem::Version.new('5.0')
       put :update,
           {
             user: {
@@ -49,7 +49,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   end
 
   test 'password confirmation does not match' do
-    if Rails.version < "5"
+    if Rails.gem_version < Gem::Version.new('5.0')
       put :update,
           {
             user: {
@@ -120,7 +120,6 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
           },
           format: :xml
       assert_redirected_to root_path
-      binding.pry
       assert_equal response.content_type, 'text/html'
     else
       put :update,
