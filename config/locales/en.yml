@@ -21,6 +21,11 @@ en:
     invalid_security_question: 'The security question answer was invalid.'
     paranoid_verify:
       code_required: 'Please enter the code our support team provided'
+    paranoid_verification_code:
+      show:
+        submit_verification_code: Submit verification code
+        verification_code: Verification code
+        submit: Submit
     password_expired:
       updated: 'Your new password is saved.'
       change_required: 'Your password is expired. Please renew your password.'
