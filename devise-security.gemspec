@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'
-  s.add_development_dependency 'rubocop', '~> 0.72.0'
+  s.add_development_dependency 'rubocop', '~> 0.73.0'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'wwtd'
 end
