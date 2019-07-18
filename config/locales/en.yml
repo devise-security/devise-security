@@ -21,9 +21,20 @@ en:
     invalid_security_question: 'The security question answer was invalid.'
     paranoid_verify:
       code_required: 'Please enter the code our support team provided'
+    paranoid_verification_code:
+      show:
+        submit_verification_code: Submit verification code
+        verification_code: Verification code
+        submit: Submit
     password_expired:
       updated: 'Your new password is saved.'
       change_required: 'Your password is expired. Please renew your password.'
+      show:
+        renew_your_password: Renew your password
+        current_password: Current password
+        new_password: New password
+        new_password_confirmation: Confirm new password
+        change_my_password: Change my password
     failure:
       session_limited: 'Your login credentials were used in another browser. Please sign in again to continue in this browser.'
       expired: 'Your account has expired due to inactivity. Please contact the site administrator.'
