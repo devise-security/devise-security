@@ -101,7 +101,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
           }
       assert_response 204
       assert_equal root_url, response.location
-      assert_nil response.content_type, "No Content-Type header should be set for No Content response"
+      assert_nil response.content_type, 'No Content-Type header should be set for No Content response'
     end
   end
 
@@ -133,7 +133,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
           }
       assert_response 204
       assert_equal root_url, response.location
-      assert_nil response.content_type, "No Content-Type header should be set for No Content response"
+      assert_nil response.content_type, 'No Content-Type header should be set for No Content response'
     end
   end
 end
