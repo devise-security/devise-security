@@ -20,9 +20,19 @@ de:
     invalid_captcha: 'Die Captcha-Eingabe ist nicht gültig.'
     paranoid_verify:
       code_required: 'Bitte geben Sie den Code ein, den unser Support-Team zur Verfügung gestellt hat.'
+      show:
+        submit_verification_code: Bestätigungscode eingeben
+        verification_code: Bestätigungscode
+        submit: Bestätigen
     password_expired:
       updated: 'Das neue Passwort wurde übernommen.'
       change_required: 'Ihr Passwort ist abgelaufen. Bitte vergeben Sie ein neues Passwort.'
+      show:
+        renew_your_password: Vergeben Sie ein neues Passwort
+        current_password: Aktuelles Passwort
+        new_password: Neues Passwort
+        new_password_confirmation: Passwort bestätigen
+        change_my_password: Passwort ändern
     failure:
       session_limited: 'Ihre Anmeldedaten wurden in einem anderen Browser genutzt. Bitte melden Sie sich erneut an, um in diesem Browser fortzufahren.'
       expired: 'Ihr Account ist aufgrund zu langer Inaktivität abgelaufen. Bitte kontaktieren Sie den Administrator.'
