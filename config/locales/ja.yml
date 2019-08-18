@@ -18,7 +18,7 @@ ja:
           other: は最低%{count}つの大文字英字を含む必要があります。
   devise:
     invalid_captcha: 'キャプチャ入力が不正です。'
-    invalid_security_question: 'セキュリティ質問に対すつ回答が不正です。'
+    invalid_security_question: 'セキュリティ質問に対する回答が不正です。'
     paranoid_verify:
       code_required: 'サポートチームに提供された認証コードを入力してください。'
     password_expired:

@@ -186,7 +186,7 @@ create_table :old_passwords do |t|
   t.string :password_salt # Optional. bcrypt stores the salt in the encrypted password field so this column may not be necessary.
   t.datetime :created_at
 end
-add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: :index_password_archivable
+add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: 'index_password_archivable'
 ```
 
 ### Session limitable
@@ -195,7 +195,7 @@ add_index :old_passwords, [:password_archivable_type, :password_archivable_id], 
 create_table :the_resources do |t|
   # other devise fields
 
-  t.string :unique_session_id, limit: 20
+  t.string :unique_session_id
 end
 ```
 

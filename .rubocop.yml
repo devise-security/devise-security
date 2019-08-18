@@ -1,17 +1,10 @@
 AllCops:
-  TargetRubyVersion: 2.3
-  Include:
-    - '**/Rakefile'
-    - '**/config.ru'
-    - 'lib/tasks/**/*'
+  TargetRubyVersion: 2.4
   Exclude:
     - Gemfile*
-    - README
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'bin/**/*'
-    - 'vendor/bundle/**/*'
-    - 'spec/support/**/*' # rspec support helpers have a strange api
+    - bin/*
+    - gemfiles/*
+    - test/**/*
 
 Rails:
   Enabled: true

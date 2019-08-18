@@ -5,6 +5,7 @@ require File.expand_path('../boot', __FILE__)
 require 'action_mailer/railtie'
 require "action_mailer/railtie"
 require "rails/test_unit/railtie"
+DEVISE_ORM = ENV.fetch('DEVISE_ORM', 'active_record').to_sym
 
 Bundler.require :default, DEVISE_ORM
 require "#{DEVISE_ORM}/railtie"

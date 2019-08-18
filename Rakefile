@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'lib')
-require 'rubygems'
-require 'bundler'
+require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'rdoc/task'
 require 'devise-security/version'
@@ -13,7 +12,7 @@ task default: :test
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
-  t.test_files = FileList['test/*test*.rb']
+  t.test_files = FileList['test/*test*.rb', 'test/**/*test*.rb']
   t.verbose = true
   t.warning = false
 end
