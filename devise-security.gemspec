@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
     'Dillon Welch',
     'Kevin Olbrich'
   ]
+  s.post_install_message = 'devise-security will drop support for Rails 4.2.x when Ruby 2.4 reaches EOL on 2020-03-31'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
