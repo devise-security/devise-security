@@ -1,24 +1,15 @@
 # frozen_string_literal: true
 
+require_relative "compatibility/#{DEVISE_ORM}_patch"
+
 module Devise
   module Models
+    # These compatibility modules define methods used by devise-security
+    # that may need to be defined or re-defined for compatibility between ORMs
+    # and/or older versions of ORMs.
     module Compatibility
       extend ActiveSupport::Concern
-
-      # for backwards compatibility with Rails < 5.1.x
-      unless Devise.activerecord51?
-        def saved_change_to_encrypted_password?
-          encrypted_password_changed?
-        end
-
-        def encrypted_password_before_last_save
-          previous_changes['encrypted_password'].try(:first)
-        end
-
-        def will_save_change_to_encrypted_password?
-          changed_attributes['encrypted_password'].present?
-        end
-      end
+      include "Devise::Models::Compatibility::#{DEVISE_ORM.to_s.classify}Patch".constantize
     end
   end
 end

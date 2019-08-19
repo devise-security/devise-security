@@ -2,7 +2,15 @@
 
 source "https://rubygems.org"
 
-gem "omniauth"
 gem "rails", "~> 4.2.0"
+gem "bundler", "< 2"
+
+group :active_record do
+  gem "sqlite3", "~> 1.3.0"
+end
+
+group :mongoid do
+  gem "mongoid", "~> 4.0"
+end
 
 gemspec path: "../"

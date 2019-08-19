@@ -1,9 +1,10 @@
 AllCops:
-  TargetRubyVersion: 2.3
-  Include:
-    - '**/Rakefile'
-    - 'lib/**/*'
-    - 'app/**/*'
+  TargetRubyVersion: 2.4
+  Exclude:
+    - Gemfile*
+    - bin/*
+    - gemfiles/*
+    - test/**/*
 
 Rails:
   Enabled: true

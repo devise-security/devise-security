@@ -1,10 +1,10 @@
-<h2>Submit verification code</h2>
+<h2>t('.submit_verification_code')</h2>
 
 <%= form_for(resource, as: resource_name, url: [resource_name, :paranoid_verification_code], html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render partial: 'devise/shared/error_messages' %>
 
-  <p><%= f.label :paranoid_verification_code, 'Verification code' %><br />
+  <p><%= f.label :paranoid_verification_code, t('.verification_code') %><br />
   <%= f.text_field :paranoid_verification_code, value: '' %></p>
 
-  <p><%= f.submit 'Submit' %></p>
+  <p><%= f.submit t('.submit') %></p>
 <% end %>

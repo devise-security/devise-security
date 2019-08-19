@@ -1,16 +1,16 @@
-<h2>Renew your password</h2>
+<h2><%= t('.renew_your_password') %></h2>
 
 <%= form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render partial: 'devise/shared/error_messages' %>
 
-  <p><%= f.label :current_password, 'Current password' %><br />
+  <p><%= f.label :current_password, t('.current_password') %><br />
   <%= f.password_field :current_password %></p>
 
-  <p><%= f.label :password, 'New password' %><br />
+  <p><%= f.label :password, t('.new_password') %><br />
   <%= f.password_field :password %></p>
 
-  <p><%= f.label :password_confirmation, 'Confirm new password' %><br />
+  <p><%= f.label :password_confirmation, t('.new_password_confirmation') %><br />
   <%= f.password_field :password_confirmation %></p>
 
-  <p><%= f.submit 'Change my password' %></p>
+  <p><%= f.submit t('.change_my_password') %></p>
 <% end %>

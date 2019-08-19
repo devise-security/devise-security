@@ -43,21 +43,13 @@ checks:
 plugins:
  rubocop:
   enabled: true
-  channel: rubocop-0-59
+  channel: rubocop-0-71
  markdownlint:
   enabled: true
  brakeman:
   enabled: true
 exclude_patterns:
-- "config/"
-- "db/"
-- "dist/"
-- "features/"
-- "**/node_modules/"
-- "script/"
-- "**/spec/"
-- "**/test/"
-- "**/tests/"
-- "**/vendor/"
-- "**/*.d.ts"
-- "gemfiles/"
+- "Gemfile"
+- "bin/*"
+- "gemfiles/*"
+- "test/**/*"

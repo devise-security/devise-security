@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class TestPasswordArchivable < ActiveSupport::TestCase
+
   setup do
     Devise.password_archiving_count = 2
   end
@@ -19,7 +20,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   test 'cannot use same password' do
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'Password1') }
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
   end
 
   test 'indirectly saving associated user does not cause deprecation warning' do
@@ -37,17 +38,15 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     assert_equal 0, OldPassword.count
   end
 
-  test 'cannot use archived passwords' do
+  test 'cannot reuse archived passwords' do
     assert_equal 2, Devise.password_archiving_count
 
     user = User.create! email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
     assert_equal 0, OldPassword.count
-
     set_password(user,  'Password2')
     assert_equal 1, OldPassword.count
 
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'Password1') }
-
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
     set_password(user,  'Password3')
     assert_equal 2, OldPassword.count
 
@@ -70,8 +69,8 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     assert set_password(user,  'Password2')
 
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'Password2') }
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password2') }
 
-    assert_raises(ActiveRecord::RecordInvalid) { set_password(user,  'Password1') }
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
   end
 end

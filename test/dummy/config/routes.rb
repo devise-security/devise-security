@@ -7,6 +7,7 @@ RailsApp::Application.routes.draw do
   devise_for :security_question_users, only: [:sessions, :unlocks], controllers: { unlocks: "security_question/unlocks" }
 
   resources :foos
+  resource :widgets
 
   root to: 'foos#index'
 end

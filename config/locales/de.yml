@@ -1,28 +1,38 @@
 de:
   errors:
     messages:
-      taken_in_past: 'wurde bereits in der Vergangenheit verwendet!'
-      equal_to_current_password: 'darf nicht dem aktuellen Passwort entsprechen!'
+      taken_in_past: 'wurde bereits in der Vergangenheit verwendet.'
+      equal_to_current_password: 'darf nicht dem aktuellen Passwort entsprechen.'
       password_complexity:
         digit:
-          one: muss mindestens eine Nummer enthalten
-          other: muss mindestens %{count} Zahlen enthalten
+          one: muss mindestens eine Ziffer enthalten
+          other: muss mindestens %{count} Ziffern enthalten
         lower:
-          one: muss mindestens eine Kleinbuchstabe enthalten
+          one: muss mindestens einen Kleinbuchstaben enthalten
           other: muss mindestens %{count} Kleinbuchstaben enthalten
         symbol:
-          one: muss mindestens eine Satzzeichen enthalten
+          one: muss mindestens ein Satzzeichen enthalten
           other: muss mindestens %{count} Satzzeichen enthalten
         upper:
-          one: muss mindestens eine Großbuchstabe enthalten
+          one: muss mindestens einen Großbuchstaben enthalten
           other: muss mindestens %{count} Großbuchstaben enthalten
   devise:
-    invalid_captcha: 'Die Captchaeingabe ist nicht gültig!'
+    invalid_captcha: 'Die Captcha-Eingabe ist nicht gültig.'
     paranoid_verify:
-      code_required: 'Bitte geben Sie den Code unser Support-Team zur Verfügung gestellt'
+      code_required: 'Bitte geben Sie den Code ein, den unser Support-Team zur Verfügung gestellt hat.'
+      show:
+        submit_verification_code: Bestätigungscode eingeben
+        verification_code: Bestätigungscode
+        submit: Bestätigen
     password_expired:
       updated: 'Das neue Passwort wurde übernommen.'
-      change_required: 'Ihr Passwort ist abgelaufen. Bitte vergeben sie ein neues Passwort!'
+      change_required: 'Ihr Passwort ist abgelaufen. Bitte vergeben Sie ein neues Passwort.'
+      show:
+        renew_your_password: Vergeben Sie ein neues Passwort
+        current_password: Aktuelles Passwort
+        new_password: Neues Passwort
+        new_password_confirmation: Passwort bestätigen
+        change_my_password: Passwort ändern
     failure:
       session_limited: 'Ihre Anmeldedaten wurden in einem anderen Browser genutzt. Bitte melden Sie sich erneut an, um in diesem Browser fortzufahren.'
-      expired: 'Ihr Account ist aufgrund zu langer Inaktiviät abgelaufen. Bitte kontaktieren Sie den Administrator.'
+      expired: 'Ihr Account ist aufgrund zu langer Inaktivität abgelaufen. Bitte kontaktieren Sie den Administrator.'
