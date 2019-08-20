@@ -11,8 +11,8 @@ de:
           one: muss mindestens einen Kleinbuchstaben enthalten
           other: muss mindestens %{count} Kleinbuchstaben enthalten
         symbol:
-          one: muss mindestens ein Satzzeichen enthalten
-          other: muss mindestens %{count} Satzzeichen enthalten
+          one: muss mindestens ein Sonderzeichen enthalten
+          other: muss mindestens %{count} Sonderzeichen enthalten
         upper:
           one: muss mindestens einen Großbuchstaben enthalten
           other: muss mindestens %{count} Großbuchstaben enthalten
