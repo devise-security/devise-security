@@ -1,6 +1,7 @@
 tr:
   errors:
     messages:
+      password_confirmation_mismatched: 'eşleşmeyen.'
       taken_in_past: "daha önce kullanıldı."
       equal_to_current_password: "mevcut paroladan farklı olmalı."
       password_format: "büyük, küçük harfler ve sayılar içermeli."

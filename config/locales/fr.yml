@@ -1,6 +1,7 @@
 fr:
   errors:
     messages:
+      password_confirmation_mismatched: 'non corrispondenti.'
       taken_in_past: a été utilisé trop récemment. Veuillez en choisir un autre
       equal_to_current_password: doit être différent de l'actuel
       password_complexity:
