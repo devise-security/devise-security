@@ -57,6 +57,6 @@ appraise 'rails-6.0' do
   end
 
   group :mongoid do
-    gem 'mongoid', '~> 7.0'
+    gem 'mongoid', '~> 7.0.5'
   end
 end
