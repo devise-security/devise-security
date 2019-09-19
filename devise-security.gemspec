@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'
-  s.add_development_dependency 'rubocop', '~> 0.71.0' # NOTE: also update .codeclimate.yml and make sure it uses the same version
+  s.add_development_dependency 'rubocop', '~> 0.74.0' # NOTE: also update .codeclimate.yml and make sure it uses the same version
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'wwtd'
 end
