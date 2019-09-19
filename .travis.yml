@@ -30,10 +30,6 @@ matrix:
   allow_failures:
     # edge, not expected to pass
     - rvm: ruby-head
-    - gemfile: gemfiles/rails_6.0.gemfile
-    # mongoid has not released support for rails 6
-    - gemfile: gemfiles/rails_6.0.gemfile
-      env: DEVISE_ORM=mongoid
 gemfile:
   - gemfiles/rails_4.2.gemfile
   - gemfiles/rails_5.0.gemfile
