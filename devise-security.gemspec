@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
     'Dillon Welch',
     'Kevin Olbrich'
   ]
+  s.post_install_message = 'WARNING: devise-security will drop support for Rails 4.2 in version 0.16.0'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
@@ -45,6 +46,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'
   s.add_development_dependency 'rubocop', '~> 0.74.0' # NOTE: also update .codeclimate.yml and make sure it uses the same version
+  s.add_development_dependency 'rubocop-rails'
+  s.add_development_dependency 'solargraph'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'wwtd'
 end

@@ -22,18 +22,17 @@ matrix:
     # Skip these combinations because they have incompatible dependencies
     # and will always fail.
     - rvm: 2.6
-      gemfile: gemfiles/rails_4.2_stable.gemfile
+      gemfile: gemfiles/rails_4.2.gemfile
     - rvm: ruby-head
-      gemfile: gemfiles/rails_4.2_stable.gemfile
+      gemfile: gemfiles/rails_4.2.gemfile
     - rvm: 2.4
-      gemfile: gemfiles/rails_6.0_beta.gemfile
+      gemfile: gemfiles/rails_6.0.gemfile
   allow_failures:
     # edge, not expected to pass
     - rvm: ruby-head
-    - gemfile: gemfiles/rails_6.0_beta.gemfile
 gemfile:
-  - gemfiles/rails_4.2_stable.gemfile
-  - gemfiles/rails_5.0_stable.gemfile
-  - gemfiles/rails_5.1_stable.gemfile
-  - gemfiles/rails_5.2_stable.gemfile
-  - gemfiles/rails_6.0_beta.gemfile
+  - gemfiles/rails_4.2.gemfile
+  - gemfiles/rails_5.0.gemfile
+  - gemfiles/rails_5.1.gemfile
+  - gemfiles/rails_5.2.gemfile
+  - gemfiles/rails_6.0.gemfile
