@@ -117,7 +117,7 @@ GEM
       rack (>= 1.6.2, < 3)
     orm_adapter (0.5.0)
     parallel (1.17.0)
-    parser (2.6.3.0)
+    parser (2.6.4.1)
       ast (~> 2.4.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -181,7 +181,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
-    rubocop (0.74.0)
+    rubocop (0.75.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
@@ -251,7 +251,7 @@ DEPENDENCIES
   pry-rescue
   rails (~> 5.0.0)
   rails_email_validator
-  rubocop (~> 0.74.0)
+  rubocop (~> 0.75.0)
   rubocop-rails
   solargraph
   sqlite3
