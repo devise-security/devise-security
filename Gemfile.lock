@@ -198,7 +198,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    solargraph (0.38.4)
+    solargraph (0.38.5)
       backport (~> 1.1)
       benchmark
       bundler (>= 1.17.2)
