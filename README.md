@@ -132,7 +132,7 @@ module MyApp
   class Application < Rails::Application
     #...
   end
-end  
+end
 ```
 
 ## Captcha-Support
@@ -331,6 +331,12 @@ To locally simulate what travis-ci will run when you push code use:
 
     $ gem install bundler -v '1.17.3'
     $ BUNDLER_VERSION=1.17.3 wwtd
+
+## Maintenance Policy
+
+We are committed to maintain support for `devise-security` for all normal or security maintenance versions of the Ruby language [as listed here](https://www.ruby-lang.org/en/downloads/branches/), and for the Ruby on Rails framework [as per their maintenance policy](https://rubyonrails.org/maintenance/).
+
+Support for Rails 4.2 will be dropped in version 0.16.0.
 
 ## Copyright
 
