@@ -66,7 +66,7 @@ GEM
       thor (>= 0.19.4, < 2.0)
       tins (~> 1.6)
     crass (1.0.6)
-    database_cleaner (1.7.0)
+    database_cleaner (1.8.2)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -164,6 +164,7 @@ GEM
       railties (>= 5.0)
     reverse_markdown (1.4.0)
       nokogiri
+    rexml (3.2.4)
     rmagick (4.0.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
@@ -182,14 +183,15 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
-    rubocop (0.75.1)
+    rubocop (0.80.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.6)
+      parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
+      rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    rubocop-rails (2.4.1)
+    rubocop-rails (2.4.2)
       rack (>= 1.1)
       rubocop (>= 0.72.0)
     ruby-progressbar (1.10.1)
@@ -198,7 +200,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    solargraph (0.38.2)
+    solargraph (0.38.5)
       backport (~> 1.1)
       benchmark
       bundler (>= 1.17.2)
@@ -230,13 +232,13 @@ GEM
       sync
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
-    unicode-display_width (1.6.0)
+    unicode-display_width (1.6.1)
     warden (1.2.8)
       rack (>= 2.0.6)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    wwtd (1.4.0)
+    wwtd (1.4.1)
     yard (0.9.24)
 
 PLATFORMS
@@ -257,7 +259,7 @@ DEPENDENCIES
   pry-rescue
   rails (~> 5.0.0)
   rails_email_validator
-  rubocop (~> 0.75.0)
+  rubocop (~> 0.80.0)
   rubocop-rails
   solargraph
   sqlite3
