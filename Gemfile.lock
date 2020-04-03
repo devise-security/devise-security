@@ -118,7 +118,7 @@ GEM
       rack (>= 1.6.2, < 3)
     orm_adapter (0.5.0)
     parallel (1.19.1)
-    parser (2.7.0.2)
+    parser (2.7.0.5)
       ast (~> 2.4.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -129,7 +129,7 @@ GEM
     pry-rescue (1.5.0)
       interception (>= 0.5)
       pry (>= 0.12.0)
-    rack (2.1.1)
+    rack (2.2.2)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7.2)
@@ -191,7 +191,8 @@ GEM
       rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    rubocop-rails (2.4.2)
+    rubocop-rails (2.5.1)
+      activesupport
       rack (>= 1.1)
       rubocop (>= 0.72.0)
     ruby-progressbar (1.10.1)
