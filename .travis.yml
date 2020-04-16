@@ -23,6 +23,8 @@ matrix:
     # and will always fail.
     - rvm: 2.6
       gemfile: gemfiles/rails_4.2.gemfile
+    - rvm: 2.7
+      gemfile: gemfiles/rails_4.2.gemfile
     - rvm: ruby-head
       gemfile: gemfiles/rails_4.2.gemfile
   allow_failures:
