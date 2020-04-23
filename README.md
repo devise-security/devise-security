@@ -13,12 +13,12 @@ It is composed of 7 additional Devise modules:
 - `:password_expirable` - passwords will expire after a configured time (and
   will need to be changed by the user). You will most likely want to use
   `:password_expirable` together with the `:password_archivable` module to
-  [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175)
+  [prevent the current expired password from being reused](https://github.com/phatworx/devise_security_extension/issues/175)
   immediately as the new password.
 - `:secure_validatable` - better way to validate a model (email, stronger
   password validation). Don't use with Devise `:validatable` module!
 - `:password_archivable` - save used passwords in an `old_passwords` table for
-  history checks (don't be able to use a formerly used password)
+  history checks (prevent reusing passwords)
 - `:session_limitable` - ensures, that there is only one session usable per
   account at once
 - `:expirable` - expires a user account after x days of inactivity (default 90
@@ -26,7 +26,7 @@ It is composed of 7 additional Devise modules:
 - `:security_questionable` - as accessible substitution for captchas (security
   question with captcha fallback)
 - `:paranoid_verification` - admin can generate verification code that user
-  needs to fill in otherwise he wont be able to use the application.
+  needs to fill in otherwise he won't be able to use the application.
 
 Configuration and database schema for each module below.
 
