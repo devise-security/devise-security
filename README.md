@@ -1,28 +1,45 @@
 # Devise Security
 
-[![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)[![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
+[![Build
+Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)[![Coverage
+Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
-A [Devise](https://github.com/plataformatec/devise) extension to add additional security features required by modern web applications. Forked from [Devise Security Extension](https://github.com/phatworx/devise_security_extension)
+A [Devise](https://github.com/plataformatec/devise) extension to add additional
+security features required by modern web applications. Forked from
+[Devise Security Extension](https://github.com/phatworx/devise_security_extension)
 
 It is composed of 7 additional Devise modules:
 
-- `:password_expirable` - passwords will expire after a configured time (and will need to be changed by the user). You will most likely want to use `:password_expirable` together with the `:password_archivable` module to [prevent the current expired password being reused](https://github.com/phatworx/devise_security_extension/issues/175) immediately as the new password.
-- `:secure_validatable` - better way to validate a model (email, stronger password validation). Don't use with Devise `:validatable` module!
-- `:password_archivable` - save used passwords in an `old_passwords` table for history checks (prevent reusing passwords)
-- `:session_limitable` - ensures, that there is only one session usable per account at once
-- `:expirable` - expires a user account after x days of inactivity (default 90 days)
-- `:security_questionable` - as accessible substitution for captchas (security question with captcha fallback)
-- `:paranoid_verification` - admin can generate verification code that user needs to fill in otherwise he won't be able to use the application.
+- `:password_expirable` - passwords will expire after a configured time (and
+  will need to be changed by the user). You will most likely want to use
+  `:password_expirable` together with the `:password_archivable` module to
+  [prevent the current expired password from being reused](https://github.com/phatworx/devise_security_extension/issues/175)
+  immediately as the new password.
+- `:secure_validatable` - better way to validate a model (email, stronger
+  password validation). Don't use with Devise `:validatable` module!
+- `:password_archivable` - save used passwords in an `old_passwords` table for
+  history checks (prevent reusing passwords)
+- `:session_limitable` - ensures, that there is only one session usable per
+  account at once
+- `:expirable` - expires a user account after x days of inactivity (default 90
+  days)
+- `:security_questionable` - as accessible substitution for captchas (security
+  question with captcha fallback)
+- `:paranoid_verification` - admin can generate verification code that user
+  needs to fill in otherwise he won't be able to use the application.
 
 Configuration and database schema for each module below.
 
 ## Additional features
 
-- **captcha support** for `sign_up`, `sign_in`, `recover` and `unlock` (to make automated mass creation and brute forcing of accounts harder)
+**captcha support** for `sign_up`, `sign_in`, `recover` and `unlock` (to make
+automated mass creation and brute forcing of accounts harder)
 
 ## Getting started
 
-Devise Security works with Devise on Rails 4.2 onwards. You can add it to your Gemfile after you successfully set up Devise (see [Devise documentation](https://github.com/plataformatec/devise)) with:
+Devise Security works with Devise on Rails 4.2 onwards. You can add it to your
+Gemfile after you successfully set up Devise (see
+[Devise documentation](https://github.com/plataformatec/devise)) with:
 
 ```ruby
 gem 'devise-security'
@@ -36,7 +53,10 @@ After you installed Devise Security you need to run the generator:
 rails generate devise_security:install
 ```
 
-The generator adds optional configurations to `config/initializers/devise-security.rb`. Enable the modules you wish to use in the initializer you are ready to add Devise Security modules on top of Devise modules to any of your Devise models:
+The generator adds optional configurations to
+`config/initializers/devise-security.rb`. Enable the modules you wish to use in
+the initializer you are ready to add Devise Security modules on top of Devise
+modules to any of your Devise models:
 
 ```ruby
 devise :password_expirable, :secure_validatable, :password_archivable, :session_limitable, :expirable
@@ -44,13 +64,16 @@ devise :password_expirable, :secure_validatable, :password_archivable, :session_
 
 ### E-mail Validation
 
-for `:secure_validatable` you need to have a way to validate an e-mail. There are multiple libraries that support this, and even a way built into Ruby!
+for `:secure_validatable` you need to have a way to validate an e-mail. There
+are multiple libraries that support this, and even a way built into Ruby!
 
-[Ruby Constant](http://yogodoshi.com/ruby-already-has-its-own-regular-expression-to-validate-emails/)
-  * Note: This method would require a `email_validation` method to be defined in order to hook into the `validates` method defined here.
-[email_address](https://github.com/afair/email_address) gem
-[valid_email2](https://github.com/micke/valid_email2) gem
-[rails_email_validator](https://github.com/phatworx/rails_email_validator) gem (deprecated)
+- [Ruby Constant](http://yogodoshi.com/ruby-already-has-its-own-regular-expression-to-validate-emails/)
+  > Note: This method would require a `email_validation` method to be defined in
+  > order to hook into the `validates` method defined here.
+- [email_address](https://github.com/afair/email_address) gem
+- [valid_email2](https://github.com/micke/valid_email2) gem
+- [rails_email_validator](https://github.com/phatworx/rails_email_validator) gem
+  (deprecated)
 
 ## Configuration
 
@@ -106,29 +129,34 @@ end
 
 ## Other ORMs
 
-Devise-security supports [Mongoid](https://rubygems.org/gems/mongoid) as an alternative ORM to active_record.  To use this ORM, add this to your `Gemfile`.
+Devise-security supports [Mongoid](https://rubygems.org/gems/mongoid) as an
+alternative ORM to active_record. To use this ORM, add this to your `Gemfile`.
 
-    gem 'mongoid'
+```ruby
+gem 'mongoid'
+```
 
 And then ensure that the environment variable `DEVISE_ORM=mongoid` is set.
 
 For local development you will need to have MongoDB installed locally.
 
-    brew install mongodb
+```bash
+brew install mongodb
+```
 
 ### Rails App setup example with Mongoid
 
 ```ruby
 # inside config/application.rb
-require File.expand_path('../boot', __FILE__)
-#...
-DEVISE_ORM=:mongoid
+    require File.expand_path('../boot', __FILE__)
+    #...
+    DEVISE_ORM=:mongoid
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
+    Bundler.require(*Rails.groups)
 
-module MyApp
+    module MyApp
   class Application < Rails::Application
     #...
   end
@@ -137,29 +165,32 @@ end
 
 ## Captcha-Support
 
-The captcha support depends on [EasyCaptcha](https://github.com/phatworx/easy_captcha). See further documentation there.
+The captcha support depends on
+[EasyCaptcha](https://github.com/phatworx/easy_captcha). See further
+documentation there.
 
 ### Installation
 
 1. Add EasyCaptcha to your `Gemfile` with
 
-```ruby
-gem 'easy_captcha'
-```
+   ```ruby
+   gem 'easy_captcha'
+   ```
 
-1. Run the initializer
+2. Run the initializer
 
-```ruby
-rails generate easy_captcha:install
-```
+   ```ruby
+   rails generate easy_captcha:install
+   ```
 
-1. Enable captcha - see "Configuration" of Devise Security above.
-1. Add the captcha in the generated devise views for each controller you have activated
+3. Enable captcha - see "Configuration" of Devise Security above.
+4. Add the captcha in the generated devise views for each controller you have
+   activated.
 
-```erb
-<p><%= captcha_tag %></p>
-<p><%= text_field_tag :captcha %></p>
-```
+    ```erb
+    <p><%= captcha_tag %></p>
+    <p><%= text_field_tag :captcha %></p>
+    ```
 
 ## Schema
 
@@ -174,7 +205,8 @@ end
 add_index :the_resources, :password_changed_at
 ```
 
-Note: setting `password_changed_at` to `nil` will require the user to change their password.
+Note: setting `password_changed_at` to `nil` will require the user to change
+their password.
 
 ### Password archivable
 
@@ -271,13 +303,13 @@ end
 
 ## Requirements
 
-* Devise (<https://github.com/plataformatec/devise>)
-* Rails 4.2 onwards (<http://github.com/rails/rails>)
-* recommendations:
-    - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
-    - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
-    - `mongodb` (<https://www.mongodb.com/>)
-    - `rvm` (<https://rvm.io/>)
+- Devise (<https://github.com/plataformatec/devise>)
+- Rails 4.2 onwards (<http://github.com/rails/rails>)
+- recommendations:
+  - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
+  - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
+  - `mongodb` (<https://www.mongodb.com/>)
+  - `rvm` (<https://rvm.io/>)
 
 ## Todo
 
@@ -295,7 +327,8 @@ end
 - 0.8 Support for Rails 4 (+ variety of patches)
 - 0.11 Support for Rails 5. Forked to allow project maintenance and features
 
-See also [Github Releases](https://github.com/devise-security/devise-security/releases)
+See also
+[Github Releases](https://github.com/devise-security/devise-security/releases)
 
 ## Maintainers
 
@@ -305,26 +338,38 @@ See also [Github Releases](https://github.com/devise-security/devise-security/re
 
 ## Contributing to devise-security
 
-- Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-- Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+- Check out the latest master to make sure the feature hasn't been implemented
+  or the bug hasn't been fixed yet
+- Check out the issue tracker to make sure someone already hasn't requested it
+  and/or contributed it
 - Fork the project
 - Start a feature/bugfix branch
 - Commit and push until you are happy with your contribution
-- Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-- Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+- Make sure to add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+- Please try not to mess with the Rakefile, version, or history. If you want to
+  have your own version, or is otherwise necessary, that is fine, but please
+  isolate to its own commit so I can cherry-pick around it.
 
 ## Running tests
 
-Standard tests can be invoked using `rake`.  To run the tests against the `mongoid` ORM, use `DEVISE_ORM=mongoid rake` while `mongodb` is running.
+Standard tests can be invoked using `rake`. To run the tests against the
+`mongoid` ORM, use `DEVISE_ORM=mongoid rake` while `mongodb` is running.
 
 To locally simulate what travis-ci will run when you push code use:
 
-    $ gem install bundler -v '1.17.3'
-    $ BUNDLER_VERSION=1.17.3 wwtd
+```bash
+gem install bundler -v '1.17.3'
+BUNDLER_VERSION=1.17.3 wwtd
+```
 
 ## Maintenance Policy
 
-We are committed to maintain support for `devise-security` for all normal or security maintenance versions of the Ruby language [as listed here](https://www.ruby-lang.org/en/downloads/branches/), and for the Ruby on Rails framework [as per their maintenance policy](https://rubyonrails.org/maintenance/).
+We are committed to maintain support for `devise-security` for all normal or
+security maintenance versions of the Ruby language
+[as listed here](https://www.ruby-lang.org/en/downloads/branches/), and for the
+Ruby on Rails framework
+[as per their maintenance policy](https://rubyonrails.org/maintenance/).
 
 Support for Rails 4.2 will be dropped in version 0.16.0.
 
