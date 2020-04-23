@@ -12,7 +12,7 @@ en:
           other: must contain at least %{count} lower-case letters
         symbol:
           one: must contain at least one punctuation mark or symbol
-          other: must contain at least %{count} puncutation marks or symbols
+          other: must contain at least %{count} punctuation marks or symbols
         upper:
           one: must contain at least one upper-case letter
           other: must contain at least %{count} upper-case letters
