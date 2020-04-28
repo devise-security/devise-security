@@ -8,9 +8,9 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   setup do
     @controller.class.respond_to :json, :xml
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = User.create!(
+    @user = User.create(
       username: 'hello',
-      email: 'hello@path.travel',
+      email: 'bob@microsoft.com',
       password: 'Password4',
       password_changed_at: 4.months.ago,
       confirmed_at: 5.months.ago
