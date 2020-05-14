@@ -55,7 +55,7 @@ module DeviseSecurity
                   redirect_for_password_change scope
                   return
                 else
-                  warden.session(scope)['password_expired'] = false
+                  warden.session(scope)[:password_expired] = false
                 end
               end
             end
