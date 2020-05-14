@@ -2,6 +2,7 @@ source "https://rubygems.org"
 gemspec
 
 gem 'rails', '~> 5.0.0'
+gem 'minitest-rails', '~> 5.0.0'
 
 group :active_record do
   gem 'sqlite3', "~> 1.3.0"
