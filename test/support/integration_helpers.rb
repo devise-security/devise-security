@@ -4,7 +4,7 @@ module IntegrationHelpers
   # @param session [ActionDispatch::Integration::Session]
   # @return [void]
   # @note accounts for differences in the integration test API between rails versions
-  def sign_in(user, session)
+  def sign_in(user, session = integration_session)
     if Rails.gem_version > Gem::Version.new('5.0')
       session.post new_user_session_path, params: {
         user: {

@@ -39,7 +39,7 @@ class TestPasswordExpirableWorkflow < ActionDispatch::IntegrationTest
     assert_redirected_to(root_path)
 
     @user.update(password_changed_at: Time.zone.now)
-    refute @user.need_change_password?
+    assert_not @user.need_change_password?
 
     follow_redirect!
     assert_response :success
