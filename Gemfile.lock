@@ -104,7 +104,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.0)
+    minitest (5.14.1)
     minitest-rails (5.0.0)
       minitest (~> 5.10)
       railties (~> 5.0.0)
