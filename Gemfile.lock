@@ -121,7 +121,7 @@ GEM
       rack (>= 1.6.2, < 3)
     orm_adapter (0.5.0)
     parallel (1.19.1)
-    parser (2.7.1.1)
+    parser (2.7.1.2)
       ast (~> 2.4.0)
     pry (0.13.0)
       coderay (~> 1.1)
@@ -208,7 +208,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    solargraph (0.39.2)
+    solargraph (0.39.7)
       backport (~> 1.1)
       benchmark
       bundler (>= 1.17.2)
@@ -247,7 +247,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
     wwtd (1.4.1)
-    yard (0.9.24)
+    yard (0.9.25)
 
 PLATFORMS
   ruby
