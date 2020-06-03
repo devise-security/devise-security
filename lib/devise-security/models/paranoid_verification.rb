@@ -32,7 +32,7 @@ module Devise
       end
 
       def generate_paranoid_code
-        update_without_password paranoid_verification_code: Devise.verification_code_generator.call(),
+        update_without_password paranoid_verification_code: Devise.verification_code_generator.call,
                                 paranoid_verification_attempt: 0
       end
     end
