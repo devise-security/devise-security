@@ -83,7 +83,6 @@ module Devise
           all.each do |u|
             u.expire! if u.expired? && u.expired_at.nil?
           end
-          return
         end
 
         # Scope method to collect all expired users since +time+ ago
