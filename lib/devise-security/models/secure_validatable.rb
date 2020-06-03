@@ -67,7 +67,7 @@ module Devise
         dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
           user.password_salt = password_salt_was if respond_to?(:password_salt)
         end
-        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
+        errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
       end
 
       protected
@@ -101,7 +101,7 @@ module Devise
         end
 
         def devise_validation_enabled?
-          self.ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
+          ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
         end
       end
     end
