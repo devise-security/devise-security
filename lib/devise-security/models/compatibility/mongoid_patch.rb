@@ -1,7 +1,6 @@
 module Devise
   module Models
     module Compatibility
-
       class NotPersistedError < Mongoid::Errors::MongoidError; end
 
       module MongoidPatch

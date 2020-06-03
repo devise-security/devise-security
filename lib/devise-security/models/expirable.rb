@@ -37,6 +37,7 @@ module Devise
         return self.expired_at < Time.now.utc unless self.expired_at.nil?
         # if it is not set, check the last activity against configured expire_after time range
         return self.last_activity_at < self.class.expire_after.ago unless self.last_activity_at.nil?
+
         # if last_activity_at is nil as well, the user has to be 'fresh' and is therefore not expired
         false
       end

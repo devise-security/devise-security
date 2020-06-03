@@ -88,3 +88,12 @@ Style/HashTransformValues:
 
 Style/SlicingWithRange:
   Enabled: true
+
+# Until we drop support for Rails 4.2, this can be different Rails 4.2 can work
+# with ruby 2.2 and we don't know of any obvious problems with older versions of
+# ruby, we just don't support them. Making the minimum ruby version match the
+# oldest supported ruby will prevent people from installing the gem in older
+# applications, which we don't want to do.
+Gemspec/RequiredRubyVersion:
+  Exclude:
+    - 'devise-security.gemspec'

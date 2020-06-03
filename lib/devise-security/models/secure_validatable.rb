@@ -30,10 +30,9 @@ module Devise
             validation_condition = "#{login_attribute}_changed?".to_sym
 
             validates login_attribute, uniqueness: {
-                                          scope:          authentication_keys[1..-1],
-                                          case_sensitive: !!case_insensitive_keys
-                                        },
-                                        if: validation_condition
+              scope: authentication_keys[1..-1],
+              case_sensitive: !!case_insensitive_keys
+            }, if: validation_condition
 
             already_validated_email = login_attribute.to_s == 'email'
           end
@@ -64,6 +63,7 @@ module Devise
 
       def current_equal_password_validation
         return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
+
         dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
           user.password_salt = password_salt_was if respond_to?(:password_salt)
         end

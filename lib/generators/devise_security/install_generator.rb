@@ -11,8 +11,7 @@ module DeviseSecurity
 
       def copy_initializer
         template('devise-security.rb',
-                 'config/initializers/devise-security.rb',
-        )
+                 'config/initializers/devise-security.rb')
       end
 
       def copy_locales
