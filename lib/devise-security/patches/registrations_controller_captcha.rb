@@ -9,7 +9,7 @@ module DeviseSecurity::Patches
 
         if valid_captcha_if_defined?(params[:captcha])
           if resource.save
-            block.call(resource) if block
+            block&.call(resource)
             if resource.active_for_authentication?
               set_flash_message :notice, :signed_up if is_flashing_format?
               sign_up(resource_name, resource)
