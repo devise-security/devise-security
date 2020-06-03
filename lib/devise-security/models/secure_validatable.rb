@@ -31,7 +31,7 @@ module Devise
 
             validates login_attribute, uniqueness: {
               scope: authentication_keys[1..-1],
-              case_sensitive: !!case_insensitive_keys
+              case_sensitive: !!case_insensitive_keys,
             }, if: validation_condition
 
             already_validated_email = login_attribute.to_s == 'email'

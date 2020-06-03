@@ -15,7 +15,7 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
     lower: /\p{Lower}/,
     symbol: /\p{Punct}|\p{S}/,
     symbols: /\p{Punct}|\p{S}/,
-    upper: /\p{Upper}/
+    upper: /\p{Upper}/,
   }.freeze
 
   def validate_each(record, attribute, value)

@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     'Alexander Dreher',
     'Nate Bird',
     'Dillon Welch',
-    'Kevin Olbrich'
+    'Kevin Olbrich',
   ]
   s.post_install_message = 'WARNING: devise-security will drop support for Rails 4.2 in version 0.16.0'
 
