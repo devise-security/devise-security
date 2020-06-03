@@ -22,7 +22,7 @@ module Devise
         # @param name [Symbol] attribute to update
         # @param value [String] value to set
         def update_attribute_without_validatons_or_callbacks(name, value)
-          set(Hash[*[name, value]])
+          set(Hash[name, value])
         end
       end
     end
