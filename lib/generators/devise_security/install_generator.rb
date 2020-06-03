@@ -6,7 +6,7 @@ module DeviseSecurity
     class InstallGenerator < Rails::Generators::Base
       LOCALES = %w[en es de fr it ja tr ru nl].freeze
 
-      source_root File.expand_path('../../templates', __FILE__)
+      source_root File.expand_path('../templates', __dir__)
       desc 'Install the devise security extension'
 
       def copy_initializer
