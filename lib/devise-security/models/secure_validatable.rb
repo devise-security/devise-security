@@ -88,6 +88,7 @@ module Devise
 
         private
 
+        # REFACTOR: this method name violates a rubocop convention
         def has_uniqueness_validation_of_login?
           validators.any? do |validator|
             validator_orm_klass = DEVISE_ORM == :active_record ? ActiveRecord::Validations::UniquenessValidator : ::Mongoid::Validatable::UniquenessValidator

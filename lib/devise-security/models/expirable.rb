@@ -21,6 +21,7 @@ module Devise
       extend ActiveSupport::Concern
 
       # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
+      # rubocop:disable Rails/SkipsModelValidations
       def update_last_activity!
         if respond_to?(:update_column)
           self.update_column(:last_activity_at, Time.now.utc)
@@ -28,6 +29,7 @@ module Devise
           self.update_attribute(:last_activity_at, Time.now.utc)
         end
       end
+      # rubocop:enable Rails/SkipsModelValidations
 
       # Tells if the account has expired
       #

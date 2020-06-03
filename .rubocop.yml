@@ -97,3 +97,8 @@ Style/SlicingWithRange:
 Gemspec/RequiredRubyVersion:
   Exclude:
     - 'devise-security.gemspec'
+
+Naming/PredicateName:
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/devise-security/models/secure_validatable.rb'
