@@ -16,5 +16,5 @@ module DeviseSecurity
   end
 end
 
-ActiveRecord::ConnectionAdapters::Table.send :include, DeviseSecurity::Orm::ActiveRecord::Schema
-ActiveRecord::ConnectionAdapters::TableDefinition.send :include, DeviseSecurity::Orm::ActiveRecord::Schema
+ActiveRecord::ConnectionAdapters::Table.include DeviseSecurity::Orm::ActiveRecord::Schema
+ActiveRecord::ConnectionAdapters::TableDefinition.include DeviseSecurity::Orm::ActiveRecord::Schema
