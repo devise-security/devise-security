@@ -42,6 +42,7 @@ class TestPasswordExpirableWorkflow < ActionDispatch::IntegrationTest
     sign_in(@user)
     assert_redirected_to(root_path)
 
+    # simulates an external process updating the password
     @user.update(password_changed_at: Time.zone.now)
     assert_not @user.need_change_password?
 
