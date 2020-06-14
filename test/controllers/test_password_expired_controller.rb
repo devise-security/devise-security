@@ -16,6 +16,8 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
       confirmed_at: 5.months.ago
     )
     assert @user.valid?
+    assert @user.need_change_password?
+
     sign_in(@user)
   end
 
