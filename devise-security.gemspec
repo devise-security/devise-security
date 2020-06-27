@@ -1,7 +1,6 @@
-# -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'devise-security/version'
 
 Gem::Specification.new do |s|
@@ -18,7 +17,7 @@ Gem::Specification.new do |s|
     'Alexander Dreher',
     'Nate Bird',
     'Dillon Welch',
-    'Kevin Olbrich'
+    'Kevin Olbrich',
   ]
   s.post_install_message = 'WARNING: devise-security will drop support for Rails 4.2 in version 0.16.0'
 
@@ -44,7 +43,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'omniauth'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rescue'
-  s.add_development_dependency 'rails-controller-testing'
   s.add_development_dependency 'rails_email_validator'
   s.add_development_dependency 'rubocop', '~> 0.80.0' # NOTE: also update .codeclimate.yml and make sure it uses the same version
   s.add_development_dependency 'rubocop-rails'
