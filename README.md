@@ -1,8 +1,8 @@
 # Devise Security
 
-[![Build
-Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)[![Coverage
-Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
+[![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
+[![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
 A [Devise](https://github.com/plataformatec/devise) extension to add additional
 security features required by modern web applications. Forked from
@@ -84,7 +84,7 @@ Devise.setup do |config|
 
   # Password expires after a configurable time (in seconds).
   # Or expire passwords on demand by setting this configuration to `true`
-  # Use `user.need_password_change!` to expire a password.
+  # Use `user.need_change_password!` to expire a password.
   # Setting the configuration to `false` will completely disable expiration checks.
   # config.expire_password_after = 3.months | true | false
 

@@ -42,20 +42,29 @@ module DeviseSecurity
 
       private
 
-      # lookup if an password change needed
+      # Called as a `before_action` on all actions on any controller that uses
+      # this helper. If the user's session is marked as having an expired
+      # password we double check in case it has been changed by another process,
+      # then redirect to the password change url.
+      #
+      # @note `Warden::Manager.after_authentication` is run AFTER this method
+      #
+      # @note Once the warden session has `'password_expired'` set to `false`,
+      #    it will **never** be checked again until the user re-logs in.
       def handle_password_change
         return if warden.nil?
 
-        if !devise_controller? && !ignore_password_expire? && !request.format.nil? && request.format.html?
+        if !devise_controller? &&
+           !ignore_password_expire? &&
+           !request.format.nil? &&
+           request.format.html?
           Devise.mappings.keys.flatten.any? do |scope|
-            if signed_in?(scope) && warden.session(scope)['password_expired']
-              # re-check to avoid infinite loop if date changed after login attempt
+            if signed_in?(scope) && warden.session(scope)['password_expired'] == true
               if send(:"current_#{scope}").try(:need_change_password?)
                 store_location_for(scope, request.original_fullpath) if request.get?
-                redirect_for_password_change scope
-                break
+                redirect_for_password_change(scope)
               else
-                warden.session(scope)[:password_expired] = false
+                warden.session(scope)['password_expired'] = false
               end
             end
           end
