@@ -30,11 +30,14 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
   end
 
   def constraints(record)
-    case options[:constraints]
+    # TODO - there are examples where there is and isn't a `constraints`. Is one format deprecated?
+    constraints = options[:constraints] || options
+
+    case constraints
     when Proc
-      options[:constraints].call(record)
+      constraints.call(record)
     else
-      options[:constraints]
+      constraints
     end
   end
 
