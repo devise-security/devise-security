@@ -54,10 +54,19 @@ module Devise
         unless has_uniqueness_validation_of_login?
           # Only perform uniqueness check when the login attribute is dirty so
           # we can avoid hitting the database unnecessarily.
-          validates login_attribute, uniqueness: {
-            scope:          authentication_keys[1..-1],
-            case_sensitive: !case_insensitive_keys.include?(login_attribute),
-          }, if: -> { will_save_change_to_attribute?(self.class.login_attribute) }
+          if defined?(will_save_change_to_attribute?)
+            validates login_attribute, uniqueness: {
+              scope:          authentication_keys[1..-1],
+              case_sensitive: !case_insensitive_keys.include?(login_attribute),
+            }, if: -> { will_save_change_to_attribute?(self.class.login_attribute) }
+          # `will_save_change_to_attribute?` was added in Rails 5.1
+          # We can remove this `else` when support is dropped
+          else
+            validates login_attribute, uniqueness: {
+              scope:          authentication_keys[1..-1],
+              case_sensitive: !case_insensitive_keys.include?(login_attribute),
+            }
+          end
 
           already_validated_email = login_attribute.to_s == 'email'
         end
