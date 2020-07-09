@@ -5,8 +5,8 @@ require 'rails_email_validator'
 
 class TestSecureValidatable < ActiveSupport::TestCase
   class User < ApplicationRecord
-    devise :database_authenticatable, :password_archivable,
-           :paranoid_verification, :password_expirable, :secure_validatable
+    devise :database_authenticatable, :paranoid_verification,
+      :password_expirable, :secure_validatable
     include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
   end
 
@@ -64,6 +64,12 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'subclasses can override complexity requirements' do
+    class ModifiedUser < User
+      def self.password_complexity
+        { digits: 10 }
+      end
+    end
+
     msg = 'Password must contain at least 10 digits'
     user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
     assert_equal(false, user.valid?)
@@ -80,6 +86,12 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'password length can be overridden in a subclass' do
+    class ModifiedUser < User
+      def self.password_length
+        10..20
+      end
+    end
+
     msg = 'Password is too short (minimum is 10 characters)'
     user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
     assert_equal(false, user.valid?)
