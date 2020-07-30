@@ -20,7 +20,7 @@ module Devise
       include Devise::Models::Compatibility
 
       included do
-        assert_secure_validations_api!(self)
+        raise "Could not use SecureValidatable on #{self}" unless respond_to?(:validates)
 
         add_uniqueness_validations
         add_presence_validations
@@ -38,10 +38,6 @@ module Devise
       end
 
       class_methods do
-        def assert_secure_validations_api!(base)
-          raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
-        end
-
         Devise::Models.config(self, :password_complexity, :password_length, :email_validation)
 
         private
