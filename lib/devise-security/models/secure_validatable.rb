@@ -100,8 +100,10 @@ module Devise
         end
       end
 
+      # See if the new proposed password is the same as the current password.
       def current_equal_password_validation
-        return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
+        return if cannot_equal_existing_password?
+
         dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
           user.password_salt = password_salt_was if respond_to?(:password_salt)
         end
@@ -116,6 +118,15 @@ module Devise
       # or confirmation are being set somewhere.
       def password_required?
         !persisted? || !password.nil? || !password_confirmation.nil?
+      end
+
+      # When checking if a new password matches the current, there are some
+      # cases where we know this can't be true (before we even compare the old
+      # and new). These are used during validation and provide quicker checks
+      # than having to encrypt and compare passwords.
+      # @return [Boolean]
+      def cannot_equal_existing_password?
+        new_record? || !will_save_change_to_encrypted_password? || password.blank?
       end
 
       def email_required?
