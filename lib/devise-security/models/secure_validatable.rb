@@ -16,53 +16,88 @@ module Devise
     #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
     #
     module SecureValidatable
+      extend ActiveSupport::Concern
       include Devise::Models::Compatibility
 
-      def self.included(base)
-        base.extend ClassMethods
-        assert_secure_validations_api!(base)
+      included do
+        assert_secure_validations_api!(self)
 
-        base.class_eval do
-          already_validated_email = false
+        add_uniqueness_validations
+        add_presence_validations
 
-          # validate login in a strict way if not yet validated
-          unless uniqueness_validation_of_login?
-            validation_condition = "#{login_attribute}_changed?".to_sym
+        # extra validations
+        validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
+        validates(
+          :password,
+          'devise_security/password_complexity': password_complexity,
+          if: :password_required?,
+        )
 
-            validates(
-              login_attribute,
-              uniqueness: {
-                scope: authentication_keys[1..-1],
-                case_sensitive: !!case_insensitive_keys,
-              },
-              if: validation_condition,
-            )
-
-            already_validated_email = login_attribute.to_s == 'email'
-          end
-
-          unless devise_validation_enabled?
-            validates :email, presence: true, if: :email_required?
-            unless already_validated_email
-              validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
-            end
-
-            validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
-          end
-
-          # extra validations
-          validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
-          validates :password,
-                    'devise_security/password_complexity': password_complexity,
-                    if: :password_required?
-
-          # don't allow use same password
-          validate :current_equal_password_validation
-        end
+        # don't allow use same password
+        validate :current_equal_password_validation
       end
 
-      def self.assert_secure_validations_api!(base)
-        raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
+      class_methods do
+        def assert_secure_validations_api!(base)
+          raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
+        end
+
+        Devise::Models.config(self, :password_complexity, :password_length, :email_validation)
+
+        private
+
+        def add_uniqueness_validations
+          # validate login in a strict way if not yet validated
+          add_validation_for_login_item unless uniqueness_validation_of_login?
+
+          # @todo This used to be `to_s`; is that to allow string or symbol?
+          validated_email = login_attribute == :email
+
+          # add uniqueness validation to email unless it would have been added
+          # by Devise or we would have added it via
+          # `add_validation_for_login_item` above
+          add_uniqueness_validation_for_email unless devise_validation_enabled? || validated_email
+        end
+
+        def add_presence_validations
+          return if devise_validation_enabled?
+
+          validates :email, presence: true, if: :email_required?
+          validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
+        end
+
+        def add_validation_for_login_item
+          validation_condition = "#{login_attribute}_changed?".to_sym
+
+          validates(
+            login_attribute,
+            uniqueness: {
+              scope: authentication_keys[1..-1],
+              case_sensitive: !!case_insensitive_keys,
+            },
+            if: validation_condition,
+          )
+        end
+
+        def add_uniqueness_validation_for_email
+          # check uniq for email ever
+          validates :email, uniqueness: true, allow_blank: true, if: :email_changed?
+        end
+
+        def uniqueness_validation_of_login?
+          validators.any? do |validator|
+            validator_orm_klass = DEVISE_ORM == :active_record ? ActiveRecord::Validations::UniquenessValidator : ::Mongoid::Validatable::UniquenessValidator
+            validator.is_a?(validator_orm_klass) && validator.attributes.include?(login_attribute)
+          end
+        end
+
+        def login_attribute
+          authentication_keys[0]
+        end
+
+        def devise_validation_enabled?
+          ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
+        end
       end
 
       def current_equal_password_validation
@@ -85,27 +120,6 @@ module Devise
 
       def email_required?
         true
-      end
-
-      module ClassMethods
-        Devise::Models.config(self, :password_complexity, :password_length, :email_validation)
-
-        private
-
-        def uniqueness_validation_of_login?
-          validators.any? do |validator|
-            validator_orm_klass = DEVISE_ORM == :active_record ? ActiveRecord::Validations::UniquenessValidator : ::Mongoid::Validatable::UniquenessValidator
-            validator.is_a?(validator_orm_klass) && validator.attributes.include?(login_attribute)
-          end
-        end
-
-        def login_attribute
-          authentication_keys[0]
-        end
-
-        def devise_validation_enabled?
-          ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
-        end
       end
     end
   end
