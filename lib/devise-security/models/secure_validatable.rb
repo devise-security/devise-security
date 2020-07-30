@@ -66,6 +66,7 @@ module Devise
           validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
         end
 
+        # Add uniqueness validation for {login_attribute}
         def add_validation_for_login_item
           validation_condition = "#{login_attribute}_changed?".to_sym
 
@@ -79,11 +80,13 @@ module Devise
           )
         end
 
+        # Add validation for email uniqueness
         def add_uniqueness_validation_for_email
-          # check uniq for email ever
           validates :email, uniqueness: true, allow_blank: true, if: :email_changed?
         end
 
+        # Check if there is already a uniqueness validation for {login_attribute}
+        # @return [Boolean]
         def uniqueness_validation_of_login?
           validators.any? do |validator|
             validator_orm_klass = DEVISE_ORM == :active_record ? ActiveRecord::Validations::UniquenessValidator : ::Mongoid::Validatable::UniquenessValidator
@@ -95,6 +98,8 @@ module Devise
           authentication_keys[0]
         end
 
+        # Check if class is already using validations from Devis
+        # @return [Boolean]
         def devise_validation_enabled?
           ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
         end
@@ -116,6 +121,7 @@ module Devise
       # Checks whether a password is needed or not. For validations only.
       # Passwords are always required if it's a new record, or if the password
       # or confirmation are being set somewhere.
+      # @return [Boolean]
       def password_required?
         !persisted? || !password.nil? || !password_confirmation.nil?
       end
@@ -129,6 +135,7 @@ module Devise
         new_record? || !will_save_change_to_encrypted_password? || password.blank?
       end
 
+      # @return [true]
       def email_required?
         true
       end
