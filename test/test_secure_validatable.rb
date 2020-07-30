@@ -82,4 +82,17 @@ class TestSecureValidatable < ActiveSupport::TestCase
     refute user.valid?
     assert_equal DEVISE_ORM == :active_record ? ['Email has already been taken'] : ['Email is already taken'], user.errors.full_messages
   end
+
+  test 'useful error when class does not support validations' do
+    exception = assert_raises do
+      class PORO
+        include Devise::Models::SecureValidatable
+      end
+    end
+
+    message = exception.message
+
+    assert message.match?(/could not use/i)
+    assert message.match?(/PORO/)
+  end
 end
