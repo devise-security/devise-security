@@ -6,7 +6,7 @@ pt-BR:
       password_complexity:
         digit:
           one: Deve conter ao menos um dígito
-          other: Deve conter ao menos %{count} digitos
+          other: Deve conter ao menos %{count} dígitos
         lower:
           one: Deve conter ao menos uma letra minúscula
           other: Deve conter ao menos %{count} letras minúsculas
