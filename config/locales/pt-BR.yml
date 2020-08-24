@@ -5,7 +5,7 @@ pt-BR:
       equal_to_current_password: 'Deve ser diferente da senha atual.'
       password_complexity:
         digit:
-          one: Deve conter ao menos um digito
+          one: Deve conter ao menos um dígito
           other: Deve conter ao menos %{count} digitos
         lower:
           one: Deve conter ao menos uma letra minúscula
