@@ -1,21 +1,21 @@
 pt:
   errors:
     messages:
-      taken_in_past: 'Foi usada anteriormente.'
-      equal_to_current_password: 'Deve ser diferente da senha atual.'
+      taken_in_past: 'foi usada anteriormente.'
+      equal_to_current_password: 'deve ser diferente da senha atual.'
       password_complexity:
         digit:
-          one: Deve conter ao menos um dígito
-          other: Deve conter ao menos %{count} dígitos
+          one: deve conter ao menos um dígito
+          other: deve conter ao menos %{count} dígitos
         lower:
-          one: Deve conter ao menos uma letra minúscula
-          other: Deve conter ao menos %{count} letras minúsculas
+          one: deve conter ao menos uma letra minúscula
+          other: deve conter ao menos %{count} letras minúsculas
         symbol:
-          one: Deve conter ao menos um símbolo
-          other: Deve conter ao menos %{count} símbolos
+          one: deve conter ao menos um símbolo
+          other: deve conter ao menos %{count} símbolos
         upper:
-          one: Deve conter ao menos uma letra maiúscula
-          other: Deve conter ao menos %{count} letras maiúsculas
+          one: deve conter ao menos uma letra maiúscula
+          other: deve conter ao menos %{count} letras maiúsculas
   devise:
     invalid_captcha: 'O captcha está errado.'
     invalid_security_question: 'A resposta da pergunta de segurança está errada.'
