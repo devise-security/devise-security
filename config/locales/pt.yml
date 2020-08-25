@@ -1,4 +1,4 @@
-pt-BR:
+pt:
   errors:
     messages:
       taken_in_past: 'Foi usada anteriormente.'
