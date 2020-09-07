@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
-appraise 'rails-4.2' do
-  gem 'rails', '~> 4.2.0'
-  gem 'minitest-rails', '~> 2.0'
-  gem 'bundler', '< 2'
+if RUBY_VERSION < '2.7'
+  appraise 'rails-4.2' do
+    gem 'rails', '~> 4.2.0'
+    gem 'minitest-rails', '~> 2.0'
+    gem 'bundler', '< 2'
 
-  group :active_record do
-    gem 'sqlite3', '~> 1.3.0'
-  end
+    group :active_record do
+      gem 'sqlite3', '~> 1.3.0'
+    end
 
-  group :mongoid do
-    gem 'mongoid', '~> 4.0'
+    group :mongoid do
+      gem 'mongoid', '~> 4.0'
+    end
   end
 end
 
