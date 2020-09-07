@@ -25,7 +25,7 @@ appraise 'rails-5.0' do
   end
 
   group :test do
-    gem 'rails-controller-testing'
+    gem 'rails-controller-testing', '1.0.4'
   end
 
   group :mongoid do
@@ -42,7 +42,7 @@ appraise 'rails-5.1' do
   end
 
   group :test do
-    gem 'rails-controller-testing'
+    gem 'rails-controller-testing', '1.0.4'
   end
 
   group :mongoid do
@@ -59,7 +59,7 @@ appraise 'rails-5.2' do
   end
 
   group :test do
-    gem 'rails-controller-testing'
+    gem 'rails-controller-testing', '1.0.4'
   end
 
   group :mongoid do
@@ -76,7 +76,7 @@ appraise 'rails-6.0' do
   end
 
   group :test do
-    gem 'rails-controller-testing'
+    gem 'rails-controller-testing', '1.0.4'
   end
 
   group :mongoid do
