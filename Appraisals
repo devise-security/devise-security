@@ -2,7 +2,7 @@
 
 if RUBY_VERSION < '2.7'
   appraise 'rails-4.2' do
-    gem 'rails', '~> 4.2.0'
+    gem 'railties', '~> 4.2.0'
     gem 'minitest-rails', '~> 2.0'
     gem 'bundler', '< 2'
 
@@ -17,7 +17,7 @@ if RUBY_VERSION < '2.7'
 end
 
 appraise 'rails-5.0' do
-  gem 'rails', '~> 5.0.0'
+  gem 'railties', '~> 5.0.0'
   gem 'minitest-rails', '~> 5.0.0'
 
   group :active_record do
@@ -34,7 +34,7 @@ appraise 'rails-5.0' do
 end
 
 appraise 'rails-5.1' do
-  gem 'rails', '~> 5.1.0'
+  gem 'railties', '~> 5.1.0'
   gem 'minitest-rails', '~> 5.1.0'
 
   group :active_record do
@@ -51,7 +51,7 @@ appraise 'rails-5.1' do
 end
 
 appraise 'rails-5.2' do
-  gem 'rails', '~> 5.2.0'
+  gem 'railties', '~> 5.2.0'
   gem 'minitest-rails', '~> 5.2.0'
 
   group :active_record do
@@ -68,7 +68,7 @@ appraise 'rails-5.2' do
 end
 
 appraise 'rails-6.0' do
-  gem 'rails', '~> 6.0.0'
+  gem 'railties', '~> 6.0.0'
   gem 'minitest-rails', '~> 6.0.0'
 
   group :active_record do
