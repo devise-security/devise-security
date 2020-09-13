@@ -143,7 +143,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     }
     SecureUser.create!(options)
     user = SecureUser.new(options)
-    refute user.valid?
+    assert user.invalid?
     assert_equal DEVISE_ORM == :active_record ? ['Email has already been taken'] : ['Email is already taken'], user.errors.full_messages
   end
 
@@ -151,7 +151,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.create!(email: 'bob@microsoft.com', password: 'Test12345', password_confirmation: 'Test12345')
     user.password = 'Test12345'
     user.password_confirmation = 'Test12345'
-    refute user.valid?
-    assert_equal ["Password must be different from the current password."], user.errors.full_messages
+    assert user.invalid?
+    assert_equal ['Password must be different from the current password.'], user.errors.full_messages
   end
 end

@@ -137,9 +137,10 @@ module Devise
                          constraints: record.password_complexity
         end
 
-        # don't allow user to change the password back to the same one
+        # don't allow user to change the password back to the same one. Don't
+        # enforce this constraint if the stricter {PasswordArchivable} is in
+        # use.
         validate :current_equal_password_validation,
-                 if: ->(record) { record.devise_modules.include?(:database_authenticatable) },
                  unless: ->(record) { record.devise_modules.include?(:password_archivable) }
       end
 
