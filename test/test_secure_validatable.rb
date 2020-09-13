@@ -68,9 +68,27 @@ class TestSecureValidatable < ActiveSupport::TestCase
       def self.password_complexity
         { digits: 10 }
       end
+
+      def password_complexity
+        self.class.password_complexity
+      end
     end
 
     msg = 'Password must contain at least 10 digits'
+    user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
+    assert_equal(false, user.valid?)
+    assert_equal([msg], user.errors.full_messages)
+    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+  end
+
+  test 'instances can override complexity requirements' do
+    class ModifiedUser < User
+      def password_complexity
+        { digits: 15 }
+      end
+    end
+
+    msg = 'Password must contain at least 15 digits'
     user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
@@ -90,9 +108,27 @@ class TestSecureValidatable < ActiveSupport::TestCase
       def self.password_length
         10..20
       end
+
+      def password_length
+        self.class.password_length
+      end
     end
 
     msg = 'Password is too short (minimum is 10 characters)'
+    user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
+    assert_equal(false, user.valid?)
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+  end
+
+  test 'password length can be overridden by an instance' do
+    class ModifiedUser < User
+      def password_length
+        15..20
+      end
+    end
+
+    msg = 'Password is too short (minimum is 15 characters)'
     user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
     assert_equal(false, user.valid?)
     assert_includes(user.errors.full_messages, msg)
