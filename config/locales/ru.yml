@@ -1,6 +1,7 @@
 ru:
   errors:
     messages:
+      password_confirmation_mismatched: 'несовместимый'
       taken_in_past: 'уже ранее использовался.'
       equal_to_current_password: 'должен отличаться от текущего пароля.'
       password_complexity:

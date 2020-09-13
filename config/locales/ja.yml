@@ -1,6 +1,7 @@
 ja:
   errors:
     messages:
+      password_confirmation_mismatched: '不一致。'
       taken_in_past: 'は既に使われています。'
       equal_to_current_password: 'は現在のパスワードと異なるものである必要があります。'
       password_complexity:

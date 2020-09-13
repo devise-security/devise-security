@@ -1,6 +1,7 @@
 de:
   errors:
     messages:
+      password_confirmation_mismatched: 'nicht übereinstimmend.'
       taken_in_past: 'wurde bereits in der Vergangenheit verwendet.'
       equal_to_current_password: 'darf nicht dem aktuellen Passwort entsprechen.'
       password_complexity:
