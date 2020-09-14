@@ -141,7 +141,9 @@ And then ensure that the environment variable `DEVISE_ORM=mongoid` is set.
 For local development you will need to have MongoDB installed locally.
 
 ```bash
-brew install mongodb
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb-community
 ```
 
 ### Rails App setup example with Mongoid

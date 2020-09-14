@@ -78,7 +78,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(ORMInvalidRecordException) { user.save! }
   end
 
   test 'instances can override complexity requirements' do
@@ -92,7 +92,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
     assert_equal(false, user.valid?)
     assert_equal([msg], user.errors.full_messages)
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(ORMInvalidRecordException) { user.save! }
   end
 
   test 'password must have minimum length' do
@@ -118,7 +118,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
     assert_equal(false, user.valid?)
     assert_includes(user.errors.full_messages, msg)
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(ORMInvalidRecordException) { user.save! }
   end
 
   test 'password length can be overridden by an instance' do
@@ -132,7 +132,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
     assert_equal(false, user.valid?)
     assert_includes(user.errors.full_messages, msg)
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(ORMInvalidRecordException) { user.save! }
   end
 
   test 'duplicate email validation message is added only once' do
