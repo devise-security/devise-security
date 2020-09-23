@@ -90,6 +90,15 @@ Devise.setup do |config|
 
   # Need 1 char each of: A-Z, a-z, 0-9, and a punctuation mark or symbol
   # config.password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
+  # NOTE: This can be overridden by class or instance methods named
+  #   `password_complexity` that returns a Hash of constraints.
+  # Requires {SecureValidateable}
+
+  # Password Length
+  # config.password_length = 2..64
+  # NOTE: This can be overridden by a class or instance method named
+  #   `password_length` that returns a Range of Integers.
+  # Requires {SecureValidateable}
 
   # Number of old passwords in archive
   # config.password_archiving_count = 5

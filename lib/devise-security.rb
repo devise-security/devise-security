@@ -9,7 +9,7 @@ require 'devise'
 
 module Devise
   # Number of seconds that passwords are valid (e.g 3.months)
-  # Disable pasword expiration with +false+
+  # Disable password expiration with +false+
   # Expire only on demand with +true+
   mattr_accessor :expire_password_after
   @@expire_password_after = 3.months
@@ -76,7 +76,7 @@ module Devise
   mattr_accessor :delete_expired_after
   @@delete_expired_after = 90.days
 
-  # paranoid_verification will regenerate verifacation code after faild attempt
+  # paranoid_verification will regenerate verification code after faild attempt
   mattr_accessor :paranoid_code_regenerate_after_attempt
   @@paranoid_code_regenerate_after_attempt = 10
 end

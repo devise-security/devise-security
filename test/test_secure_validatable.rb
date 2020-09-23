@@ -14,7 +14,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     msg = "Email can't be blank"
     user = User.create password: 'passWord1', password_confirmation: 'passWord1'
 
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) do
       user.save!
@@ -24,7 +24,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'email must be valid' do
     msg = 'Email is invalid'
     user = User.create email: 'bob', password: 'passWord1', password_confirmation: 'passWord1'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) do
       user.save!
@@ -34,7 +34,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'validate both email and password' do
     msgs = ['Email is invalid', 'Password must contain at least one uppercase letter']
     user = User.create email: 'bob@@foo.tv', password: 'password1', password_confirmation: 'password1'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal(msgs, user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -42,7 +42,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password must have capital letter' do
     msgs = ['Password must contain at least one uppercase letter']
     user = User.create email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal(msgs, user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -50,7 +50,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password must have lowercase letter' do
     msg = 'Password must contain at least one lowercase letter'
     user = User.create email: 'bob@microsoft.com', password: 'PASSWORD1', password_confirmation: 'PASSWORD1'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -58,12 +58,12 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password must have number' do
     msg = 'Password must contain at least one digit'
     user = User.create email: 'bob@microsoft.com', password: 'PASSword', password_confirmation: 'PASSword'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
 
-  test 'subclasses can override complexity requirements' do
+  test 'subclasses can override password complexity requirements' do
     class ModifiedUser < User
       def self.password_complexity
         { digits: 10 }
@@ -76,7 +76,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
     msg = 'Password must contain at least 10 digits'
     user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -90,7 +90,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
     msg = 'Password must contain at least 15 digits'
     user = ModifiedUser.create email: 'bob@microsoft.com', password: 'PASSwordPASSword', password_confirmation: 'PASSwordPASSword'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -98,7 +98,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password must have minimum length' do
     msg = 'Password is too short (minimum is 7 characters)'
     user = User.create email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_equal([msg], user.errors.full_messages)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -116,7 +116,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
     msg = 'Password is too short (minimum is 10 characters)'
     user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_includes(user.errors.full_messages, msg)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -130,12 +130,12 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
     msg = 'Password is too short (minimum is 15 characters)'
     user = ModifiedUser.new email: 'bob@microsoft.com', password: 'Pa3zZ', password_confirmation: 'Pa3zZ'
-    assert_equal(false, user.valid?)
+    assert user.invalid?
     assert_includes(user.errors.full_messages, msg)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
 
-  test 'duplicate email validation message is added only once' do
+  test 'email validation message is added only once' do
     options = {
       email: 'test@example.org',
       password: 'Test12345',
