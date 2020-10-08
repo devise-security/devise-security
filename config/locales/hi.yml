@@ -2,8 +2,8 @@
 hi:
   errors:
     messages:
-      taken_in_past: पहले लिया गया 
-      equal_to_current_password: इससे अलग पासवर्ड होना चाहिए 
+      taken_in_past: पहले लिया जा चुका है  
+      equal_to_current_password: वर्तमान पासवर्ड के बराबर है 
       password_complexity:
         digit:
           one: एक अंक होना चाहिए 
@@ -12,8 +12,8 @@ hi:
           one: एक लोअर-केस अक्षर होना चाहिए 
           other: कम से कम %{count} अक्षर होने चाहिए  
         symbol:
-          one: एक प्रतीक चिन्ह होना चाहिए 
-          other: कम से कम %{count} प्रतीक चिन्ह होने चाहिए  
+          one: एक चिन्ह होना चाहिए 
+          other: कम से कम %{count} चिन्ह होने चाहिए  
         upper:
           one: एक अपर-केस अक्षर होना चाहिए 
           other: कम से कम %{count} अपर-केस अक्षर होने चाहिए  
@@ -28,13 +28,13 @@ hi:
         verification_code: वेरिफिकेशन कोड 
         submit: सबमिट 
     password_expired:
-      updated: नया पासवर्ड संरक्षित किया 
+      updated: पासवर्ड अद्यतन किया गया
       change_required: पासवर्ड अमान्य हो चुका, पासवर्ड बदले 
       show:
         renew_your_password: पासवर्ड बदले 
         current_password: अभी का पासवर्ड 
         new_password: नया पासवर्ड 
-        new_password_confirmation: नया पासवर्ड सत्यापित 
+        new_password_confirmation: नया पासवर्ड प्रमाणित
         change_my_password: पासवर्ड बदले 
     failure:
       session_limited: जानकारी, दूसरे ब्राउज़र में उपयोग की गयी थी जारी रखने फिर से साइन-इन करे 
