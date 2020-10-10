@@ -10,8 +10,8 @@ module DeviseSecurity
       desc 'Install the devise security extension'
 
       def copy_initializer
-        template('devise-security.rb',
-                 'config/initializers/devise-security.rb',
+        template('devise_security.rb',
+                 'config/initializers/devise_security.rb',
         )
       end
 
