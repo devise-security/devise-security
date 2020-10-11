@@ -29,8 +29,9 @@ jobs:
         gem uninstall -aIx bundler
         gem install bundler -v 1.17.3
         bundle install --jobs 4 --retry 3
-    - name: Start MongoDB
-      uses: superchargejs/mongodb-github-action@1.0.0
-    - run: bundle exec rake
-      env:
-        DEVISE_ORM: ${{ matrix.orm }}
+        bundle exec rake
+    # - name: Start MongoDB
+    #   uses: superchargejs/mongodb-github-action@1.0.0
+    # - run: bundle exec rake
+    #   env:
+    #     DEVISE_ORM: ${{ matrix.orm }}
