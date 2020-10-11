@@ -34,7 +34,7 @@ hi:
         renew_your_password: पासवर्ड बदले 
         current_password: अभी का पासवर्ड 
         new_password: नया पासवर्ड 
-        new_password_confirmation: नया पासवर्ड प्रमाणित
+        new_password_confirmation: नया पासवर्ड पुष्टि किया गया
         change_my_password: पासवर्ड बदले 
     failure:
       session_limited: जानकारी, दूसरे ब्राउज़र में उपयोग की गयी थी जारी रखने फिर से साइन-इन करे 
