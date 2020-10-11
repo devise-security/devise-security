@@ -12,9 +12,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        orm: [active_record, mongoid]
-        rails: [4.2, 5.0, 5.1, 5.2, 6.0]
-        ruby: [2.5, 2.6, 2.7]
+        orm: [active_record] #, mongoid]
+        rails: [4.2] #, 5.0, 5.1, 5.2, 6.0]
+        ruby: [2.5] #, 2.6, 2.7]
 
     steps:
     - uses: actions/checkout@v2
@@ -26,6 +26,8 @@ jobs:
         RAILS_VERSION: ${{ matrix.rails }}
       run: |
         export BUNDLE_GEMFILE="${GITHUB_WORKSPACE}/gemfiles/rails_${RAILS_VERSION}.gemfile"
+        gem uninstall -aIx bundler
+        gem install bundler -v 1.17.3
         bundle install --jobs 4 --retry 3
     - name: Start MongoDB
       uses: superchargejs/mongodb-github-action@1.0.0
