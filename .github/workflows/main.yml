@@ -13,6 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         orm: [active_record, mongoid]
+        rails: [4.2, 5.0, 5.1, 5.2, 6.0]
         ruby: [2.5, 2.6, 2.7]
 
     steps:
@@ -20,8 +21,13 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-    - run: bundle install
-    - name: Start MongoDB v${{ matrix.node-version }}
+    - name: Bundle Install
+      env:
+        RAILS_VERSION: ${{ matrix.rails }}
+      run: |
+        export BUNDLE_GEMFILE="${GITHUB_WORKSPACE}/gemfiles/rails_${MTSR_RAILS_VERSION}.gemfile"
+        bundle install --jobs 4 --retry 3
+    - name: Start MongoDB
       uses: superchargejs/mongodb-github-action@1.0.0
     - run: bundle exec rake
       env:
