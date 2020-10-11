@@ -1,0 +1,21 @@
+name: Run tests
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [2.5, 2.6, 2.7, head]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - run: bundle install
