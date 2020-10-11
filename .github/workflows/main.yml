@@ -24,7 +24,7 @@ jobs:
     - name: Bundle Install
       env:
         RAILS_VERSION: ${{ matrix.rails }}
-        BUNDLE_GEMFILE: ${GITHUB_WORKSPACE}/gemfiles/rails_${RAILS_VERSION}.gemfile
+        BUNDLE_GEMFILE: ${{ GITHUB_WORKSPACE }}/gemfiles/rails_${{ RAILS_VERSION }}.gemfile
       run: |
         gem uninstall -aIx bundler
         gem install bundler -v 1.17.3
