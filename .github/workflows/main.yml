@@ -25,7 +25,7 @@ jobs:
       env:
         RAILS_VERSION: ${{ matrix.rails }}
       run: |
-        export BUNDLE_GEMFILE="${GITHUB_WORKSPACE}/gemfiles/rails_${MTSR_RAILS_VERSION}.gemfile"
+        export BUNDLE_GEMFILE="${GITHUB_WORKSPACE}/gemfiles/rails_${RAILS_VERSION}.gemfile"
         bundle install --jobs 4 --retry 3
     - name: Start MongoDB
       uses: superchargejs/mongodb-github-action@1.0.0
