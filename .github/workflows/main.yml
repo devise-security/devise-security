@@ -26,7 +26,8 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
     - uses: actions/cache@v2
       with:
-        path: **/bundle
+        path: |
+          **/bundle
         key: a-a-bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-file-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}
     - name: bundle install
       env:
