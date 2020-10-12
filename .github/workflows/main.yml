@@ -28,19 +28,17 @@ jobs:
       with:
         path: vendor/bundle
         key: bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-file-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}
-    # - name: bundle install
-    #   env:
-    #     BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
-    #   run: |
-    #     bundle config path vendor/bundle
-    #     bundle install --jobs 4
-    # - name: Tests
-    #   env:
-    #     BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
-    #   run: |
-    #     bundle exec rake
-    # - name: Start MongoDB
-    #   uses: superchargejs/mongodb-github-action@1.0.0
-    # - run: bundle exec rake
-    #   env:
-    #     DEVISE_ORM: ${{ matrix.orm }}
+    - name: bundle install
+      env:
+        BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4
+    - name: Start MongoDB # TODO if
+      uses: superchargejs/mongodb-github-action@1.0.0
+    - name: Tests
+      env:
+        BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
+        DEVISE_ORM: ${{ matrix.orm }}
+      run: |
+        bundle exec rake
