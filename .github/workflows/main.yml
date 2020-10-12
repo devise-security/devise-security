@@ -27,11 +27,12 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: vendor/bundle
-        key: a-bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-file-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}
+        key: a-a-bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-file-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}
     - name: bundle install
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
       run: |
+        bundle config deployment true
         bundle config path vendor/bundle
         bundle install --jobs 4
     # - name: Start MongoDB # TODO if
