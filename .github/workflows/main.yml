@@ -28,7 +28,7 @@ jobs:
       with:
         path: |
           **/bundle
-        key: a-a-bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-file-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}
+        key: a-a-bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-gemfile-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}-gemspec-${{ hashFiles('**/devise-security.gemspec') }}
     - name: bundle install
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
