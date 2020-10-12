@@ -353,7 +353,6 @@ See also
 
 ## Running tests
 
-
 Standard tests can be invoked using `rake`. To run the tests against the
 `mongoid` ORM, use `DEVISE_ORM=mongoid rake` while `mongodb` is running.
 
