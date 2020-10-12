@@ -14,7 +14,7 @@ jobs:
       matrix:
         orm: [active_record] #, mongoid]
         # rails: [4.2, 5.0, 5.1, 5.2, 6.0]
-        rails: [6.0]
+        rails: [5.2]
         ruby: [2.5, 2.6, 2.7]
 
     steps:
