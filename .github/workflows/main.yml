@@ -28,6 +28,10 @@ jobs:
         gem uninstall -aIx bundler
         gem install bundler -v 1.17.3
         bundle install --jobs 4 --retry 3
+    - name: Tests
+      env:
+        BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
+      run: |
         bundle exec rake
     # - name: Start MongoDB
     #   uses: superchargejs/mongodb-github-action@1.0.0
