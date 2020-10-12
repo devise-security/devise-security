@@ -29,7 +29,7 @@ jobs:
         RAILS: ${{ matrix.rails }}
       with:
         path: vendor/bundle
-        key: $RAILS-bundle-use-ruby-${{ matrix.orm }}-${{ matrix.rails }}-${{ matrix.ruby }}-${{ env.HASHPLS }}
+        key: ${{ $RAILS }}-bundle-use-ruby-${{ matrix.orm }}-${{ matrix.rails }}-${{ matrix.ruby }}-${{ env.HASHPLS }}
     # - name: bundle install
     #   env:
     #     BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
