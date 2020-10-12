@@ -23,7 +23,6 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
     - name: Bundle Install
       env:
-        RAILS_VERSION: ${{ matrix.rails }}
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
       run: |
         gem uninstall -aIx bundler
