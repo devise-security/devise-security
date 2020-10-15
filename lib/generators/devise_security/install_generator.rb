@@ -3,7 +3,7 @@
 module DeviseSecurity
   module Generators
     # Generator for Rails to create or append to a Devise initializer.
-    class InstallGenerator < Rails::Generators::Base     
+    class InstallGenerator < Rails::Generators::Base
       LOCALES = %w[by cs de en es fa fr hi it ja nl pt ru tr uk zh_CN zh_TW].freeze
 
       source_root File.expand_path('../../templates', __FILE__)
