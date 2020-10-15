@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
   ]
   s.post_install_message = 'WARNING: devise-security will drop support for Rails 4.2 in version 0.16.0'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- test/*`.split("\n")
+  s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
+  s.test_files    = Dir['test/**/*']
   s.require_paths = ['lib']
   s.required_ruby_version = '>= 2.3.0'
 
