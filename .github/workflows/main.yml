@@ -35,8 +35,9 @@ jobs:
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4
-    # - name: Start MongoDB # TODO if
-    #   uses: superchargejs/mongodb-github-action@1.0.0
+    - name: Start MongoDB # TODO if
+      uses: superchargejs/mongodb-github-action@1.0.0
+      if: ${{ matrix.orm == 'mongoid' }}
     - name: Tests
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
