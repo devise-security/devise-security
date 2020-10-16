@@ -14,10 +14,10 @@ jobs:
       matrix:
         # orm: [active_record] #, mongoid]
         orm: [active_record, mongoid]
-        rails: [5.2]
-        # rails: [4.2, 5.0, 5.1, 5.2, 6.0]
-        ruby: [2.5, 2.6] #, 2.7]
-        # ruby: [2.5, 2.6, 2.7]
+        # rails: [5.2]
+        rails: [4.2, 5.0, 5.1, 5.2, 6.0]
+        # ruby: [2.5, 2.6] #, 2.7]
+        ruby: [2.5, 2.6, 2.7]
 
     steps:
     - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4
-    - name: Start MongoDB # TODO if
+    - name: Start MongoDB
       uses: superchargejs/mongodb-github-action@1.0.0
       if: ${{ matrix.orm == 'mongoid' }}
     - name: Tests
