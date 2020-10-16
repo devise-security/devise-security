@@ -36,14 +36,14 @@ jobs:
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4
-      if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.4') }}
+      if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
     - name: Start MongoDB
       uses: superchargejs/mongodb-github-action@1.0.0
-      if: ${{ matrix.orm == 'mongoid' && (matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.4')) }}
+      if: ${{ matrix.orm == 'mongoid' && (matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5')) }}
     - name: Tests
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
         DEVISE_ORM: ${{ matrix.orm }}
       run: |
         bundle exec rake
-      if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.4') }}
+      if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
