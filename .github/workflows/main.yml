@@ -23,7 +23,7 @@ jobs:
     steps:
     - name: fail?
       run: |
-        exit 1
+        exit 0
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
