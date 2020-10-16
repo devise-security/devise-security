@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # orm: [active_record] #, mongoid]
-        orm: [active_record, mongoid]
+        orm: [active_record] #, mongoid]
+        # orm: [active_record, mongoid]
         rails: ['4.2']
         # rails: ['4.2', '5.0', '5.1', '5.2', '6.0']
         ruby: [2.7]
@@ -31,6 +31,8 @@ jobs:
           **/bundle
         key: a-a-bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-gemfile-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}-gemspec-${{ hashFiles('**/devise-security.gemspec') }}
     - name: Use bundler < 2.0
+      env:
+        BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
       run: |
         gem uninstall -aIx bundler
         gem install bundler -v 1.17.3
