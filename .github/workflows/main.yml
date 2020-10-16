@@ -30,6 +30,11 @@ jobs:
         path: |
           **/bundle
         key: a-a-bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{ matrix.orm }}-gemfile-${{ hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails)) }}-gemspec-${{ hashFiles('**/devise-security.gemspec') }}
+    - name: Use bundler < 2.0
+      run: |
+        gem uninstall -aIx bundler
+        gem install bundler -v 1.17.3
+      if: ${{ matrix.rails == '4.2' }}
     - name: bundle install
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
