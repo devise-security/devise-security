@@ -12,6 +12,7 @@ class TestInstallGenerator < Rails::Generators::TestCase
   test 'Assert all files are properly created' do
     run_generator
     assert_file 'config/initializers/devise-security.rb'
+    assert_file 'config/locales/devise.security_extension.by.yml'
     assert_file 'config/locales/devise.security_extension.cs.yml'
     assert_file 'config/locales/devise.security_extension.de.yml'
     assert_file 'config/locales/devise.security_extension.en.yml'
@@ -23,9 +24,9 @@ class TestInstallGenerator < Rails::Generators::TestCase
     assert_file 'config/locales/devise.security_extension.ja.yml'
     assert_file 'config/locales/devise.security_extension.nl.yml'
     assert_file 'config/locales/devise.security_extension.pt.yml'
-    assert_file 'config/locales/devise.security_extension.zh_CN.yml'
     assert_file 'config/locales/devise.security_extension.ru.yml'
     assert_file 'config/locales/devise.security_extension.tr.yml'
     assert_file 'config/locales/devise.security_extension.uk.yml'
+    assert_file 'config/locales/devise.security_extension.zh_CN.yml'
   end
 end
