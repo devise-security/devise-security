@@ -1,29 +1,29 @@
 es:
   errors:
     messages:
-      taken_in_past: 'la contraseña fue usada previamente, favor elegir otra.'
+      taken_in_past: 'la contraseña fue usada previamente, por favor elige otra.'
       equal_to_current_password: 'tiene que ser diferente a la contraseña actual.'
       password_complexity:
         digit:
-          one: tiene que contener al menos un digito
-          other: tiene que contener al menos %{count} digitos
+          one: tiene que contener al menos un dígito
+          other: tiene que contener al menos %{count} dígitos
         lower:
-          one: tiene que contener al menos un minúscula
+          one: tiene que contener al menos una minúscula
           other: tiene que contener al menos %{count} minúsculas
         symbol:
           one: tiene que contener al menos un signo de puntuación
           other: tiene que contener al menos %{count} signos de puntuación
         upper:
-          one: tiene que contener al menos un mayúscula
+          one: tiene que contener al menos una mayúscula
           other: tiene que contener al menos %{count} mayúsculas
   devise:
     invalid_captcha: 'El captcha ingresado es inválido.'
-    invalid_security_question: 'La respuesta a la pregunta de suguridad fue incorrecta.'
+    invalid_security_question: 'La respuesta a la pregunta de seguridad fue incorrecta.'
     paranoid_verify:
       code_required: 'Por favor ingrese el código provisto por nuestro equipo de soporte'
     password_expired:
-      updated: 'Su nueva contraña ha sido guardada.'
-      change_required: 'Su contraña ha expirado. Por favor renueve su contraseña.'
+      updated: 'Su nueva contraseña ha sido guardada.'
+      change_required: 'Su contraseña ha expirado. Por favor renueve su contraseña.'
     failure:
-      session_limited: 'Sus credenciales de inicio de sesión fueron usadas en otro navegador. Por favor inicie sesión nuevamente para continuar en éste navegador.'
+      session_limited: 'Sus credenciales de inicio de sesión fueron usadas en otro navegador. Por favor inicie sesión nuevamente para continuar en este navegador.'
       expired: 'Su cuenta ha expirado debido a inactividad. Por favor contacte al administrador de la aplicación.'
