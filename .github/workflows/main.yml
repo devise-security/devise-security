@@ -52,6 +52,7 @@ jobs:
         flag-name: run-orm-${{ matrix.orm }}-rails-${{ matrix.rails }}-ruby-${{ matrix.ruby }}
         parallel: true
         path-to-lcov: ./coverage/lcov/devise-security.lcov
+      if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
 
   finish:
     needs: testing
