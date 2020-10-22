@@ -43,7 +43,7 @@ jobs:
         CI: true
         DEVISE_ORM: ${{ matrix.orm }}
       run: |
-        bundle exec rake TEST=test/test_complexity_validator.rb
+        bundle exec rake
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
