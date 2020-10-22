@@ -46,7 +46,7 @@ jobs:
         # COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         DEVISE_ORM: ${{ matrix.orm }}
       run: |
-        bundle exec rake
+        bundle exec rake TEST=test/test_complexity_validator.rb
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
@@ -54,6 +54,7 @@ jobs:
         github-token: ${{ secrets.COVERALLS_TOKEN }}
         flag-name: run-orm-${{ matrix.orm }}-rails-${{ matrix.rails }}-ruby-${{ matrix.ruby }}
         parallel: true
+        path-to-lcov: ./coverage/lcov/devise-security.lcov
 
   finish:
     needs: testing
@@ -64,3 +65,4 @@ jobs:
       with:
         github-token: ${{ secrets.COVERALLS_TOKEN }}
         parallel-finished: true
+        path-to-lcov: ./coverage/lcov/devise-security.lcov
