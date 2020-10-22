@@ -20,6 +20,7 @@ end
 
 if ENV['CI']
   require 'coveralls'
+  require 'simplecov'
   require 'simplecov-lcov'
   SimpleCov.formatter = Coveralls::SimpleCov::Formatter
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter([
