@@ -12,9 +12,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        orm: [active_record, mongoid]
-        rails: ['4.2', '5.0', '5.1', '5.2', '6.0']
-        ruby: ['2.5', '2.6', '2.7'] # TODO fix repo to work with ruby-head
+        # orm: [active_record, mongoid]
+        # rails: ['4.2', '5.0', '5.1', '5.2', '6.0']
+        # ruby: ['2.5', '2.6', '2.7'] # TODO fix repo to work with ruby-head
+        orm: [active_record] #, mongoid]
+        rails: ['4.2'] #, '5.0', '5.1', '5.2', '6.0']
+        ruby: ['2.5'] #, '2.6', '2.7'] # TODO fix repo to work with ruby-head
 
     steps:
     - uses: actions/checkout@v2
@@ -40,8 +43,25 @@ jobs:
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
         CI: true
-        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        # COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         DEVISE_ORM: ${{ matrix.orm }}
       run: |
         bundle exec rake
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
+    - name: Coveralls Parallel
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.COVERALLS_TOKEN }}
+        flag-name: run-${{ matrix.test_number }}
+        flag-name: run-orm-${{ matrix.orm }}-rails-${{ matrix.rails }}-ruby-${{ matrix.ruby }}
+        parallel: true
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.COVERALLS_TOKEN }}
+        parallel-finished: true
