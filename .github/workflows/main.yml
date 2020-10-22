@@ -43,9 +43,14 @@ jobs:
     - name: Tests for ORM ${{ matrix.orm }}, Rails ${{ matrix.rails }}, and Ruby ${{ matrix.ruby }}
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
-        # CI: true
-        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        CI: true
+        # COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         DEVISE_ORM: ${{ matrix.orm }}
       run: |
         bundle exec rake
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.COVERALLS_TOKEN }}
