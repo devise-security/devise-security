@@ -1,5 +1,6 @@
-name: CI
+name: CI # TODO name change
 
+# TODO all
 on:
   push:
     branches: [ master ]
@@ -7,7 +8,7 @@ on:
     branches: [ master ]
 
 jobs:
-  testing:
+  testing: # TODO name change
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -51,7 +52,8 @@ jobs:
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
       with:
-        github-token: ${{ secrets.COVERALLS_TOKEN }}
+        # github-token: ${{ secrets.COVERALLS_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         flag-name: run-orm-${{ matrix.orm }}-rails-${{ matrix.rails }}-ruby-${{ matrix.ruby }}
         parallel: true
         path-to-lcov: ./coverage/lcov/devise-security.lcov
@@ -63,6 +65,7 @@ jobs:
     - name: Coveralls Finished
       uses: coverallsapp/github-action@master
       with:
-        github-token: ${{ secrets.COVERALLS_TOKEN }}
+        # github-token: ${{ secrets.COVERALLS_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         parallel-finished: true
         path-to-lcov: ./coverage/lcov/devise-security.lcov
