@@ -1,14 +1,9 @@
-name: CI # TODO name change
+name: Test Suite
 
-# TODO all
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: ["push", "pull_request"]
 
 jobs:
-  testing: # TODO name change
+  run-tests: # TODO name change
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -55,7 +50,7 @@ jobs:
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
 
   finish:
-    needs: testing
+    needs: run-tests
     runs-on: ubuntu-latest
     steps:
     - name: Coveralls Finished
