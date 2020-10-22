@@ -31,7 +31,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'coveralls'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'm'
@@ -42,6 +41,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails_email_validator'
   s.add_development_dependency 'rubocop', '~> 0.80.0' # NOTE: also update .codeclimate.yml and make sure it uses the same version
   s.add_development_dependency 'rubocop-rails'
+  s.add_development_dependency 'simplecov-lcov'
   s.add_development_dependency 'solargraph'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'wwtd'
