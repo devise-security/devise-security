@@ -48,3 +48,6 @@ jobs:
       run: |
         bundle exec rake
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
+    - name: Report Test Coverage
+      uses: coverallsapp/github-action@master
+      if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
