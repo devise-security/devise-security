@@ -14,11 +14,11 @@ jobs:
       matrix:
         # orm: [active_record] #, mongoid]
         orm: [active_record, mongoid]
-        # rails: ['4.2']
-        rails: ['4.2', '5.0', '5.1', '5.2', '6.0']
-        # ruby: [2.5]
+        rails: ['4.2']
+        # rails: ['4.2', '5.0', '5.1', '5.2', '6.0']
+        ruby: [2.5]
         # ruby: [2.5, 2.6] #, 2.7]
-        ruby: [2.5, 2.6, 2.7] # TODO head
+        # ruby: [2.5, 2.6, 2.7] # TODO head
 
     steps:
     - uses: actions/checkout@v2
@@ -40,10 +40,10 @@ jobs:
     - name: Start MongoDB
       uses: superchargejs/mongodb-github-action@1.0.0
       if: ${{ matrix.orm == 'mongoid' && (matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5')) }}
-    - name: Tests
+    - name: Tests for ORM ${{ matrix.orm }}, Rails ${{ matrix.rails }}, and Ruby ${{ matrix.ruby }}
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
-        CI: true
+        # CI: true
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         DEVISE_ORM: ${{ matrix.orm }}
       run: |
