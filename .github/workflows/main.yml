@@ -13,10 +13,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # orm: [active_record, mongoid]
+        orm: [active_record, mongoid]
         # rails: ['4.2', '5.0', '5.1', '5.2', '6.0']
         # ruby: ['2.5', '2.6', '2.7'] # TODO fix repo to work with ruby-head
-        orm: [active_record] #, mongoid]
+        # orm: [active_record] #, mongoid]
         rails: ['4.2'] #, '5.0', '5.1', '5.2', '6.0']
         ruby: ['2.5'] #, '2.6', '2.7'] # TODO fix repo to work with ruby-head
 
@@ -44,7 +44,6 @@ jobs:
       env:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
         CI: true
-        # COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         DEVISE_ORM: ${{ matrix.orm }}
       run: |
         bundle exec rake TEST=test/test_complexity_validator.rb
@@ -52,7 +51,6 @@ jobs:
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
       with:
-        # github-token: ${{ secrets.COVERALLS_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
         flag-name: run-orm-${{ matrix.orm }}-rails-${{ matrix.rails }}-ruby-${{ matrix.ruby }}
         parallel: true
@@ -65,7 +63,6 @@ jobs:
     - name: Coveralls Finished
       uses: coverallsapp/github-action@master
       with:
-        # github-token: ${{ secrets.COVERALLS_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
         parallel-finished: true
         path-to-lcov: ./coverage/lcov/devise-security.lcov
