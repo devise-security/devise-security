@@ -51,3 +51,5 @@ jobs:
     - name: Report Test Coverage
       uses: coverallsapp/github-action@master
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
+      with:
+        github-token: ${{ secrets.COVERALLS_TOKEN }}
