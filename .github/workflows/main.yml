@@ -30,7 +30,7 @@ jobs:
         BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
       run: |
         bundle config path vendor/bundle
-        bundle install --jobs 4
+        bundle install
       if: ${{ matrix.rails != '4.2' || (matrix.rails == '4.2' && matrix.ruby == '2.5') }}
     - name: Start MongoDB
       uses: superchargejs/mongodb-github-action@1.0.0
@@ -56,7 +56,7 @@ jobs:
     needs: run-tests
     runs-on: ubuntu-latest
     steps:
-    - name: Coveralls Finished
+    - name: Upload coverage to Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
