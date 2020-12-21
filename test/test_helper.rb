@@ -19,9 +19,11 @@ SimpleCov.start do
 end
 
 if ENV['CI']
-  require 'coveralls'
-  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-  Coveralls.wear!
+  require 'simplecov'
+  require 'simplecov-lcov'
+  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+  SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+  SimpleCov.start
 end
 
 require 'pry'
