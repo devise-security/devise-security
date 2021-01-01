@@ -373,6 +373,11 @@ Ruby on Rails framework
 
 Support for Rails 4.2 will be dropped in version 0.16.0.
 
+In order to avoid introducing bugs caused by backwardly incompatible Ruby
+language features, it is highly recommended that all development work be done
+using the oldest supported ruby version. The contents of the `.ruby-version`
+file should reflect this.
+
 ## Copyright
 
 Copyright (c) 2011-2017 Marco Scholl. See LICENSE.txt for further details.
