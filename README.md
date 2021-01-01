@@ -64,7 +64,7 @@ devise :password_expirable, :secure_validatable, :password_archivable, :session_
 
 ### E-mail Validation
 
-for `:secure_validatable` you need to have a way to validate an e-mail. There
+For `:secure_validatable` you need to have a way to validate an e-mail. There
 are multiple libraries that support this, and even a way built into Ruby!
 
 - (Recommended) Ruby built-in `URI::MailTo::EMAIL_REGEXP` constant
