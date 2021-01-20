@@ -89,7 +89,7 @@ Devise.setup do |config|
   # config.expire_password_after = 3.months | true | false
 
   # Need 1 char each of: A-Z, a-z, 0-9, and a punctuation mark or symbol
-  # config.password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
+  # config.password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1, lower_or_upper: 0, symbol_or_digit: 0 }
 
   # Number of old passwords in archive
   # config.password_archiving_count = 5
