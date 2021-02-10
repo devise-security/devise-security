@@ -3,6 +3,7 @@ nl:
     messages:
       taken_in_past: is eerder gebruikt.
       equal_to_current_password: moet verschillen van het huidige wachtwoord.
+      equal_to_email: moet anders zijn dan de e-mail
       password_complexity:
         digit:
           one: moet minimaal 1 cijfer bevatten

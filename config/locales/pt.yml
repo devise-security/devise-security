@@ -3,6 +3,7 @@ pt:
     messages:
       taken_in_past: 'foi usada anteriormente.'
       equal_to_current_password: 'deve ser diferente da senha atual.'
+      equal_to_email: 'deve ser diferente do e-mail.'
       password_complexity:
         digit:
           one: deve conter ao menos um dígito
