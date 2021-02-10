@@ -9,5 +9,5 @@ Mongoid.configure do |config|
   config.include_root_in_json = true
 end
 
-DatabaseCleaner[:mongoid].strategy = :deletion, except: []
+DatabaseCleaner[:mongoid].strategy = :deletion
 ORMInvalidRecordException = Mongoid::Errors::Validations
