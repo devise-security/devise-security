@@ -69,6 +69,9 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
+    database_cleaner-mongoid (2.0.1)
+      database_cleaner-core (~> 2.0.0)
+      mongoid
     devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -263,6 +266,7 @@ DEPENDENCIES
   appraisal
   bundler
   database_cleaner
+  database_cleaner-mongoid
   devise-security!
   easy_captcha
   m
