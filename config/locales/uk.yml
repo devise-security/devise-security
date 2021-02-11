@@ -3,6 +3,7 @@ uk:
     messages:
       taken_in_past: 'раніше використовувався.'
       equal_to_current_password: 'має відрізнятися від поточного паролю.'
+      equal_to_email: 'має відрізнятися від електронної пошти.'
       password_complexity:
         digit:
           one: 'повинен включати хоча б одну цифру'

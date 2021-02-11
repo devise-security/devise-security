@@ -3,6 +3,7 @@ fa:
     messages:
       taken_in_past: 'قبلا استفاده شده است'
       equal_to_current_password: 'باید متفاوت با رمز عبور فعلی باشد'
+      equal_to_email: 'باید متفاوت از ایمیل باشد'
       password_complexity:
         digit:
           one: باید حداقل یک رقم داشته باشد

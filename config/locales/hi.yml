@@ -4,6 +4,7 @@ hi:
     messages:
       taken_in_past: यह पासवर्ड, आपके द्वारा पूर्व मे प्रयोग किया जा चुका है  
       equal_to_current_password: नया पासवर्ड, वर्तमान पासवर्ड से भिन्न होना चाहिए 
+      equal_to_email: ईमेल से अलग होना चाहिए
       password_complexity:
         digit:
           one: एक अंक होना चाहिए 

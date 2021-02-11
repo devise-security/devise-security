@@ -55,6 +55,9 @@ module Devise
 
           # don't allow use same password
           validate :current_equal_password_validation
+
+          # don't allow email to equal password
+          validate :email_not_equal_password_validation
         end
       end
 
@@ -68,6 +71,15 @@ module Devise
           user.password_salt = password_salt_was if respond_to?(:password_salt)
         end
         self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
+      end
+
+      def email_not_equal_password_validation
+        return if password.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
+        dummy = self.class.new.tap do |user|
+          user.password_salt = password_salt if respond_to?(:password_salt)
+          user.password = email
+        end
+        self.errors.add(:password, :equal_to_email) if dummy.valid_password?(password)
       end
 
       protected

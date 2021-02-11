@@ -3,6 +3,7 @@ ru:
     messages:
       taken_in_past: 'уже ранее использовался.'
       equal_to_current_password: 'должен отличаться от текущего пароля.'
+      equal_to_email: 'должно отличаться от адреса электронной почты.'
       password_complexity:
         digit:
           one: 'должен содержать хотя бы одну цифру'
