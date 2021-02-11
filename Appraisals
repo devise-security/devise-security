@@ -12,6 +12,7 @@ if RUBY_VERSION < '2.7'
 
     group :mongoid do
       gem 'mongoid', '~> 4.0'
+      gem 'database_cleaner-mongoid', '~> 2.0'
     end
   end
 end
