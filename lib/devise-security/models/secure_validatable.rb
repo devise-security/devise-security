@@ -5,102 +5,217 @@ require_relative '../validators/password_complexity_validator'
 
 module Devise
   module Models
-    # SecureValidatable creates better validations with more validation for security
+    # {SecureValidatable} adds additional validations for better security.
+    # @note depends on +database_authenticatable+ from Devise
     #
-    # == Options
+    # # Validations
     #
-    # SecureValidatable adds the following options to devise_for:
+    # ## Unique login
     #
-    #   * +email_regexp+: the regular expression used to validate e-mails;
-    #   * +password_length+: a range expressing password length. Defaults from devise
-    #   * +password_regex+: need strong password. Defaults to /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/
+    # Verifies that the first +authentication_key+ is unique (scoped by any
+    # additional keys). This respects the +Devise.case_sensitive_keys+
+    # configuration.  This validation is skipped if the model already declares a
+    # +validates_uniqueness_of+ validator on the first +authentication_key+.
+    #
+    # @note You should ensure that there is a unique index on +login_attribute+
+    #   to avoid race conditions.
+    #
+    # ## Email validation
+    #
+    # If the model requires an email address (i.e, +email_required?+ returns
+    # +true+), then the email address is verified to be present and unique.
+    #
+    # Additional email validation configs can be set by configuring
+    # `Devise.email_validation`, but it is probably clearer and less error prone
+    # to just define these validations directly in your models due to the
+    # variety of available email validation gems.
+    #
+    # ## Password Presence
+    #
+    # Ensures that the +password+ is set for any model where
+    # +password_required?+ returns +true+
+    #
+    # @note only enforced if +password_required?+ is +true+
+    #
+    # ## Password Complexity
+    #
+    # @note only enforced if +password_required?+ is +true+
+    #
+    # Enforces password complexity requirements as described in
+    # {DeviseSecurity::PasswordComplexityValidator}. The global configurations
+    # can be overridden at the class or instance level by defining a method
+    # called `password_complexity` that returns a {Hash} with the appropriate
+    # configurations.
+    #
+    # ## Password Length
+    #
+    # @note only enforced if +password_required?+ is +true+
+    #
+    # Ensures that the +password+ is of the configured length. The length can be
+    # passed as part of the devise configuration or overridden at a class or
+    # instance level by implementing a +password_length+ method that returns a
+    # +Range+.
+    #
+    # ## Password re-use
+    #
+    # @note only enforced if +password_required?+ is +true+
+    #
+    # Disallows re-using current password when changing the password.  This
+    # validation is disabled if the {PasswordArchivable} module is used because
+    # it results in redundant validation failures.
+    #
+    # ## Options
+    #
+    # {SecureValidatable} adds the following options to the +devise+
+    # declaration:
+    #
+    # * +password_complexity+: descriptor of the minimum character classes
+    #   required for password complexity, i.e.:
+    #     { digits: 1, lower: 1, upper: 1, symbol 1}
+    # * +email_validation+: a Hash of validation options to be passed to the
+    #   email validator
+    # * +password_length+: a +Range+ expressing password length. Defaults from
+    #   devise
     #
     module SecureValidatable
+      extend ActiveSupport::Concern
       include Devise::Models::Compatibility
 
-      def self.included(base)
-        base.extend ClassMethods
+      included do |base|
         assert_secure_validations_api!(base)
 
-        base.class_eval do
-          already_validated_email = false
+        devise :database_authenticatable
 
-          # validate login in a strict way if not yet validated
-          unless has_uniqueness_validation_of_login?
-            validation_condition = "#{login_attribute}_changed?".to_sym
+        already_validated_email = false
 
+        # Validate that the attribute used to login (e.g., +email+ or
+        # +username+) is unique.
+        unless has_uniqueness_validation_of_login?
+          # Only perform uniqueness check when the login attribute is dirty so
+          # we can avoid hitting the database unnecessarily.
+          if defined?(will_save_change_to_attribute?)
             validates login_attribute, uniqueness: {
-                                          scope:          authentication_keys[1..-1],
-                                          case_sensitive: !!case_insensitive_keys
-                                        },
-                                        if: validation_condition
-
-            already_validated_email = login_attribute.to_s == 'email'
+              scope: authentication_keys[1..-1],
+              case_sensitive: !case_insensitive_keys.include?(login_attribute),
+            }, if: -> { will_save_change_to_attribute?(self.class.login_attribute) }
+          # `will_save_change_to_attribute?` was added in Rails 5.1
+          # We can remove this `else` when support is dropped
+          else
+            validates login_attribute, uniqueness: {
+              scope: authentication_keys[1..-1],
+              case_sensitive: !case_insensitive_keys.include?(login_attribute),
+            }
           end
 
-          unless devise_validation_enabled?
-            validates :email, presence: true, if: :email_required?
-            unless already_validated_email
-              validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
-            end
+          already_validated_email = login_attribute.to_s == 'email'
+        end
 
-            validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
+        # Don't do these validations if the core :validateable is enabled
+        unless devise_modules.include?(:validateable)
+          # Validate that the email address is not blank if +email_required?+ is +true+
+          validates :email, presence: true, if: :email_required?
+          unless already_validated_email
+            # Validates uniqueness of email if it has unsaved changes
+            validates :email, uniqueness: true, allow_blank: true, if: :email_changed?
           end
 
-          # extra validations
-          validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
-          validates :password,
-                    'devise_security/password_complexity': password_complexity,
-                    if: :password_required?
+          # Validates that a password is set if +password_required?+ is +true+
+          validates :password, presence: true, confirmation: true, if: :password_required?
 
-          # don't allow use same password
-          validate :current_equal_password_validation
+          # Validate password length requirements
+          validate if: :password_required? do |record|
+            validates_with ActiveModel::Validations::LengthValidator,
+                           attributes: :password,
+                           in: record.password_length
+          end
         end
-      end
 
-      def self.assert_secure_validations_api!(base)
-        raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
-      end
+        # validate the email address
+        # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
+        validates :email, email: email_validation if email_validation.present?
 
-      def current_equal_password_validation
-        return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
-        dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
-          user.password_salt = password_salt_was if respond_to?(:password_salt)
+        # Check password complexity requirements
+        validate if: :password_required? do |record|
+          validates_with DeviseSecurity::PasswordComplexityValidator,
+                         { attributes: :password }.merge(record.password_complexity)
         end
-        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
+
+        # Don't allow user to change the password back to the same one. Don't
+        # enforce this constraint if the stricter {PasswordArchivable} is in
+        # use.
+        validate :current_equal_password_validation,
+                 unless: ->(record) { record.devise_modules.include?(:password_archivable) }
       end
 
-      protected
-
-      # Checks whether a password is needed or not. For validations only.
-      # Passwords are always required if it's a new record, or if the password
-      # or confirmation are being set somewhere.
+      # Checks whether password validations are needed. Passwords are always
+      # required if it's a new record, or if the +password+ or
+      # +password_confirmation+ are set.
+      #
+      # @return [Boolean]
       def password_required?
-        !persisted? || !password.nil? || !password_confirmation.nil?
+        new_record? || password.present? || password_confirmation.present?
       end
 
+      # Requires an +email+ attribute to be defined. Override this method to
+      # return false to disable email validations.
+      #
+      # @return [Boolean]
       def email_required?
         true
       end
 
-      module ClassMethods
+      # Password complexity configurations for an instance of the base class,
+      # defaults to the class method. Override this for more fine-grained
+      # control of complexity configurations based on instance attributes.
+      #
+      # @return [Hash]
+      def password_complexity
+        self.class.password_complexity
+      end
+
+      # Password length requirements. Override this at the class or instance
+      # level to override global configurations.
+      #
+      # @return [Range]
+      def password_length
+        self.class.password_length
+      end
+
+      # Email validation options. Override this at the class or instance level
+      # to override global configurations.
+      #
+      # @return [Hash] email validation options
+      def email_validation
+        self.class.email_validation
+      end
+
+      private
+
+      def current_equal_password_validation
+        return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
+
+        dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
+          user.password_salt = password_salt_was if respond_to?(:password_salt)
+        end
+        errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
+      end
+
+      class_methods do
         Devise::Models.config(self, :password_complexity, :password_length, :email_validation)
 
-        private
+        def assert_secure_validations_api!(base)
+          raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
+        end
 
         def has_uniqueness_validation_of_login?
           validators.any? do |validator|
             validator_orm_klass = DEVISE_ORM == :active_record ? ActiveRecord::Validations::UniquenessValidator : ::Mongoid::Validatable::UniquenessValidator
-            validator.kind_of?(validator_orm_klass) && validator.attributes.include?(login_attribute)
+            validator.is_a?(validator_orm_klass) && validator.attributes.include?(login_attribute)
           end
         end
 
         def login_attribute
           authentication_keys[0]
-        end
-
-        def devise_validation_enabled?
-          self.ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
         end
       end
     end

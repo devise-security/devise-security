@@ -39,6 +39,7 @@ test/tmp/*
 bin/*
 .yardoc
 .idea
+doc
 
 # Don't ignore the Gemfile.lock
 # see https://bundler.io/man/bundle-install.1.html#THE-GEMFILE-LOCK

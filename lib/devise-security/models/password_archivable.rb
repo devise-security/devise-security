@@ -5,13 +5,13 @@ require_relative "#{DEVISE_ORM}/old_password"
 
 module Devise
   module Models
-    # PasswordArchivable, this depends on the DatabaseAuthenticatable module from devise
+    # PasswordArchivable, this depends on the database_authenticatable module from devise
     module PasswordArchivable
       extend ActiveSupport::Concern
       include Devise::Models::Compatibility
-      include Devise::Models::DatabaseAuthenticatable
 
       included do
+        devise :database_authenticatable
         has_many :old_passwords, class_name: 'OldPassword', as: :password_archivable, dependent: :destroy
         before_update :archive_password, if: :will_save_change_to_encrypted_password?
         validate :validate_password_archive, if: :password_present?
