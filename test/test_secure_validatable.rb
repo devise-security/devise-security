@@ -86,7 +86,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password can not equal email for new user' do
     msg = 'Password must be different than the email.'
     user = User.create email: 'bob@microsoft.com', password: 'bob@microsoft.com', password_confirmation: 'bob@microsoft.com'
-    assert_equal(false, user.valid?)
+    refute user.valid?
     assert_includes(user.errors.full_messages, msg)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -94,7 +94,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password can not equal case sensitive version of email for new user' do
     msg = 'Password must be different than the email.'
     user = User.create email: 'bob@microsoft.com', password: 'BoB@microsoft.com', password_confirmation: 'BoB@microsoft.com'
-    assert_equal(false, user.valid?)
+    refute user.valid?
     assert_includes(user.errors.full_messages, msg)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -105,8 +105,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     msg = 'Password must be different than the email.'
     user.password = 'bob@microsoft.com'
     user.password_confirmation = 'bob@microsoft.com'
-    user.save
-    assert_equal(false, user.valid?)
+    refute user.valid?
     assert_includes(user.errors.full_messages, msg)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
@@ -117,8 +116,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     msg = 'Password must be different than the email.'
     user.password = 'BoB@microsoft.com'
     user.password_confirmation = 'BoB@microsoft.com'
-    user.save
-    assert_equal(false, user.valid?)
+    refute user.valid?
     assert_includes(user.errors.full_messages, msg)
     assert_raises(ORMInvalidRecordException) { user.save! }
   end
