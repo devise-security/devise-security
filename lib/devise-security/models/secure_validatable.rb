@@ -57,7 +57,7 @@ module Devise
           validate :current_equal_password_validation
 
           # don't allow email to equal password
-          validate :email_not_equal_password_validation
+          validate :email_not_equal_password_validation unless allow_passwords_equal_to_email
         end
       end
 
@@ -98,7 +98,7 @@ module Devise
       end
 
       module ClassMethods
-        Devise::Models.config(self, :password_complexity, :password_length, :email_validation)
+        Devise::Models.config(self, :password_complexity, :password_length, :email_validation, :allow_passwords_equal_to_email)
 
         private
 
