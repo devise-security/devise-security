@@ -41,4 +41,10 @@ Devise.setup do |config|
 
   # Time period for account expiry from last_activity_at
   # config.expire_after = 90.days
+
+  # Allow passwords to be equal to email (false, true)
+  # This specifically performs case insensitive comparisons
+  # Used by secure_validatable. Defaults to false
+  # config.allow_passwords_equal_to_email = false # deny passwords equal (case insensitive) to the email
+  # config.allow_passwords_equal_to_email = true # allow passwords equal (case insensitive) to the email
 end
