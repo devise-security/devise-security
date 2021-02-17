@@ -77,9 +77,11 @@ module Devise
         return if password.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
         dummy = self.class.new.tap do |user|
           user.password_salt = password_salt if respond_to?(:password_salt)
-          user.password = email
+          # whether case_insensitive_keys includes email or not, any variation of the email
+          # should not be a supported password
+          user.password = email.downcase
         end
-        self.errors.add(:password, :equal_to_email) if dummy.valid_password?(password)
+        self.errors.add(:password, :equal_to_email) if dummy.valid_password?(password.downcase)
       end
 
       protected
