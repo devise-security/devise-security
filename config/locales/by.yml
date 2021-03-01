@@ -3,6 +3,7 @@ by:
     messages:
       taken_in_past: 'ужо раней выкарыстоўваўся.'
       equal_to_current_password: 'павінен адрознівацца ад сучаснага пароля.'
+      equal_to_email: 'павінна адрознівацца ад электроннай пошты.'
       password_complexity:
         digit:
           one: 'павінен утрымліваць хоць адну лічбу'

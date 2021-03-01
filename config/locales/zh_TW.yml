@@ -3,6 +3,7 @@ zh_TW:
     messages:
       taken_in_past: '曾被使用過。'
       equal_to_current_password: '必須與目前密碼不同。'
+      equal_to_email: '必須與電子郵件地址不同。'
       password_complexity:
         digit:
           one: 必須包含至少一個數字
