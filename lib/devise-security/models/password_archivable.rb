@@ -73,7 +73,7 @@ module Devise
           return true if old_passwords.where(encrypted_password: encrypted_password_was).exists?
 
           old_passwords.create!(encrypted_password: encrypted_password_was) if encrypted_password_was.present?
-          old_passwords.order(created_at: :desc).offset(max_old_passwords).destroy_all
+          old_passwords.reorder(created_at: :desc).offset(max_old_passwords).destroy_all
         else
           old_passwords.destroy_all
         end
