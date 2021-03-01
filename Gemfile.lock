@@ -63,7 +63,7 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
-    database_cleaner (1.8.5)
+    database_cleaner (1.99.0)
     devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -250,7 +250,7 @@ PLATFORMS
 DEPENDENCIES
   appraisal
   bundler
-  database_cleaner
+  database_cleaner (< 2.0.0)
   devise-security!
   easy_captcha
   m
