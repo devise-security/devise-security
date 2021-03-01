@@ -1,7 +1,6 @@
 require:
   - rubocop-rails
 AllCops:
-  TargetRubyVersion: 2.4
   Exclude:
     - Gemfile*
     - bin/*
@@ -16,7 +15,7 @@ Rails:
 Metrics/MethodLength:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Naming/FileName:
@@ -57,3 +56,12 @@ Style/AndOr:
   # or completely (always).
   # They read better, more like normal English.
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true

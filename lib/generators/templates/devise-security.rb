@@ -41,4 +41,7 @@ Devise.setup do |config|
 
   # Time period for account expiry from last_activity_at
   # config.expire_after = 90.days
+
+  # Allow password to equal the email
+  # config.allow_passwords_equal_to_email = false
 end

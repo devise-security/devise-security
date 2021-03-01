@@ -79,6 +79,10 @@ module Devise
   # paranoid_verification will regenerate verifacation code after faild attempt
   mattr_accessor :paranoid_code_regenerate_after_attempt
   @@paranoid_code_regenerate_after_attempt = 10
+
+  # Whether to allow passwords that are equal (case insensitive) to the email
+  mattr_accessor :allow_passwords_equal_to_email
+  @@allow_passwords_equal_to_email = false
 end
 
 # an security extension for devise
