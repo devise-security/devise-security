@@ -115,9 +115,10 @@ GEM
     nio4r (2.5.3)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    omniauth (1.9.1)
+    omniauth (2.0.3)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
+      rack-protection
     orm_adapter (0.5.0)
     parallel (1.19.2)
     parser (2.7.2.0)
@@ -132,6 +133,8 @@ GEM
       interception (>= 0.5)
       pry (>= 0.12.0)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.4)
@@ -257,7 +260,7 @@ DEPENDENCIES
   minitest
   minitest-rails (~> 5.2.0)
   mongoid
-  omniauth (< 2.0.0)
+  omniauth (< 3.0.0)
   pry-byebug
   pry-rescue
   rails-controller-testing (<= 1.0.4)
