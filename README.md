@@ -234,6 +234,16 @@ create_table :the_resources do |t|
 end
 ```
 
+#### Bypassing session limitable
+
+Sometimes it's useful to impersonate a user without authentication (e.g. [administrator impersonating a user](https://github.com/plataformatec/devise/wiki/How-To:-Sign-in-as-another-user-if-you-are-an-admin)), in this case the `session_limitable` strategy will log out the user, and if the user logs in while the administrator is still logged in, the administrator will be logged out.
+
+For such cases the following can be used:
+
+```ruby
+sign_in(User.find(params[:id]), scope: :user, skip_session_limitable: true)
+```
+
 ### Expirable
 
 ```ruby
