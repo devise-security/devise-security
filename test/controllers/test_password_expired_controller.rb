@@ -21,9 +21,33 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     sign_in(@user)
   end
 
+  test 'redirects on show if user not logged in' do
+    sign_out(@user)
+    get :show
+    assert_redirected_to :root
+  end
+
+  test 'redirects on show if user does not need password change' do
+    @user.update(password_changed_at: Time.zone.now)
+    get :show
+    assert_redirected_to :root
+  end
+
   test 'should render show' do
     get :show
     assert_includes @response.body, 'Renew your password'
+  end
+
+  test 'redirects on update if user not logged in' do
+    sign_out(@user)
+    put :update
+    assert_redirected_to :root
+  end
+
+  test 'redirects on update if user does not need password change' do
+    @user.update(password_changed_at: Time.zone.now)
+    put :update
+    assert_redirected_to :root
   end
 
   test 'update password with default format' do

@@ -82,4 +82,80 @@ class TestSecureValidatable < ActiveSupport::TestCase
     refute user.valid?
     assert_equal DEVISE_ORM == :active_record ? ['Email has already been taken'] : ['Email is already taken'], user.errors.full_messages
   end
+
+  test 'password can not equal email for new user' do
+    msg = 'Password must be different than the email.'
+    user = User.create email: 'bob@microsoft.com', password: 'bob@microsoft.com', password_confirmation: 'bob@microsoft.com'
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
+
+  test 'password can not equal case sensitive version of email for new user' do
+    msg = 'Password must be different than the email.'
+    user = User.create email: 'bob@microsoft.com', password: 'BoB@microsoft.com', password_confirmation: 'BoB@microsoft.com'
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
+
+  test 'password can not equal email with spaces for new user' do
+    msg = 'Password must be different than the email.'
+    user = User.create email: 'bob@microsoft.com', password: 'bob@microsoft.com    ', password_confirmation: 'bob@microsoft.com    '
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
+
+  test 'password can not equal case sensitive version of email with spaces for new user' do
+    msg = 'Password must be different than the email.'
+    user = User.create email: 'bob@microsoft.com', password: '  BoB@microsoft.com   ', password_confirmation: '  BoB@microsoft.com   '
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
+
+  test 'password can not equal email for existing user' do
+    user = User.create email: 'bob@microsoft.com', password: 'pAs5W0rd!Is5e6Ure', password_confirmation: 'pAs5W0rd!Is5e6Ure'
+
+    msg = 'Password must be different than the email.'
+    user.password = 'bob@microsoft.com'
+    user.password_confirmation = 'bob@microsoft.com'
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
+
+  test 'password can not equal case sensitive version of email for existing user' do
+    user = User.create email: 'bob@microsoft.com', password: 'pAs5W0rd!Is5e6Ure', password_confirmation: 'pAs5W0rd!Is5e6Ure'
+
+    msg = 'Password must be different than the email.'
+    user.password = 'BoB@microsoft.com'
+    user.password_confirmation = 'BoB@microsoft.com'
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
+
+  test 'password can not equal email with spaces for existing user' do
+    user = User.create email: 'bob@microsoft.com', password: 'pAs5W0rd!Is5e6Ure', password_confirmation: 'pAs5W0rd!Is5e6Ure'
+
+    msg = 'Password must be different than the email.'
+    user.password = 'bob@microsoft.com     '
+    user.password_confirmation = 'bob@microsoft.com     '
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
+
+  test 'password can not equal case sensitive version of email with spaces for existing user' do
+    user = User.create email: 'bob@microsoft.com', password: 'pAs5W0rd!Is5e6Ure', password_confirmation: 'pAs5W0rd!Is5e6Ure'
+
+    msg = 'Password must be different than the email.'
+    user.password = ' BoB@microsoft.com      '
+    user.password_confirmation = ' BoB@microsoft.com      '
+    refute user.valid?
+    assert_includes(user.errors.full_messages, msg)
+    assert_raises(ORMInvalidRecordException) { user.save! }
+  end
 end
