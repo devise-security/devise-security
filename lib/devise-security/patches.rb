@@ -4,7 +4,7 @@ module DeviseSecurity
   module Patches
     autoload :ControllerCaptcha, 'devise-security/patches/controller_captcha'
     autoload :ControllerSecurityQuestion, 'devise-security/patches/controller_security_question'
-    autoload :SetMinimumPasswordInformation, 'devise-security/patches/set_minimum_password_information'
+    autoload :SecureValidatableInformation, 'devise-security/patches/secure_validatable_information'
 
     class << self
       def apply
@@ -20,7 +20,7 @@ module DeviseSecurity
         Devise::SessionsController.send(:include, Patches::ControllerCaptcha) if Devise.captcha_for_sign_in
 
         # TODO conditional include
-        DeviseController.send(:include, Patches::SetMinimumPasswordInformation)
+        DeviseController.send(:include, Patches::SecureValidatableInformation)
       end
     end
   end

@@ -4,7 +4,6 @@ RailsApp::Application.routes.draw do
   devise_for :users
 
   devise_for :secure_users
-  devise_for :validatable_users
   devise_for :non_validatable_users
 
   devise_for :captcha_users, only: [:sessions], controllers: { sessions: 'captcha/sessions' }

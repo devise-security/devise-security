@@ -2,13 +2,13 @@
 
 require 'test_helper'
 
-class TestWithSecureValidatable < ActionController::TestCase
+class TestSecureValidatableInformationController < ActionController::TestCase
   include Devise::Test::ControllerHelpers
-  tests MinimumPasswordInformationController
+  tests SecureValidatableInformationController
 
   def set_minimum_password_length(mapping)
     @request.env["devise.mapping"] = Devise.mappings[mapping]
-    @controller.set_secure_validatable_password_information
+    @controller.set_secure_validatable_information
     @length = @controller.instance_variable_get(:@minimum_password_length)
     @complexity =
       @controller.instance_variable_get(:@minimum_password_complexity)
