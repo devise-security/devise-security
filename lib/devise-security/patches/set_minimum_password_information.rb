@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module DeviseSecurity::Patches
-  module SetMinimumPasswordLength
+  module SetMinimumPasswordInformation
     extend ActiveSupport::Concern
 
     included do
