@@ -5,10 +5,8 @@ module DeviseSecurity::Patches
     extend ActiveSupport::Concern
 
     included do
-      define_method :set_minimum_password_length do
-        if devise_mapping.validatable?
-          @minimum_password_length = resource_class.password_length.min
-        elsif devise_mapping.secure_validatable?
+      define_method :set_secure_validatable_password_information do
+        if devise_mapping.secure_validatable?
           @minimum_password_length = resource_class.password_length.min
           @minimum_password_complexity = resource_class.password_complexity
         end
