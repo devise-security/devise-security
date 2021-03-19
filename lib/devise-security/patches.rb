@@ -19,7 +19,6 @@ module DeviseSecurity
         Devise::RegistrationsController.send(:include, Patches::ControllerCaptcha) if Devise.captcha_for_sign_up
         Devise::SessionsController.send(:include, Patches::ControllerCaptcha) if Devise.captcha_for_sign_in
 
-        # TODO conditional include
         DeviseController.send(:include, Patches::SecureValidatableInformation)
       end
     end

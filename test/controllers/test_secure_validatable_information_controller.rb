@@ -27,13 +27,13 @@ class TestSecureValidatableInformationController < ActionController::TestCase
   end
 
   test 'When not using secure_validatable, @minimum_password_length is not set' do
-    set_minimum_password_length(:non_validatable_user)
+    set_minimum_password_length(:non_devise_user)
 
     assert_nil @length
   end
 
   test 'When not using secure_validatable, @minimum_password_complexity is not set' do
-    set_minimum_password_length(:non_validatable_user)
+    set_minimum_password_length(:non_devise_user)
 
     assert_nil @complexity
   end
