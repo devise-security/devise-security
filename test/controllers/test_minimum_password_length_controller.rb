@@ -15,4 +15,9 @@ class TestWithSecureValidatable < ActionController::TestCase
     @request.env["devise.mapping"] = Devise.mappings[:validatable_user]
     assert_equal @controller.set_minimum_password_length, Devise.password_length.min
   end
+
+  test 'When not using either, @minimum_password_length is not set' do
+    @request.env["devise.mapping"] = Devise.mappings[:non_validatable_user]
+    assert_nil @controller.set_minimum_password_length
+  end
 end
