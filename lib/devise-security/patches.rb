@@ -4,6 +4,7 @@ module DeviseSecurity
   module Patches
     autoload :ControllerCaptcha, 'devise-security/patches/controller_captcha'
     autoload :ControllerSecurityQuestion, 'devise-security/patches/controller_security_question'
+    autoload :SetMinimumPasswordLength, 'devise-security/patches/set_minimum_password_length'
 
     class << self
       def apply
@@ -17,6 +18,9 @@ module DeviseSecurity
 
         Devise::RegistrationsController.send(:include, Patches::ControllerCaptcha) if Devise.captcha_for_sign_up
         Devise::SessionsController.send(:include, Patches::ControllerCaptcha) if Devise.captcha_for_sign_in
+
+        # TODO conditional include
+        DeviseController.send(:include, Patches::SetMinimumPasswordLength)
       end
     end
   end
