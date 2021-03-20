@@ -6,6 +6,8 @@ RailsApp::Application.routes.draw do
   devise_for :non_devise_users
   devise_for :secure_users
 
+  get '/secure_validatable_information', to: 'secure_validatable_information#index'
+
   devise_for :captcha_users, only: [:sessions], controllers: { sessions: 'captcha/sessions' }
   devise_for :security_question_users, only: [:sessions, :unlocks], controllers: { unlocks: 'security_question/unlocks' }
 
