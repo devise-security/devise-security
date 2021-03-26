@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'database_cleaner', '< 2.0.0' # https://github.com/devise-security/devise-security/issues/276
+  s.add_development_dependency 'database_cleaner', '< 3.0.0' # https://github.com/devise-security/devise-security/issues/276
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
