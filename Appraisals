@@ -11,6 +11,7 @@ if RUBY_VERSION < '2.7'
     end
 
     group :mongoid do
+      gem 'database_cleaner-mongoid', '< 2.0'
       gem 'mongoid', '~> 4.0'
     end
   end
@@ -29,6 +30,7 @@ appraise 'rails-5.0' do
   end
 
   group :mongoid do
+    gem 'database_cleaner-mongoid', '~> 2.0'
     gem 'mongoid', '~> 6.0'
   end
 end
@@ -46,6 +48,7 @@ appraise 'rails-5.1' do
   end
 
   group :mongoid do
+    gem 'database_cleaner-mongoid', '~> 2.0'
     gem 'mongoid', '~> 6.0'
   end
 end
@@ -63,6 +66,7 @@ appraise 'rails-5.2' do
   end
 
   group :mongoid do
+    gem 'database_cleaner-mongoid', '~> 2.0'
     gem 'mongoid', '~> 6.0'
   end
 end
@@ -80,6 +84,7 @@ appraise 'rails-6.0' do
   end
 
   group :mongoid do
+    gem 'database_cleaner-mongoid', '~> 2.0'
     gem 'mongoid', '~> 7.0.5'
   end
 end
