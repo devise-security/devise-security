@@ -199,9 +199,10 @@ documentation there.
 
 ### Secure Validatable
 
-Devise exposes @minimum_password_length for use in views when you use
-`validatable`. If you use `secure_validatable`, this will still be exposed.
-Additionally, there is a @minimum_password_complexity variable that is exposed
+Devise exposes `@minimum_password_length` for use in views when you use
+`validatable` and call `set_minimum_password_length` in your controller. 
+If you use `secure_validatable`, this will still be exposed.
+Additionally, there is a `@minimum_password_complexity` variable that is exposed
 if you want to have your own view to expose complexity requirements.
 
 Code example:
