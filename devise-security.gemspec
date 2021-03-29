@@ -1,7 +1,6 @@
-# -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'devise-security/version'
 
 Gem::Specification.new do |s|
@@ -18,9 +17,8 @@ Gem::Specification.new do |s|
     'Alexander Dreher',
     'Nate Bird',
     'Dillon Welch',
-    'Kevin Olbrich'
+    'Kevin Olbrich',
   ]
-  s.post_install_message = 'WARNING: devise-security will drop support for Rails 4.2 in version 0.16.0'
 
   s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
   s.test_files    = Dir['test/**/*']
@@ -43,6 +41,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop-rails'
   s.add_development_dependency 'simplecov-lcov'
   s.add_development_dependency 'solargraph'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'wwtd'
 end

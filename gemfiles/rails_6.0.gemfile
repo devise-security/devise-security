@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "railties", "~> 6.0.0"
 gem "minitest-rails", "~> 6.0.0"
+gem "railties", "~> 6.0.0"
 
 group :active_record do
   gem "sqlite3"
@@ -15,7 +15,7 @@ group :mongoid do
 end
 
 group :test do
-  gem "rails-controller-testing", "1.0.4"
+  gem "rails-controller-testing"
 end
 
 gemspec path: "../"

@@ -17,8 +17,6 @@ class TestPasswordExpirableWorkflow < ActionDispatch::IntegrationTest
   end
 
   test 'sign in and change expired password' do
-    skip("Does not work in Rails < 5.0") if Rails.gem_version < Gem::Version.new('5.0')
-
     sign_in(@user)
     assert_redirected_to(root_path)
     follow_redirect!
@@ -37,8 +35,6 @@ class TestPasswordExpirableWorkflow < ActionDispatch::IntegrationTest
   end
 
   test 'sign in and password is updated before redirect completes' do
-    skip("Does not work in Rails < 5.0") if Rails.gem_version < Gem::Version.new('5.0')
-
     sign_in(@user)
     assert_redirected_to(root_path)
 
