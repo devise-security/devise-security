@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 # Oldest Rails version getting security patches is 5.2
-gem 'railties', '~> 5.2.4'
+gem 'railties', '~> 5.2.5'
 gem 'minitest-rails', '~> 5.2.0'
 
 group :active_record do
