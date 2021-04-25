@@ -85,9 +85,8 @@ module Devise
   @@allow_passwords_equal_to_email = false
 end
 
-# an security extension for devise
+# a security extension for devise
 module DeviseSecurity
-  autoload :Schema, 'devise-security/schema'
   autoload :Patches, 'devise-security/patches'
 
   module Controllers
@@ -108,6 +107,6 @@ Devise.add_module :paranoid_verification, controller: :paranoid_verification_cod
 # requires
 require 'devise-security/routes'
 require 'devise-security/rails'
-require "devise-security/orm/#{DEVISE_ORM}"
+require "devise-security/orm/#{DEVISE_ORM}" if DEVISE_ORM == :mongoid
 require 'devise-security/models/database_authenticatable_patch'
 require 'devise-security/models/paranoid_verification'
