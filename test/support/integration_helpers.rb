@@ -5,7 +5,6 @@ module IntegrationHelpers
   # @param user [User]
   # @param session [ActionDispatch::Integration::Session]
   # @return [void]
-  # @note accounts for differences in the integration test API between rails versions
   def sign_in(user, session = integration_session)
     session.post new_user_session_path, params: {
       user: {
@@ -19,7 +18,6 @@ module IntegrationHelpers
   # @param user [User]
   # @param session [ActionDispatch::Integration::Session]
   # @return [void]
-  # @note accounts for differences in the integration test API between rails versions
   def failed_sign_in(user, session)
     session.post new_user_session_path, params: {
       user: {
