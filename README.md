@@ -321,7 +321,7 @@ end
 ## Requirements
 
 - Devise (<https://github.com/heartcombo/devise>)
-- Rails 4.2 onwards (<http://github.com/rails/rails>)
+- Rails 5.0 onwards (<http://github.com/rails/rails>)
 - recommendations:
   - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
   - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)

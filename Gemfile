@@ -15,9 +15,10 @@ group :mongoid do
   gem 'mongoid', '~> 6.0'
 end
 
-# This dependency is here to support an older style of testing used with Rails
-# 4.2. It can be dropped after we drop support for Rails 4.2 and we get rid of
-# the older style tests.
+# This dependency is here to support an older style of testing that was used
+# with Rails 4.2. It can be dropped after we get rid of the older style tests.
+# Note that Devise itself still uses controller testing so we may need to retain
+# this for consistency.
 group :test do
   gem 'rails-controller-testing'
 end
