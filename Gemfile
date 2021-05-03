@@ -12,7 +12,7 @@ group :active_record do
 end
 
 group :mongoid do
-  gem 'mongoid', '~> 6.0'
+  gem 'mongoid', '~> 7.2'
 end
 
 # This dependency is here to support an older style of testing that was used
