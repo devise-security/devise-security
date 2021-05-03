@@ -60,6 +60,7 @@ jobs:
             matrix.ruby }}
           parallel: true
           path-to-lcov: ./coverage/lcov/devise-security.lcov
+        if: success() || failure()
 
   finish:
     needs: run-tests
