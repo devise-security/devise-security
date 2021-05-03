@@ -51,7 +51,7 @@ jobs:
           bundle exec rake
         # Mongoid is not compatible with Ruby 3.0 as of 7.2.2
         if: ${{ (!(matrix.orm == 'mongoid' && matrix.ruby >= '3.0')) &&
-            (matrix.rails < '6.0' && matrix.ruby < '3.0' ) }}
+            !(matrix.rails < '6.0' && matrix.ruby >= '3.0' ) }}
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
