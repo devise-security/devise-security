@@ -12,9 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         orm: [active_record, mongoid]
-        rails: ["5.0", "5.1", "5.2", "6.0"]
-        ruby: ["2.5", "2.6", "2.7"] # TODO fix repo to work with ruby-head
-
+        rails: ["5.0", "5.1", "5.2", "6.0", "6.1"]
+        ruby: ["2.6", "2.7", "3.0"] # TODO fix repo to work with ruby-head
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
@@ -35,6 +34,11 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install
+        # Mongoid is not compatible with Ruby 3.0 as of 7.2.2
+        # Rails < 5.2 is not compatible with Ruby 3.0
+        if:
+          ${{ (!(matrix.orm == 'mongoid' && matrix.ruby >= '3.0')) &&
+          !(matrix.rails < '6.0' && matrix.ruby >= '3.0' ) }}
       - name: Start MongoDB
         uses: superchargejs/mongodb-github-action@1.0.0
         if: ${{ matrix.orm == 'mongoid' }}
@@ -47,6 +51,11 @@ jobs:
           DEVISE_ORM: ${{ matrix.orm }}
         run: |
           bundle exec rake
+        # Mongoid is not compatible with Ruby 3.0 as of 7.2.2
+        # Rails < 5.2 is not compatible with Ruby 3.0
+        if:
+          ${{ (!(matrix.orm == 'mongoid' && matrix.ruby >= '3.0')) &&
+          !(matrix.rails < '6.0' && matrix.ruby >= '3.0' ) }}
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
@@ -56,6 +65,11 @@ jobs:
             matrix.ruby }}
           parallel: true
           path-to-lcov: ./coverage/lcov/devise-security.lcov
+        # Mongoid is not compatible with Ruby 3.0 as of 7.2.2
+        # Rails < 5.2 is not compatible with Ruby 3.0
+        if:
+          ${{ (!(matrix.orm == 'mongoid' && matrix.ruby >= '3.0')) &&
+          !(matrix.rails < '6.0' && matrix.ruby >= '3.0' ) }}
 
   finish:
     needs: run-tests
