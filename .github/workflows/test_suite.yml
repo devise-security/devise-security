@@ -14,8 +14,7 @@ jobs:
         orm: [active_record, mongoid]
         rails: ["5.0", "5.1", "5.2", "6.0", "6.1"]
         ruby: ["2.6", "2.7", "3.0"] # TODO fix repo to work with ruby-head
-    # Mongoid is not compatible with Ruby 3.0 as of 7.2.2
-    if: ${{ !(matrix.orm == 'mongoid' && matrix.ruby >= '3.0') }}
+
 
     steps:
       - uses: actions/checkout@v2
@@ -40,7 +39,7 @@ jobs:
 
       - name: Start MongoDB
         uses: superchargejs/mongodb-github-action@1.0.0
-        if: ${{ !(matrix.orm == 'mongoid' && matrix.ruby >= '3.0') }}
+        if: ${{ matrix.orm == 'mongoid' }}
       - name:
           Tests for ORM ${{ matrix.orm }}, Rails ${{ matrix.rails }}, and Ruby
           ${{ matrix.ruby }}
@@ -50,6 +49,8 @@ jobs:
           DEVISE_ORM: ${{ matrix.orm }}
         run: |
           bundle exec rake
+        # Mongoid is not compatible with Ruby 3.0 as of 7.2.2
+        if: ${{ !(matrix.orm == 'mongoid' && matrix.ruby >= '3.0') }}
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
