@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "minitest-rails", "~> 6.0.0"
-gem "railties", "~> 6.0.0"
+gem "minitest-rails", "~> 6.1.0"
+gem "railties", "~> 6.1.0"
 
 group :active_record do
   gem "sqlite3"
