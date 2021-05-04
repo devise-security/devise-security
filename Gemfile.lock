@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    devise-security (0.15.0)
+    devise-security (0.16.0)
       devise (>= 4.3.0, < 5.0)
 
 GEM
