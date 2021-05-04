@@ -13,7 +13,7 @@ jobs:
       matrix:
         orm: [active_record, mongoid]
         rails: ["5.2", "6.0", "6.1"]
-        ruby: ["2.6", "2.7", "3.0"] # TODO fix repo to work with ruby-head
+        ruby: ["2.6", "2.7", "3.0", head]
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
