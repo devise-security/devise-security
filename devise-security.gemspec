@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
-  s.add_development_dependency 'omniauth', '< 3.0.0' # https://github.com/devise-security/devise-security/issues/267
+  s.add_development_dependency 'omniauth'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'

@@ -272,7 +272,7 @@ DEPENDENCIES
   minitest
   minitest-rails (~> 5.2.0)
   mongoid (~> 7.2)
-  omniauth (< 3.0.0)
+  omniauth
   pry-byebug
   pry-rescue
   rails-controller-testing
