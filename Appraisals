@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 appraise 'rails-5.0' do
-  gem 'railties', '~> 5.0.0'
+  gem 'rails', '~> 5.0.0'
   gem 'minitest-rails', '~> 5.0.0'
 
   group :active_record do
@@ -15,7 +15,7 @@ appraise 'rails-5.0' do
 end
 
 appraise 'rails-5.1' do
-  gem 'railties', '~> 5.1.0'
+  gem 'rails', '~> 5.1.0'
   gem 'minitest-rails', '~> 5.1.0'
 
   group :mongoid do
@@ -25,7 +25,7 @@ appraise 'rails-5.1' do
 end
 
 appraise 'rails-5.2' do
-  gem 'railties', '~> 5.2.0'
+  gem 'rails', '~> 5.2.0'
   gem 'minitest-rails', '~> 5.2.0'
 
   group :mongoid do
@@ -35,7 +35,7 @@ appraise 'rails-5.2' do
 end
 
 appraise 'rails-6.0' do
-  gem 'railties', '~> 6.0.0'
+  gem 'rails', '~> 6.0.0'
   gem 'minitest-rails', '~> 6.0.0'
 
   group :mongoid do
@@ -45,7 +45,7 @@ appraise 'rails-6.0' do
 end
 
 appraise 'rails-6.1' do
-  gem 'railties', '~> 6.1.0'
+  gem 'rails', '~> 6.1.0'
   gem 'minitest-rails', '~> 6.1.0'
 
   group :mongoid do

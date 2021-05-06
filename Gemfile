@@ -5,7 +5,6 @@ gemspec
 
 # Oldest Rails version getting security patches is 5.2
 gem 'minitest-rails', '~> 5.2.0'
-gem 'railties', '~> 5.2.4'
 
 group :active_record do
   gem 'sqlite3'
