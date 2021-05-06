@@ -6,8 +6,9 @@ AllCops:
   Exclude:
     - Gemfile*
     - bin/*
-    - gemfiles/*
+    - gemfiles/**/*
     - test/**/*
+    - vendor/bundle/**/*
 
 Rails:
   Enabled: true
