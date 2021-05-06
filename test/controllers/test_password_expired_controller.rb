@@ -63,6 +63,23 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     assert_equal response.media_type, 'text/html'
   end
 
+  test 'update password with custom redirect route' do
+    Devise.password_expired_redirect_location = '/cookies'
+
+    put :update,
+        params: {
+          user: {
+            current_password: 'Password4',
+            password: 'Password5',
+            password_confirmation: 'Password5',
+          },
+        }
+    assert_redirected_to '/cookies'
+    assert_equal response.media_type, 'text/html'
+
+    Devise.password_expired_redirect_location = nil
+  end
+
   test 'password confirmation does not match' do
     put :update,
         params: {
