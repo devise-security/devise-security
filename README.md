@@ -127,6 +127,12 @@ Devise.setup do |config|
 
   # Allow passwords to be equal to email (false, true)
   # config.allow_passwords_equal_to_email = false
+
+  # Custom redirect route for successful password expiration update action
+  # config.password_expired_redirect_location = nil
+
+  # Custom redirect route for successful paranoid verification code update action
+  # config.paranoid_verification_code_redirect_location = nil
 end
 ```
 

@@ -83,6 +83,14 @@ module Devise
   # Whether to allow passwords that are equal (case insensitive) to the email
   mattr_accessor :allow_passwords_equal_to_email
   @@allow_passwords_equal_to_email = false
+
+  # Custom redirect route for successful password expiration update action
+  mattr_accessor :password_expired_redirect_location
+  @@password_expired_redirect_location = nil
+
+  # Custom redirect route for successful paranoid verification code update action
+  mattr_accessor :paranoid_verification_code_redirect_location
+  @@paranoid_verification_code_redirect_location = nil
 end
 
 # a security extension for devise
