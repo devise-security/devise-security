@@ -24,7 +24,6 @@ Naming/FileName:
   Exclude:
     - "devise-security.gemspec"
     - 'lib/devise-security.rb'
-    - 'lib/generators/templates/devise-security.rb'
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
