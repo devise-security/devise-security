@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.3.0'
 
   s.add_runtime_dependency 'devise', '>= 4.3.0', '< 5.0'
+  s.add_runtime_dependency 'rails', '>= 5.0'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler'
