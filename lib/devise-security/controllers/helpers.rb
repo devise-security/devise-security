@@ -80,7 +80,7 @@ module DeviseSecurity
             if signed_in?(scope) && warden.session(scope)['paranoid_verify']
               store_location_for(scope, request.original_fullpath) if request.get?
               redirect_for_paranoid_verification scope
-              return
+              break
             end
           end
         end

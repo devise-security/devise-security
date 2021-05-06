@@ -15,7 +15,7 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
     lower: /\p{Lower}/,
     symbol: /\p{Punct}|\p{S}/,
     symbols: /\p{Punct}|\p{S}/,
-    upper: /\p{Upper}/
+    upper: /\p{Upper}/,
   }.freeze
 
   def validate_each(record, attribute, value)
@@ -23,9 +23,7 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
       minimum = [0, options[key].to_i].max
       pattern = Regexp.new PATTERNS[key]
 
-      unless (value || '').scan(pattern).size >= minimum
-        record.errors.add attribute, :"password_complexity.#{key}", count: minimum
-      end
+      record.errors.add(attribute, :"password_complexity.#{key}", count: minimum) if value.to_s.scan(pattern).size < minimum
     end
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 DEVISE_ORM = ENV.fetch('DEVISE_ORM', 'active_record').to_sym unless defined?(DEVISE_ORM)
 
 require DEVISE_ORM.to_s if DEVISE_ORM.in? [:active_record, :mongoid]

@@ -3,5 +3,5 @@
 ActiveSupport.on_load(:mongoid) do
   require 'orm_adapter/adapters/mongoid'
 
-  Mongoid::Document::ClassMethods.send :include, Devise::Models
+  Mongoid::Document::ClassMethods.include Devise::Models
 end

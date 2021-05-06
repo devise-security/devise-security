@@ -9,7 +9,7 @@ module DeviseSecurity::Patches
           self.resource = warden.authenticate!(auth_options)
           set_flash_message(:notice, :signed_in) if is_flashing_format?
           sign_in(resource_name, resource)
-          block.call(resource) if block
+          block&.call(resource)
           respond_with resource, location: after_sign_in_path_for(resource)
         else
           flash[:alert] = t('devise.invalid_captcha') if is_flashing_format?

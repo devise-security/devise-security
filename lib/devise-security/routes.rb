@@ -2,7 +2,6 @@
 
 module ActionDispatch::Routing
   class Mapper
-
     protected
 
     # route for handle expired passwords
