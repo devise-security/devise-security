@@ -19,8 +19,10 @@ de:
           other: muss mindestens %{count} Großbuchstaben enthalten
   devise:
     invalid_captcha: 'Die Captcha-Eingabe ist nicht gültig.'
+    invalid_security_question: 'Die Antwort auf die Sicherheitsfrage war ungültig.'
     paranoid_verify:
       code_required: 'Bitte geben Sie den Code ein, den unser Support-Team zur Verfügung gestellt hat.'
+    paranoid_verification_code:
       show:
         submit_verification_code: Bestätigungscode eingeben
         verification_code: Bestätigungscode
