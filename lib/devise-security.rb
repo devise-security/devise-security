@@ -16,7 +16,7 @@ module Devise
 
   # Validate password for strongness
   mattr_accessor :password_complexity
-  @@password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
+  @@password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1, lower_or_upper: 0, symbol_or_digit: 0 }
 
   # Number of old passwords in archive
   mattr_accessor :password_archiving_count

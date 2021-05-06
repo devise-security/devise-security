@@ -69,4 +69,19 @@ class PasswordComplexityValidatorTest < Minitest::Test
     refute(ModelWithPassword.new('$!,*').valid?)
     assert(ModelWithPassword.new('aB3*').valid?)
   end
+
+  def test_enforces_symbol_or_digit
+    ModelWithPassword.validates :password, 'devise_security/password_complexity': { symbol_or_digit: 1 }
+    refute(ModelWithPassword.new('aaaa').valid?)
+    assert(ModelWithPassword.new('aaa!').valid?)
+    assert(ModelWithPassword.new('aaa1').valid?)
+    assert(ModelWithPassword.new('aa!1').valid?)
+  end
+
+  def test_enforces_lower_or_upper
+    ModelWithPassword.validates :password, 'devise_security/password_complexity': { lower_or_upper: 1 }
+    refute(ModelWithPassword.new('1234').valid?)
+    assert(ModelWithPassword.new('AAAa').valid?)
+    assert(ModelWithPassword.new('Aaaa').valid?)
+  end
 end
