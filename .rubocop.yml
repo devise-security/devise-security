@@ -2,6 +2,7 @@ inherit_from: .rubocop_todo.yml
 
 require:
   - rubocop-rails
+
 AllCops:
   Exclude:
     - Gemfile*
@@ -9,6 +10,10 @@ AllCops:
     - gemfiles/**/*
     - test/**/*
     - vendor/bundle/**/*
+  # https://github.com/rubocop/rubocop/issues/7771#issuecomment-628344513
+  # Automatically enables new cops so that weaonly have to manually add them
+  # if we are editing default behavior
+  NewCops: enable
 
 Rails:
   Enabled: true
@@ -62,21 +67,6 @@ Style/AndOr:
   # They read better, more like normal English.
   Enabled: false
 
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
-  Enabled: true
-
-Style/ExponentialNotation:
-  Enabled: true
-
 Style/HashEachMethods:
   Enabled: true
 
@@ -84,9 +74,6 @@ Style/HashTransformKeys:
   Enabled: true
 
 Style/HashTransformValues:
-  Enabled: true
-
-Style/SlicingWithRange:
   Enabled: true
 
 # Until we drop support for Rails 4.2, this can be different Rails 4.2 can work
