@@ -11,7 +11,7 @@ module DeviseSecurity
 
       def copy_initializer
         template(
-          'devise-security.rb', 'config/initializers/devise-security.rb'
+          'devise_security.rb', 'config/initializers/devise_security.rb'
         )
       end
 
