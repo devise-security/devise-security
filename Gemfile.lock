@@ -129,7 +129,7 @@ GEM
       rack (>= 1.6.2, < 3)
       rack-protection
     orm_adapter (0.5.0)
-    parallel (1.20.1)
+    parallel (1.19.2)
     parser (3.0.1.1)
       ast (~> 2.4.1)
     pry (0.13.1)
@@ -203,14 +203,14 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
-    rubocop (0.80.1)
+    rubocop (0.81.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
       rexml
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 1.7)
+      unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-rails (2.5.2)
       activesupport
       rack (>= 1.1)
@@ -250,7 +250,7 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    unicode-display_width (1.6.1)
+    unicode-display_width (1.7.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.3)
@@ -278,7 +278,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_email_validator
   railties (~> 5.2.4)
-  rubocop (~> 0.80.0)
+  rubocop (~> 0.81.0)
   rubocop-rails
   simplecov-lcov
   solargraph
