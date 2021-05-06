@@ -73,4 +73,28 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
   end
+
+  test 'default sort orders do not affect archiving' do
+    class ::OldPassword
+      default_scope { order(created_at: :asc) }
+    end
+
+    assert_equal 2, Devise.password_archiving_count
+
+    user = User.create! email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    assert_equal 0, OldPassword.count
+    set_password(user,  'Password2')
+    assert_equal 1, OldPassword.count
+
+    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
+    set_password(user,  'Password3')
+    assert_equal 2, OldPassword.count
+
+    # rotate first password out of archive
+    assert set_password(user,  'Password4')
+
+    # archive count was 2, so first password should work again
+    assert set_password(user,  'Password1')
+    assert set_password(user,  'Password2')
+  end
 end
