@@ -47,7 +47,7 @@ module Devise
           # NOTE: we deliberately do not do mass assignment here so that users that
           #   rely on `protected_attributes_continued` gem can still use this extension.
           #   See issue #68
-          self.class.new.tap { |object| object.encrypted_password = old_password }.valid_password?(password)
+          self.class.default_scoped.new.tap { |object| object.encrypted_password = old_password }.valid_password?(password)
         end
       end
 
