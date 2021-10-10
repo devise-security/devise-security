@@ -1,0 +1,41 @@
+bg:
+  errors:
+    messages:
+      taken_in_past: 'е използвана и преди.'
+      equal_to_current_password: 'трябва да е различна от настоящата парола.'
+      equal_to_email: 'трябва да е различна от e-mail адреса.'
+      password_complexity:
+        digit:
+          one: трябва да съдържа поне една цифра
+          other: трябва да съдържа %{count} цифри
+        lower:
+          one: трябва да съдържа поне една малка буква
+          other: трябва да съдържа поне %{count} малки букви
+        symbol:
+          one: трябва да съдържа поне един пунктоационен знак или символ
+          other: трябва да съдържа поне %{count} пунктоационни знака или символи
+        upper:
+          one: трябва да съдържа поне една главна буква
+          other: трябва да съдържа поне %{count} главни букви
+  devise:
+    invalid_captcha: 'Кодът е грешен.'
+    invalid_security_question: 'Отговора на тайния въпрос е грешен.'
+    paranoid_verify:
+      code_required: 'Моля въведете кода, който нашия екип по поддръжката Ви е предоставил'
+    paranoid_verification_code:
+      show:
+        submit_verification_code: Изпрати код за потвърждение
+        verification_code: Код за потвърждение
+        submit: Изпрати
+    password_expired:
+      updated: 'Вашата нова парола е запазена.'
+      change_required: 'Вашата парола е изтекла. Моля подновете паролата си.'
+      show:
+        renew_your_password: Подновете паролата си
+        current_password: Настояща парола
+        new_password: Нова парола
+        new_password_confirmation: Потвърждение на нова парола
+        change_my_password: Промени паролата ми
+    failure:
+      session_limited: 'Вашето потребителско име и парола са използвани в друг браузър. Моля влезте отново за да продължите в този браузър.'
+      expired: 'Вашия акаунт е затворен поради неактивност. Моля свържете се с администратор.'
