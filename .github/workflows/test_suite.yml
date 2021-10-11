@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         orm: [active_record, mongoid]
-        rails: ["5.0", "5.1", "5.2", "6.0", "6.1"]
+        rails: ["5.2", "6.0", "6.1"]
         ruby: ["2.6", "2.7", "3.0", head]
     steps:
       - uses: actions/checkout@v2
