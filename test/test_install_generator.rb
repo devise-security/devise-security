@@ -11,7 +11,7 @@ class TestInstallGenerator < Rails::Generators::TestCase
 
   test 'Assert all files are properly created' do
     run_generator
-    assert_file 'config/initializers/devise-security.rb'
+    assert_file 'config/initializers/devise_security.rb'
     assert_file 'config/locales/devise.security_extension.by.yml'
     assert_file 'config/locales/devise.security_extension.cs.yml'
     assert_file 'config/locales/devise.security_extension.de.yml'

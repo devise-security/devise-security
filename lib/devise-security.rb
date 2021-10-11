@@ -79,11 +79,14 @@ module Devise
   # paranoid_verification will regenerate verifacation code after faild attempt
   mattr_accessor :paranoid_code_regenerate_after_attempt
   @@paranoid_code_regenerate_after_attempt = 10
+
+  # Whether to allow passwords that are equal (case insensitive) to the email
+  mattr_accessor :allow_passwords_equal_to_email
+  @@allow_passwords_equal_to_email = false
 end
 
-# an security extension for devise
+# a security extension for devise
 module DeviseSecurity
-  autoload :Schema, 'devise-security/schema'
   autoload :Patches, 'devise-security/patches'
 
   module Controllers
@@ -104,6 +107,6 @@ Devise.add_module :paranoid_verification, controller: :paranoid_verification_cod
 # requires
 require 'devise-security/routes'
 require 'devise-security/rails'
-require "devise-security/orm/#{DEVISE_ORM}"
+require "devise-security/orm/#{DEVISE_ORM}" if DEVISE_ORM == :mongoid
 require 'devise-security/models/database_authenticatable_patch'
 require 'devise-security/models/paranoid_verification'

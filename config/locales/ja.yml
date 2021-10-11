@@ -3,6 +3,7 @@ ja:
     messages:
       taken_in_past: 'は既に使われています。'
       equal_to_current_password: 'は現在のパスワードと異なるものである必要があります。'
+      equal_to_email: 'メールとは異なる必要があります'
       password_complexity:
         digit:
           one: は最低1つの数字を含む必要があります。
