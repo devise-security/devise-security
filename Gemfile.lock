@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     devise-security (0.16.0)
-      devise (>= 4.3.0, < 5.0)
+      devise (>= 4.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -279,7 +279,7 @@ DEPENDENCIES
   minitest
   minitest-rails (~> 5.2.0)
   mongoid (~> 7.3)
-  omniauth (< 3.0.0)
+  omniauth
   pry-byebug
   pry-rescue
   rails-controller-testing
