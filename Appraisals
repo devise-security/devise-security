@@ -6,7 +6,6 @@ appraise 'rails-5.2' do
 
   group :mongoid do
     gem 'database_cleaner-mongoid', '~> 2.0'
-    gem 'mongoid', '~> 7.3'
   end
 end
 
@@ -16,7 +15,6 @@ appraise 'rails-6.0' do
 
   group :mongoid do
     gem 'database_cleaner-mongoid', '~> 2.0'
-    gem 'mongoid', '~> 7.3'
   end
 
   # net-smtp, net-imap and net-pop were removed from default gems in Ruby 3.1, but is used by the `mail` gem.
@@ -31,7 +29,6 @@ appraise 'rails-6.1' do
 
   group :mongoid do
     gem 'database_cleaner-mongoid', '~> 2.0'
-    gem 'mongoid', '~> 7.3'
   end
 
   # net-smtp, net-imap and net-pop were removed from default gems in Ruby 3.1, but is used by the `mail` gem.
