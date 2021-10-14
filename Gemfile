@@ -13,6 +13,10 @@ end
 
 group :mongoid do
   gem 'mongoid', '~> 7.3'
+
+  group :test do
+    gem 'database_cleaner-mongoid', '~> 2.0'
+  end
 end
 
 # This dependency is here to support an older style of testing that was used
