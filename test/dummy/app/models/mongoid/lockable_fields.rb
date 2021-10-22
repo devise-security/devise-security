@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockableFields
   extend ::ActiveSupport::Concern
 
