@@ -4,11 +4,12 @@ require 'test_helper'
 
 class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
   class User < ApplicationRecord
-    include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
-
     devise :database_authenticatable, :validatable
 
+    include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
+
     include Devise::Models::DatabaseAuthenticatablePatch
+
   end
 
   def create_user
