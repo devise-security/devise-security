@@ -18,7 +18,7 @@ class TestSessionLimitable < ActiveSupport::TestCase
     modified_user = ModifiedUser.create email: 'bob2@microsoft.com', password: 'password1', password_confirmation: 'password1'
     assert_equal(true, modified_user.skip_session_limitable?)
   end
-    
+
   class SessionLimitableUser < User
     devise :session_limitable
     include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
@@ -51,7 +51,7 @@ class TestSessionLimitable < ActiveSupport::TestCase
 
   test '#update_unique_session_id!(value) raises an exception on an unpersisted record' do
     user = User.create
-    assert !user.persisted?
+    assert_not user.persisted?
     assert_raises(Devise::Models::Compatibility::NotPersistedError) { user.update_unique_session_id!('unique_value') }
   end
 end

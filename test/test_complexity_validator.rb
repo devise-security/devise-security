@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
-class PasswordComplexityValidatorTest < Minitest::Test
+class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   class ModelWithPassword
     include ActiveModel::Validations
 
@@ -21,52 +23,52 @@ class PasswordComplexityValidatorTest < Minitest::Test
 
   def test_enforces_uppercase
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { upper: 1 }
-    refute(ModelWithPassword.new('aaaa').valid?)
+    assert_not(ModelWithPassword.new('aaaa').valid?)
     assert(ModelWithPassword.new('Aaaa').valid?)
   end
 
   def test_enforces_count
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { upper: 2 }
-    refute(ModelWithPassword.new('Aaaa').valid?)
+    assert_not(ModelWithPassword.new('Aaaa').valid?)
     assert(ModelWithPassword.new('AAaa').valid?)
   end
 
   def test_enforces_digit
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { digit: 1 }
-    refute(ModelWithPassword.new('aaaa').valid?)
+    assert_not(ModelWithPassword.new('aaaa').valid?)
     assert(ModelWithPassword.new('aaa1').valid?)
   end
 
   def test_enforces_digits
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { digits: 2 }
-    refute(ModelWithPassword.new('aaa1').valid?)
+    assert_not(ModelWithPassword.new('aaa1').valid?)
     assert(ModelWithPassword.new('aa12').valid?)
   end
 
   def test_enforces_lower
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { lower: 1 }
-    refute(ModelWithPassword.new('AAAA').valid?)
+    assert_not(ModelWithPassword.new('AAAA').valid?)
     assert(ModelWithPassword.new('AAAa').valid?)
   end
 
   def test_enforces_symbol
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { symbol: 1 }
-    refute(ModelWithPassword.new('aaaa').valid?)
+    assert_not(ModelWithPassword.new('aaaa').valid?)
     assert(ModelWithPassword.new('aaa!').valid?)
   end
 
   def test_enforces_symbols
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { symbols: 2 }
-    refute(ModelWithPassword.new('aaa!').valid?)
+    assert_not(ModelWithPassword.new('aaa!').valid?)
     assert(ModelWithPassword.new('aa!?').valid?)
   end
 
   def test_enforces_combination
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { lower: 1, upper: 1, digit: 1, symbol: 1 }
-    refute(ModelWithPassword.new('abcd').valid?)
-    refute(ModelWithPassword.new('ABCD').valid?)
-    refute(ModelWithPassword.new('1234').valid?)
-    refute(ModelWithPassword.new('$!,*').valid?)
+    assert_not(ModelWithPassword.new('abcd').valid?)
+    assert_not(ModelWithPassword.new('ABCD').valid?)
+    assert_not(ModelWithPassword.new('1234').valid?)
+    assert_not(ModelWithPassword.new('$!,*').valid?)
     assert(ModelWithPassword.new('aB3*').valid?)
   end
 end
