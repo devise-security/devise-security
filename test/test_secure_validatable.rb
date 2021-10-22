@@ -146,6 +146,12 @@ class TestSecureValidatable < ActiveSupport::TestCase
     refute user.valid?
     assert_includes(user.errors.full_messages, msg)
     assert_raises(ORMInvalidRecordException) { user.save! }
+
+    # User#email_not_equal_password_validation was raising
+    # `NoMethodError (undefined method `downcase' for nil:NilClass)`
+    # with a `nil` email.
+    user.email = nil
+    refute user.valid?
   end
 
   test 'password can not equal case sensitive version of email with spaces for existing user' do

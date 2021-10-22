@@ -6,7 +6,7 @@ require 'generators/devise_security/install_generator'
 
 class TestInstallGenerator < Rails::Generators::TestCase
   tests DeviseSecurity::Generators::InstallGenerator
-  destination File.expand_path('../tmp', __FILE__)
+  destination File.expand_path('tmp', __dir__)
   setup :prepare_destination
 
   test 'Assert all files are properly created' do

@@ -74,7 +74,7 @@ module Devise
       end
 
       def email_not_equal_password_validation
-        return if password.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
+        return if password.blank? || email.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
         dummy = self.class.new.tap do |user|
           user.password_salt = password_salt if respond_to?(:password_salt)
           # whether case_insensitive_keys or strip_whitespace_keys include email or not, any
