@@ -91,17 +91,18 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password cannot be blank upon creation' do
     user = User.new(email: 'bob@microsoft.com')
 
+    msgs = [
+      "Password can't be blank",
+      'Password is too short (minimum is 7 characters)',
+      'Password must contain at least one digit',
+      'Password must contain at least one lower-case letter',
+      'Password must contain at least one upper-case letter'
+    ]
+
+    msgs << "Encrypted password can't be blank" if DEVISE_ORM == :mongoid
+
     assert user.invalid?
-    assert_equal(
-      [
-        "Password can't be blank",
-        "Password is too short (minimum is 7 characters)",
-        "Password must contain at least one digit",
-        "Password must contain at least one lower-case letter",
-        "Password must contain at least one upper-case letter"
-      ],
-      user.errors.full_messages
-    )
+    assert_equal(msgs, user.errors.full_messages)
   end
 
   test 'password cannot be updated to be blank' do
@@ -120,10 +121,10 @@ class TestSecureValidatable < ActiveSupport::TestCase
     assert_equal(
       [
         "Password can't be blank",
-        "Password is too short (minimum is 7 characters)",
-        "Password must contain at least one digit",
-        "Password must contain at least one lower-case letter",
-        "Password must contain at least one upper-case letter"
+        'Password is too short (minimum is 7 characters)',
+        'Password must contain at least one digit',
+        'Password must contain at least one lower-case letter',
+        'Password must contain at least one upper-case letter'
       ],
       user.errors.full_messages
     )
@@ -336,6 +337,6 @@ class TestSecureValidatable < ActiveSupport::TestCase
       class ::Dog; include Devise::Models::SecureValidatable; end
     end
 
-    assert_equal("Could not use SecureValidatable on Dog", error.message)
+    assert_equal('Could not use SecureValidatable on Dog', error.message)
   end
 end
