@@ -4,13 +4,13 @@ require 'test_helper'
 
 class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
   def create_user
-    user = User.create(
+    User.create(
       email: 'bob@microsoft.com',
       password: 'Password1!',
       password_confirmation: 'Password1!'
-    )
-    user.extend(Devise::Models::DatabaseAuthenticatablePatch)
-    user
+    ) do |user|
+      user.extend(Devise::Models::DatabaseAuthenticatablePatch)
+    end
   end
 
   test 'updates if all params are present and valid' do
@@ -82,7 +82,9 @@ class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
     assert_equal(
       [
         "Password confirmation doesn't match Password",
-        "Password is too short (minimum is 7 characters)"
+        'Password is too short (minimum is 7 characters)',
+        'Password must contain at least one digit',
+        'Password must contain at least one upper-case letter'
       ],
       user.errors.full_messages
     )
@@ -100,7 +102,11 @@ class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
     )
 
     assert_equal(
-      ["Password is too short (minimum is 7 characters)"],
+      [
+        'Password is too short (minimum is 7 characters)',
+        'Password must contain at least one digit',
+        'Password must contain at least one upper-case letter'
+      ],
       user.errors.full_messages
     )
   end
