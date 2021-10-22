@@ -207,8 +207,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
-    rubocop (0.81.0)
-      jaro_winkler (~> 1.5.1)
+    rubocop (0.83.0)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
@@ -285,7 +284,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_email_validator
   railties (~> 5.2.6)
-  rubocop (~> 0.81.0)
+  rubocop (~> 0.83.0)
   rubocop-rails
   simplecov-lcov
   solargraph

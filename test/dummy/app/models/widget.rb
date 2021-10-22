@@ -4,7 +4,5 @@ class Widget < ApplicationRecord
   belongs_to :user
   validates_associated :user
 
-  if DEVISE_ORM == :mongoid
-    field :name, type: String
-  end
+  field :name, type: String if DEVISE_ORM == :mongoid
 end

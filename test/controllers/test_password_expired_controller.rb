@@ -76,6 +76,10 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     assert_response :success
     assert_template :show
     assert_equal response.media_type, 'text/html'
+    assert_includes(
+      response.body,
+      "Password confirmation doesn&#39;t match Password"
+    )
   end
 
   test 'update password using JSON format' do

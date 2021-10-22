@@ -94,7 +94,6 @@ class TestParanoidVerification < ActiveSupport::TestCase
     Devise.paranoid_code_regenerate_after_attempt = original_regenerate
   end
 
-
   test 'by default paranoid code regenerate should have 10 attempts' do
     user = User.new(paranoid_verification_code: 'abcde')
     assert_equal 10, user.paranoid_attempts_remaining
