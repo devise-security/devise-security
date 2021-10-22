@@ -3,21 +3,14 @@
 require 'test_helper'
 
 class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
-  class User < ApplicationRecord
-    devise :database_authenticatable, :validatable
-
-    include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
-
-    include Devise::Models::DatabaseAuthenticatablePatch
-
-  end
-
   def create_user
-    User.create(
+    user = User.create(
       email: 'bob@microsoft.com',
       password: 'Password1!',
       password_confirmation: 'Password1!'
     )
+    user.extend(Devise::Models::DatabaseAuthenticatablePatch)
+    user
   end
 
   test 'updates if all params are present and valid' do
