@@ -44,7 +44,9 @@ module Devise
               validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
             end
 
-            validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
+            validates_presence_of :password, if: :password_required?
+            validates_confirmation_of :password, if: :password_required?
+            validates_length_of :password, within: password_length, allow_blank: true
           end
 
           # extra validations
