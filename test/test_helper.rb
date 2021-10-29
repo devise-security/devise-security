@@ -3,6 +3,13 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
+
+if ENV['CI']
+  require 'simplecov-lcov'
+  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+  SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+end
+
 SimpleCov.start do
   add_filter 'gemfiles'
   add_filter 'test/dummy/db'
@@ -16,14 +23,6 @@ SimpleCov.start do
   add_group 'Security Questionable', 'security_question'
   add_group 'Session Limitable', 'session_limitable'
   add_group 'Tests', 'test'
-end
-
-if ENV['CI']
-  require 'simplecov'
-  require 'simplecov-lcov'
-  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
-  SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
-  SimpleCov.start
 end
 
 require 'pry'
