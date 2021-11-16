@@ -21,6 +21,11 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
     assert(ModelWithPassword.new('aaaa').valid?)
   end
 
+  def test_allows_blank
+    ModelWithPassword.validates :password, 'devise_security/password_complexity': { upper: 1 }
+    assert(ModelWithPassword.new('').valid?)
+  end
+
   def test_enforces_uppercase
     ModelWithPassword.validates :password, 'devise_security/password_complexity': { upper: 1 }
     assert_not(ModelWithPassword.new('aaaa').valid?)
