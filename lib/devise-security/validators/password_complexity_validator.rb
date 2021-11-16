@@ -4,9 +4,11 @@
 # Options:
 # - digit:  minimum number of digits in the validated string
 # - digits: minimum number of digits in the validated string
+#           uses localization string for "digit" above
 # - lower:  minimum number of lower-case letters in the validated string
 # - symbol: minimum number of punctuation characters or symbols in the validated string
 # - symbols: minimum number of punctuation characters or symbols in the validated string
+#            uses localization string for "symbol" above
 # - upper:  minimum number of upper-case letters in the validated string
 class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
   PATTERNS = {
@@ -18,13 +20,22 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
     upper: /\p{Upper}/
   }.freeze
 
+  KEYS = {
+    digits: :digit,
+    symbols: :symbol
+  }.freeze
+
   def validate_each(record, attribute, value)
     active_pattern_keys.each do |key|
       minimum = [0, options[key].to_i].max
       pattern = Regexp.new PATTERNS[key]
 
       unless (value || '').scan(pattern).size >= minimum
-        record.errors.add attribute, :"password_complexity.#{key}", count: minimum
+        record.errors.add(
+          attribute,
+          :"password_complexity.#{KEYS.fetch(key, key)}",
+          count: minimum
+        )
       end
     end
   end
