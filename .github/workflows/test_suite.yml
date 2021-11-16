@@ -14,6 +14,13 @@ jobs:
         orm: [active_record, mongoid]
         rails: ["5.2", "6.0", "6.1"]
         ruby: ["2.6", "2.7", "3.0", head]
+        exclude:
+          - orm: mongoid
+            rails: 6.0
+            ruby: head
+          - orm: mongoid
+            rails: 6.1
+            ruby: head
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
