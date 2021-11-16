@@ -27,9 +27,11 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   def test_with_no_rules_anything_goes
     assert(create_model('aaaa').valid?)
   end
-
-  # TODO test garbage
-
+  
+  def test_allows_blank
+    assert(create_model('', { upper: 1 }).valid?)
+  end
+  
   def test_enforces_uppercase_invalid
     model = create_model('aaaa', { upper: 1 })
 

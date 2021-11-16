@@ -91,13 +91,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   test 'password cannot be blank upon creation' do
     user = User.new(email: 'bob@microsoft.com')
 
-    msgs = [
-      "Password can't be blank",
-      'Password is too short (minimum is 7 characters)',
-      'Password must contain at least one digit',
-      'Password must contain at least one lower-case letter',
-      'Password must contain at least one upper-case letter'
-    ]
+    msgs = ["Password can't be blank"]
 
     msgs << "Encrypted password can't be blank" if DEVISE_ORM == :mongoid
 
@@ -118,16 +112,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user.password_confirmation = nil
 
     assert user.invalid?
-    assert_equal(
-      [
-        "Password can't be blank",
-        'Password is too short (minimum is 7 characters)',
-        'Password must contain at least one digit',
-        'Password must contain at least one lower-case letter',
-        'Password must contain at least one upper-case letter'
-      ],
-      user.errors.full_messages
-    )
+    assert_equal(["Password can't be blank"],user.errors.full_messages)
   end
 
   test 'password_confirmation must match password' do
