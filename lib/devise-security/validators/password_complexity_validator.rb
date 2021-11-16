@@ -19,6 +19,8 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
   }.freeze
 
   def validate_each(record, attribute, value)
+    return unless value.present?
+
     active_pattern_keys.each do |key|
       minimum = [0, options[key].to_i].max
       pattern = Regexp.new PATTERNS[key]
