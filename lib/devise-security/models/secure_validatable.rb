@@ -59,7 +59,7 @@ module Devise
           validate :current_equal_password_validation
 
           # don't allow email to equal password
-          validate :email_not_equal_password_validation unless allow_passwords_equal_to_email
+          validate :email_not_equal_password_validation
         end
       end
 
@@ -76,14 +76,11 @@ module Devise
       end
 
       def email_not_equal_password_validation
+        return if self.class.allow_passwords_equal_to_email
         return if password.blank? || email.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
-        dummy = self.class.new.tap do |user|
-          user.password_salt = password_salt if respond_to?(:password_salt)
-          # whether case_insensitive_keys or strip_whitespace_keys include email or not, any
-          # variation of the email should not be a supported password
-          user.password = email.downcase.strip
+        if ActiveSupport::SecurityUtils.secure_compare(password.downcase.strip, email.downcase.strip)
+          self.errors.add(:password, :equal_to_email)
         end
-        self.errors.add(:password, :equal_to_email) if dummy.valid_password?(password.downcase.strip)
       end
 
       protected
