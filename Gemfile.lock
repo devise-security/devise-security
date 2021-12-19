@@ -56,7 +56,7 @@ GEM
     ast (2.4.2)
     backport (1.2.0)
     bcrypt (3.1.16)
-    benchmark (0.1.1)
+    benchmark (0.2.0)
     bson (4.12.1)
     builder (3.2.4)
     byebug (11.1.3)
@@ -72,7 +72,7 @@ GEM
     database_cleaner-mongoid (2.0.1)
       database_cleaner-core (~> 2.0.0)
       mongoid
-    devise (4.8.0)
+    devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -89,10 +89,10 @@ GEM
       simplecov (>= 0.3.8)
       yard (>= 0.7.0)
     erubi (1.10.0)
-    globalid (0.5.2)
+    globalid (1.0.0)
       activesupport (>= 5.0)
-    hashie (4.1.0)
-    i18n (1.8.10)
+    hashie (5.0.0)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     interception (0.5)
     jaro_winkler (1.5.4)
@@ -100,7 +100,7 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    loofah (2.12.0)
+    loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     m (1.6.0)
@@ -110,13 +110,13 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     method_source (1.0.0)
-    mini_mime (1.1.1)
+    mini_mime (1.1.2)
     mini_portile2 (2.6.1)
-    minitest (5.14.4)
+    minitest (5.15.0)
     minitest-rails (5.2.0)
       minitest (~> 5.10)
       railties (~> 5.2.0)
-    mongo (2.16.0)
+    mongo (2.17.0)
       bson (>= 4.8.2, < 5.0.0)
     mongoid (7.3.3)
       activemodel (>= 5.1, < 6.2)
@@ -134,7 +134,7 @@ GEM
       rack-protection
     orm_adapter (0.5.0)
     parallel (1.21.0)
-    parser (3.0.2.0)
+    parser (3.0.3.2)
       ast (~> 2.4.1)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -145,7 +145,7 @@ GEM
     pry-rescue (1.5.2)
       interception (>= 0.5)
       pry (>= 0.12.0)
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
     rack-protection (2.1.0)
       rack
@@ -186,7 +186,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    reverse_markdown (2.0.0)
+    reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
     rmagick (4.2.3)
@@ -206,7 +206,7 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
-    rspec-support (3.10.2)
+    rspec-support (3.10.3)
     rubocop (0.83.0)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
@@ -214,10 +214,10 @@ GEM
       rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-rails (2.5.2)
-      activesupport
+    rubocop-rails (2.6.0)
+      activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 0.72.0)
+      rubocop (>= 0.82.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     simplecov (0.21.2)
@@ -227,7 +227,7 @@ GEM
     simplecov-html (0.12.3)
     simplecov-lcov (0.8.0)
     simplecov_json_formatter (0.1.3)
-    solargraph (0.44.0)
+    solargraph (0.44.2)
       backport (~> 1.2)
       benchmark
       bundler (>= 1.17.2)
@@ -245,9 +245,9 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.2.2)
-      actionpack (>= 4.0)
-      activesupport (>= 4.0)
+    sprockets-rails (3.4.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
     thor (1.1.0)
@@ -258,10 +258,12 @@ GEM
     unicode-display_width (1.8.0)
     warden (1.2.9)
       rack (>= 2.0.9)
+    webrick (1.7.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    yard (0.9.26)
+    yard (0.9.27)
+      webrick (~> 1.7.0)
 
 PLATFORMS
   ruby
@@ -291,4 +293,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   2.2.22
+   2.2.33
