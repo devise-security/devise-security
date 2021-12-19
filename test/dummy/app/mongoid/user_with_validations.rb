@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "shared_user"
+require 'shared_user'
 
 class UserWithValidations
   include Mongoid::Document
@@ -11,8 +11,8 @@ class UserWithValidations
   field :facebook_token, type: String
 
   ## Database authenticatable
-  field :email, type: String, default: ""
-  field :encrypted_password, type: String, default: ""
+  field :email, type: String, default: ''
+  field :encrypted_password, type: String, default: ''
 
   ## Recoverable
   field :reset_password_token, type: String

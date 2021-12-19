@@ -1,11 +1,15 @@
 require:
   - rubocop-rails
+
 AllCops:
   Exclude:
     - Gemfile*
     - bin/*
-    - gemfiles/*
-    - test/**/*
+    - gemfiles/**/*
+    - vendor/bundle/**/*
+  # Automatically enables new cops so that we only have to add them to
+  # edit default behavior
+  NewCops: enable
 
 Rails:
   Enabled: true

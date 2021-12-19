@@ -44,7 +44,9 @@ module Devise
               validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
             end
 
-            validates :password, presence: true, length: password_length, confirmation: true, if: :password_required?
+            validates_presence_of :password, if: :password_required?
+            validates_confirmation_of :password, if: :password_required?
+            validates_length_of :password, within: password_length, allow_blank: true
           end
 
           # extra validations
@@ -74,7 +76,7 @@ module Devise
       end
 
       def email_not_equal_password_validation
-        return if password.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
+        return if password.blank? || email.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
         dummy = self.class.new.tap do |user|
           user.password_salt = password_salt if respond_to?(:password_salt)
           # whether case_insensitive_keys or strip_whitespace_keys include email or not, any
