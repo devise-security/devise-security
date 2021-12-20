@@ -20,9 +20,9 @@ module Devise
 
       def self.included(base)
         base.extend ClassMethods
-        assert_secure_validations_api!(base)
 
         base.class_eval do
+          assert_secure_validations_api!(base)
           already_validated_email = false
 
           # validate login in a strict way if not yet validated
@@ -63,10 +63,6 @@ module Devise
         end
       end
 
-      def self.assert_secure_validations_api!(base)
-        raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
-      end
-
       def current_equal_password_validation
         return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
         dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
@@ -100,6 +96,10 @@ module Devise
         Devise::Models.config(self, :password_complexity, :password_length, :email_validation, :allow_passwords_equal_to_email)
 
         private
+
+        def assert_secure_validations_api!(base)
+          raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
+        end
 
         def has_uniqueness_validation_of_login?
           validators.any? do |validator|
