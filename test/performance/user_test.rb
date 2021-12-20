@@ -31,7 +31,9 @@ module Performance
       user2 = ConfigOnUser.new(email: email, password: email)
       user2.valid?
 
+      GC.start
       result1 = Benchmark.measure { user1.valid? }
+      GC.start
       result2 = Benchmark.measure { user2.valid? }
 
       assert_in_delta(result1.real, result2.real, 0.005)
