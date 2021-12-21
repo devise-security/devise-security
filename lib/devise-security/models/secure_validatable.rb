@@ -94,10 +94,12 @@ module Devise
 
       def email_not_equal_password_validation
         return if allow_passwords_equal_to_email
+
         return if password.blank? || email.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
-        if ActiveSupport::SecurityUtils.secure_compare(password.downcase.strip, email.downcase.strip)
-          self.errors.add(:password, :equal_to_email)
-        end
+
+        return unless Devise.secure_compare(password.downcase.strip, email.downcase.strip)
+
+        errors.add(:password, :equal_to_email)
       end
 
       protected
@@ -105,6 +107,8 @@ module Devise
       # Checks whether a password is needed or not. For validations only.
       # Passwords are always required if it's a new record, or if the password
       # or confirmation are being set somewhere.
+      #
+      # @return [Boolean]
       def password_required?
         !persisted? || !password.nil? || !password_confirmation.nil?
       end
