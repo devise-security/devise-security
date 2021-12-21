@@ -56,7 +56,14 @@ module Devise
           end
 
           # extra validations
-          validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
+          # validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
+          validate do |record|
+            if email_validation
+              validates_with(
+                EmailValidator, { attributes: :email }
+              )
+            end
+          end
 
           validate if: :password_required? do |record|
             validates_with(
@@ -104,6 +111,10 @@ module Devise
 
       def allow_passwords_equal_to_email
         self.class.allow_passwords_equal_to_email
+      end
+
+      def email_validation
+        self.class.email_validation
       end
 
       def password_complexity
