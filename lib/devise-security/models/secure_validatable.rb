@@ -78,7 +78,8 @@ module Devise
       def email_not_equal_password_validation
         return if self.class.allow_passwords_equal_to_email
         return if password.blank? || email.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
-        if ActiveSupport::SecurityUtils.secure_compare(password.downcase.strip, email.downcase.strip)
+
+        if Devise.secure_compare(password.downcase.strip, email.downcase.strip)
           self.errors.add(:password, :equal_to_email)
         end
       end
