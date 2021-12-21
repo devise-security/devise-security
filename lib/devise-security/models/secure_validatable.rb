@@ -56,7 +56,7 @@ module Devise
           end
 
           # extra validations
-          # validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
+          # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
           validate do |record|
             if email_validation
               validates_with(
