@@ -57,9 +57,13 @@ module Devise
 
           # extra validations
           validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
-          validates :password,
-                    'devise_security/password_complexity': password_complexity,
-                    if: :password_required?
+
+          validate if: :password_required? do |record|
+            validates_with(
+              DeviseSecurity::PasswordComplexityValidator,
+              { attributes: :password }.merge(record.password_complexity)
+            )
+          end
 
           # don't allow use same password
           validate :current_equal_password_validation
@@ -96,6 +100,10 @@ module Devise
 
       def email_required?
         true
+      end
+
+      def password_complexity
+        self.class.password_complexity
       end
 
       def password_length
