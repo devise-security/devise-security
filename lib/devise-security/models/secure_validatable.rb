@@ -113,21 +113,13 @@ module Devise
         true
       end
 
-      def allow_passwords_equal_to_email
-        self.class.allow_passwords_equal_to_email
-      end
-
-      def email_validation
-        self.class.email_validation
-      end
-
-      def password_complexity
-        self.class.password_complexity
-      end
-
-      def password_length
-        self.class.password_length
-      end
+      delegate(
+        :allow_passwords_equal_to_email,
+        :email_validation,
+        :password_complexity,
+        :password_length,
+        to: :class
+      )
 
       module ClassMethods
         Devise::Models.config(
