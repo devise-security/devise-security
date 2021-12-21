@@ -115,7 +115,13 @@ module Devise
       end
 
       module ClassMethods
-        Devise::Models.config(self, :password_complexity, :password_length, :email_validation, :allow_passwords_equal_to_email)
+        Devise::Models.config(
+          self,
+          :allow_passwords_equal_to_email,
+          :email_validation,
+          :password_complexity,
+          :password_length
+        )
 
         private
 
