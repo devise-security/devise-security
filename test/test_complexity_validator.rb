@@ -27,11 +27,11 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   def test_with_no_rules_anything_goes
     assert(create_model('aaaa').valid?)
   end
-  
+
   def test_allows_blank
     assert(create_model('', { upper: 1 }).valid?)
   end
-  
+
   def test_enforces_uppercase_invalid
     model = create_model('aaaa', { upper: 1 })
 
@@ -205,9 +205,9 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
       {
         password:
         [
-          "must contain at least one upper-case letter",
           "must contain at least one digit",
-          "must contain at least one punctuation mark or symbol"
+          "must contain at least one punctuation mark or symbol",
+          "must contain at least one upper-case letter"
         ]
       }
     )
@@ -222,8 +222,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
       {
         password:
         [
-          "must contain at least one lower-case letter",
           "must contain at least one digit",
+          "must contain at least one lower-case letter",
           "must contain at least one punctuation mark or symbol"
         ]
       }
@@ -240,8 +240,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
         password:
         [
           "must contain at least one lower-case letter",
-          "must contain at least one upper-case letter",
-          "must contain at least one punctuation mark or symbol"
+          "must contain at least one punctuation mark or symbol",
+          "must contain at least one upper-case letter"
         ]
       }
     )
@@ -256,9 +256,9 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
       {
         password:
         [
+          "must contain at least one digit",
           "must contain at least one lower-case letter",
-          "must contain at least one upper-case letter",
-          "must contain at least one digit"
+          "must contain at least one upper-case letter"
         ]
       }
     )
