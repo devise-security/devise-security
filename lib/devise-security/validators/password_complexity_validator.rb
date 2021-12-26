@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
-# Password Complexity Validator
+# (NIST)[https://pages.nist.gov/800-63-3/sp800-63b.html#appA] does not recommend
+# the use of a password complexity checks because...
+#
+# > Length and complexity requirements beyond those recommended here
+# > significantly increase the difficulty of memorized secrets and increase user
+# > frustration. As a result, users often work around these restrictions in a
+# > way that is counterproductive. Furthermore, other mitigations such as
+# > blacklists, secure hashed storage, and rate limiting are more effective at
+# > preventing modern brute-force attacks. Therefore, no additional complexity
+# > requirements are imposed.
 #
 # Options:
 # - `digit | digits`:  minimum number of digits in the validated string. Uses
