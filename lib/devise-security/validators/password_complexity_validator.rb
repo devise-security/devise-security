@@ -25,32 +25,29 @@ class DeviseSecurity::PasswordComplexityValidator < ActiveModel::EachValidator
     }
   end
 
+  # Validate the complexity of the password. This validation does not check to
+  # ensure the password is not blank. That is the responsibility of other
+  # validations. This validator will also ignore any patterns that are not
+  # explicitly configured to be used or whose minimum limits are less than 1.
+  #
   # @param record [ActiveModel::Model]
   # @param attribute [Symbol]
   # @param password [String]
   def validate_each(record, attribute, password)
     return if password.blank?
 
-    active_patterns.each do |pattern_name, minimum|
-      next if password.scan(patterns[pattern_name]).size >= minimum
+    options.sort.each do |pattern_name, minimum|
+      normalized_option = pattern_name.to_s.singularize.to_sym
+
+      next unless patterns.key?(normalized_option)
+      next unless minimum.positive?
+      next if password.scan(patterns[normalized_option]).size >= minimum
 
       record.errors.add(
         attribute,
-        :"password_complexity.#{pattern_name}",
+        :"password_complexity.#{normalized_option}",
         count: minimum
       )
     end
-  end
-
-  # A Hash of the valid patterns that have been enabled. These are normalized to
-  # have singular key names and positive limits. Negative or zero limits are
-  # ignored.
-  #
-  # @return [Hash<Symbol,Integer>]
-  def active_patterns
-    options.transform_keys { |pattern| pattern.to_s.singularize.to_sym } # singularize keys
-           .slice(*patterns.keys) # ignore any unknown patterns and other options
-           .transform_values { |value| [0, value.to_i].max } # normalize to positive limits
-           .reject { |_, value| value.zero? } # ignore zero limits
   end
 end
