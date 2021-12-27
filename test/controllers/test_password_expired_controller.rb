@@ -21,13 +21,6 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     sign_in(@user)
   end
 
-  # def create_override_controller
-  #   Rails.application.routes.draw do
-  #     get 'any_action' => 'application#any_action'
-  #     devise_for :users, controllers: { password_expired: }
-  #   end
-  # end
-
   test 'redirects on show if user not logged in' do
     sign_out(@user)
     get :show
