@@ -78,7 +78,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     assert_equal response.media_type, 'text/html'
     assert_includes(
       response.body,
-      "Password confirmation doesn&#39;t match Password"
+      'Password confirmation doesn&#39;t match Password'
     )
   end
 
@@ -113,14 +113,14 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   end
 end
 
-class PasswordExpirationCustomRedirectTest < ActionController::TestCase
+class PasswordExpiredCustomRedirectTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
-  tests Overrides::PasswordExpirationController
+  tests Overrides::PasswordExpiredController
 
   setup do
     @controller.class.respond_to :json, :xml
-    @request.env['devise.mapping'] = Devise.mappings[:password_expiration_user]
-    @user = PasswordExpirationUser.create!(
+    @request.env['devise.mapping'] = Devise.mappings[:password_expired_user]
+    @user = PasswordExpiredUser.create!(
       username: 'hello',
       email: 'hello@path.travel',
       password: 'Password4',
@@ -136,7 +136,7 @@ class PasswordExpirationCustomRedirectTest < ActionController::TestCase
   test 'update password with custom redirect route' do
     put :update,
         params: {
-          password_expiration_user: {
+          password_expired_user: {
             current_password: 'Password4',
             password: 'Password5',
             password_confirmation: 'Password5',

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PasswordExpirationUser < ApplicationUserRecord
+class PasswordExpiredUser < ApplicationUserRecord
   devise :database_authenticatable, :password_archivable, :paranoid_verification, :password_expirable
 
   if DEVISE_ORM == :mongoid
