@@ -20,6 +20,8 @@ jobs:
           # See https://github.com/rails/rails/issues/43998, fixed in Rails 7.0.1
           - rails: 7.0
             ruby: 3.1
+          - rails: 7.0
+            ruby: head
           - orm: mongoid
             rails: 7.0
           - rails: 5.2
