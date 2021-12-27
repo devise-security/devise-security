@@ -27,6 +27,7 @@ end
 
 appraise 'rails-7.0' do
   gem 'railties', '~> 7.0.0'
+  gem 'devise', '~> 4.8.1' # devise introduced Rails 7 support
   gem 'minitest-rails', github: 'blowmage/minitest-rails', branch: 'master' # temporary until official release of Rails 7 support for minitest-rails
 
   # net-smtp, net-imap and net-pop were removed from default gems in Ruby 3.1, but is used by the `mail` gem.
