@@ -142,7 +142,7 @@ class PasswordExpiredCustomRedirectTest < ActionController::TestCase
             password_confirmation: 'Password5',
           },
         }
+
     assert_redirected_to '/cookies'
-    assert_equal response.media_type, 'text/html'
   end
 end
