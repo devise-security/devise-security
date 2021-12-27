@@ -59,7 +59,7 @@ class ParanoidVerificationCodeCustomRedirectTest < ActionController::TestCase
     sign_in(@user)
   end
 
-  test "redirects to custom redirect route on update" do
+  test 'redirects to custom redirect route on update' do
     patch :update, params: { paranoid_verification_user: { paranoid_verification_code: 'cookies' } }
 
     assert_redirected_to '/cats'

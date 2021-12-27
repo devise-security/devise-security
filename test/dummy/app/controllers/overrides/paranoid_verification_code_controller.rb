@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Overrides::ParanoidVerificationCodeController < Devise::ParanoidVerificationCodeController
-  def after_password_expired_update_path_for(_)
-    '/cookies'
+  def after_paranoid_verification_code_update_path_for(_)
+    '/cats'
   end
 end

@@ -17,10 +17,14 @@ class Devise::ParanoidVerificationCodeController < DeviseController
       warden.session(scope)['paranoid_verify'] = false
       set_flash_message :notice, :updated
       bypass_sign_in resource, scope: scope
-      redirect_to redirect_route
+      redirect_to after_paranoid_verification_code_update_path_for(resource)
     else
       respond_with(resource, action: :show)
     end
+  end
+
+  def after_paranoid_verification_code_update_path_for(_resource)
+    stored_location_for(scope) || :root
   end
 
   private
@@ -40,11 +44,5 @@ class Devise::ParanoidVerificationCodeController < DeviseController
   def authenticate_scope!
     send(:"authenticate_#{resource_name}!")
     self.resource = send("current_#{resource_name}")
-  end
-
-  def redirect_route
-    Devise.paranoid_verification_code_redirect_location ||
-      stored_location_for(scope) ||
-      :root
   end
 end
