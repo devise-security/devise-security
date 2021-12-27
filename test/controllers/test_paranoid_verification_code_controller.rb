@@ -40,15 +40,29 @@ class Devise::ParanoidVerificationCodeControllerTest < ActionController::TestCas
     assert_redirected_to :root
     assert_equal 'Verification code accepted', flash[:notice]
   end
+end
+
+class ParanoidVerificationCodeCustomRedirectTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+  tests Overrides::ParanoidVerificationCodeController
+
+  setup do
+    @request.env['devise.mapping'] = Devise.mappings[:paranoid_verification_user]
+
+    @user = ParanoidVerificationUser.create!(
+      username: 'hello',
+      email: 'hello@path.travel',
+      password: 'Password4',
+      confirmed_at: 5.months.ago,
+    )
+
+    sign_in(@user)
+  end
 
   test "redirects to custom redirect route on update" do
-    Devise.paranoid_verification_code_redirect_location = '/cats'
-
-    patch :update, params: { user: { paranoid_verification_code: 'cookies' } }
+    patch :update, params: { paranoid_verification_user: { paranoid_verification_code: 'cookies' } }
 
     assert_redirected_to '/cats'
     assert_equal 'Verification code accepted', flash[:notice]
-
-    Devise.paranoid_verification_code_redirect_location = nil
   end
 end
