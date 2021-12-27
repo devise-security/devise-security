@@ -21,6 +21,13 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     sign_in(@user)
   end
 
+  # def create_override_controller
+  #   Rails.application.routes.draw do
+  #     get 'any_action' => 'application#any_action'
+  #     devise_for :users, controllers: { password_expired: }
+  #   end
+  # end
+
   test 'redirects on show if user not logged in' do
     sign_out(@user)
     get :show
@@ -61,23 +68,6 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
         }
     assert_redirected_to root_path
     assert_equal response.media_type, 'text/html'
-  end
-
-  test 'update password with custom redirect route' do
-    Devise.password_expired_redirect_location = '/cookies'
-
-    put :update,
-        params: {
-          user: {
-            current_password: 'Password4',
-            password: 'Password5',
-            password_confirmation: 'Password5',
-          },
-        }
-    assert_redirected_to '/cookies'
-    assert_equal response.media_type, 'text/html'
-
-    Devise.password_expired_redirect_location = nil
   end
 
   test 'password confirmation does not match' do
@@ -127,5 +117,39 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
     assert_response 204
     assert_equal root_url, response.location
     assert_nil response.media_type, 'No Content-Type header should be set for No Content response'
+  end
+end
+
+class PasswordExpirationCustomRedirectTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+  tests Overrides::PasswordExpirationController
+
+  setup do
+    @controller.class.respond_to :json, :xml
+    @request.env['devise.mapping'] = Devise.mappings[:password_expiration_user]
+    @user = PasswordExpirationUser.create!(
+      username: 'hello',
+      email: 'hello@path.travel',
+      password: 'Password4',
+      password_changed_at: 4.months.ago,
+      confirmed_at: 5.months.ago,
+    )
+    assert @user.valid?
+    assert @user.need_change_password?
+
+    sign_in(@user)
+  end
+
+  test 'update password with custom redirect route' do
+    put :update,
+        params: {
+          password_expiration_user: {
+            current_password: 'Password4',
+            password: 'Password5',
+            password_confirmation: 'Password5',
+          },
+        }
+    assert_redirected_to '/cookies'
+    assert_equal response.media_type, 'text/html'
   end
 end
