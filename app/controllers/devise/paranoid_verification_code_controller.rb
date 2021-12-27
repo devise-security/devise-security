@@ -17,10 +17,22 @@ class Devise::ParanoidVerificationCodeController < DeviseController
       warden.session(scope)['paranoid_verify'] = false
       set_flash_message :notice, :updated
       bypass_sign_in resource, scope: scope
-      redirect_to stored_location_for(scope) || :root
+      redirect_to after_paranoid_verification_code_update_path_for(resource)
     else
       respond_with(resource, action: :show)
     end
+  end
+
+  # Allows you to customize where the user is redirected to after the update action
+  # successfully completes.
+  #
+  # Defaults to the request's original path, and then `root` if that is `nil`.
+  #
+  # @param resource [ActiveModel::Model] Devise `resource` model for logged in user.
+  #
+  # @return [String, Symbol] The path that the user will be redirected to.
+  def after_paranoid_verification_code_update_path_for(_resource)
+    stored_location_for(scope) || :root
   end
 
   private
