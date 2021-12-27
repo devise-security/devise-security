@@ -24,17 +24,22 @@ class Devise::PasswordExpiredController < DeviseController
       warden.session(scope)['password_expired'] = false
       set_flash_message :notice, :updated
       bypass_sign_in resource, scope: scope
-      respond_with({}, location: redirect_route)
+      respond_with({}, location: after_password_expiration_update_path_for(resource))
     else
       clean_up_passwords(resource)
       respond_with(resource, action: :show)
     end
   end
 
+  def after_password_expiration_update_path_for(_resource)
+    stored_location_for(scope) || :root
+  end
+
   private
 
   def skip_password_change
     return if !resource.nil? && resource.need_change_password?
+
     redirect_to :root
   end
 
@@ -51,11 +56,5 @@ class Devise::PasswordExpiredController < DeviseController
   def authenticate_scope!
     send(:"authenticate_#{resource_name}!")
     self.resource = send("current_#{resource_name}")
-  end
-
-  def redirect_route
-    Devise.password_expired_redirect_location ||
-      stored_location_for(scope) ||
-      :root
   end
 end
