@@ -31,6 +31,14 @@ class Devise::PasswordExpiredController < DeviseController
     end
   end
 
+  # Allows you to customize where the user is sent to after the update action
+  # successfully completes.
+  #
+  # Defaults to the request's original path, and then `root` if that is `nil`.
+  #
+  # @param resource [ActiveModel::Model] Devise `resource` model for logged in user.
+  #
+  # @return [String, Symbol] The path that the user will be sent to.
   def after_password_expired_update_path_for(_resource)
     stored_location_for(scope) || :root
   end
