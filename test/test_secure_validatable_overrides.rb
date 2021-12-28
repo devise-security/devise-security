@@ -3,6 +3,18 @@
 require 'test_helper'
 
 class TestSecureValidatableOverrides < ActiveSupport::TestCase
+  class ::CustomClassPasswordValidator < DeviseSecurity::PasswordComplexityValidator
+    def patterns
+      super.merge(letter: /\p{Alpha}/)
+    end
+  end
+
+  class ::CustomInstancePasswordValidator < DeviseSecurity::PasswordComplexityValidator
+    def patterns
+      super.merge(alnum: /\p{Alnum}/)
+    end
+  end
+
   class User < ApplicationRecord
     devise :database_authenticatable, :secure_validatable
     include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
@@ -11,11 +23,12 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   class ClassLevelOverrideUser < User
     self.allow_passwords_equal_to_email = true
     self.email_validation = false
-    self.password_complexity = { symbol: 1 }
+    self.password_complexity = { symbol: 1, letter: 10 }
+    self.password_complexity_validator = 'custom_class_password_validator'
     self.password_length = 10..100
   end
 
-  class InstanceLevelOverrideUser < User
+  class InstanceLevelOverrideUser < ClassLevelOverrideUser
     def allow_passwords_equal_to_email
       true
     end
@@ -25,11 +38,15 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
     end
 
     def password_complexity
-      { symbol: 2 }
+      { symbol: 2, alnum: 10 }
     end
 
     def password_length
       11..100
+    end
+
+    def password_complexity_validator
+      'CustomInstancePasswordValidator'
     end
   end
 
@@ -56,8 +73,8 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   test 'email validation can be overridden at the class level' do
     user = ClassLevelOverrideUser.new(
       email: 'bob1!@f.com',
-      password: 'Pa3zZ1!!11111',
-      password_confirmation: 'Pa3zZ1!!11111'
+      password: 'Pa3zZ1!!aaaaaa',
+      password_confirmation: 'Pa3zZ1!!aaaaaa'
     )
 
     assert user.valid?
@@ -66,8 +83,8 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   test 'email validation can be overridden at the instance level' do
     user = InstanceLevelOverrideUser.new(
       email: 'bob1!@f.com',
-      password: 'Pa3zZ1!!11111',
-      password_confirmation: 'Pa3zZ1!!11111'
+      password: 'Pa3zZ1!!aaaaaa',
+      password_confirmation: 'Pa3zZ1!!aaaaaa'
     )
 
     assert user.valid?
@@ -110,7 +127,10 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
     assert user.invalid?
     assert_equal(
-      ['Password is too short (minimum is 10 characters)'],
+      [
+        'Password is too short (minimum is 10 characters)',
+        'Password must contain at least 10 letters'
+      ],
       user.errors.full_messages
     )
   end
@@ -124,7 +144,10 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
     assert user.invalid?
     assert_equal(
-      ['Password is too short (minimum is 11 characters)'],
+      [
+        'Password is too short (minimum is 11 characters)',
+        'Password must contain at least 10 letters or numbers'
+      ],
       user.errors.full_messages
     )
   end

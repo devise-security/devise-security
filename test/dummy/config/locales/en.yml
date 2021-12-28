@@ -1,0 +1,10 @@
+en:
+  errors:
+    messages:
+      password_complexity:
+        letter:
+          one: must contain at least one letter
+          other: must contain at least %{count} letters
+        alnum:
+          one: must contain at least one letter or number
+          other: must contain at least %{count} letters or numbers

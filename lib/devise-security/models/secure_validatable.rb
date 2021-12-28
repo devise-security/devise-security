@@ -67,7 +67,7 @@ module Devise
 
           validate if: :password_required? do |record|
             validates_with(
-              DeviseSecurity::PasswordComplexityValidator,
+              record.password_complexity_validator.is_a?(Class) ? record.password_complexity_validator : record.password_complexity_validator.classify.constantize,
               { attributes: :password }.merge(record.password_complexity)
             )
           end
@@ -121,6 +121,7 @@ module Devise
         :allow_passwords_equal_to_email,
         :email_validation,
         :password_complexity,
+        :password_complexity_validator,
         :password_length,
         to: :class
       )
@@ -131,6 +132,7 @@ module Devise
           :allow_passwords_equal_to_email,
           :email_validation,
           :password_complexity,
+          :password_complexity_validator,
           :password_length
         )
 
