@@ -42,12 +42,3 @@ Style/PercentLiteralDelimiters:
     # indicated with `[]` not `()`.
     '%w': '[]'
     '%W': '[]'
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
