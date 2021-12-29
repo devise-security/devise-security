@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'compatibility'
+require_relative "#{DEVISE_ORM}/banned_password"
 
 module Devise
   module Models
