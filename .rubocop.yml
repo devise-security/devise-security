@@ -34,9 +34,6 @@ Style/ClassAndModuleChildren:
     - nested
     - compact
 
-Style/SymbolArray:
-  EnforcedStyle: brackets
-
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.
 Style/PercentLiteralDelimiters:

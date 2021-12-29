@@ -39,7 +39,7 @@ class CreateTables < MIGRATION_CLASS
       t.integer :password_archivable_id, null: false
       t.datetime :created_at
     end
-    add_index :old_passwords, [:password_archivable_type, :password_archivable_id], name: 'index_password_archivable'
+    add_index :old_passwords, %i[password_archivable_type password_archivable_id], name: 'index_password_archivable'
   end
 
   def self.down
