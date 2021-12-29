@@ -51,7 +51,7 @@ class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
       }
     )
 
-    assert_equal(["Current password is invalid"], user.errors.full_messages)
+    assert_equal(['Current password is invalid'], user.errors.full_messages)
   end
 
   test 'does not update if password is missing' do
@@ -71,7 +71,7 @@ class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
   test 'does not update if password is invalid and mismatches confirmation' do
     user = create_user
 
-    result = user.update_with_password(
+    user.update_with_password(
       {
         current_password: 'Password1!',
         password: 'f',
@@ -93,7 +93,7 @@ class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
   test 'does not update if password is invalid and matches confirmation' do
     user = create_user
 
-    result = user.update_with_password(
+    user.update_with_password(
       {
         current_password: 'Password1!',
         password: 'f',
