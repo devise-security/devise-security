@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-
   devise :database_authenticatable,
          :confirmable,
          :expirable,
@@ -25,7 +24,7 @@ class User < ApplicationRecord
   if DEVISE_ORM == :mongoid
     require './test/dummy/app/models/mongoid/mappings'
     include ::Mongoid::Mappings
-    
+
     def some_method_calling_mongoid
       Mongoid.logger
     end

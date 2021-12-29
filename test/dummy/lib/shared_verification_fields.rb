@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'shared_user'
 
 module SharedVerificationFields

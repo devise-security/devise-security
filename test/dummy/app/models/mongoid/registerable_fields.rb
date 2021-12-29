@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RegisterableFields
   extend ::ActiveSupport::Concern
 
@@ -5,10 +7,10 @@ module RegisterableFields
     include Mongoid::Document
 
     ## Database authenticatable
-    field :email, type: String, default: ""
+    field :email, type: String, default: ''
     validates_presence_of :email
 
-    field :encrypted_password, type: String, default: ""
+    field :encrypted_password, type: String, default: ''
     validates_presence_of :encrypted_password
 
     field :password_changed_at, type: Time

@@ -2,20 +2,24 @@
 
 source "https://rubygems.org"
 
-gem "railties", "~> 6.0.0"
 gem "minitest-rails", "~> 6.0.0"
+gem "railties", "~> 6.0.0"
+gem "net-smtp", require: false
 
 group :active_record do
   gem "sqlite3"
 end
 
 group :mongoid do
-  gem "mongoid", "~> 7.0.5"
-  gem "database_cleaner-mongoid", "~> 2.0"
+  gem "mongoid", "~> 7.3"
+
+  group :test do
+    gem "database_cleaner-mongoid", "~> 2.0"
+  end
 end
 
 group :test do
-  gem "rails-controller-testing", "1.0.4"
+  gem "rails-controller-testing"
 end
 
 gemspec path: "../"

@@ -1,0 +1,43 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+  reviewers:
+  - olbrich
+  labels:
+  - ":arrow_up: dependencies"
+  ignore:
+  - dependency-name: rails-controller-testing
+    versions:
+    - ">= 1.0.5.a, < 1.0.6"
+  - dependency-name: kramdown
+    versions:
+    - 2.3.1
+  - dependency-name: database_cleaner
+    versions:
+    - 2.0.0
+    - 2.0.1
+  - dependency-name: omniauth
+    versions:
+    - 2.0.1
+    - 2.0.2
+    - 2.0.3
+  - dependency-name: nokogiri
+    versions:
+    - 1.11.1
+  - dependency-name: appraisal
+    versions:
+    - 2.4.0
+  - dependency-name: minitest
+    versions:
+    - 5.14.3
+  - dependency-name: mongoid
+    versions:
+    - 7.2.0
+  - dependency-name: solargraph
+    versions:
+    - 0.40.2
+    - 0.40.3

@@ -3,7 +3,6 @@
 require 'test_helper'
 
 class TestPasswordArchivable < ActiveSupport::TestCase
-
   setup do
     Devise.password_archiving_count = 2
   end
@@ -20,7 +19,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   test 'cannot use same password' do
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
-    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
+    assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }
   end
 
   test 'indirectly saving associated user does not cause deprecation warning' do
@@ -43,19 +42,19 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     user = User.create! email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
     assert_equal 0, OldPassword.count
-    set_password(user,  'Password2')
+    set_password(user, 'Password2')
     assert_equal 1, OldPassword.count
 
-    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
-    set_password(user,  'Password3')
+    assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }
+    set_password(user, 'Password3')
     assert_equal 2, OldPassword.count
 
     # rotate first password out of archive
-    assert set_password(user,  'Password4')
+    assert set_password(user, 'Password4')
 
     # archive count was 2, so first password should work again
-    assert set_password(user,  'Password1')
-    assert set_password(user,  'Password2')
+    assert set_password(user, 'Password1')
+    assert set_password(user, 'Password2')
   end
 
   test 'the option should be dynamic during runtime' do
@@ -67,10 +66,34 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
 
-    assert set_password(user,  'Password2')
+    assert set_password(user, 'Password2')
 
-    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password2') }
+    assert_raises(ORMInvalidRecordException) { set_password(user, 'Password2') }
 
-    assert_raises(ORMInvalidRecordException) { set_password(user,  'Password1') }
+    assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }
+  end
+
+  test 'default sort orders do not affect archiving' do
+    class ::OldPassword
+      default_scope { order(created_at: :asc) }
+    end
+
+    assert_equal 2, Devise.password_archiving_count
+
+    user = User.create! email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    assert_equal 0, OldPassword.count
+    set_password(user, 'Password2')
+    assert_equal 1, OldPassword.count
+
+    assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }
+    set_password(user, 'Password3')
+    assert_equal 2, OldPassword.count
+
+    # rotate first password out of archive
+    assert set_password(user, 'Password4')
+
+    # archive count was 2, so first password should work again
+    assert set_password(user, 'Password1')
+    assert set_password(user, 'Password2')
   end
 end

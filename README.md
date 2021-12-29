@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
-A [Devise](https://github.com/plataformatec/devise) extension to add additional
+A [Devise](https://github.com/heartcombo/devise) extension to add additional
 security features required by modern web applications. Forked from
 [Devise Security Extension](https://github.com/phatworx/devise_security_extension)
 
@@ -37,9 +37,9 @@ automated mass creation and brute forcing of accounts harder)
 
 ## Getting started
 
-Devise Security works with Devise on Rails 4.2 onwards. You can add it to your
+Devise Security works with Devise on Rails >= 5.2. You can add it to your
 Gemfile after you successfully set up Devise (see
-[Devise documentation](https://github.com/plataformatec/devise)) with:
+[Devise documentation](https://github.com/heartcombo/devise)) with:
 
 ```ruby
 gem 'devise-security'
@@ -54,7 +54,7 @@ rails generate devise_security:install
 ```
 
 The generator adds optional configurations to
-`config/initializers/devise-security.rb`. Enable the modules you wish to use in
+`config/initializers/devise_security.rb`. Enable the modules you wish to use in
 the initializer you are ready to add Devise Security modules on top of Devise
 modules to any of your Devise models:
 
@@ -89,6 +89,8 @@ Devise.setup do |config|
   # config.expire_password_after = 3.months | true | false
 
   # Need 1 char each of: A-Z, a-z, 0-9, and a punctuation mark or symbol
+  # You may use "digits" in place of "digit" and "symbols" in place of
+  # "symbol" based on your preference
   # config.password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
 
   # Number of old passwords in archive
@@ -190,10 +192,10 @@ documentation there.
 4. Add the captcha in the generated devise views for each controller you have
    activated.
 
-    ```erb
-    <p><%= captcha_tag %></p>
-    <p><%= text_field_tag :captcha %></p>
-    ```
+   ```erb
+   <p><%= captcha_tag %></p>
+   <p><%= text_field_tag :captcha %></p>
+   ```
 
 ## Views
 
@@ -259,7 +261,11 @@ end
 
 #### Bypassing session limitable
 
-Sometimes it's useful to impersonate a user without authentication (e.g. [administrator impersonating a user](https://github.com/plataformatec/devise/wiki/How-To:-Sign-in-as-another-user-if-you-are-an-admin)), in this case the `session_limitable` strategy will log out the user, and if the user logs in while the administrator is still logged in, the administrator will be logged out.
+Sometimes it's useful to impersonate a user without authentication (e.g.
+[administrator impersonating a user](https://github.com/heartcombo/devise/wiki/How-To:-Sign-in-as-another-user-if-you-are-an-admin)),
+in this case the `session_limitable` strategy will log out the user, and if the
+user logs in while the administrator is still logged in, the administrator will
+be logged out.
 
 For such cases the following can be used:
 
@@ -339,8 +345,8 @@ end
 
 ## Requirements
 
-- Devise (<https://github.com/plataformatec/devise>)
-- Rails 4.2 onwards (<http://github.com/rails/rails>)
+- Devise (<https://github.com/heartcombo/devise>)
+- Rails 5.2 onwards (<http://github.com/rails/rails>)
 - recommendations:
   - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
   - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
@@ -392,13 +398,6 @@ See also
 Standard tests can be invoked using `rake`. To run the tests against the
 `mongoid` ORM, use `DEVISE_ORM=mongoid rake` while `mongodb` is running.
 
-To locally simulate what travis-ci will run when you push code use:
-
-```bash
-gem install bundler -v '1.17.3'
-BUNDLER_VERSION=1.17.3 wwtd
-```
-
 ## Maintenance Policy
 
 We are committed to maintain support for `devise-security` for all normal or
@@ -406,8 +405,6 @@ security maintenance versions of the Ruby language
 [as listed here](https://www.ruby-lang.org/en/downloads/branches/), and for the
 Ruby on Rails framework
 [as per their maintenance policy](https://rubyonrails.org/maintenance/).
-
-Support for Rails 4.2 will be dropped in version 0.16.0.
 
 In order to avoid introducing bugs caused by backwardly incompatible Ruby
 language features, it is highly recommended that all development work be done

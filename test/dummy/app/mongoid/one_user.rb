@@ -11,16 +11,16 @@ class OneUser
   field :password_changed_at, type: Time
   index({ password_changed_at: 1 }, {})
 
-  #field :paranoid_verification_code, type: String
-  #field :paranoid_verified_at, type: Time
-  #field :paranoid_verification_attempt, type: Integer, default: 0
+  field :paranoid_verification_code, type: String
+  field :paranoid_verified_at, type: Time
+  field :paranoid_verification_attempt, type: Integer, default: 0
 
   field :username, type: String
   field :facebook_token, type: String
 
   ## Database authenticatable
-  field :email,              type: String, default: ""
-  field :encrypted_password, type: String, default: ""
+  field :email,              type: String, default: ''
+  field :encrypted_password, type: String, default: ''
 
   ## Recoverable
   field :reset_password_token,   type: String
