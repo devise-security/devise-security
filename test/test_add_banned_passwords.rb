@@ -8,7 +8,6 @@ class TestAddBannedPasswords < ActiveSupport::TestCase
   test 'it works' do
     DeviseSecurity::AddBannedPasswords.new(file: "#{__dir__}/dummy.txt").add
 
-    # TODO password uniqueness
     assert_equal(BannedPassword.count, 2)
     assert(BannedPassword.where(password: 'cats').exists?)
     assert(BannedPassword.where(password: 'meow').exists?)
