@@ -13,7 +13,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
       email: 'hello@path.travel',
       password: 'Password4',
       password_changed_at: 4.months.ago,
-      confirmed_at: 5.months.ago,
+      confirmed_at: 5.months.ago
     )
     assert @user.valid?
     assert @user.need_change_password?
@@ -51,27 +51,31 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   end
 
   test 'update password with default format' do
-    put :update,
-        params: {
-          user: {
-            current_password: 'Password4',
-            password: 'Password5',
-            password_confirmation: 'Password5',
-          },
+    put(
+      :update,
+      params: {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
         }
+      }
+    )
     assert_redirected_to root_path
     assert_equal response.media_type, 'text/html'
   end
 
   test 'password confirmation does not match' do
-    put :update,
-        params: {
-          user: {
-            current_password: 'Password4',
-            password: 'Password5',
-            password_confirmation: 'Password6',
-          },
+    put(
+      :update,
+      params: {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password6'
         }
+      }
+    )
 
     assert_response :success
     assert_template :show
@@ -83,30 +87,35 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   end
 
   test 'update password using JSON format' do
-    put :update,
-        format: :json,
-        params: {
-          user: {
-            current_password: 'Password4',
-            password: 'Password5',
-            password_confirmation: 'Password5',
-          },
+    put(
+      :update,
+      format: :json,
+      params: {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
         }
+      }
+    )
+
     assert_response 204
     assert_equal root_url, response.location
     assert_nil response.media_type, 'No Content-Type header should be set for No Content response'
   end
 
   test 'update password using XML format' do
-    put :update,
-        format: :xml,
-        params: {
-          user: {
-            current_password: 'Password4',
-            password: 'Password5',
-            password_confirmation: 'Password5',
-          },
+    put(
+      :update,
+      format: :xml,
+      params: {
+        user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
         }
+      }
+    )
     assert_response 204
     assert_equal root_url, response.location
     assert_nil response.media_type, 'No Content-Type header should be set for No Content response'

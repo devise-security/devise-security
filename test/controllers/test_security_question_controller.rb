@@ -50,18 +50,15 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
   tests Devise::UnlocksController
 
   setup do
-    @user = User.create(username: 'hello', email: 'hello@path.travel',
-                        password: '1234', security_question_answer: 'Right Answer')
+    @user = User.create(
+      username: 'hello', email: 'hello@path.travel', password: '1234', security_question_answer: 'Right Answer'
+    )
     @user.lock_access!
     @request.env['devise.mapping'] = Devise.mappings[:user]
   end
 
   test 'When security question is not enabled it is not inserted' do
-    post :create, params: {
-      user: {
-        email: @user.email,
-      },
-    }
+    post :create, params: { user: { email: @user.email } }
 
     assert_equal I18n.t('devise.unlocks.send_instructions'), flash[:notice]
     assert_redirected_to new_user_session_path
