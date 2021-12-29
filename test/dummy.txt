@@ -1,4 +1,2 @@
-hi
-hello
-meow
 cats
+meow

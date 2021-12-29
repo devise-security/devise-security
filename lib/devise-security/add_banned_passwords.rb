@@ -14,9 +14,11 @@ module DeviseSecurity
 
       if Rails.gem_version >= Gem::Version.new('6.0')
         BannedPassword.insert_all(passwords)
+      else
+        passwords.each do |password|
+          BannedPassword.create(password)
+        end
       end
-
-      puts passwords
     end
   end
 end
