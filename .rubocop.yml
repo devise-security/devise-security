@@ -28,7 +28,6 @@ Layout/LineLength:
 Naming/FileName:
   Exclude: ["devise-security.gemspec"]
 
-# TODO don't like this
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
   SupportedStyles:
