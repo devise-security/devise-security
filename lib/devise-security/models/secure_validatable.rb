@@ -46,14 +46,31 @@ module Devise
 
             validates_presence_of :password, if: :password_required?
             validates_confirmation_of :password, if: :password_required?
-            validates_length_of :password, within: password_length, allow_blank: true
+
+            validate if: :password_required? do |record|
+              validates_with ActiveModel::Validations::LengthValidator,
+                             attributes: :password,
+                             allow_blank: true,
+                             in: record.password_length
+            end
           end
 
           # extra validations
-          validates :email, email: email_validation if email_validation # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
-          validates :password,
-                    'devise_security/password_complexity': password_complexity,
-                    if: :password_required?
+          # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
+          validate do |record|
+            if email_validation
+              validates_with(
+                EmailValidator, { attributes: :email }
+              )
+            end
+          end
+
+          validate if: :password_required? do |record|
+            validates_with(
+              record.password_complexity_validator.is_a?(Class) ? record.password_complexity_validator : record.password_complexity_validator.classify.constantize,
+              { attributes: :password }.merge(record.password_complexity)
+            )
+          end
 
           # don't allow use same password
           validate :current_equal_password_validation
@@ -77,7 +94,7 @@ module Devise
       end
 
       def email_not_equal_password_validation
-        return if self.class.allow_passwords_equal_to_email
+        return if allow_passwords_equal_to_email
 
         return if password.blank? || email.blank? || (!new_record? && !will_save_change_to_encrypted_password?)
 
@@ -101,8 +118,24 @@ module Devise
         true
       end
 
+      delegate(
+        :allow_passwords_equal_to_email,
+        :email_validation,
+        :password_complexity,
+        :password_complexity_validator,
+        :password_length,
+        to: :class
+      )
+
       module ClassMethods
-        Devise::Models.config(self, :password_complexity, :password_length, :email_validation, :allow_passwords_equal_to_email)
+        Devise::Models.config(
+          self,
+          :allow_passwords_equal_to_email,
+          :email_validation,
+          :password_complexity,
+          :password_complexity_validator,
+          :password_length
+        )
 
         private
 
