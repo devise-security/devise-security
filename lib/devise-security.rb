@@ -103,6 +103,7 @@ Devise.add_module :session_non_transferable, model: 'devise-security/models/sess
 Devise.add_module :expirable, model: 'devise-security/models/expirable'
 Devise.add_module :security_questionable, model: 'devise-security/models/security_questionable'
 Devise.add_module :paranoid_verification, controller: :paranoid_verification_code, model: 'devise-security/models/paranoid_verification', route: :verification_code
+Devise.add_module :password_bannable, model: 'devise-security/models/password_bannable'
 
 # requires
 require 'devise-security/routes'

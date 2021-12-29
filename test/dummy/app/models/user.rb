@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :omniauthable,
          :paranoid_verification,
          :password_archivable,
+         :password_bannable,
          :password_expirable,
          :recoverable,
          :registerable,
