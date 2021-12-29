@@ -7,10 +7,12 @@ module DeviseSecurity
     end
 
     def add
-      puts @file
+      passwords = []
       File.foreach(@file) do |line|
-        puts line
+        passwords << { password: line.chomp }
       end
+
+      puts passwords
     end
   end
 end
