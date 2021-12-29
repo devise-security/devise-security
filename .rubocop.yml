@@ -43,13 +43,6 @@ Style/PercentLiteralDelimiters:
     '%w': '[]'
     '%W': '[]'
 
-# TODO can this be removed
-Style/AndOr:
-  # Whether `and` and `or` are banned only in conditionals (conditionals)
-  # or completely (always).
-  # They read better, more like normal English.
-  Enabled: false
-
 Style/HashEachMethods:
   Enabled: true
 
