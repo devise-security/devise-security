@@ -6,6 +6,6 @@ require_relative '../lib/devise-security/add_banned_passwords'
 
 class TestAddBannedPasswords < ActiveSupport::TestCase
   test 'it works' do
-    DeviseSecurity::AddBannedPasswords.new.add
+    DeviseSecurity::AddBannedPasswords.new(file: __FILE__).add
   end
 end

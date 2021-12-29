@@ -8,7 +8,8 @@ module DeviseSecurity
     end
 
     def add
-      File.foreach(file) do |line|
+      File.foreach(@file) do |line|
+        puts line
       end
     end
   end
