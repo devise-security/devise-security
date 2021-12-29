@@ -10,10 +10,8 @@ module Devise
       include Devise::Models::Compatibility
 
       included do
-        validate :password_not_banned, if: :password_present?
+        validate :password_not_banned, if: -> { password.present? }
       end
-
-      delegate :present?, to: :password, prefix: true
 
       def password_not_banned
         return unless BannedPassword.where(password: password).exists?
