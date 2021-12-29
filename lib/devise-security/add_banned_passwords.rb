@@ -13,7 +13,12 @@ module DeviseSecurity
         File.foreach(@file) do |line|
           passwords << { password: line.chomp }
         end
-        BannedPassword.insert_all(passwords)
+
+        if DEVISE_ORM == :mongoid
+          BannedPassword.collection.insert_many(passwords)
+        else
+          BannedPassword.insert_all(passwords)
+        end
       else
         File.foreach(@file) do |line|
           BannedPassword.create(password: line.chomp)
