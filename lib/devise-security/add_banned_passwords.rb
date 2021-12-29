@@ -12,6 +12,10 @@ module DeviseSecurity
         passwords << { password: line.chomp }
       end
 
+      if Rails.gem_version >= Gem::Version.new('6.0')
+        BannedPassword.insert_all(passwords)
+      end
+
       puts passwords
     end
   end
