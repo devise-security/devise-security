@@ -34,9 +34,6 @@ Style/ClassAndModuleChildren:
     - nested
     - compact
 
-Style/HashSyntax:
-  EnforcedStyle: ruby19
-
 Style/SymbolArray:
   EnforcedStyle: brackets
 
