@@ -4,10 +4,10 @@ module DeviseSecurity
   class AddBannedPasswords
     def initialize(file: '')
       @file = file
-      puts 'hi'
     end
 
     def add
+      puts @file
       File.foreach(@file) do |line|
         puts line
       end
