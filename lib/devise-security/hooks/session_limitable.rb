@@ -8,13 +8,13 @@ Warden::Manager.after_set_user except: :fetch do |record, warden, options|
      warden.authenticated?(options[:scope]) &&
      !record.skip_session_limitable?
 
-     if !options[:skip_session_limitable]
+    if !options[:skip_session_limitable]
       unique_session_id = Devise.friendly_token
       warden.session(options[:scope])['unique_session_id'] = unique_session_id
       record.update_unique_session_id!(unique_session_id)
-     else
+    else
       warden.session(options[:scope])['devise.skip_session_limitable'] = true
-     end
+    end
   end
 end
 
@@ -29,7 +29,7 @@ Warden::Manager.after_set_user only: :fetch do |record, warden, options|
      warden.authenticated?(scope) &&
      options[:store] != false
     if record.unique_session_id != warden.session(scope)['unique_session_id'] &&
-       !record.skip_session_limitable? && 
+       !record.skip_session_limitable? &&
        !warden.session(scope)['devise.skip_session_limitable']
       Rails.logger.warn do
         '[devise-security][session_limitable] session id mismatch: '\
