@@ -14,6 +14,9 @@ AllCops:
 Rails:
   Enabled: true
 
+Metrics/ClassLength:
+  Exclude: ["test/**/*"]
+
 # We don't care about method length, since we check method cyclomatic
 # complexity.
 Metrics/MethodLength:
@@ -25,6 +28,7 @@ Layout/LineLength:
 Naming/FileName:
   Exclude: ["devise-security.gemspec"]
 
+# TODO don't like this
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
   SupportedStyles:
@@ -46,6 +50,7 @@ Style/PercentLiteralDelimiters:
     '%w': '[]'
     '%W': '[]'
 
+# TODO can this be removed
 Style/AndOr:
   # Whether `and` and `or` are banned only in conditionals (conditionals)
   # or completely (always).
