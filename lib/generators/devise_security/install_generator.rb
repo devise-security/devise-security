@@ -10,16 +10,14 @@ module DeviseSecurity
       desc 'Install the devise security extension'
 
       def copy_initializer
-        template('devise_security.rb',
-                 'config/initializers/devise_security.rb',
-        )
+        template('devise_security.rb', 'config/initializers/devise_security.rb')
       end
 
       def copy_locales
         LOCALES.each do |locale|
           copy_file(
             "../../../config/locales/#{locale}.yml",
-            "config/locales/devise.security_extension.#{locale}.yml",
+            "config/locales/devise.security_extension.#{locale}.yml"
           )
         end
       end

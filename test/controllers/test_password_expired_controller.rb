@@ -134,7 +134,7 @@ class PasswordExpiredCustomRedirectTest < ActionController::TestCase
       email: 'hello@path.travel',
       password: 'Password4',
       password_changed_at: 4.months.ago,
-      confirmed_at: 5.months.ago,
+      confirmed_at: 5.months.ago
     )
     assert @user.valid?
     assert @user.need_change_password?
@@ -143,14 +143,16 @@ class PasswordExpiredCustomRedirectTest < ActionController::TestCase
   end
 
   test 'update password with custom redirect route' do
-    put :update,
-        params: {
-          password_expired_user: {
-            current_password: 'Password4',
-            password: 'Password5',
-            password_confirmation: 'Password5',
-          },
+    put(
+      :update,
+      params: {
+        password_expired_user: {
+          current_password: 'Password4',
+          password: 'Password5',
+          password_confirmation: 'Password5'
         }
+      }
+    )
 
     assert_redirected_to '/cookies'
   end
