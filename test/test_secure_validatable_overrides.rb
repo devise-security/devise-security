@@ -10,6 +10,9 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   end
 
   class ::CustomInstancePasswordValidator < DeviseSecurity::PasswordComplexityValidator
+    # Add a pattern for alphanumeric characters. See
+    # [en.yml](file:///./test/dummy/config/locales/en.yml) for translations used in
+    # tests.
     def patterns
       super.merge(alnum: /\p{Alnum}/)
     end
@@ -23,7 +26,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   class ClassLevelOverrideUser < User
     self.allow_passwords_equal_to_email = true
     self.email_validation = false
-    self.password_complexity = { symbol: 1, letter: 10 }
+    self.password_complexity = { symbol: 1, letter: 1 }
     self.password_complexity_validator = 'custom_class_password_validator'
     self.password_length = 10..100
   end
@@ -38,7 +41,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
     end
 
     def password_complexity
-      { symbol: 2, alnum: 10 }
+      { symbol: 2, alnum: 1 }
     end
 
     def password_length
@@ -127,10 +130,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
     assert user.invalid?
     assert_equal(
-      [
-        'Password is too short (minimum is 10 characters)',
-        'Password must contain at least 10 letters'
-      ],
+      ['Password is too short (minimum is 10 characters)'],
       user.errors.full_messages
     )
   end
@@ -144,10 +144,41 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
     assert user.invalid?
     assert_equal(
-      [
-        'Password is too short (minimum is 11 characters)',
-        'Password must contain at least 10 letters or numbers'
-      ],
+      ['Password is too short (minimum is 11 characters)'],
+      user.errors.full_messages
+    )
+  end
+
+  test 'password validator can be overridden at the instance level' do
+    password = '!' * 11 # 11 characters, all symbols
+    user = InstanceLevelOverrideUser.new(
+      email: 'bob@microsoft.com',
+      password: password,
+      password_confirmation: password
+    )
+
+    assert user.invalid?
+    # This validation error only occurs when the CustomInstancePasswordValidator
+    # is used.
+    assert_equal(
+      ['Password must contain at least one letter or number'],
+      user.errors.full_messages
+    )
+  end
+
+  test 'password validator can be overridden at the class level' do
+    password = '!' * 10 # 10 characters, all symbols
+    user = ClassLevelOverrideUser.new(
+      email: 'bob@microsoft.com',
+      password: password,
+      password_confirmation: password
+    )
+
+    assert user.invalid?
+    # This validation error only occurs when the CustomClassPasswordValidator
+    # is used.
+    assert_equal(
+      ['Password must contain at least one letter'],
       user.errors.full_messages
     )
   end
