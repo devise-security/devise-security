@@ -3,8 +3,6 @@ require:
 
 AllCops:
   Exclude:
-    - Gemfile*
-    - bin/*
     - gemfiles/**/*
     - vendor/bundle/**/*
   # Automatically enables new cops so that we only have to add them to
