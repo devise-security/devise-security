@@ -6,6 +6,7 @@ module DeviseSecurity
       desc 'Ban most common passwords'
 
       def ban_passwords
+        BannedPassword.create(password: 'yo')
       end
     end
   end

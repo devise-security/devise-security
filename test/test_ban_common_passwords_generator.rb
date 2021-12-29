@@ -11,5 +11,6 @@ class TestBanCommonPasswordsGenerator < Rails::Generators::TestCase
 
   test 'pls' do
     run_generator
+    assert_equal(BannedPassword.count, 1)
   end
 end
