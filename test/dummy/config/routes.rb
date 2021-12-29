@@ -4,7 +4,6 @@ RailsApp::Application.routes.draw do
   devise_for :users
 
   devise_for :non_devise_users
-  devise_for :secure_users
   devise_for :validatable_users
 
   get '/secure_validatable_information', to: 'secure_validatable_information#index'

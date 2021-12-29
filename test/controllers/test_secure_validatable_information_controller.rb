@@ -17,14 +17,14 @@ class TestSecureValidatableInformationController < ActionController::TestCase
   end
 
   test 'When using secure_validatable, @minimum_password_length is set' do
-    setup_for(:secure_user)
+    setup_for(:user)
 
     assert_equal @length, Devise.password_length.min
   end
 
   test 'When using secure_validatable, '\
        '@minimum_password_complexity is set' do
-    setup_for(:secure_user)
+    setup_for(:user)
 
     assert_equal @complexity, Devise.password_complexity
  end
