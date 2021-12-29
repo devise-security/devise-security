@@ -31,12 +31,3 @@ Style/ClassAndModuleChildren:
   SupportedStyles:
     - nested
     - compact
-
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    # Using `[]` for string arrays instead of `()`, since normal arrays are
-    # indicated with `[]` not `()`.
-    '%w': '[]'
-    '%W': '[]'
