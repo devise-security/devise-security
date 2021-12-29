@@ -37,15 +37,6 @@ Style/HashSyntax:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-# Trailing commas make for clearer diffs because the last line won't appear
-# to have been changed, as it would if it lacked a comma and had one added.
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: comma
-Style/TrailingCommaInArguments:
-  EnforcedStyleForMultiline: comma
-
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.
 Style/PercentLiteralDelimiters:
