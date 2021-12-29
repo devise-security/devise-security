@@ -18,7 +18,7 @@ module Devise
       def password_not_banned
         return unless BannedPassword.where(password: password).exists?
 
-        errors.add(:password, 'sucks to be you')
+        errors.add(:password, :banned_password)
       end
     end
   end

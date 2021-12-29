@@ -8,4 +8,12 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     assert(user.valid?)
   end
+
+  test 'user is invalid if password is banned' do
+    BannedPassword.create(password: 'Password1')
+    user = User.create(email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1')
+
+    user.valid?
+    assert_equal(user.errors.messages, { password: ['is banned.'] })
+  end
 end

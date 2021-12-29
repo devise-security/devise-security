@@ -1,6 +1,7 @@
 en:
   errors:
     messages:
+      banned_password: 'is banned.'
       taken_in_past: 'was used previously.'
       equal_to_current_password: 'must be different than the current password.'
       equal_to_email: 'must be different than the email.'
