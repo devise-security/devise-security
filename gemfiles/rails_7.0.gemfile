@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "minitest-rails", github: "blowmage/minitest-rails", branch: "master"
 gem "railties", "~> 7.0.0"
-gem "devise", "~> 4.8.1"
+gem "devise", ">= 4.8.1"
 gem "net-smtp", require: false
 
 group :active_record do
