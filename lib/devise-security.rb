@@ -9,14 +9,19 @@ require 'devise'
 
 module Devise
   # Number of seconds that passwords are valid (e.g 3.months)
-  # Disable pasword expiration with +false+
+  # Disable password expiration with +false+
   # Expire only on demand with +true+
   mattr_accessor :expire_password_after
   @@expire_password_after = 3.months
 
-  # Validate password for strongness
+  # Validate password complexity
   mattr_accessor :password_complexity
   @@password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
+
+  # Define the class used to validate password complexity. Set to a Class or a
+  # string which will be used to determine which class to use.
+  mattr_accessor :password_complexity_validator
+  @@password_complexity_validator = 'devise_security/password_complexity_validator'
 
   # Number of old passwords in archive
   mattr_accessor :password_archiving_count
