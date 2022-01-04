@@ -31,7 +31,7 @@ class User < ApplicationRecord
     end
   when :active_record
     def some_method_calling_active_record
-      ActiveRecord::Base.transaction {}
+      ActiveRecord::Base.transaction { break; }
     end
   end
 end
