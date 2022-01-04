@@ -11,19 +11,4 @@ module SharedUserWithoutEmail
            :registerable, :rememberable, :timeoutable,
            :trackable
   end
-
-  # This test stub is a bit rubbish because it's tied very closely to the
-  # implementation where we care about this one case. However, completely
-  # removing the email field breaks "recoverable" tests completely, so we are
-  # just taking the approach here that "email" is something that is a not an
-  # ActiveRecord field.
-  def email_changed?
-    raise NoMethodError
-  end
-
-  def respond_to?(method_name, include_all = false)
-    return false if method_name.to_sym == :email_changed?
-
-    super(method_name, include_all)
-  end
 end
