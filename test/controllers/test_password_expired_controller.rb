@@ -62,7 +62,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
       }
     )
     assert_redirected_to root_path
-    assert_equal response.media_type, 'text/html'
+    assert_equal('text/html', response.media_type)
   end
 
   test 'password confirmation does not match' do
@@ -79,7 +79,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_template :show
-    assert_equal response.media_type, 'text/html'
+    assert_equal('text/html', response.media_type)
     assert_includes(
       response.body,
       'Password confirmation doesn&#39;t match Password'

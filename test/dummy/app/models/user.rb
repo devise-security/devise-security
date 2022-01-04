@@ -21,14 +21,15 @@ class User < ApplicationRecord
 
   has_many :widgets
 
-  if DEVISE_ORM == :mongoid
+  case DEVISE_ORM
+  when :mongoid
     require './test/dummy/app/models/mongoid/mappings'
     include ::Mongoid::Mappings
 
     def some_method_calling_mongoid
       Mongoid.logger
     end
-  elsif DEVISE_ORM == :active_record
+  when :active_record
     def some_method_calling_active_record
       ActiveRecord::Base.transaction {}
     end
