@@ -393,6 +393,6 @@ file should reflect this.
 Copyright (c) 2017-2022 Dillon Welch & Kevin Olbrich.
 Copyright (c) 2011-2017 Marco Scholl as the project [`devise_security_extension`](https://github.com/phatworx/devise_security_extension). 
 
-This repo was created as a fork from b2ee978af7d49f0fb0e7271c6ac074dfb4d39353. 
+This repo was created as a fork from [b2ee978a](https://github.com/phatworx/devise_security_extension/commit/b2ee978af7d49f0fb0e7271c6ac074dfb4d39353).
 
 See LICENSE.txt for further details.
