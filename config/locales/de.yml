@@ -23,6 +23,7 @@ de:
     paranoid_verify:
       code_required: 'Bitte geben Sie den Code ein, den unser Support-Team zur Verfügung gestellt hat.'
     paranoid_verification_code:
+      updated: Bestätigungscode akzeptiert
       show:
         submit_verification_code: Bestätigungscode eingeben
         verification_code: Bestätigungscode

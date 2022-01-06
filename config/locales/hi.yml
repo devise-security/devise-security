@@ -24,6 +24,7 @@ hi:
     paranoid_verify:
       code_required: सपोर्ट टीम द्वारा दिया गया कोड डाले
     paranoid_verification_code:
+      updated: सत्यापन कोड स्वीकार किया गया
       show:
         submit_verification_code: वेरिफिकेशन कोड डाले
         verification_code: वेरिफिकेशन कोड

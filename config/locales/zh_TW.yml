@@ -23,6 +23,7 @@ zh_TW:
     paranoid_verify:
       code_required: '請輸入由我們客服團隊提供的代碼'
     paranoid_verification_code:
+      updated: 接受驗證碼
       show:
         submit_verification_code: 送出驗證碼
         verification_code: 驗證碼

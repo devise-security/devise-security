@@ -31,6 +31,7 @@ by:
     paranoid_verify:
       code_required: 'Калі ласка, увядзіце код, атрыманы ад нашай каманды падтрымкі'
     paranoid_verification_code:
+      updated: Код спраўджання прыняты
       show:
         submit_verification_code: 'Увод кода пацверджання'
         verification_code: 'Код пацверджання'

@@ -31,6 +31,7 @@ ru:
     paranoid_verify:
       code_required: 'Пожалуйста введите код, полученный от нашей команды поддержки'
     paranoid_verification_code:
+      updated: Код подтверждения принят
       show:
         submit_verification_code: Ввод кода подтверждения
         verification_code: Код подверждения
