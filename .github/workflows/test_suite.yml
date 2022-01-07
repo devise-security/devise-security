@@ -17,9 +17,6 @@ jobs:
         exclude:
           - rails: 7.0
             ruby: 2.6
-          # See https://github.com/rails/rails/issues/43998, fixed in Rails 7.0.1
-          - rails: 7.0
-            ruby: 3.1
           - rails: 7.0
             ruby: head
           - orm: mongoid
