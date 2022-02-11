@@ -98,14 +98,16 @@ module DeviseSecurity
       # path for change password
       def change_password_required_path_for(resource_or_scope = nil)
         scope       = Devise::Mapping.find_scope!(resource_or_scope)
-        change_path = "#{scope}_password_expired_path"
-        send(change_path)
+        router_name = Devise.mappings[scope].router_name
+        context     = router_name ? send(router_name) : _devise_route_context
+        context.send("#{scope}_password_expired_path")
       end
 
       def paranoid_verification_code_path_for(resource_or_scope = nil)
         scope       = Devise::Mapping.find_scope!(resource_or_scope)
-        change_path = "#{scope}_paranoid_verification_code_path"
-        send(change_path)
+        router_name = Devise.mappings[scope].router_name
+        context     = router_name ? send(router_name) : _devise_route_context
+        context.send("#{scope}_paranoid_verification_code_path")
       end
 
       protected
@@ -113,6 +115,12 @@ module DeviseSecurity
       # allow to overwrite for some special handlings
       def ignore_password_expire?
         false
+      end
+
+      private
+
+      def _devise_route_context
+        @_devise_route_context ||= send(Devise.available_router_name)
       end
     end
   end
