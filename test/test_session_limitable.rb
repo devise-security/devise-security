@@ -10,12 +10,12 @@ class TestSessionLimitable < ActiveSupport::TestCase
   end
 
   test 'check is not skipped by default' do
-    user = User.create email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1'
+    user = User.new(email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1')
     assert_equal(false, user.skip_session_limitable?)
   end
 
   test 'default check can be overridden by record instance' do
-    modified_user = ModifiedUser.create email: 'bob2@microsoft.com', password: 'password1', password_confirmation: 'password1'
+    modified_user = ModifiedUser.new(email: 'bob2@microsoft.com', password: 'password1', password_confirmation: 'password1')
     assert_equal(true, modified_user.skip_session_limitable?)
   end
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    devise-security (0.16.0)
+    devise-security (0.17.0)
       devise (>= 4.3.0)
 
 GEM
@@ -136,12 +136,9 @@ GEM
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
-    pry (0.13.1)
+    pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry-byebug (3.9.0)
-      byebug (~> 11.0)
-      pry (~> 0.13.0)
     pry-rescue (1.5.2)
       interception (>= 0.5)
       pry (>= 0.12.0)
@@ -209,9 +206,11 @@ GEM
     rspec-support (3.10.3)
     rubocop (0.83.0)
       parallel (~> 1.10)
-      parser (>= 2.7.0.1)
+      parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
       rexml
+      rubocop-ast (>= 1.15.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-rails (2.6.0)
@@ -258,7 +257,7 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    unicode-display_width (1.8.0)
+    unicode-display_width (2.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     webrick (1.7.0)
@@ -275,6 +274,7 @@ PLATFORMS
 DEPENDENCIES
   appraisal
   bundler
+  byebug
   database_cleaner
   database_cleaner-mongoid (~> 2.0)
   devise-security!
@@ -284,12 +284,12 @@ DEPENDENCIES
   minitest-rails (~> 5.2.0)
   mongoid (~> 7.3)
   omniauth
-  pry-byebug
   pry-rescue
   rails-controller-testing
   rails_email_validator
   railties (~> 5.2.6)
-  rubocop (~> 0.83.0)
+  rubocop
+  rubocop-minitest
   rubocop-rails
   simplecov-lcov
   solargraph
