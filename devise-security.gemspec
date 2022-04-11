@@ -29,15 +29,16 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler'
+  s.add_development_dependency 'byebug'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'omniauth'
-  s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'
-  s.add_development_dependency 'rubocop', '~> 0.83.0' # NOTE: also update .codeclimate.yml and make sure it uses the same version
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop-minitest'
   s.add_development_dependency 'rubocop-rails'
   s.add_development_dependency 'simplecov-lcov'
   s.add_development_dependency 'solargraph'

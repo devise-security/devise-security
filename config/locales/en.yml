@@ -7,7 +7,7 @@ en:
       password_complexity:
         digit:
           one: must contain at least one digit
-          other: must contain at least %{count} numerals
+          other: must contain at least %{count} digits
         lower:
           one: must contain at least one lower-case letter
           other: must contain at least %{count} lower-case letters
@@ -23,6 +23,7 @@ en:
     paranoid_verify:
       code_required: 'Please enter the code our support team provided'
     paranoid_verification_code:
+      updated: Verification code accepted
       show:
         submit_verification_code: Submit verification code
         verification_code: Verification code
