@@ -129,6 +129,9 @@ Devise.setup do |config|
 
   # Allow passwords to be equal to email (false, true)
   # config.allow_passwords_equal_to_email = false
+
+  # paranoid_verification will regenerate verification code after failed attempt
+  # config.paranoid_code_regenerate_after_attempt = 10
 end
 ```
 
