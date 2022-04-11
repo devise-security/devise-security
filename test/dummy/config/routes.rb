@@ -3,6 +3,11 @@
 RailsApp::Application.routes.draw do
   devise_for :users
 
+  devise_for :non_devise_users
+  devise_for :validatable_users
+
+  get '/secure_validatable_information', to: 'secure_validatable_information#index'
+
   devise_for :captcha_users, only: [:sessions], controllers: { sessions: 'captcha/sessions' }
   devise_for :password_expired_users, only: [:password_expired], controllers: { password_expired: 'overrides/password_expired' }
   devise_for :paranoid_verification_users, only: [:verification_code], controllers: { paranoid_verification_code: 'overrides/paranoid_verification_code' }

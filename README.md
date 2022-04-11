@@ -200,6 +200,29 @@ documentation there.
    <p><%= text_field_tag :captcha %></p>
    ```
 
+## Views
+
+### Secure Validatable
+
+Devise exposes `@minimum_password_length` for use in views when you use
+`validatable` and call `set_minimum_password_length` in your controller. 
+If you use `secure_validatable`, this will still be exposed.
+Additionally, there is a `@minimum_password_complexity` variable that is exposed
+if you want to have your own view to expose complexity requirements.
+
+Code example:
+
+```erb
+<% if @minimum_password_complexity %>
+  <% @minimum_password_complexity.each do |k, v| %>
+    <em><%= t("errors.messages.password_complexity.#{k}", count: v) %></em><br />
+  <% end %>
+<% end %>
+```
+
+See https://github.com/devise-security/devise-security/issues/290 for more
+discussion on the topic.
+
 ## Schema
 
 ### Password expirable
