@@ -47,7 +47,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   test 'saving a record records the time the password was changed' do
     user = User.new email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
-    assert user.password_changed_at.nil?
+    assert_nil user.password_changed_at
     assert_not user.password_change_requested?
     assert_not user.password_expired?
     user.save

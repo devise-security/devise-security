@@ -37,8 +37,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least one upper-case letter"] }
+      { password: ['must contain at least one upper-case letter'] },
+      model.errors.messages
     )
   end
 
@@ -51,8 +51,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least 2 upper-case letters"] }
+      { password: ['must contain at least 2 upper-case letters'] },
+      model.errors.messages
     )
   end
 
@@ -65,7 +65,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages, { password: ["must contain at least one digit"] }
+      { password: ['must contain at least one digit'] }, model.errors.messages
     )
   end
 
@@ -78,7 +78,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages, { password: ["must contain at least 2 digits"] }
+      { password: ['must contain at least 2 digits'] }, model.errors.messages
     )
   end
 
@@ -91,7 +91,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages, { password: ["must contain at least one digit"] }
+      { password: ['must contain at least one digit'] }, model.errors.messages
     )
   end
 
@@ -104,7 +104,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages, { password: ["must contain at least 2 digits"] }
+      { password: ['must contain at least 2 digits'] }, model.errors.messages
     )
   end
 
@@ -117,8 +117,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least one lower-case letter"] }
+      { password: ['must contain at least one lower-case letter'] },
+      model.errors.messages
     )
   end
 
@@ -131,8 +131,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least 2 lower-case letters"] }
+      { password: ['must contain at least 2 lower-case letters'] },
+      model.errors.messages
     )
   end
 
@@ -145,8 +145,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least one punctuation mark or symbol"] }
+      { password: ['must contain at least one punctuation mark or symbol'] },
+      model.errors.messages
     )
   end
 
@@ -159,8 +159,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least 2 punctuation marks or symbols"] }
+      { password: ['must contain at least 2 punctuation marks or symbols'] },
+      model.errors.messages
     )
   end
 
@@ -173,8 +173,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least one punctuation mark or symbol"] }
+      { password: ['must contain at least one punctuation mark or symbol'] },
+      model.errors.messages
     )
   end
 
@@ -187,8 +187,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
-      { password: ["must contain at least 2 punctuation marks or symbols"] }
+      { password: ['must contain at least 2 punctuation marks or symbols'] },
+      model.errors.messages
     )
   end
 
@@ -201,15 +201,15 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
       {
         password:
         [
-          "must contain at least one digit",
-          "must contain at least one punctuation mark or symbol",
-          "must contain at least one upper-case letter"
+          'must contain at least one digit',
+          'must contain at least one punctuation mark or symbol',
+          'must contain at least one upper-case letter'
         ]
-      }
+      },
+      model.errors.messages
     )
   end
 
@@ -218,15 +218,15 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
       {
         password:
         [
-          "must contain at least one digit",
-          "must contain at least one lower-case letter",
-          "must contain at least one punctuation mark or symbol"
+          'must contain at least one digit',
+          'must contain at least one lower-case letter',
+          'must contain at least one punctuation mark or symbol'
         ]
-      }
+      },
+      model.errors.messages
     )
   end
 
@@ -235,15 +235,15 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
       {
         password:
         [
-          "must contain at least one lower-case letter",
-          "must contain at least one punctuation mark or symbol",
-          "must contain at least one upper-case letter"
+          'must contain at least one lower-case letter',
+          'must contain at least one punctuation mark or symbol',
+          'must contain at least one upper-case letter'
         ]
-      }
+      },
+      model.errors.messages
     )
   end
 
@@ -252,15 +252,15 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages,
       {
         password:
         [
-          "must contain at least one digit",
-          "must contain at least one lower-case letter",
-          "must contain at least one upper-case letter"
+          'must contain at least one digit',
+          'must contain at least one lower-case letter',
+          'must contain at least one upper-case letter'
         ]
-      }
+      },
+      model.errors.messages
     )
   end
 
@@ -269,7 +269,8 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
 
     assert_not(model.valid?)
     assert_equal(
-      model.errors.messages, { password: ["must contain at least one digit"] }
+      { password: ['must contain at least one digit'] },
+      model.errors.messages
     )
   end
 
