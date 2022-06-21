@@ -1,4 +1,6 @@
-Copyright (c) 2011 Marco Scholl
+Copyright (c) 2017-2022 Dillon Welch & Kevin Olbrich.
+
+Copyright (c) 2011-2017 Marco Scholl
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
