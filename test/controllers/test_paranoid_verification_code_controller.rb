@@ -12,7 +12,7 @@ class Devise::ParanoidVerificationCodeControllerTest < ActionController::TestCas
       username: 'hello',
       email: 'hello@path.travel',
       password: 'Password4',
-      confirmed_at: 5.months.ago,
+      confirmed_at: 5.months.ago
     )
 
     sign_in(@user)
@@ -35,7 +35,7 @@ class Devise::ParanoidVerificationCodeControllerTest < ActionController::TestCas
     assert_template :show
   end
 
-  test "redirects to root on update" do
+  test 'redirects to root on update' do
     patch :update, params: { user: { paranoid_verification_code: 'cookies' } }
     assert_redirected_to :root
     assert_equal 'Verification code accepted', flash[:notice]
@@ -53,7 +53,7 @@ class ParanoidVerificationCodeCustomRedirectTest < ActionController::TestCase
       username: 'hello',
       email: 'hello@path.travel',
       password: 'Password4',
-      confirmed_at: 5.months.ago,
+      confirmed_at: 5.months.ago
     )
 
     sign_in(@user)

@@ -2,7 +2,7 @@
 
 class Devise::ParanoidVerificationCodeController < DeviseController
   skip_before_action :handle_paranoid_verification
-  prepend_before_action :authenticate_scope!, only: [:show, :update]
+  prepend_before_action :authenticate_scope!, only: %i[show update]
 
   def show
     if !resource.nil? && resource.need_paranoid_verification?

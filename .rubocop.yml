@@ -4,8 +4,6 @@ require:
 
 AllCops:
   Exclude:
-    - Gemfile*
-    - bin/*
     - gemfiles/**/*
     - vendor/bundle/**/*
   # Automatically enables new cops so that we only have to add them to
@@ -14,6 +12,9 @@ AllCops:
 
 Rails:
   Enabled: true
+
+Metrics/ClassLength:
+  Exclude: ["test/**/*"]
 
 # We don't care about method length, since we check method cyclomatic
 # complexity.
@@ -31,42 +32,3 @@ Style/ClassAndModuleChildren:
   SupportedStyles:
     - nested
     - compact
-
-Style/HashSyntax:
-  EnforcedStyle: ruby19
-
-Style/SymbolArray:
-  EnforcedStyle: brackets
-
-# Trailing commas make for clearer diffs because the last line won't appear
-# to have been changed, as it would if it lacked a comma and had one added.
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: comma
-Style/TrailingCommaInArguments:
-  EnforcedStyleForMultiline: comma
-
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    # Using `[]` for string arrays instead of `()`, since normal arrays are
-    # indicated with `[]` not `()`.
-    '%w': '[]'
-    '%W': '[]'
-
-Style/AndOr:
-  # Whether `and` and `or` are banned only in conditionals (conditionals)
-  # or completely (always).
-  # They read better, more like normal English.
-  Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true

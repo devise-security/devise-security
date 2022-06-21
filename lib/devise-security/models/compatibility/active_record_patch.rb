@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Devise
   module Models
     module Compatibility
-
       class NotPersistedError < ActiveRecord::ActiveRecordError; end
 
       module ActiveRecordPatch
@@ -33,7 +34,6 @@ module Devise
         def update_attribute_without_validatons_or_callbacks(name, value)
           update_column(name, value)
         end
-
       end
     end
   end

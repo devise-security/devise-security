@@ -26,7 +26,7 @@ module Devise
           already_validated_email = false
 
           # validate login in a strict way if not yet validated
-          unless has_uniqueness_validation_of_login?
+          unless uniqueness_validation_of_login?
             validation_condition = "#{login_attribute}_changed?".to_sym
 
             validates login_attribute, uniqueness: {
@@ -86,10 +86,11 @@ module Devise
 
       def current_equal_password_validation
         return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
+
         dummy = self.class.new(encrypted_password: encrypted_password_was).tap do |user|
           user.password_salt = password_salt_was if respond_to?(:password_salt)
         end
-        self.errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
+        errors.add(:password, :equal_to_current_password) if dummy.valid_password?(password)
       end
 
       def email_not_equal_password_validation
@@ -138,10 +139,10 @@ module Devise
 
         private
 
-        def has_uniqueness_validation_of_login?
+        def uniqueness_validation_of_login?
           validators.any? do |validator|
             validator_orm_klass = DEVISE_ORM == :active_record ? ActiveRecord::Validations::UniquenessValidator : ::Mongoid::Validatable::UniquenessValidator
-            validator.kind_of?(validator_orm_klass) && validator.attributes.include?(login_attribute)
+            validator.is_a?(validator_orm_klass) && validator.attributes.include?(login_attribute)
           end
         end
 
@@ -150,7 +151,7 @@ module Devise
         end
 
         def devise_validation_enabled?
-          self.ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
+          ancestors.map(&:to_s).include? 'Devise::Models::Validatable'
         end
       end
     end

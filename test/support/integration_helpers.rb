@@ -6,12 +6,15 @@ module IntegrationHelpers
   # @param session [ActionDispatch::Integration::Session]
   # @return [void]
   def sign_in(user, session = integration_session)
-    session.post new_user_session_path, params: {
-      user: {
-        email: user.email,
-        password: user.password,
-      },
-    }
+    session.post(
+      new_user_session_path,
+      params: {
+        user: {
+          email: user.email,
+          password: user.password
+        }
+      }
+    )
   end
 
   # attempt to login the user with a bad password. This will exercise all the Warden Hooks
@@ -19,11 +22,14 @@ module IntegrationHelpers
   # @param session [ActionDispatch::Integration::Session]
   # @return [void]
   def failed_sign_in(user, session)
-    session.post new_user_session_path, params: {
-      user: {
-        email: user.email,
-        password: 'bad-password',
-      },
-    }
+    session.post(
+      new_user_session_path,
+      params: {
+        user: {
+          email: user.email,
+          password: 'bad-password'
+        }
+      }
+    )
   end
 end
