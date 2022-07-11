@@ -4,7 +4,7 @@
   <%= render partial: 'devise/shared/error_messages' %>
 
   <p><%= f.label :paranoid_verification_code, t('.verification_code') %><br />
-  <%= f.text_field :paranoid_verification_code, value: '' %></p>
+  <%= f.text_field :paranoid_verification_code, value: '', required: true %></p>
 
   <p><%= f.submit t('.submit') %></p>
 <% end %>
