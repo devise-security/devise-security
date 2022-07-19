@@ -23,6 +23,7 @@ nl:
     paranoid_verify:
       code_required: Voer de aangeleverde code in
     paranoid_verification_code:
+      updated: Verificatiecode geaccepteerd
       show:
         submit_verification_code: Verstuur verificatie code
         verification_code: Verificatie code

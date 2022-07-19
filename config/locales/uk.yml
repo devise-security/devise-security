@@ -31,6 +31,7 @@ uk:
     paranoid_verify:
       code_required: 'Введіть, будь ласка, код від нашої команди підтримки'
     paranoid_verification_code:
+      updated: Код підтвердження прийнято
       show:
         submit_verification_code: Відправити код підтвердження
         verification_code: Код підтвердження

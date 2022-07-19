@@ -23,6 +23,7 @@ fa:
     paranoid_verify:
       code_required: 'لطفاً کدی را که تیم پشتیبانی ما ارائه کرده است وارد کنید'
     paranoid_verification_code:
+      updated: کد تأیید پذیرفته شد
       show:
         submit_verification_code: ارسال کد تاییدیه
         verification_code: کد تاییدیه

@@ -23,6 +23,7 @@ bg:
     paranoid_verify:
       code_required: 'Моля въведете кода, който нашия екип по поддръжката Ви е предоставил'
     paranoid_verification_code:
+      updated: Кодът за потвърждение е приет
       show:
         submit_verification_code: Изпрати код за потвърждение
         verification_code: Код за потвърждение
