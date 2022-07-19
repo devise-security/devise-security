@@ -9,8 +9,8 @@ fr:
           one: doit contenir au moins un chiffre
           other: doit contenir au moins %{count} chiffres
         lower:
-          one: doit contenir au moins une lettre miniscule
-          other: doit contenir au moins %{count} lettres miniscules
+          one: doit contenir au moins une lettre minuscule
+          other: doit contenir au moins %{count} lettres minuscules
         symbol:
           one: doit contenir au moins un signe de ponctuation
           other: doit contenir au moins %{count} signes de ponctuation
