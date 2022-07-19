@@ -11,24 +11,22 @@ module Devise
         new_password_confirmation = params[:password_confirmation]
 
         result = if valid_password && new_password.present? && new_password_confirmation.present?
-          update(params, *options)
-        else
-          self.assign_attributes(params, *options)
+                   update(params, *options)
+                 else
+                   assign_attributes(params, *options)
 
-          if current_password.blank?
-            self.errors.add(:current_password, :blank)
-          elsif !valid_password
-            self.errors.add(:current_password, :invalid)
-          end
+                   if current_password.blank?
+                     errors.add(:current_password, :blank)
+                   elsif !valid_password
+                     errors.add(:current_password, :invalid)
+                   end
 
-          self.errors.add(:password, :blank) if new_password.blank?
+                   errors.add(:password, :blank) if new_password.blank?
 
-          if new_password_confirmation.blank?
-            self.errors.add(:password_confirmation, :blank)
-          end
+                   errors.add(:password_confirmation, :blank) if new_password_confirmation.blank?
 
-          false
-        end
+                   false
+                 end
 
         clean_up_passwords
         result

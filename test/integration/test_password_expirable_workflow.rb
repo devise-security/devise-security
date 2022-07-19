@@ -26,8 +26,8 @@ class TestPasswordExpirableWorkflow < ActionDispatch::IntegrationTest
       user: {
         current_password: 'passWord1',
         password: 'Password12345!',
-        password_confirmation: 'Password12345!',
-      },
+        password_confirmation: 'Password12345!'
+      }
     }
     assert_redirected_to(root_path)
     @user.reload

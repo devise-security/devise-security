@@ -3,8 +3,8 @@
 class Devise::PasswordExpiredController < DeviseController
   before_action :verify_requested_format!
   skip_before_action :handle_password_change
-  before_action :skip_password_change, only: [:show, :update]
-  prepend_before_action :authenticate_scope!, only: [:show, :update]
+  before_action :skip_password_change, only: %i[show update]
+  prepend_before_action :authenticate_scope!, only: %i[show update]
 
   def show
     respond_with(resource)
@@ -52,7 +52,7 @@ class Devise::PasswordExpiredController < DeviseController
   end
 
   def resource_params
-    permitted_params = [:current_password, :password, :password_confirmation]
+    permitted_params = %i[current_password password password_confirmation]
 
     params.require(resource_name).permit(*permitted_params)
   end

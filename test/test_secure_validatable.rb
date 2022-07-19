@@ -112,7 +112,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user.password_confirmation = nil
 
     assert user.invalid?
-    assert_equal(["Password can't be blank"],user.errors.full_messages)
+    assert_equal(["Password can't be blank"], user.errors.full_messages)
   end
 
   test 'password_confirmation must match password' do
@@ -213,7 +213,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     options = {
       email: 'bob@microsoft.com',
       password: 'Password1!',
-      password_confirmation: 'Password1!',
+      password_confirmation: 'Password1!'
     }
     User.create!(options)
     user = User.new(options)
@@ -230,7 +230,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     options = {
       email: 'bob@microsoft.com',
       password: 'Password1!',
-      password_confirmation: 'Password1!',
+      password_confirmation: 'Password1!'
     }
     User.create!(options)
     options[:email] = 'BOB@MICROSOFT.COM'

@@ -5,7 +5,10 @@ require 'shared_user_without_email'
 class UserWithoutEmail
   include Mongoid::Document
   include Shim
-  include SharedUserWithoutEmail
+
+  devise :database_authenticatable, :lockable, :recoverable,
+         :registerable, :rememberable, :timeoutable,
+         :trackable
 
   field :username, type: String
   field :facebook_token, type: String

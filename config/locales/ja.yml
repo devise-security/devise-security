@@ -22,9 +22,21 @@ ja:
     invalid_security_question: 'セキュリティ質問に対する回答が不正です。'
     paranoid_verify:
       code_required: 'サポートチームに提供された認証コードを入力してください。'
+    paranoid_verification_code:
+      updated: 確認コードを受け入れました
+      show:
+        submit_verification_code: 確認コードを送信する
+        verification_code: 検証コード
+        submit: 参加する
     password_expired:
       updated: '新しいパスワードが保存されました。'
       change_required: 'パスワードが期限切れです。パスワードを新しく設定してください。'
+      show:
+        renew_your_password: パスワードを更新する
+        current_password: 現在のパスワード
+        new_password: 新しいパスワード
+        new_password_confirmation: 新しいパスワードを確認
+        change_my_password: パスワードを変更する
     failure:
       session_limited: '他のブラウザでログインされました。このブラウザで続ける場合は、もう一度サインインしてください。'
       expired: '活動がなかったため、あなたのアカウントは期限切れとなりました。サイト管理者に連絡してください。'

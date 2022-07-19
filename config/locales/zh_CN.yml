@@ -23,6 +23,7 @@ zh_CN:
     paranoid_verify:
       code_required: '请输入我们支持团队提供的代码'
     paranoid_verification_code:
+      updated: 接受验证码
       show:
         submit_verification_code: 提交验证码
         verification_code: 验证码

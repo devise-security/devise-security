@@ -23,6 +23,7 @@ it:
     paranoid_verify:
       code_required: 'Inserisci il codice fornito dal nostro team di supporto'
     paranoid_verification_code:
+      updated: Codice di verifica accettato
       show:
         submit_verification_code: Invia codice di verifica
         verification_code: Codice di verifica

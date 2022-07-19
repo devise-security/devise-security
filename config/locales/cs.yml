@@ -7,15 +7,19 @@ cs:
       password_complexity:
         digit:
           one: musí obsahovat alespoň jednu číslici
+          few: musí obsahovat alespoň %{count} číslice
           other: musí obsahovat alespoň %{count} číslice
         lower:
           one: musí obsahovat alespoň jedno malé písmeno
+          few: musí obsahovat alespoň %{count} malé písmena
           other: musí obsahovat alespoň %{count} malé písmena
         symbol:
           one: musí obsahovat alespoň jedno interpunkční znaménko nebo symbol
+          few: musí obsahovat alespoň %{count} interpunkční znaménka nebo symboly
           other: musí obsahovat alespoň %{count} interpunkční znaménka nebo symboly
         upper:
           one: musí obsahovat alespoň jedno velké písmeno
+          few: musí obsahovat alespoň %{count} velké písmena
           other: musí obsahovat alespoň %{count} velké písmena
   devise:
     invalid_captcha: Chybná captcha.
@@ -23,6 +27,7 @@ cs:
     paranoid_verify:
       code_required: Zadejte kód, který poskytla naše podpora
     paranoid_verification_code:
+      updated: Ověřovací kód přijat
       show:
         submit_verification_code: Odeslat ověřovací kód
         verification_code: Ověřovací kód

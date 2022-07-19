@@ -34,9 +34,11 @@ module Devise
       # @return [bool]
       def expired?
         # expired_at set (manually, via cron, etc.)
-        return self.expired_at < Time.now.utc unless self.expired_at.nil?
+        return expired_at < Time.now.utc unless expired_at.nil?
+
         # if it is not set, check the last activity against configured expire_after time range
-        return self.last_activity_at < self.class.expire_after.ago unless self.last_activity_at.nil?
+        return last_activity_at < self.class.expire_after.ago unless last_activity_at.nil?
+
         # if last_activity_at is nil as well, the user has to be 'fresh' and is therefore not expired
         false
       end
@@ -58,13 +60,13 @@ module Devise
       #
       # @return [bool]
       def active_for_authentication?
-        super && !self.expired?
+        super && !expired?
       end
 
       # The message sym, if {#active_for_authentication?} returns +false+. E.g. needed
       # for i18n.
       def inactive_message
-        !self.expired? ? super : :expired
+        !expired? ? super : :expired
       end
 
       module ClassMethods
@@ -80,7 +82,6 @@ module Devise
           all.each do |u|
             u.expire! if u.expired? && u.expired_at.nil?
           end
-          return
         end
 
         # Scope method to collect all expired users since +time+ ago

@@ -13,11 +13,11 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/devise-security/devise-security'
   s.description = 'An enterprise security extension for devise.'
   s.authors     = [
-    'Marco Scholl',
     'Alexander Dreher',
-    'Nate Bird',
     'Dillon Welch',
     'Kevin Olbrich',
+    'Marco Scholl',
+    'Nate Bird'
   ]
 
   s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'easy_captcha'
+  s.add_development_dependency 'i18n-tasks'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'omniauth'
