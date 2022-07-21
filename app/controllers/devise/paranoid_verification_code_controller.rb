@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 class Devise::ParanoidVerificationCodeController < DeviseController
+  before_action :verify_requested_format!
   skip_before_action :handle_paranoid_verification
+  before_action :skip_paranoid_verification, only: %i[show update]
   prepend_before_action :authenticate_scope!, only: %i[show update]
 
   def show
-    if !resource.nil? && resource.need_paranoid_verification?
-      respond_with(resource)
-    else
-      redirect_to :root
-    end
+    respond_with(resource)
   end
 
   def update
@@ -17,7 +15,7 @@ class Devise::ParanoidVerificationCodeController < DeviseController
       warden.session(scope)['paranoid_verify'] = false
       set_flash_message :notice, :updated
       bypass_sign_in resource, scope: scope
-      redirect_to after_paranoid_verification_code_update_path_for(resource)
+      respond_with({}, location: after_paranoid_verification_code_update_path_for(resource))
     else
       respond_with(resource, action: :show)
     end
@@ -37,12 +35,16 @@ class Devise::ParanoidVerificationCodeController < DeviseController
 
   private
 
+  def skip_paranoid_verification
+    return if !resource.nil? && resource.need_paranoid_verification?
+
+    redirect_to :root
+  end
+
   def resource_params
-    if params.respond_to?(:permit)
-      params.require(resource_name).permit(:paranoid_verification_code)
-    else
-      params[scope].slice(:paranoid_verification_code)
-    end
+    permitted_params = %i[paranoid_verification_code]
+
+    params.require(resource_name).permit(*permitted_params)
   end
 
   def scope
