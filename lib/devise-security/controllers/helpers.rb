@@ -29,8 +29,8 @@ module DeviseSecurity
       end
 
       def valid_captcha_if_defined?(captcha)
-        defined?(verify_recaptcha) && verify_recaptcha ||
-          defined?(valid_captcha?) && valid_captcha?(captcha)
+        (defined?(verify_recaptcha) && verify_recaptcha) ||
+          (defined?(valid_captcha?) && valid_captcha?(captcha))
       end
 
       def valid_security_question_answer?(resource, answer)
@@ -75,12 +75,18 @@ module DeviseSecurity
       def handle_paranoid_verification
         return if warden.nil?
 
-        if !devise_controller? && !request.format.nil? && request.format.html?
+        if !devise_controller? &&
+           !ignore_paranoid_verification_code? &&
+           !request.format.nil? &&
+           request.format.html?
           Devise.mappings.keys.flatten.any? do |scope|
-            if signed_in?(scope) && warden.session(scope)['paranoid_verify']
-              store_location_for(scope, request.original_fullpath) if request.get?
-              redirect_for_paranoid_verification scope
-              return
+            if signed_in?(scope) && warden.session(scope)['paranoid_verify'] == true
+              if send(:"current_#{scope}").try(:need_paranoid_verification?)
+                store_location_for(scope, request.original_fullpath) if request.get?
+                redirect_for_paranoid_verification(scope)
+              else
+                warden.session(scope)['paranoid_verify'] = false
+              end
             end
           end
         end
@@ -98,20 +104,26 @@ module DeviseSecurity
       # path for change password
       def change_password_required_path_for(resource_or_scope = nil)
         scope       = Devise::Mapping.find_scope!(resource_or_scope)
-        change_path = "#{scope}_password_expired_path"
-        send(change_path)
+        router_name = Devise.mappings[scope].router_name
+        context     = router_name ? send(router_name) : _devise_route_context
+        context.send("#{scope}_password_expired_path")
       end
 
       def paranoid_verification_code_path_for(resource_or_scope = nil)
         scope       = Devise::Mapping.find_scope!(resource_or_scope)
-        change_path = "#{scope}_paranoid_verification_code_path"
-        send(change_path)
+        router_name = Devise.mappings[scope].router_name
+        context     = router_name ? send(router_name) : _devise_route_context
+        context.send("#{scope}_paranoid_verification_code_path")
       end
 
       protected
 
       # allow to overwrite for some special handlings
       def ignore_password_expire?
+        false
+      end
+
+      def ignore_paranoid_verification_code?
         false
       end
     end
