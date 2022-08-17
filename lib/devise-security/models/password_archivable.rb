@@ -35,7 +35,7 @@ module Devise
         end
       end
 
-      # validate is the password used in the past
+      # validate if the password was used in the past
       # @return [true] if current password was used previously
       # @return [false] if disabled or not previously used
       def password_archive_included?
