@@ -156,4 +156,9 @@ class PasswordExpiredCustomRedirectTest < ActionController::TestCase
 
     assert_redirected_to '/cookies'
   end
+
+  test 'yield resource to block on update' do
+    put(:update, params: { password_expired_user: { current_password: '123' } })
+    assert @controller.update_block_called?, 'Update failed to yield resource to provided block'
+  end
 end
