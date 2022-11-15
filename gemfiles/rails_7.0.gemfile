@@ -2,8 +2,9 @@
 
 source "https://rubygems.org"
 
-gem "minitest-rails", "~> 6.0.0"
-gem "railties", "~> 6.0.0"
+gem "minitest-rails", "~> 7.0.0"
+gem "railties", "~> 7.0.1"
+gem "devise", ">= 4.8.1"
 gem "net-smtp", require: false
 
 group :active_record do

@@ -12,19 +12,17 @@ jobs:
       fail-fast: false
       matrix:
         orm: [active_record, mongoid]
-        rails: ["5.2", "6.0", "6.1"]
-        ruby: ["2.6", "2.7", "3.0", head]
+        rails: ["5.2", "6.0", "6.1", "7.0"]
+        ruby: ["2.6", "2.7", "3.0", "3.1", "head"]
         exclude:
-          - orm: mongoid
-            rails: 6.0
-            ruby: head
-          - orm: mongoid
-            rails: 6.1
-            ruby: head
           - rails: 5.2
             ruby: 3.0
           - rails: 5.2
+            ruby: 3.1
+          - rails: 5.2
             ruby: head
+          - rails: 7.0
+            ruby: 2.6
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1

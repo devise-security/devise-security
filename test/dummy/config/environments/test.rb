@@ -23,5 +23,6 @@ RailsApp::Application.configure do
   config.active_support.test_order = :sorted
   config.log_level = :debug
   config.active_record.sqlite3.represent_boolean_as_integer = true if Rails.gem_version.release >= Gem::Version.new('5.2') && Rails.gem_version.release < Gem::Version.new('6.0')
+  config.active_record.legacy_connection_handling = false if Rails.gem_version.release >= Gem::Version.new('6.1')
 end
 ActiveSupport::Deprecation.debug = true
