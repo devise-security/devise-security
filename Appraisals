@@ -24,3 +24,8 @@ appraise 'rails-6.1' do
   # Taken from https://github.com/rails/rails/pull/42366
   gem 'net-smtp', require: false
 end
+
+appraise 'rails-7.0' do
+  gem 'railties', '~> 7.0.0'
+  gem 'minitest-rails', '~> 7.0.0'
+end

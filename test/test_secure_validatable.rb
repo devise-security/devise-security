@@ -219,7 +219,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.new(options)
 
     assert user.invalid?
-    if DEVISE_ORM == :active_record
+    if DEVISE_ORM == :active_record || Gem::Version.new(Mongoid::VERSION) >= Gem::Version.new("8.0")
       assert_equal(['Email has already been taken'], user.errors.full_messages)
     else
       assert_equal(['Email is already taken'], user.errors.full_messages)
@@ -237,7 +237,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.new(options)
 
     assert user.invalid?
-    if DEVISE_ORM == :active_record
+    if DEVISE_ORM == :active_record || Gem::Version.new(Mongoid::VERSION) >= Gem::Version.new("8.0")
       assert_equal(['Email has already been taken'], user.errors.full_messages)
     else
       assert_equal(['Email is already taken'], user.errors.full_messages)
