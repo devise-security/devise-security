@@ -139,7 +139,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-darwin)
       racc (~> 1.4)
-    omniauth (2.1.0)
+    omniauth (2.1.1)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
@@ -154,8 +154,8 @@ GEM
       interception (>= 0.5)
       pry (>= 0.12.0)
     racc (1.6.2)
-    rack (2.2.4)
-    rack-protection (2.2.0)
+    rack (2.2.6.4)
+    rack-protection (2.2.4)
       rack
     rack-test (2.0.2)
       rack (>= 1.3)
