@@ -26,11 +26,11 @@ jobs:
           - rails: 5.2
             ruby: head
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             **/bundle
