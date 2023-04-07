@@ -13,7 +13,7 @@ jobs:
       matrix:
         orm: [active_record, mongoid]
         rails: ["5.2", "6.0", "6.1"]
-        ruby: ["2.6", "2.7", "3.0", head]
+        ruby: ["2.7", "3.0", head]
         exclude:
           - orm: mongoid
             rails: 6.0
