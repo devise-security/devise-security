@@ -46,7 +46,7 @@ jobs:
           bundle config path vendor/bundle
           bundle install
       - name: Start MongoDB
-        uses: superchargejs/mongodb-github-action@1.0.0
+        uses: superchargejs/mongodb-github-action@1.9.0
         if: ${{ matrix.orm == 'mongoid' }}
       - name:
           Tests for ORM ${{ matrix.orm }}, Rails ${{ matrix.rails }}, and Ruby
