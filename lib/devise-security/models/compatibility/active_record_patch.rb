@@ -7,7 +7,8 @@ module Devise
 
       module ActiveRecordPatch
         extend ActiveSupport::Concern
-        unless Devise.activerecord51?
+
+        unless defined?(ActiveRecord) && ActiveRecord.gem_version >= Gem::Version.new("5.1.x")
           # When the record was saved, was the +encrypted_password+ changed?
           # @return [Boolean]
           def saved_change_to_encrypted_password?

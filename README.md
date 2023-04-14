@@ -1,6 +1,6 @@
 # Devise Security
 
-[![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
+[![Build Status](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml/badge.svg?branch=master)](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml)
 [![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
