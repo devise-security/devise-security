@@ -3,16 +3,16 @@
 source 'https://rubygems.org'
 gemspec
 
-# Oldest Rails version getting security patches is 5.2
-gem 'minitest-rails', '~> 5.2.0'
-gem 'railties', '~> 5.2.8'
+# Oldest Rails version getting security patches is 6.0
+gem 'minitest-rails', '~> 6.0.0'
+gem 'railties', '~> 6.0.0'
 
 group :active_record do
   gem 'sqlite3'
 end
 
 group :mongoid do
-  gem 'mongoid', '~> 7.4'
+  gem 'mongoid', '~> 8.0'
 
   group :test do
     gem 'database_cleaner-mongoid', '~> 2.0'
