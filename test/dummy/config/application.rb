@@ -21,11 +21,6 @@ module RailsApp
     config.autoload_paths += ["#{config.root}/app/#{DEVISE_ORM}"]
     config.autoload_paths += ["#{config.root}/lib"]
 
-    if Gem::Version.new(Rails.version) <= Gem::Version.new("7.0")
-      config.assets.enabled = true
-      config.assets.version = '1.0'
-    end
-
     config.secret_key_base = 'foobar'
   end
 end

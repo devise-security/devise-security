@@ -1,6 +1,6 @@
 # Devise Security
 
-[![Build Status](https://travis-ci.org/devise-security/devise-security.svg?branch=master)](https://travis-ci.org/devise-security/devise-security)
+[![Build Status](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml/badge.svg?branch=master)](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml)
 [![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
@@ -380,22 +380,22 @@ Standard tests can be invoked using `rake`. To run the tests against the
 
 ## Maintenance Policy
 
-We are committed to maintain support for `devise-security` for all normal or
+We are committed to maintaining support for `devise-security` for all normal or
 security maintenance versions of the Ruby language
 [as listed here](https://www.ruby-lang.org/en/downloads/branches/), and for the
 Ruby on Rails framework
 [as per their maintenance policy](https://rubyonrails.org/maintenance/).
 
-In order to avoid introducing bugs caused by backwardly incompatible Ruby
+To avoid introducing bugs caused by backwardly incompatible Ruby
 language features, it is highly recommended that all development work be done
-using the oldest supported ruby version. The contents of the `.ruby-version`
+using the oldest supported Ruby version. The contents of the `.ruby-version`
 file should reflect this.
 
 ## Copyright
 
-Copyright (c) 2017-2022 Dillon Welch & Kevin Olbrich.
+Copyright (c) 2017-2023 Dillon Welch & Kevin Olbrich.
 
-Copyright (c) 2011-2017 Marco Scholl as the project [`devise_security_extension`](https://github.com/phatworx/devise_security_extension). 
+Copyright (c) 2011-2017 Marco Scholl as the project [`devise_security_extension`](https://github.com/phatworx/devise_security_extension).
 
 This repo was created as a fork from [b2ee978a](https://github.com/phatworx/devise_security_extension/commit/b2ee978af7d49f0fb0e7271c6ac074dfb4d39353).
 
