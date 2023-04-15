@@ -3,9 +3,7 @@
 source "https://rubygems.org"
 
 gem "minitest-rails", "~> 7.0.0"
-gem "railties", "~> 7.0.0"
-gem "sprockets-rails", require: "sprockets/rails"
-gem "net-smtp", require: false
+gem "railties", "~> 7.0.1"
 
 group :active_record do
   gem "sqlite3"
