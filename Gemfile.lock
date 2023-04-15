@@ -133,8 +133,8 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.0)
-    minitest (5.16.3)
+    mini_portile2 (2.8.1)
+    minitest (5.15.0)
     minitest-rails (5.2.0)
       minitest (~> 5.10)
       railties (~> 5.2.0)
@@ -144,11 +144,11 @@ GEM
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.10.5, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
-    nio4r (2.5.8)
-    nokogiri (1.13.9)
+    nio4r (2.5.2)
+    nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    nokogiri (1.13.9-x86_64-darwin)
+    nokogiri (1.14.2-x86_64-darwin)
       racc (~> 1.4)
     omniauth (2.1.0)
       hashie (>= 3.4.6)
@@ -164,7 +164,7 @@ GEM
     pry-rescue (1.5.2)
       interception (>= 0.5)
       pry (>= 0.12.0)
-    racc (1.6.0)
+    racc (1.6.2)
     rack (2.2.4)
     rack-protection (3.0.3)
       rack
@@ -324,7 +324,7 @@ DEPENDENCIES
   pry-rescue
   rails-controller-testing
   rails_email_validator
-  railties (~> 5.2.8)
+  railties (~> 5.2.8.1)
   rubocop
   rubocop-minitest
   rubocop-rails
@@ -334,4 +334,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   2.3.3
+   2.4.10
