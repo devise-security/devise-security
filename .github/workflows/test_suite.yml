@@ -72,8 +72,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Upload coverage to Coveralls
-        uses: coverallsapp/github-action@v1.1.2
+        uses: coverallsapp/github-action@v2.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
-          path-to-lcov: ./coverage/lcov/devise-security.lcov
+          file: ./coverage/lcov/devise-security.lcov
