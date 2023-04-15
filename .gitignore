@@ -51,3 +51,4 @@ gemfiles/*.lock
 vendor/
 
 .byebug_history
+Brewfile.lock.json
