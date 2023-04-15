@@ -157,9 +157,9 @@ GEM
       railties (~> 6.0.0)
     mongo (2.18.2)
       bson (>= 4.14.1, < 5.0.0)
-    mongoid (7.5.2)
+    mongoid (8.0.3)
       activemodel (>= 5.1, < 7.1, != 7.0.0)
-      mongo (>= 2.10.5, < 3.0.0)
+      mongo (>= 2.18.0, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
     net-imap (0.3.4)
       date
@@ -349,7 +349,7 @@ DEPENDENCIES
   m
   minitest
   minitest-rails (~> 6.0.0)
-  mongoid (~> 7.4)
+  mongoid (~> 8.0)
   omniauth
   pry-rescue
   rails-controller-testing

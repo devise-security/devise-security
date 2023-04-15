@@ -12,7 +12,7 @@ group :active_record do
 end
 
 group :mongoid do
-  gem 'mongoid', '~> 7.4'
+  gem 'mongoid', '~> 8.0'
 
   group :test do
     gem 'database_cleaner-mongoid', '~> 2.0'
