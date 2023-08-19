@@ -37,6 +37,9 @@ module Devise
   mattr_accessor :email_validation
   @@email_validation = true
 
+  # skip email uniqueness validation, can be useful if you want use the built in email validations,
+  # but you use something like :username for your authentication_key, and don't want the unique validation
+  # on the email
   mattr_accessor :skip_email_uniqueness_validation
   @@skip_email_uniqueness_validation = false
 
