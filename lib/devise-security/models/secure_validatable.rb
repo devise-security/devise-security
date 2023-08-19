@@ -30,19 +30,17 @@ module Devise
             validation_condition = "#{login_attribute}_changed?".to_sym
 
             validates login_attribute, uniqueness: {
-                                          scope:          authentication_keys[1..-1],
-                                          case_sensitive: !!case_insensitive_keys
-                                        },
-                                        if: validation_condition
+                                         scope: authentication_keys[1..-1],
+                                         case_sensitive: !!case_insensitive_keys
+                                       },
+                                       if: validation_condition
 
             already_validated_email = login_attribute.to_s == 'email'
           end
 
           unless devise_validation_enabled?
             validates :email, presence: true, if: :email_required?
-            unless already_validated_email
-              validates :email, uniqueness: true, allow_blank: true, if: :email_changed? # check uniq for email ever
-            end
+            validates :email, uniqueness: true, allow_blank: true, if: :email_changed? unless already_validated_email || skip_email_uniqueness_validation
 
             validates_presence_of :password, if: :password_required?
             validates_confirmation_of :password, if: :password_required?
@@ -57,7 +55,7 @@ module Devise
 
           # extra validations
           # see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
-          validate do |record|
+          validate do
             if email_validation
               validates_with(
                 EmailValidator, { attributes: :email }
@@ -121,6 +119,7 @@ module Devise
       delegate(
         :allow_passwords_equal_to_email,
         :email_validation,
+        :skip_email_uniqueness_validation,
         :password_complexity,
         :password_complexity_validator,
         :password_length,
@@ -132,6 +131,7 @@ module Devise
           self,
           :allow_passwords_equal_to_email,
           :email_validation,
+          :skip_email_uniqueness_validation,
           :password_complexity,
           :password_complexity_validator,
           :password_length

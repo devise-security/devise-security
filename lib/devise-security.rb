@@ -37,6 +37,9 @@ module Devise
   mattr_accessor :email_validation
   @@email_validation = true
 
+  mattr_accessor :skip_email_uniqueness_validation
+  @@skip_email_uniqueness_validation = false
+
   # captcha integration for recover form
   mattr_accessor :captcha_for_recover
   @@captcha_for_recover = false
