@@ -3,8 +3,6 @@
 require 'test_helper'
 
 class TestSecureValidatableAuthKeyUsername < ActiveSupport::TestCase
-  include IntegrationHelpers
-
   class User < ApplicationRecord
     devise authentication_keys: [:username]
 
@@ -27,7 +25,7 @@ class TestSecureValidatableAuthKeyUsername < ActiveSupport::TestCase
       password_confirmation: 'Passw-!88dsSdd-@ord1!'
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'username uniqueness is validated' do
@@ -45,7 +43,7 @@ class TestSecureValidatableAuthKeyUsername < ActiveSupport::TestCase
       password_confirmation: 'Passw-!88dsSdd-@ord1!'
     )
 
-    assert user.invalid?
-    assert_equal(["Username has already been taken"], user.errors.full_messages)
+    assert_predicate user, :invalid?
+    assert_equal(['Username has already been taken'], user.errors.full_messages)
   end
 end
