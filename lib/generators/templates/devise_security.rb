@@ -26,6 +26,9 @@ Devise.setup do |config|
   # dependency: see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
   # config.email_validation = true
 
+  # skip email uniqueness validation
+  # config.skip_email_uniqueness_validation = false
+
   # captcha integration for recover form
   # config.captcha_for_recover = true
 
