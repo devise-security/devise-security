@@ -11,12 +11,12 @@ class TestSecureValidatableAuthKeyUsername < ActiveSupport::TestCase
 
     protected
 
-    def validate_email_uniquenes?
+    def validate_email_uniqueness?
       false
     end
   end
 
-  test "new user can use an existing user's email if validate_email_uniquenes? is set to false" do
+  test "new user can use an existing user's email if validate_email_uniqueness? is set to false" do
     User.create!(
       username: 'bobber1',
       email: 'bob@microsoft.com',
