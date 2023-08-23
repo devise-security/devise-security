@@ -6,11 +6,17 @@ class TestSecureValidatableAuthKeyUsername < ActiveSupport::TestCase
   class User < ApplicationRecord
     devise authentication_keys: [:username]
 
-    devise :database_authenticatable, :secure_validatable, skip_email_uniqueness_validation: true
+    devise :database_authenticatable, :secure_validatable
     include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
+
+    protected
+
+    def validate_email_uniquenes?
+      false
+    end
   end
 
-  test "new user can use existing user's email if skip_email_uniqueness_validatio is set to true" do
+  test "new user can use an existing user's email if validate_email_uniquenes? is set to false" do
     User.create!(
       username: 'bobber1',
       email: 'bob@microsoft.com',

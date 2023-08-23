@@ -40,7 +40,7 @@ module Devise
 
           unless devise_validation_enabled?
             validates :email, presence: true, if: :email_required?
-            validates :email, uniqueness: true, allow_blank: true, if: :email_changed? unless already_validated_email || skip_email_uniqueness_validation
+            validates :email, uniqueness: true, allow_blank: true, if: :email_changed? && :validate_email_uniquenes? unless already_validated_email
 
             validates_presence_of :password, if: :password_required?
             validates_confirmation_of :password, if: :password_required?
@@ -116,10 +116,13 @@ module Devise
         true
       end
 
+      def validate_email_uniquenes?
+        true
+      end
+
       delegate(
         :allow_passwords_equal_to_email,
         :email_validation,
-        :skip_email_uniqueness_validation,
         :password_complexity,
         :password_complexity_validator,
         :password_length,
@@ -131,7 +134,6 @@ module Devise
           self,
           :allow_passwords_equal_to_email,
           :email_validation,
-          :skip_email_uniqueness_validation,
           :password_complexity,
           :password_complexity_validator,
           :password_length

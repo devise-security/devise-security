@@ -82,30 +82,22 @@ Devise.setup do |config|
   # ==> Security Extension
   # Configure security extension for devise
 
-  # Should the password expire (e.g 3.months)
-  # config.expire_password_after = false
+  # Password expires after a configurable time (in seconds).
+  # Or expire passwords on demand by setting this configuration to `true`
+  # Use `user.need_change_password!` to expire a password.
+  # Setting the configuration to `false` will completely disable expiration checks.
+  # config.expire_password_after = 3.months | true | false
 
   # Need 1 char each of: A-Z, a-z, 0-9, and a punctuation mark or symbol
   # You may use "digits" in place of "digit" and "symbols" in place of
   # "symbol" based on your preference
   # config.password_complexity = { digit: 1, lower: 1, symbol: 1, upper: 1 }
 
-  # How many passwords to keep in archive
+  # Number of old passwords in archive
   # config.password_archiving_count = 5
 
-  # Deny old passwords (true, false, number_of_old_passwords_to_check)
-  # Examples:
-  # config.deny_old_passwords = false # allow old passwords
-  # config.deny_old_passwords = true # will deny all the old passwords
-  # config.deny_old_passwords = 3 # will deny new passwords that matches with the last 3 passwords
+  # Deny old password (true, false, count)
   # config.deny_old_passwords = true
-
-  # enable email validation for :secure_validatable. (true, false, validation_options)
-  # dependency: see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
-  # config.email_validation = true
-
-  # skip email uniqueness validation
-  # config.skip_email_uniqueness_validation = false
 
   # captcha integration for recover form
   # config.captcha_for_recover = true
@@ -119,13 +111,23 @@ Devise.setup do |config|
   # captcha integration for unlock form
   # config.captcha_for_unlock = true
 
-  # captcha integration for confirmation form
-  # config.captcha_for_confirmation = true
+  # security_question integration for recover form
+  # this automatically enables captchas (captcha_for_recover, as fallback)
+  # config.security_question_for_recover = false
 
+  # security_question integration for unlock form
+  # this automatically enables captchas (captcha_for_unlock, as fallback)
+  # config.security_question_for_unlock = false
+
+  # security_question integration for confirmation form
+  # this automatically enables captchas (captcha_for_confirmation, as fallback)
+  # config.security_question_for_confirmation = false
+
+  # ==> Configuration for :expirable
   # Time period for account expiry from last_activity_at
   # config.expire_after = 90.days
 
-  # Allow password to equal the email
+  # Allow passwords to be equal to email (false, true)
   # config.allow_passwords_equal_to_email = false
 
   # paranoid_verification will regenerate verification code after failed attempt
@@ -373,11 +375,7 @@ See also
 
 ## Running tests
 
-Standard tests can be invoked using `rake`, you can run a single test file by adding
-the argument `TEST=` with the path to the test file you want to
-run: `rake TEST=test/path_to/my_test_file.rb`.
-
-To run the tests against the
+Standard tests can be invoked using `rake`. To run the tests against the
 `mongoid` ORM, use `DEVISE_ORM=mongoid rake` while `mongodb` is running.
 
 ## Maintenance Policy
