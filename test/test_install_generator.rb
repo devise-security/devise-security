@@ -23,6 +23,7 @@ class TestInstallGenerator < Rails::Generators::TestCase
     assert_file 'config/locales/devise.security_extension.it.yml'
     assert_file 'config/locales/devise.security_extension.ja.yml'
     assert_file 'config/locales/devise.security_extension.nl.yml'
+    assert_file 'config/locales/devise.security_extension.pl.yml'
     assert_file 'config/locales/devise.security_extension.pt.yml'
     assert_file 'config/locales/devise.security_extension.ru.yml'
     assert_file 'config/locales/devise.security_extension.tr.yml'

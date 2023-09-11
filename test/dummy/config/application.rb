@@ -21,9 +21,6 @@ module RailsApp
     config.autoload_paths += ["#{config.root}/app/#{DEVISE_ORM}"]
     config.autoload_paths += ["#{config.root}/lib"]
 
-    config.assets.enabled = true
-
-    config.assets.version = '1.0'
     config.secret_key_base = 'foobar'
   end
 end

@@ -219,11 +219,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.new(options)
 
     assert user.invalid?
-    if DEVISE_ORM == :active_record
-      assert_equal(['Email has already been taken'], user.errors.full_messages)
-    else
-      assert_equal(['Email is already taken'], user.errors.full_messages)
-    end
+    assert_equal(['Email has already been taken'], user.errors.full_messages)
   end
 
   test "new user can't use existing user's email with different casing" do
@@ -237,11 +233,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     user = User.new(options)
 
     assert user.invalid?
-    if DEVISE_ORM == :active_record
-      assert_equal(['Email has already been taken'], user.errors.full_messages)
-    else
-      assert_equal(['Email is already taken'], user.errors.full_messages)
-    end
+    assert_equal(['Email has already been taken'], user.errors.full_messages)
   end
 
   test 'password cannot equal email for new user' do
