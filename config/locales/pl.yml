@@ -1,0 +1,50 @@
+pl:
+  errors:
+    messages:
+      taken_in_past: 'było używane wcześniej.'
+      equal_to_current_password: 'musi być inne niż aktualne hasło.'
+      equal_to_email: 'musi być inny niż e-mail.'
+      password_complexity:
+        digit:
+          one: musi zawierać co najmniej jedną cyfrę
+          few: musi zawierać co najmniej %{count} cyfr
+          many: musi zawierać co najmniej %{count} cyfr
+          other: musi zawierać co najmniej %{count} cyfr
+        lower:
+          one: musi zawierać co najmniej jedną małą literę
+          few: musi zawierać co najmniej %{count} małych liter
+          many: musi zawierać co najmniej %{count} małych liter
+          other: musi zawierać co najmniej %{count} małych liter
+        symbol:
+          one: musi zawierać co najmniej jeden znak interpunkcyjny lub symbol
+          few: musi zawierać co najmniej %{count} znaków interpunkcyjnych lub symboli
+          many: musi zawierać co najmniej %{count} znaków interpunkcyjnych lub symboli
+          other: musi zawierać co najmniej %{count} znaków interpunkcyjnych lub symboli
+        upper:
+          one: musi zawierać co najmniej jedną wielką literę
+          few: musi zawierać co najmniej %{count} wielkich liter
+          many: musi zawierać co najmniej %{count} wielkich liter
+          other: musi zawierać co najmniej %{count} wielkich liter
+  devise:
+    invalid_captcha: 'Dane wejściowe captcha były nieprawidłowe.'
+    invalid_security_question: 'Odpowiedź na pytanie zabezpieczające była nieprawidłowa.'
+    paranoid_verify:
+      code_required: 'Wprowadź kod otrzymany od naszego zespołu wsparcia'
+    paranoid_verification_code:
+      updated: Kod weryfikacyjny zaakceptowany
+      show:
+        submit_verification_code: Prześlij kod weryfikacyjny
+        verification_code: Kod weryfikacyjny
+        submit: Wyślij
+    password_expired:
+      updated: 'Twoje nowe hasło zostało zapisane.'
+      change_required: 'Twoje hasło wygasło. Odnów swoje hasło.'
+      show:
+        renew_your_password: Odnów swoje hasło
+        current_password: Aktualne hasło
+        new_password: Nowe hasło
+        new_password_confirmation: Potwierdź nowe hasło
+        change_my_password: Zmień moje hasło
+    failure:
+      session_limited: 'Twoje dane logowania zostały użyte w innej przeglądarce. Zaloguj się ponownie, aby kontynuować w tej przeglądarce.'
+      expired: 'Twoje konto wygasło z powodu braku aktywności. Proszę skontaktować się z administratorem serwisu.'
