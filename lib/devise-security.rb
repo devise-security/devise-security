@@ -33,7 +33,7 @@ module Devise
   @@deny_old_passwords = true
 
   # enable email validation for :secure_validatable. (true, false, validation_options)
-  # dependency: need an email validator, see https://github.com/devise-security/devise-security/blob/master/README.md#e-mail-validation
+  # dependency: need an email validator, see https://github.com/devise-security/devise-security/blob/main/README.md#e-mail-validation
   mattr_accessor :email_validation
   @@email_validation = true
 
