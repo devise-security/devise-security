@@ -7,15 +7,23 @@ pl:
       password_complexity:
         digit:
           one: musi zawierać co najmniej jedną cyfrę
+          few: musi zawierać co najmniej %{count} cyfr
+          many: musi zawierać co najmniej %{count} cyfr
           other: musi zawierać co najmniej %{count} cyfr
         lower:
           one: musi zawierać co najmniej jedną małą literę
+          few: musi zawierać co najmniej %{count} małych liter
+          many: musi zawierać co najmniej %{count} małych liter
           other: musi zawierać co najmniej %{count} małych liter
         symbol:
           one: musi zawierać co najmniej jeden znak interpunkcyjny lub symbol
+          few: musi zawierać co najmniej %{count} znaków interpunkcyjnych lub symboli
+          many: musi zawierać co najmniej %{count} znaków interpunkcyjnych lub symboli
           other: musi zawierać co najmniej %{count} znaków interpunkcyjnych lub symboli
         upper:
           one: musi zawierać co najmniej jedną wielką literę
+          few: musi zawierać co najmniej %{count} wielkich liter
+          many: musi zawierać co najmniej %{count} wielkich liter
           other: musi zawierać co najmniej %{count} wielkich liter
   devise:
     invalid_captcha: 'Dane wejściowe captcha były nieprawidłowe.'
