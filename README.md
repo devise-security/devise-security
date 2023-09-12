@@ -1,7 +1,7 @@
 # Devise Security
 
-[![Build Status](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml/badge.svg?branch=master)](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml)
-[![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=master)
+[![Build Status](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml/badge.svg?branch=main)](https://github.com/devise-security/devise-security/actions/workflows/test_suite.yml)
+[![Coverage Status](https://coveralls.io/repos/github/devise-security/devise-security/badge.svg?branch=master)](https://coveralls.io/github/devise-security/devise-security?branch=main)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ace7cd003a0db8bffa5a/maintainability)](https://codeclimate.com/github/devise-security/devise-security/maintainability)
 
 A [Devise](https://github.com/heartcombo/devise) extension to add additional
@@ -360,7 +360,7 @@ See also
 
 ## Contributing to devise-security
 
-- Check out the latest master to make sure the feature hasn't been implemented
+- Check out the latest main to make sure the feature hasn't been implemented
   or the bug hasn't been fixed yet
 - Check out the issue tracker to make sure someone already hasn't requested it
   and/or contributed it
