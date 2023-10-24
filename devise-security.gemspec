@@ -19,6 +19,10 @@ Gem::Specification.new do |s|
     'Marco Scholl',
     'Nate Bird'
   ]
+  s.metadata = {
+    'bug_tracker_uri' => 'https://github.com/devise-security/devise-security/issues',
+    'changelog_uri' => 'https://github.com/devise-security/devise-security/releases'
+  }
 
   s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
   s.test_files    = Dir['test/**/*']
