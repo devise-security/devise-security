@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TestPasswordArchivable < ActiveSupport::TestCase
+class TestPasswordExpirable < ActiveSupport::TestCase
   setup do
     Devise.expire_password_after = 2.months
   end
