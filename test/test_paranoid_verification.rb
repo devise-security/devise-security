@@ -5,7 +5,7 @@ require 'test_helper'
 class TestParanoidVerification < ActiveSupport::TestCase
   test 'should have required_fields array' do
     assert_equal(
-      [:paranoid_verification_attempt, :paranoid_verified_at],
+      [:paranoid_verification_code, :paranoid_verification_attempt, :paranoid_verified_at],
       Devise::Models::ParanoidVerification.required_fields(User)
     )
   end
