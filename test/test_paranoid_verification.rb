@@ -3,6 +3,13 @@
 require 'test_helper'
 
 class TestParanoidVerification < ActiveSupport::TestCase
+  test 'should have required_fields array' do
+    assert_equal(
+      [:paranoid_verification_attempt, :paranoid_verified_at],
+      Devise::Models::ParanoidVerification.required_fields(User)
+    )
+  end
+
   test 'need to paranoid verify if code present' do
     user = User.new
     user.generate_paranoid_code

@@ -9,6 +9,10 @@ class TestSessionLimitable < ActiveSupport::TestCase
     end
   end
 
+  test 'should have required_fields array' do
+    assert_equal [:unique_session_id], Devise::Models::SessionLimitable.required_fields(User)
+  end
+
   test 'check is not skipped by default' do
     user = User.new(email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1')
     assert_not(user.skip_session_limitable?)

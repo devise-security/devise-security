@@ -17,6 +17,10 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     user.save!
   end
 
+  test 'required_fields should be an empty array' do
+    assert_empty Devise::Models::PasswordArchivable.required_fields(User)
+  end
+
   test 'cannot use same password' do
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
     assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }

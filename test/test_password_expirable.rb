@@ -11,6 +11,10 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     Devise.expire_password_after = 90.days
   end
 
+  test 'should have required_fields array' do
+    assert_equal [:password_changed_at], Devise::Models::PasswordExpirable.required_fields(User)
+  end
+
   test 'does nothing if disabled' do
     Devise.expire_password_after = false
     user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
