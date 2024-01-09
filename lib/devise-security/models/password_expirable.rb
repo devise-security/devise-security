@@ -25,6 +25,10 @@ module Devise::Models
       before_save :update_password_changed
     end
 
+    def self.required_fields(_klass)
+      [:password_changed_at]
+    end
+
     # Is a password change required?
     # @return [Boolean]
     # @return [true] if +password_changed_at+ has not been set or if it is old

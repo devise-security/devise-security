@@ -20,6 +20,10 @@ module Devise
     module Expirable
       extend ActiveSupport::Concern
 
+      def self.required_fields(_klass)
+        [:last_activity_at, :expired_at]
+      end
+
       # Updates +last_activity_at+, called from a Warden::Manager.after_set_user hook.
       def update_last_activity!
         if respond_to?(:update_column)

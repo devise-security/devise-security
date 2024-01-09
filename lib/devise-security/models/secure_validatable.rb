@@ -82,6 +82,10 @@ module Devise
         raise "Could not use SecureValidatable on #{base}" unless base.respond_to?(:validates)
       end
 
+      def self.required_fields(_klass)
+        []
+      end
+
       def current_equal_password_validation
         return if new_record? || !will_save_change_to_encrypted_password? || password.blank?
 
