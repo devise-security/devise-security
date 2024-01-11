@@ -48,4 +48,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov-lcov'
   s.add_development_dependency 'solargraph'
   s.add_development_dependency 'solargraph-arc'
+  s.add_development_dependency 'mutex_m'
 end
