@@ -2,13 +2,17 @@
 
 require 'test_helper'
 
-class TestPasswordArchivable < ActiveSupport::TestCase
+class TestPasswordExpirable < ActiveSupport::TestCase
   setup do
     Devise.expire_password_after = 2.months
   end
 
   teardown do
     Devise.expire_password_after = 90.days
+  end
+
+  test 'should have required_fields array' do
+    assert_equal [:password_changed_at], Devise::Models::PasswordExpirable.required_fields(User)
   end
 
   test 'does nothing if disabled' do

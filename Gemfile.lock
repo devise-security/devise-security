@@ -161,6 +161,7 @@ GEM
       activemodel (>= 5.1, < 7.1, != 7.0.0)
       mongo (>= 2.18.0, < 3.0.0)
       ruby2_keywords (~> 0.0.5)
+    mutex_m (0.2.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -349,6 +350,7 @@ DEPENDENCIES
   minitest
   minitest-rails (~> 6.0.0)
   mongoid (~> 8.0)
+  mutex_m
   omniauth
   pry-rescue
   rails-controller-testing

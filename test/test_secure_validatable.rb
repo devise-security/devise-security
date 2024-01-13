@@ -16,6 +16,10 @@ class TestSecureValidatable < ActiveSupport::TestCase
     end
   end
 
+  test 'required_fields should be an empty array' do
+    assert_empty Devise::Models::SecureValidatable.required_fields(User)
+  end
+
   test 'email cannot be blank upon creation' do
     user = User.new(
       password: 'Password1!', password_confirmation: 'Password1!'

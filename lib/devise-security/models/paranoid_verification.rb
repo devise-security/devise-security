@@ -8,6 +8,10 @@ module Devise
     module ParanoidVerification
       extend ActiveSupport::Concern
 
+      def self.required_fields(_klass)
+        [:paranoid_verification_code, :paranoid_verification_attempt, :paranoid_verified_at]
+      end
+
       def need_paranoid_verification?
         !!paranoid_verification_code
       end
