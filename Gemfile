@@ -8,6 +8,7 @@ gem 'minitest-rails', '~> 6.0.0'
 gem 'railties', '~> 6.0.0'
 
 group :active_record do
+  gem 'pg'
   gem 'sqlite3'
 end
 
