@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TestPasswordArchivable < ActiveSupport::TestCase
+class TestPasswordExpirable < ActiveSupport::TestCase
   setup do
     Devise.expire_password_after = 2.months
   end
@@ -11,9 +11,13 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     Devise.expire_password_after = 90.days
   end
 
+  test 'should have required_fields array' do
+    assert_equal [:password_changed_at], Devise::Models::PasswordExpirable.required_fields(User)
+  end
+
   test 'does nothing if disabled' do
     Devise.expire_password_after = false
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     assert_not user.need_change_password?
     assert_not user.password_expired?
     user.need_change_password!
@@ -23,7 +27,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
   test 'password change can be requested' do
     Devise.expire_password_after = true
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     assert_not user.need_change_password?
     assert_not user.password_expired?
     assert_not user.password_change_requested?
@@ -34,7 +38,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'password expires' do
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     assert_not user.need_change_password?
     assert_not user.password_expired?
     assert_not user.password_too_old?
@@ -46,7 +50,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'saving a record records the time the password was changed' do
-    user = User.new email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.new email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     assert_nil user.password_changed_at
     assert_not user.password_change_requested?
     assert_not user.password_expired?
@@ -57,7 +61,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'updating a record updates the time the password was changed if the password is changed' do
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     user.update(password_changed_at: Time.zone.now.ago(3.months))
     original_password_changed_at = user.password_changed_at
     user.expire_password!
@@ -70,7 +74,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'updating a record does not updates the time the password was changed if the password was not changed' do
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     user.expire_password!
     assert user.password_change_requested?
     user.save
@@ -79,7 +83,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'override expire after at runtime' do
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     user.instance_eval do
       def expire_password_after
         4.months

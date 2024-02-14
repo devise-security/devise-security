@@ -10,7 +10,7 @@ class Devise::ParanoidVerificationCodeControllerTest < ActionController::TestCas
     @request.env['devise.mapping'] = Devise.mappings[:user]
     @user = User.create!(
       username: 'hello',
-      email: 'hello@path.travel',
+      email: generate_unique_email,
       password: 'Password4',
       confirmed_at: 5.months.ago,
       paranoid_verification_code: 'cookies'
@@ -106,7 +106,7 @@ class ParanoidVerificationCodeCustomRedirectTest < ActionController::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:paranoid_verification_user]
     @user = ParanoidVerificationUser.create!(
       username: 'hello',
-      email: 'hello@path.travel',
+      email: generate_unique_email,
       password: 'Password4',
       confirmed_at: 5.months.ago,
       paranoid_verification_code: 'cookies'
