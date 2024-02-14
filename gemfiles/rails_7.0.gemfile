@@ -8,6 +8,7 @@ gem "bigdecimal", require: false
 gem "drb", require: false
 
 group :active_record do
+  gem "pg"
   gem "sqlite3"
 end
 
