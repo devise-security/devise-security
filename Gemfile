@@ -26,3 +26,6 @@ end
 group :test do
   gem 'rails-controller-testing'
 end
+
+# Dependencies for Ruby 3.4 and up
+gem 'bigdecimal', require: false
