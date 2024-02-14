@@ -9,7 +9,7 @@ class TestParanoidVerificationCodeWorkflow < ActionDispatch::IntegrationTest
     @user = User.create!(
       password: 'passWord1',
       password_confirmation: 'passWord1',
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       paranoid_verification_code: 'cookies'
     ) # the default verification code is nil
     @user.confirm

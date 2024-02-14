@@ -8,7 +8,7 @@ class TestSessionLimitableWorkflow < ActionDispatch::IntegrationTest
   setup do
     @user = User.create!(password: 'passWord1',
                          password_confirmation: 'passWord1',
-                         email: 'bob@microsoft.com')
+                         email: generate_unique_email)
     @user.confirm
   end
 

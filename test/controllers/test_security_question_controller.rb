@@ -8,7 +8,7 @@ class TestWithSecurityQuestion < ActionController::TestCase
 
   setup do
     @user = SecurityQuestionUser.create!(
-      username: 'hello', email: 'hello@microsoft.com', password: 'A1234567z!', security_question_answer: 'Right Answer'
+      username: 'hello', email: generate_unique_email, password: 'A1234567z!', security_question_answer: 'Right Answer'
     )
     @user.lock_access!
     assert @user.locked_at.present?
@@ -51,7 +51,7 @@ class TestWithoutSecurityQuestion < ActionController::TestCase
 
   setup do
     @user = User.create(
-      username: 'hello', email: 'hello@path.travel', password: '1234', security_question_answer: 'Right Answer'
+      username: 'hello', email: generate_unique_email, password: '1234', security_question_answer: 'Right Answer'
     )
     @user.lock_access!
     @request.env['devise.mapping'] = Devise.mappings[:user]
