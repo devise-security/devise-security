@@ -78,6 +78,7 @@ GEM
       html_tokenizer (~> 0.0.6)
       parser (>= 2.4)
       smart_properties
+    bigdecimal (3.1.6)
     bson (4.15.0)
     builder (3.2.4)
     byebug (11.1.3)
@@ -102,6 +103,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    drb (2.2.0)
+      ruby2_keywords
     e2mmap (0.1.0)
     easy_captcha (0.6.5)
       bundler (>= 1.1.0)
@@ -339,11 +342,13 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal
+  bigdecimal
   bundler
   byebug
   database_cleaner
   database_cleaner-mongoid (~> 2.0)
   devise-security!
+  drb
   easy_captcha
   i18n-tasks
   m
