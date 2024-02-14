@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gem "minitest-rails", "~> 6.1.0"
 gem "railties", "~> 6.1.0"
 gem "bigdecimal", require: false
+gem "drb", require: false
 
 group :active_record do
   gem "sqlite3"

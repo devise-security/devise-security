@@ -103,6 +103,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    drb (2.2.0)
+      ruby2_keywords
     e2mmap (0.1.0)
     easy_captcha (0.6.5)
       bundler (>= 1.1.0)
@@ -346,6 +348,7 @@ DEPENDENCIES
   database_cleaner
   database_cleaner-mongoid (~> 2.0)
   devise-security!
+  drb
   easy_captcha
   i18n-tasks
   m
