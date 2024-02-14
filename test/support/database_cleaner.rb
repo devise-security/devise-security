@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DatabaseCleanerLifecycleHooks
   def self.included(_base)
     DatabaseCleaner.clean

@@ -54,20 +54,22 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   end
 
   test 'email equal to password can be overridden at the class level' do
+    email = generate_unique_email
     user = ClassLevelOverrideUser.new(
-      email: 'bob1!@microsoft.com',
-      password: 'bob1!@microsoft.com',
-      password_confirmation: 'bob1!@microsoft.com'
+      email: email,
+      password: email,
+      password_confirmation: email
     )
 
     assert user.valid?
   end
 
   test 'email equal to password can be overridden at the instance level' do
+    email = generate_unique_email
     user = InstanceLevelOverrideUser.new(
-      email: 'bob1!@microsoft.com',
-      password: 'bob1!@microsoft.com',
-      password_confirmation: 'bob1!@microsoft.com'
+      email: email,
+      password: email,
+      password_confirmation: email
     )
 
     assert user.valid?
@@ -75,7 +77,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
   test 'email validation can be overridden at the class level' do
     user = ClassLevelOverrideUser.new(
-      email: 'bob1!@f.com',
+      email: generate_unique_email,
       password: 'Pa3zZ1!!aaaaaa',
       password_confirmation: 'Pa3zZ1!!aaaaaa'
     )
@@ -85,7 +87,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
   test 'email validation can be overridden at the instance level' do
     user = InstanceLevelOverrideUser.new(
-      email: 'bob1!@f.com',
+      email: generate_unique_email,
       password: 'Pa3zZ1!!aaaaaa',
       password_confirmation: 'Pa3zZ1!!aaaaaa'
     )
@@ -95,7 +97,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
   test 'password complexity can be overridden at the class level' do
     user = ClassLevelOverrideUser.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'PASSwordddd',
       password_confirmation: 'PASSwordddd'
     )
@@ -109,7 +111,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
   test 'password complexity can be overridden at the instance level' do
     user = InstanceLevelOverrideUser.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'PASSwordddd',
       password_confirmation: 'PASSwordddd'
     )
@@ -123,7 +125,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
   test 'password length can be overridden at the class level' do
     user = ClassLevelOverrideUser.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Pa3zZ1!',
       password_confirmation: 'Pa3zZ1!'
     )
@@ -137,7 +139,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
 
   test 'password length can be overridden at the instance level' do
     user = InstanceLevelOverrideUser.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Pa3zZ1!!',
       password_confirmation: 'Pa3zZ1!!'
     )
@@ -152,7 +154,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   test 'password validator can be overridden at the instance level' do
     password = '!' * 11 # 11 characters, all symbols
     user = InstanceLevelOverrideUser.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: password,
       password_confirmation: password
     )
@@ -169,7 +171,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
   test 'password validator can be overridden at the class level' do
     password = '!' * 10 # 10 characters, all symbols
     user = ClassLevelOverrideUser.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: password,
       password_confirmation: password
     )

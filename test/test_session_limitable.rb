@@ -14,12 +14,12 @@ class TestSessionLimitable < ActiveSupport::TestCase
   end
 
   test 'check is not skipped by default' do
-    user = User.new(email: 'bob@microsoft.com', password: 'password1', password_confirmation: 'password1')
+    user = User.new(email: generate_unique_email, password: 'password1', password_confirmation: 'password1')
     assert_not(user.skip_session_limitable?)
   end
 
   test 'default check can be overridden by record instance' do
-    modified_user = ModifiedUser.new(email: 'bob2@microsoft.com', password: 'password1', password_confirmation: 'password1')
+    modified_user = ModifiedUser.new(email: generate_unique_email, password: 'password1', password_confirmation: 'password1')
     assert(modified_user.skip_session_limitable?)
   end
 
@@ -33,7 +33,7 @@ class TestSessionLimitable < ActiveSupport::TestCase
   end
 
   test '#update_unique_session_id!(value) updates valid record' do
-    user = User.create! password: 'passWord1', password_confirmation: 'passWord1', email: 'bob@microsoft.com'
+    user = User.create! password: 'passWord1', password_confirmation: 'passWord1', email: generate_unique_email
     assert user.persisted?
     assert_nil user.unique_session_id
     user.update_unique_session_id!('unique_value')
@@ -42,14 +42,15 @@ class TestSessionLimitable < ActiveSupport::TestCase
   end
 
   test '#update_unique_session_id!(value) updates invalid record atomically' do
-    user = User.create! password: 'passWord1', password_confirmation: 'passWord1', email: 'bob@microsoft.com'
+    email = generate_unique_email
+    user = User.create! password: 'passWord1', password_confirmation: 'passWord1', email: email
     assert user.persisted?
     user.email = ''
     assert user.invalid?
     assert_nil user.unique_session_id
     user.update_unique_session_id!('unique_value')
     user.reload
-    assert_equal('bob@microsoft.com', user.email)
+    assert_equal(email, user.email)
     assert_equal('unique_value', user.unique_session_id)
   end
 

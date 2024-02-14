@@ -19,14 +19,14 @@ class TestSecureValidatableAuthKeyUsername < ActiveSupport::TestCase
   test "new user can use an existing user's email if validate_email_uniqueness? is set to false" do
     User.create!(
       username: 'bobber1',
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Passw-!88dsSdd-@ord1!',
       password_confirmation: 'Passw-!88dsSdd-@ord1!'
     )
 
     user = User.new(
       username: 'bobber2',
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Passw-!88dsSdd-@ord1!',
       password_confirmation: 'Passw-!88dsSdd-@ord1!'
     )
@@ -37,14 +37,14 @@ class TestSecureValidatableAuthKeyUsername < ActiveSupport::TestCase
   test 'username uniqueness is validated' do
     User.create!(
       username: 'bobber',
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Passw-!88dsSdd-@ord1!',
       password_confirmation: 'Passw-!88dsSdd-@ord1!'
     )
 
     user = User.new(
       username: 'bobber',
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Passw-!88dsSdd-@ord1!',
       password_confirmation: 'Passw-!88dsSdd-@ord1!'
     )

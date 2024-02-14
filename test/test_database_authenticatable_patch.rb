@@ -5,7 +5,7 @@ require 'test_helper'
 class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
   def create_user
     User.create(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: 'Password1!'
     ) do |user|
