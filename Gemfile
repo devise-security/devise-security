@@ -8,6 +8,7 @@ gem 'minitest-rails', '~> 6.0.0'
 gem 'railties', '~> 6.0.0'
 
 group :active_record do
+  gem 'pg'
   gem 'sqlite3'
 end
 
@@ -26,3 +27,7 @@ end
 group :test do
   gem 'rails-controller-testing'
 end
+
+# Dependencies for Ruby 3.4 and up
+gem 'bigdecimal', require: false
+gem 'drb', require: false

@@ -16,6 +16,10 @@ class TestSecureValidatable < ActiveSupport::TestCase
     end
   end
 
+  test 'required_fields should be an empty array' do
+    assert_empty Devise::Models::SecureValidatable.required_fields(User)
+  end
+
   test 'email cannot be blank upon creation' do
     user = User.new(
       password: 'Password1!', password_confirmation: 'Password1!'
@@ -35,7 +39,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'email cannot be updated to be blank' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: 'Password1!'
     )
@@ -50,7 +54,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'email can be updated to be blank if email not required' do
     user = EmailNotRequiredUser.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: 'Password1!'
     )
@@ -89,7 +93,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test 'password cannot be blank upon creation' do
-    user = User.new(email: 'bob@microsoft.com')
+    user = User.new(email: generate_unique_email)
 
     msgs = ["Password can't be blank"]
 
@@ -101,7 +105,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password cannot be updated to be blank' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: 'Password1!'
     )
@@ -117,7 +121,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password_confirmation must match password' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: 'not the same password'
     )
@@ -131,7 +135,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password_confirmation cannot be blank' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: ''
     )
@@ -145,7 +149,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password_confirmation can be skipped' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: nil
     )
@@ -155,7 +159,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password must have capital letter' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'password1',
       password_confirmation: 'password1'
     )
@@ -169,7 +173,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password must have lowercase letter' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'PASSWORD1',
       password_confirmation: 'PASSWORD1'
     )
@@ -183,7 +187,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password must have number' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'PASSword',
       password_confirmation: 'PASSword'
     )
@@ -197,7 +201,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'password must meet minimum length' do
     user = User.new(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Pa3zZ',
       password_confirmation: 'Pa3zZ'
     )
@@ -211,7 +215,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test "new user can't use existing user's email" do
     options = {
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: 'Password1!'
     }
@@ -223,13 +227,14 @@ class TestSecureValidatable < ActiveSupport::TestCase
   end
 
   test "new user can't use existing user's email with different casing" do
+    email = generate_unique_email
     options = {
-      email: 'bob@microsoft.com',
+      email: email,
       password: 'Password1!',
       password_confirmation: 'Password1!'
     }
     User.create!(options)
-    options[:email] = 'BOB@MICROSOFT.COM'
+    options[:email] = email
     user = User.new(options)
 
     assert user.invalid?
@@ -295,7 +300,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
   test 'new password cannot equal current password' do
     user = User.create(
-      email: 'bob@microsoft.com',
+      email: generate_unique_email,
       password: 'Password1!',
       password_confirmation: 'Password1!'
     )

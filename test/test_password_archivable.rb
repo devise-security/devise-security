@@ -17,22 +17,26 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     user.save!
   end
 
+  test 'required_fields should be an empty array' do
+    assert_empty Devise::Models::PasswordArchivable.required_fields(User)
+  end
+
   test 'cannot use same password' do
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }
   end
 
   test 'indirectly saving associated user does not cause deprecation warning' do
     old_behavior = ActiveSupport::Deprecation.behavior
     ActiveSupport::Deprecation.behavior = :raise
-    user = User.new email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.new email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     widget = Widget.new(user: user)
     widget.save
     ActiveSupport::Deprecation.behavior = old_behavior
   end
 
   test 'does not save an OldPassword if user password was originally nil' do
-    user = User.new(email: 'bob@microsoft.com', password: nil, password_confirmation: nil)
+    user = User.new(email: generate_unique_email, password: nil, password_confirmation: nil)
     set_password(user, 'Password1')
     assert_equal 0, OldPassword.count
   end
@@ -40,7 +44,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   test 'cannot reuse archived passwords' do
     assert_equal 2, Devise.password_archiving_count
 
-    user = User.create! email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create! email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     assert_equal 0, OldPassword.count
     set_password(user, 'Password2')
     assert_equal 1, OldPassword.count
@@ -64,7 +68,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
       end
     end
 
-    user = User.create email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
 
     assert set_password(user, 'Password2')
 
@@ -80,7 +84,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     assert_equal 2, Devise.password_archiving_count
 
-    user = User.create! email: 'bob@microsoft.com', password: 'Password1', password_confirmation: 'Password1'
+    user = User.create! email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     assert_equal 0, OldPassword.count
     set_password(user, 'Password2')
     assert_equal 1, OldPassword.count

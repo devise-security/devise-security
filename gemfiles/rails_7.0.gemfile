@@ -4,8 +4,11 @@ source "https://rubygems.org"
 
 gem "minitest-rails", "~> 7.0.0"
 gem "railties", "~> 7.0.0"
+gem "bigdecimal", require: false
+gem "drb", require: false
 
 group :active_record do
+  gem "pg"
   gem "sqlite3"
 end
 

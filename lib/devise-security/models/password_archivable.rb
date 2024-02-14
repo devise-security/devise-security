@@ -19,6 +19,10 @@ module Devise
 
       delegate :present?, to: :password, prefix: true
 
+      def self.required_fields(_klass)
+        []
+      end
+
       def validate_password_archive
         errors.add(:password, :taken_in_past) if will_save_change_to_encrypted_password? && password_archive_included?
       end

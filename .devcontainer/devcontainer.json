@@ -1,0 +1,36 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
+{
+	"name": "Devise Security",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:latest": {},
+		"ghcr.io/itsmechlark/features/trivy:latest": {}
+	},
+
+	"containerEnv": {
+		"PGHOST": "postgres",
+		"PGUSER": "postgres",
+		"PGPASSWORD": "postgres",
+		"DATABASE_URL": "postgres://postgres:postgres@postgres:5432/devise_security_test",
+		"MONGODB_URI": "mongodb://mongodb:mongodb@mongodb:27017"
+	},
+
+	"postCreateCommand": ".devcontainer/boot.sh",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"Shopify.ruby-lsp"
+			]
+		}
+	},
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+	"updateRemoteUserUID": true
+}
