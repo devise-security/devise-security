@@ -37,16 +37,7 @@ require "orm/#{DEVISE_ORM}"
 # controller, even though it has been deprecated in favor of request tests.
 require 'rails-controller-testing'
 Rails::Controller::Testing.install
-require 'support/integration_helpers'
 
-class Minitest::Test
-  def before_setup
-    DatabaseCleaner.start
-  end
-
-  def after_teardown
-    DatabaseCleaner.clean
-  end
-end
-
-DatabaseCleaner.clean
+# Add support to load paths so we can overwrite broken test setup
+$LOAD_PATH.unshift File.expand_path('support', __dir__)
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
