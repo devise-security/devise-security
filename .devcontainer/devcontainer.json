@@ -11,10 +11,12 @@
 	},
 
 	"containerEnv": {
+		"BUNDLE_GEMFILE": "${containerWorkspaceFolder}/Gemfile", // Use the Gemfile in the workspace folder by default.
 		"PGHOST": "postgres",
 		"PGUSER": "postgres",
 		"PGPASSWORD": "postgres",
 		"DATABASE_URL": "postgres://postgres:postgres@postgres:5432/devise_security_test",
+		"DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL": "true", // https://github.com/DatabaseCleaner/database_cleaner#safeguards
 		"MONGODB_URI": "mongodb://mongodb:mongodb@mongodb:27017"
 	},
 

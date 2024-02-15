@@ -89,6 +89,22 @@ module Devise
   # Whether to allow passwords that are equal (case insensitive) to the email
   mattr_accessor :allow_passwords_equal_to_email
   @@allow_passwords_equal_to_email = false
+
+  # Allow customization of the session history class
+  mattr_accessor :session_history_class
+  @@session_history_class = 'SessionHistory'
+
+  # Restrict session token to IP address
+  mattr_accessor :session_ip_verification
+  @@session_ip_verification = true
+
+  # Maximum number of active sessions
+  mattr_accessor :max_active_sessions
+  @@max_active_sessions = 1
+
+  # Reject session when exceeded to allowed number of active sessions
+  mattr_accessor :reject_sessions
+  @@reject_sessions = false
 end
 
 # a security extension for devise
@@ -106,6 +122,7 @@ Devise.add_module :secure_validatable, model: 'devise-security/models/secure_val
 Devise.add_module :password_archivable, model: 'devise-security/models/password_archivable'
 Devise.add_module :session_limitable, model: 'devise-security/models/session_limitable'
 Devise.add_module :session_non_transferable, model: 'devise-security/models/session_non_transferable'
+Devise.add_module :session_traceable, model: 'devise-security/models/session_traceable'
 Devise.add_module :expirable, model: 'devise-security/models/expirable'
 Devise.add_module :security_questionable, model: 'devise-security/models/security_questionable'
 Devise.add_module :paranoid_verification, controller: :paranoid_verification_code, model: 'devise-security/models/paranoid_verification', route: :verification_code

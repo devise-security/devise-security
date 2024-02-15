@@ -30,6 +30,7 @@ SimpleCov.start do
   add_group 'Secure Validateable', 'secure_validatable'
   add_group 'Security Questionable', 'security_question'
   add_group 'Session Limitable', 'session_limitable'
+  add_group 'Session Traceable', 'session_traceable'
   add_group 'Tests', 'test'
 end
 
@@ -45,6 +46,9 @@ require "orm/#{DEVISE_ORM}"
 # controller, even though it has been deprecated in favor of request tests.
 require 'rails-controller-testing'
 Rails::Controller::Testing.install
+
+require 'mocha/minitest'
+require 'timecop'
 
 # Add support to load paths so we can overwrite broken test setup
 $LOAD_PATH.unshift File.expand_path('support', __dir__)

@@ -39,6 +39,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'i18n-tasks'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
+  s.add_development_dependency 'mocha'
+  s.add_development_dependency 'mutex_m'
   s.add_development_dependency 'omniauth'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'
@@ -48,5 +50,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov-lcov'
   s.add_development_dependency 'solargraph'
   s.add_development_dependency 'solargraph-arc'
-  s.add_development_dependency 'mutex_m'
+  s.add_development_dependency 'timecop'
 end

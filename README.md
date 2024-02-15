@@ -19,8 +19,10 @@ It is composed of 7 additional Devise modules:
   password validation). Don't use with Devise `:validatable` module!
 - `:password_archivable` - save used passwords in an `old_passwords` table for
   history checks (prevent reusing passwords)
-- `:session_limitable` - ensures, that there is only one session usable per
-  account at once
+- `:session_limitable` - ensures that a user can only have x active sessions
+  (where x is a configurable number)
+- `:session_traceable` - ensures that every session is logged (timestamps, user-agents and
+  IP addresses) and sessions can only be used on specified IP address (minimize session hijacking)
 - `:expirable` - expires a user account after x days of inactivity (default 90
   days)
 - `:security_questionable` - as accessible substitution for captchas (security
