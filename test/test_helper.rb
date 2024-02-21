@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
+ENV['DEVISE_ORM'] ||= 'active_record'
 
 require 'simplecov'
 
@@ -11,8 +12,15 @@ if ENV['CI']
 end
 
 SimpleCov.start do
-  add_filter 'gemfiles'
-  add_filter 'test/dummy/db'
+  add_filter %r{^/gemfiles/}
+  add_filter %r{^/test/dummy/}
+  if ENV['DEVISE_ORM'] == 'active_record'
+    add_filter %r{/mongoid/}
+  else
+    add_filter %r{^/lib/generators/(active_record|migration_generator)}
+    add_filter %r{^/test/generators}
+    add_filter %r{/active_record/}
+  end
   add_group 'ActiveRecord', 'active_record'
   add_group 'Expirable', /(?<!password_)expirable/
   add_group 'Mongoid', 'mongoid'
