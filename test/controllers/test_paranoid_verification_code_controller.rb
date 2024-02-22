@@ -8,13 +8,10 @@ class Devise::ParanoidVerificationCodeControllerTest < ActionController::TestCas
   setup do
     @controller.class.respond_to :json, :xml
     @request.env['devise.mapping'] = Devise.mappings[:user]
-    @user = User.create!(
-      username: 'hello',
-      email: generate_unique_email,
-      password: 'Password4',
+    @user = create_user({
       confirmed_at: 5.months.ago,
       paranoid_verification_code: 'cookies'
-    )
+    })
     assert @user.valid?
     assert @user.need_paranoid_verification?
 
@@ -104,13 +101,10 @@ class ParanoidVerificationCodeCustomRedirectTest < ActionController::TestCase
   setup do
     @controller.class.respond_to :json, :xml
     @request.env['devise.mapping'] = Devise.mappings[:paranoid_verification_user]
-    @user = ParanoidVerificationUser.create!(
-      username: 'hello',
-      email: generate_unique_email,
-      password: 'Password4',
+    @user = create_user({
       confirmed_at: 5.months.ago,
       paranoid_verification_code: 'cookies'
-    )
+    }, ParanoidVerificationUser)
     assert @user.valid?
     assert @user.need_paranoid_verification?
 

@@ -3,13 +3,8 @@
 require 'test_helper'
 
 class TestParanoidVerificationCodeWorkflow < ActionDispatch::IntegrationTest
-  include IntegrationHelpers
-
   setup do
-    @user = User.create!(
-      password: 'passWord1',
-      password_confirmation: 'passWord1',
-      email: generate_unique_email,
+    @user = create_user(
       paranoid_verification_code: 'cookies'
     ) # the default verification code is nil
     @user.confirm

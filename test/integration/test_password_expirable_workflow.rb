@@ -3,13 +3,10 @@
 require 'test_helper'
 
 class TestPasswordExpirableWorkflow < ActionDispatch::IntegrationTest
-  include IntegrationHelpers
-
   setup do
-    @user = User.create!(password: 'passWord1',
-                         password_confirmation: 'passWord1',
-                         email: generate_unique_email,
-                         password_changed_at: 4.months.ago) # the default expiration time is 3.months.ago
+    @user = create_user({
+      password_changed_at: 4.months.ago
+    }) # the default expiration time is 3.months.ago
     @user.confirm
 
     assert @user.valid?
@@ -24,7 +21,7 @@ class TestPasswordExpirableWorkflow < ActionDispatch::IntegrationTest
     # @note This is not the same controller used by Devise for password changes
     put '/users/password_expired', params: {
       user: {
-        current_password: 'passWord1',
+        current_password: 'Password1',
         password: 'Password12345!',
         password_confirmation: 'Password12345!'
       }

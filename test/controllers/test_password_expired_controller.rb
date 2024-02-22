@@ -8,13 +8,11 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   setup do
     @controller.class.respond_to :json, :xml
     @request.env['devise.mapping'] = Devise.mappings[:user]
-    @user = User.create!(
-      username: 'hello',
-      email: generate_unique_email,
+    @user = create_user({
       password: 'Password4',
       password_changed_at: 4.months.ago,
       confirmed_at: 5.months.ago
-    )
+    })
     assert @user.valid?
     assert @user.need_change_password?
 
@@ -129,13 +127,11 @@ class PasswordExpiredCustomRedirectTest < ActionController::TestCase
   setup do
     @controller.class.respond_to :json, :xml
     @request.env['devise.mapping'] = Devise.mappings[:password_expired_user]
-    @user = PasswordExpiredUser.create!(
-      username: 'hello',
-      email: generate_unique_email,
+    @user = create_user({
       password: 'Password4',
       password_changed_at: 4.months.ago,
       confirmed_at: 5.months.ago
-    )
+    }, PasswordExpiredUser)
     assert @user.valid?
     assert @user.need_change_password?
 
