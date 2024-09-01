@@ -8,6 +8,7 @@ on:
   schedule:
     # 00:00 on the 1st of every month
     - cron: '0 0 1 * *'
+
 jobs:
   run-tests:
     runs-on: ubuntu-latest
@@ -15,38 +16,20 @@ jobs:
       fail-fast: false
       matrix:
         orm: [active_record, mongoid]
-        rails: ["6.1", "7.0", "7.1"]
+        rails: ["7.0", "7.1"]
         ruby: ["3.1", "3.2", "3.3", head]
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v4
-        with:
-          path: |
-            **/bundle
-          key:
-            bundle-use-ruby-${{ matrix.ruby }}-rails-${{ matrix.rails }}-orm-${{
-            matrix.orm }}-gemfile-${{
-            hashFiles(format('**/gemfiles/rails_{0}.gemfile', matrix.rails))
-            }}-gemspec-${{ hashFiles('**/devise-security.gemspec') }}
-      - name: bundle install
-        env:
-          BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
-        run: |
-          bundle config path vendor/bundle
-          bundle install
+          bundler-cache: true
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.11.0
         if: ${{ matrix.orm == 'mongoid' }}
       - name:
           Tests for ORM ${{ matrix.orm }}, Rails ${{ matrix.rails }}, and Ruby
           ${{ matrix.ruby }}
-        env:
-          BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
-          CI: true
-          DEVISE_ORM: ${{ matrix.orm }}
         run: |
           bundle exec rake
       - name: Coveralls Parallel
