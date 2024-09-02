@@ -22,7 +22,10 @@ RailsApp::Application.configure do
 
   config.active_support.test_order = :sorted
   config.log_level = :debug
-  config.active_record.sqlite3.represent_boolean_as_integer = true if Rails.gem_version.release >= Gem::Version.new('5.2') && Rails.gem_version.release < Gem::Version.new('6.0')
-  config.active_record.legacy_connection_handling = false if Rails.gem_version.release >= Gem::Version.new('6.1')
+  config.active_record.legacy_connection_handling = false if (Gem::Version.new('6.1')...Gem::Version.new('7.1')).cover?(Rails.gem_version)
 end
-ActiveSupport::Deprecation.debug = true
+if Rails.gem_version <= Gem::Version.new('7.0')
+  ActiveSupport::Deprecation.debug = true
+else
+  Rails.application.deprecators.debug = true
+end
