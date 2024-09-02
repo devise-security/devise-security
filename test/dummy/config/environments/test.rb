@@ -24,7 +24,7 @@ RailsApp::Application.configure do
   config.log_level = :debug
   config.active_record.legacy_connection_handling = false if (Gem::Version.new('6.1')...Gem::Version.new('7.1')).cover?(Rails.gem_version)
 end
-if Rails.gem_version <= Gem::Version.new('7.0')
+if Rails.gem_version <= Gem::Version.new('7.1')
   ActiveSupport::Deprecation.debug = true
 else
   Rails.application.deprecators.debug = true

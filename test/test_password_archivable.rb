@@ -27,17 +27,19 @@ class TestPasswordArchivable < ActiveSupport::TestCase
   end
 
   test 'indirectly saving associated user does not cause deprecation warning' do
-    if Rails.gem_version >= Gem::Version.new('7.0')
+    if Rails.gem_version >= Gem::Version.new('7.1')
       old_behavior = Rails.application.deprecators[:active_record].behavior
       Rails.application.deprecators.behavior = :raise
     else
       old_behavior = ActiveSupport::Deprecation.behavior
       ActiveSupport::Deprecation.behavior = :raise
     end
+
     user = User.new email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     widget = Widget.new(user: user)
     widget.save
-    if Rails.gem_version >= Gem::Version.new('7.0')
+
+    if Rails.gem_version >= Gem::Version.new('7.1')
       Rails.application.deprecators.behavior = old_behavior
     else
       ActiveSupport::Deprecation.behavior = old_behavior
