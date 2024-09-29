@@ -4,12 +4,12 @@ source 'https://rubygems.org'
 gemspec
 
 # Oldest Rails version getting security patches is 6.0
-gem 'minitest-rails', '~> 6.0.0'
-gem 'railties', '~> 6.0.0'
+gem 'minitest-rails', '~> 6.1.0'
+gem 'railties', '~> 6.1.7.8'
 
 group :active_record do
   gem 'pg'
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :mongoid do
