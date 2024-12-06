@@ -32,4 +32,11 @@ module IntegrationHelpers
       }
     )
   end
+
+  # logout the user.  This will exercise all the Warden Hooks
+  # @param session [ActionDispatch::Integration::Session]
+  # @return [void]
+  def sign_out(session = integration_session)
+    session.delete(destroy_user_session_path)
+  end
 end
