@@ -27,9 +27,9 @@ Gem::Specification.new do |s|
   s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
   s.test_files    = Dir['test/**/*']
   s.require_paths = ['lib']
-  s.required_ruby_version = '>= 2.3.0'
+  s.required_ruby_version = '>= 3.1.0'
 
-  s.add_runtime_dependency 'devise', '>= 4.3.0'
+  s.add_runtime_dependency 'devise', '>= 4.8.1'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler'

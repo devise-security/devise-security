@@ -32,28 +32,9 @@ module DeviseSecurity
       )
     end
 
-    # Checks if the Rails version is 6.1 or higher
-    #
-    # @return [Boolean] true if the Rails version is 6.1 or higher, false otherwise.
-    def rails61_and_up?
-      Rails.gem_version >= Gem::Version.new('6.1.0')
-    end
-
     # Retrieves the ActiveRecord configuration
     def ar_config
-      # Rails 6.0+ uses ActiveRecord::Base.configurations.configs_for
-      # Read more: https://github.com/rails/rails/pull/38256
-      if ActiveRecord::Base.configurations.respond_to?(:configs_for)
-        if rails61_and_up?
-          # Rails 6.1+ uses ActiveRecord::Base.configurations.configs_for(env_name:, name:)
-          # Read more: https://github.com/rails/rails/pull/38536
-          ActiveRecord::Base.configurations.configs_for(env_name: Rails.env, name: 'primary').configuration_hash
-        else
-          ActiveRecord::Base.configurations.configs_for(env_name: Rails.env, spec_name: 'primary').config
-        end
-      else
-        ActiveRecord::Base.configurations[Rails.env]
-      end
+      ActiveRecord::Base.configurations.configs_for(env_name: Rails.env, name: 'primary').configuration_hash
     end
 
     # Retrieves the migration version
