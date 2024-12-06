@@ -66,4 +66,21 @@ class TestSessionLimitableWorkflow < ActionDispatch::IntegrationTest
       assert_equal session.flash[:alert], I18n.t('devise.failure.session_limited')
     end
   end
+
+  test 'session is cleared when user logs out' do
+    assert_nil @user.unique_session_id
+
+    open_session do |session|
+      sign_in(@user, session)
+      session.assert_redirected_to '/'
+      session.get widgets_path
+      session.assert_response(:success)
+      assert_equal('success', session.response.body)
+      assert_not_nil @user.reload.unique_session_id
+
+      sign_out(session)
+      session.assert_redirected_to '/'
+      assert_nil @user.reload.unique_session_id
+    end
+  end
 end
