@@ -1,5 +1,5 @@
-test/rails_app/log/*
-test/rails_app/tmp/*
+test/dummy/log/*
+test/dummy/tmp/*
 *~
 coverage/*
 *.sqlite3

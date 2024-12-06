@@ -42,3 +42,14 @@ Warden::Manager.after_set_user only: :fetch do |record, warden, options|
     end
   end
 end
+
+# When a user is signing out intentionally, we clear the unique session id
+# to prevent session replay attacks. This ensures there are 0 valid active
+# sessions immediately after signing out.
+Warden::Manager.before_logout do |record, warden, options|
+  if record.nil? == false &&
+     record.devise_modules&.include?(:session_limitable) &&
+     !record.skip_session_limitable?
+    record.update_unique_session_id!(nil)
+  end
+end

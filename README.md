@@ -378,6 +378,18 @@ See also
 Standard tests can be invoked using `rake`. To run the tests against the
 `mongoid` ORM, use `DEVISE_ORM=mongoid rake` while `mongodb` is running.
 
+## Appraisal
+
+It is possible to locally run the tests against multiple versions of Rails by using `appraisal`.
+
+```sh
+export DEVISE_ORM=active_record # or mongoid. Default is active_record
+bundle exec appraisal # installs dependencies for each Rails version
+bundle exec appraisal update # if updating dependencies is necessary
+bundle exec appraisal generate # to regenerate the appraisal gemfiles (if necessary)
+bundle exec appraisal rake # run the tests for each Rails version
+```
+
 ## Maintenance Policy
 
 We are committed to maintaining support for `devise-security` for all normal or

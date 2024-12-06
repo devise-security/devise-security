@@ -8,7 +8,8 @@ gem "bigdecimal", require: false
 gem "drb", require: false
 
 group :active_record do
-  gem "sqlite3"
+  gem "pg"
+  gem "sqlite3", "~> 1.4"
 end
 
 group :mongoid do
