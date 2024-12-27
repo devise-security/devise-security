@@ -35,8 +35,8 @@ jobs:
         env:
           BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
         run: |
-          apt-get update
-          apt-get install -y libmagickwand-dev
+          sudo apt-get update
+          sudo apt-get install -y libmagickwand-dev
           bundle config path vendor/bundle
           bundle install
       - name: Start MongoDB
