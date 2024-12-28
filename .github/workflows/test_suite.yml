@@ -46,6 +46,10 @@ jobs:
       - name:
           Tests for ORM ${{ matrix.orm }}, Rails ${{ matrix.rails }}, and Ruby
           ${{ matrix.ruby }}
+        env:
+          BUNDLE_GEMFILE: gemfiles/rails_${{ matrix.rails }}.gemfile
+          CI: true
+          DEVISE_ORM: ${{ matrix.orm }}
         run: |
           bundle exec rake
       - name: Coveralls Parallel
