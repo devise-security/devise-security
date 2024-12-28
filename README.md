@@ -37,7 +37,7 @@ automated mass creation and brute forcing of accounts harder)
 
 ## Getting started
 
-Devise Security works with Devise on Rails >= 5.2. You can add it to your
+Devise Security works with Devise on Rails >= 7.0. You can add it to your
 Gemfile after you successfully set up Devise (see
 [Devise documentation](https://github.com/heartcombo/devise)) with:
 
@@ -326,7 +326,7 @@ end
 ## Requirements
 
 - Devise (<https://github.com/heartcombo/devise>)
-- Rails 5.2 onwards (<http://github.com/rails/rails>)
+- Rails 7.0 onwards (<http://github.com/rails/rails>)
 - recommendations:
   - `autocomplete-off` (<http://github.com/phatworx/autocomplete-off>)
   - `easy_captcha` (<http://github.com/phatworx/easy_captcha>)
