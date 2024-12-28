@@ -18,4 +18,8 @@ end
 appraise 'rails-8.0' do
   gem 'railties', '~> 8.0.0'
   gem 'minitest-rails', '~> 8.0.0'
+
+  group :active_record do
+    gem 'sqlite3', '~> 2.1'
+  end
 end

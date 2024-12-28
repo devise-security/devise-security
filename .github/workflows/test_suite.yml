@@ -18,6 +18,9 @@ jobs:
         orm: [active_record, mongoid]
         rails: ["7.0", "7.1", "7.2", "8.0"]
         ruby: ["3.1", "3.2", "3.3", "3.4", head]
+        exclude:
+          - rails: "8.0"
+            ruby: "3.1"
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
