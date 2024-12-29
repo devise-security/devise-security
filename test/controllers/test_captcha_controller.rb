@@ -2,16 +2,17 @@
 
 require 'test_helper'
 
-class TestWithCaptcha < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-  tests Captcha::SessionsController
-
-  setup do
-    @request.env['devise.mapping'] = Devise.mappings[:captcha_user]
+# These tests will interact with the Captcha::SessionsController, which has the necessary patches for Captcha support
+# included manually instead of by using Devise.setup
+class TestWithCaptcha < ActionDispatch::IntegrationTest
+  class MockedCaptchaSessionsController < Captcha::SessionsController
+    def check_captcha
+      true
+    end
   end
 
   test 'When captcha is enabled, it is inserted correctly' do
-    post :create, params: {
+    post '/captcha_users/sign_in', params: {
       captcha_user: {
         email: 'wrong@email.com',
         password: 'wrongpassword'
@@ -23,32 +24,25 @@ class TestWithCaptcha < ActionController::TestCase
   end
 
   test 'When captcha is valid, it runs as normal' do
-    @controller.define_singleton_method(:verify_recaptcha) do
-      true
-    end
-
-    post :create, params: {
-      captcha: 'ABCDE',
-      captcha_user: {
-        email: 'wrong@email.com',
-        password: 'wrongpassword'
+    Captcha::SessionsController.stub :new, MockedCaptchaSessionsController.new do
+      post '/captcha_users/sign_in', params: {
+        captcha: 'ABCDE',
+        user: {
+          email: 'wrong@email.com',
+          password: 'wrongpassword'
+        }
       }
-    }
+    end
 
     assert_equal 'Invalid Email or password.', flash[:alert]
   end
 end
 
-class TestWithoutCaptcha < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-  tests Devise::SessionsController
-
-  setup do
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-  end
-
+# These tests interact with the Devise::SessionsController, which does not have the necessary patches for Captcha
+# included
+class TestWithoutCaptcha < ActionDispatch::IntegrationTest
   test 'When captcha is not enabled, it is not inserted' do
-    post :create, params: {
+    post '/users/sign_in', params: {
       user: {
         email: 'wrong@email.com',
         password: 'wrongpassword'
