@@ -10,12 +10,7 @@ class TestWithSecurityQuestion < ActionDispatch::IntegrationTest
       password: 'A1234567z!',
       security_question_answer: 'Right Answer'
     )
-    # Starting in Rails 8.0, sending devise notification emails in setup is failing because the Devise mappings for
-    # classes haven't yet been loaded and the mailer needs them to send emails. These tests don't actually need the
-    # emails to be sent, so we can just stub the method to do nothing.
-    @user.stub :send_devise_notification, nil do
-      @user.lock_access!
-    end
+    @user.lock_access!
   end
 
   test 'When security question is enabled, it is inserted correctly' do
@@ -57,12 +52,7 @@ class TestWithoutSecurityQuestion < ActionDispatch::IntegrationTest
       password: '1234',
       security_question_answer: 'Right Answer'
     )
-    # Starting in Rails 8.0, sending devise notification emails in setup is failing because the Devise mappings for
-    # classes haven't yet been loaded and the mailer needs them to send emails. These tests don't actually need the
-    # emails to be sent, so we can just stub the method to do nothing.
-    @user.stub :send_devise_notification, nil do
-      @user.lock_access!
-    end
+    @user.lock_access!
   end
 
   test 'When security question is not enabled it is not inserted' do

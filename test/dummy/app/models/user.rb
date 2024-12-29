@@ -34,4 +34,11 @@ class User < ApplicationRecord
       ActiveRecord::Base.transaction { break; }
     end
   end
+
+  # Starting in Rails 8.0, sending devise notification emails in test can fail because the Devise mappings for classes
+  # haven't yet been loaded and the mailer needs them to send emails. These tests don't actually need the emails to be
+  # sent, so we can just redefine this method to do nothing.
+  def send_devise_notification(...)
+    # no-op
+  end
 end
