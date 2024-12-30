@@ -2,7 +2,6 @@ class CreateSomeTable < ActiveRecord::Migration<%= migration_version %>
   def up
     create_table :some_table do |t|
       t.string :adapter_name, default: '<%= ar_config['adapter'] %>'
-      t.string :rails61_and_up, default: <%= rails61_and_up? %>
       t.timestamps null: false
     end
   end
