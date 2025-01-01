@@ -15,7 +15,8 @@
 		"PGUSER": "postgres",
 		"PGPASSWORD": "postgres",
 		"DATABASE_URL": "postgres://postgres:postgres@postgres:5432/devise_security_test",
-		"MONGODB_URI": "mongodb://mongodb:mongodb@mongodb:27017"
+		"MONGODB_URI": "mongodb://mongodb:mongodb@mongodb:27017",
+    "DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL": "true"
 	},
 
 	"postCreateCommand": ".devcontainer/boot.sh",
