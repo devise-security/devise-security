@@ -45,7 +45,8 @@ RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm \
     && rvm install 3.1.6 \
     && rvm install 3.2.6 \
     && rvm install 3.3.6 \
-    && rvm install 3.4.1"
+    && rvm install 3.4.1 \
+    && rvm --default use 3.2.6"
 
 # Set the default bundle path
 ENV BUNDLE_PATH=/usr/local/bundle
