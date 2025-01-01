@@ -398,14 +398,14 @@ security maintenance versions of the Ruby language
 Ruby on Rails framework
 [as per their maintenance policy](https://rubyonrails.org/maintenance/).
 
-To avoid introducing bugs caused by backwardly incompatible Ruby
-language features, it is highly recommended that all development work be done
-using the oldest supported Ruby version. The contents of the `.ruby-version`
-file should reflect this.
+To avoid introducing bugs caused by backwardly incompatible Ruby language features, it is highly recommended that all
+development work be done using the oldest supported Ruby version. In order for the devcontainer to build properly the
+ruby version in `.ruby-version` should be the oldest version that supports installing dependencies for all of the
+supported Rails versions.
 
 ## Copyright
 
-Copyright (c) 2017-2023 Dillon Welch & Kevin Olbrich.
+Copyright (c) 2017-2025 Dillon Welch & Kevin Olbrich.
 
 Copyright (c) 2011-2017 Marco Scholl as the project [`devise_security_extension`](https://github.com/phatworx/devise_security_extension).
 
