@@ -9,7 +9,7 @@ gem 'railties', '~> 7.0.0'
 
 group :active_record do
   gem 'pg'
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.5'
 end
 
 group :mongoid do
