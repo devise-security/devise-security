@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'i18n-tasks'
+  s.add_development_dependency 'logger'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'omniauth'
