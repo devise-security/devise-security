@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'omniauth'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'
+  s.add_development_dependency 'rdoc'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-minitest'
   s.add_development_dependency 'rubocop-rails'
