@@ -190,6 +190,7 @@ GEM
       rack (>= 2.2.3)
       rack-protection
     orm_adapter (0.5.0)
+    ostruct (0.6.1)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
@@ -370,6 +371,7 @@ DEPENDENCIES
   mongoid (~> 9.0)
   mutex_m
   omniauth
+  ostruct
   pg
   pry-rescue
   rails-controller-testing
