@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'logger'
 require 'i18n/tasks'
 
 class I18nTest < ActiveSupport::TestCase
