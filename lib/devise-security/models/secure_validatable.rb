@@ -45,30 +45,21 @@ module Devise
             validates_presence_of :password, if: :password_required?
             validates_confirmation_of :password, if: :password_required?
 
-            validate if: :password_required? do |record|
-              validates_with ActiveModel::Validations::LengthValidator,
-                             attributes: :password,
-                             allow_blank: true,
-                             in: record.password_length
-            end
+            validates_with ActiveModel::Validations::LengthValidator,
+                           attributes: :password,
+                           allow_blank: true,
+                           in: password_length,
+                           if: :password_required?
           end
 
           # extra validations
           # see https://github.com/devise-security/devise-security/blob/main/README.md#e-mail-validation
-          validate do
-            if email_validation
-              validates_with(
-                EmailValidator, { attributes: :email }
-              )
-            end
-          end
+          validates_with EmailValidator, attributes: :email, if: :email_validation
 
-          validate if: :password_required? do |record|
-            validates_with(
-              record.password_complexity_validator.is_a?(Class) ? record.password_complexity_validator : record.password_complexity_validator.classify.constantize,
-              { attributes: :password }.merge(record.password_complexity)
-            )
-          end
+          validates_with(
+            password_complexity_validator.is_a?(Class) ? password_complexity_validator : password_complexity_validator.classify.constantize,
+            { attributes: :password, if: :password_required? }.merge(password_complexity)
+          )
 
           # don't allow use same password
           validate :current_equal_password_validation
