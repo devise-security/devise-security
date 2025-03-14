@@ -37,7 +37,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     user = User.new email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
     widget = Widget.new(user: user)
-    widget.save
+    assert_nothing_raised { widget.save }
 
     if Rails.gem_version >= Gem::Version.new('7.1')
       Rails.application.deprecators.behavior = old_behavior

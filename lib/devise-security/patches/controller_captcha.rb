@@ -10,6 +10,11 @@ module DeviseSecurity::Patches
 
     private
 
+    # Checks the validity of the captcha provided in the parameters.
+    # If the captcha is invalid, sets a flash alert message and redirects to the new action.
+    #
+    # @see DeviseSecurity::Patches.apply for the controllers that include this method
+    # @return [void]
     def check_captcha
       return if valid_captcha_if_defined?(params[:captcha])
 

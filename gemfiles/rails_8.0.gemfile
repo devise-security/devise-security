@@ -2,18 +2,18 @@
 
 source "https://rubygems.org"
 
-gem "minitest-rails", "~> 6.1.0"
-gem "railties", "~> 6.1.0"
+gem "minitest-rails", "~> 8.0.0"
+gem "railties", "~> 8.0.0"
 gem "bigdecimal", require: false
 gem "drb", require: false
 
 group :active_record do
   gem "pg"
-  gem "sqlite3", "~> 1.4"
+  gem "sqlite3", "~> 2.1"
 end
 
 group :mongoid do
-  gem "mongoid", "~> 8.0"
+  gem "mongoid", "~> 9.0"
 
   group :test do
     gem "database_cleaner-mongoid", "~> 2.0"

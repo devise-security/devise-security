@@ -52,3 +52,5 @@ vendor/
 
 .byebug_history
 Brewfile.lock.json
+tags
+.vscode/settings.json

@@ -27,9 +27,9 @@ Gem::Specification.new do |s|
   s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
   s.test_files    = Dir['test/**/*']
   s.require_paths = ['lib']
-  s.required_ruby_version = '>= 2.3.0'
+  s.required_ruby_version = '>= 3.1.0'
 
-  s.add_runtime_dependency 'devise', '>= 4.3.0'
+  s.add_runtime_dependency 'devise', '>= 4.8.1'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'bundler'
@@ -37,11 +37,14 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'easy_captcha'
   s.add_development_dependency 'i18n-tasks'
+  s.add_development_dependency 'logger'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'omniauth'
+  s.add_development_dependency 'ostruct'
   s.add_development_dependency 'pry-rescue'
   s.add_development_dependency 'rails_email_validator'
+  s.add_development_dependency 'rdoc'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-minitest'
   s.add_development_dependency 'rubocop-rails'
