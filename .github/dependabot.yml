@@ -9,6 +9,10 @@ updates:
   schedule:
     interval: weekly
   open-pull-requests-limit: 10
+  groups:
+    all:
+      patterns:
+        - "*"       # Group everything in 1 PR!
   reviewers:
   - devise-security/maintainers
   labels:
