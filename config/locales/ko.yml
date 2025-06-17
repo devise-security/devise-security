@@ -1,0 +1,42 @@
+ko:
+  errors:
+    messages:
+      taken_in_past: '이전에 사용된 비밀번호입니다.'
+      equal_to_current_password: '현재 비밀번호와 달라야 합니다.'
+      equal_to_email: '이메일과 달라야 합니다.'
+      password_complexity:
+        digit:
+          one: 최소한 하나의 숫자를 포함해야 합니다.
+          other: 최소 %{count}개의 숫자를 포함해야 합니다.
+        lower:
+          one: 최소한 하나의 소문자를 포함해야 합니다.
+          other: 최소 %{count}개의 소문자를 포함해야 합니다.
+        symbol:
+          one: 최소한 하나의 기호 또는 특수문자를 포함해야 합니다.
+          other: 최소 %{count}개의 기호 또는 특수문자를 포함해야 합니다.
+        upper:
+          one: 최소한 하나의 대문자를 포함해야 합니다.
+          other: 최소 %{count}개의 대문자를 포함해야 합니다.
+  devise:
+    invalid_captcha: '캡차 입력이 올바르지 않습니다.'
+    invalid_security_question: '보안 질문의 답변이 올바르지 않습니다.'
+    paranoid_verify:
+      code_required: '지원팀이 제공한 코드를 입력해주세요.'
+    paranoid_verification_code:
+      updated: '인증 코드가 확인되었습니다.'
+      show:
+        submit_verification_code: '인증 코드 제출'
+        verification_code: '인증 코드'
+        submit: '제출하기'
+    password_expired:
+      updated: '새 비밀번호가 저장되었습니다.'
+      change_required: '비밀번호가 만료되었습니다. 새 비밀번호로 변경해주세요.'
+      show:
+        renew_your_password: '비밀번호 재설정'
+        current_password: '현재 비밀번호'
+        new_password: '새 비밀번호'
+        new_password_confirmation: '새 비밀번호 확인'
+        change_my_password: '비밀번호 변경하기'
+    failure:
+      session_limited: '다른 브라우저에서 로그인 정보가 사용되었습니다. 이 브라우저에서 계속하려면 다시 로그인해주세요.'
+      expired: '비활성 상태로 인해 계정이 만료되었습니다. 사이트 관리자에게 문의해주세요.'
