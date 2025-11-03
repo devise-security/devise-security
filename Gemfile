@@ -5,7 +5,7 @@ gemspec
 
 # Oldest Rails version getting security patches is 7.0
 gem 'minitest-rails', '~> 7.0.0'
-gem 'railties', '~> 7.0.0'
+gem 'railties', '~> 7.0.10'
 
 group :active_record do
   gem 'pg'
