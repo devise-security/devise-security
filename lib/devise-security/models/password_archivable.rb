@@ -56,7 +56,11 @@ module Devise
       end
 
       def deny_old_passwords
-        self.class.deny_old_passwords
+        if self.class.deny_old_passwords.respond_to?(:call)
+          self.class.deny_old_passwords.call
+        else
+          self.class.deny_old_passwords
+        end
       end
 
       def deny_old_passwords=(count)
@@ -64,7 +68,11 @@ module Devise
       end
 
       def archive_count
-        self.class.password_archiving_count
+        if self.class.password_archiving_count.respond_to?(:call)
+          self.class.password_archiving_count.call
+        else
+          self.class.password_archiving_count
+        end
       end
 
       private
