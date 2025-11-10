@@ -171,7 +171,7 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (5.26.0)
+    minitest (5.26.1)
     minitest-rails (7.0.1)
       minitest (~> 5.10)
       railties (~> 7.0.0)
@@ -353,9 +353,9 @@ GEM
     solargraph-arc (0.3.0)
       activesupport (>= 5.0)
       solargraph (~> 0.44.2)
-    sqlite3 (2.7.4)
+    sqlite3 (2.8.0)
       mini_portile2 (~> 2.8.0)
-    sqlite3 (2.7.4-x86_64-darwin)
+    sqlite3 (2.8.0-x86_64-darwin)
     stringio (3.1.7)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
@@ -411,7 +411,7 @@ DEPENDENCIES
   simplecov-lcov
   solargraph
   solargraph-arc
-  sqlite3 (~> 2.7)
+  sqlite3 (~> 2.8)
 
 BUNDLED WITH
    2.6.2
