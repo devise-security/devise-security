@@ -134,7 +134,7 @@ GEM
       reline
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (1.1.1)
+    i18n-tasks (1.1.2)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
       erubi
@@ -270,7 +270,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.3.1)
-    rdoc (6.15.1)
+    rdoc (6.16.1)
       erb
       psych (>= 4.0.0)
       tsort
@@ -321,7 +321,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.38.0, < 2.0)
-    rubocop-rails (2.34.1)
+    rubocop-rails (2.34.2)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
       rack (>= 1.1)
@@ -354,10 +354,10 @@ GEM
     solargraph-arc (0.3.0)
       activesupport (>= 5.0)
       solargraph (~> 0.44.2)
-    sqlite3 (2.8.0)
+    sqlite3 (2.8.1)
       mini_portile2 (~> 2.8.0)
-    sqlite3 (2.8.0-x86_64-darwin)
-    stringio (3.1.7)
+    sqlite3 (2.8.1-x86_64-darwin)
+    stringio (3.1.8)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
     thor (1.4.0)
