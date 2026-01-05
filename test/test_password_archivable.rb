@@ -111,4 +111,22 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     assert set_password(user, 'Password1')
     assert set_password(user, 'Password2')
   end
+
+  test 'lazy loading for password_archiving_count using a Proc' do
+    Devise.password_archiving_count = Proc.new { 2 }
+
+    user = User.create! email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+
+    set_password(user, 'Password2')
+    set_password(user, 'Password3')
+    assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }
+  end
+
+  test 'lazy loading for deny_old_passwords using a Proc' do
+    Devise.deny_old_passwords = Proc.new { true }
+
+    user = User.create! email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+
+    assert_raises(ORMInvalidRecordException) { set_password(user, 'Password1') }
+  end
 end
