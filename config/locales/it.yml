@@ -4,6 +4,7 @@ it:
       taken_in_past: "è stata gia' utilizzata in passato!"
       equal_to_current_password: " deve essere differente dalla password corrente!"
       equal_to_email: "deve essere differente dall'email"
+      incorrect: 'is incorrect.'
       password_complexity:
         digit:
           one: deve contenere almeno una cifra

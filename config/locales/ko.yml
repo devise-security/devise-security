@@ -4,6 +4,7 @@ ko:
       taken_in_past: '이전에 사용된 비밀번호입니다.'
       equal_to_current_password: '현재 비밀번호와 달라야 합니다.'
       equal_to_email: '이메일과 달라야 합니다.'
+      incorrect: 'is incorrect.'
       password_complexity:
         digit:
           one: 최소한 하나의 숫자를 포함해야 합니다.

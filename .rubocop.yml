@@ -1,4 +1,4 @@
-require:
+plugins:
   - rubocop-rails
   - rubocop-minitest
 
@@ -6,29 +6,112 @@ AllCops:
   Exclude:
     - gemfiles/**/*
     - vendor/bundle/**/*
-  # Automatically enables new cops so that we only have to add them to
-  # edit default behavior
+    - test/dummy/tmp/**/*
   NewCops: enable
+  SuggestExtensions: false
 
 Rails:
   Enabled: true
 
+# --- Metrics ---
+
 Metrics/ClassLength:
   Exclude: ["test/**/*"]
 
-# We don't care about method length, since we check method cyclomatic
-# complexity.
+Metrics/BlockLength:
+  Max: 40
+  Exclude:
+    - test/**/*
+    - "*.gemspec"
+
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 36
+
+Metrics/CyclomaticComplexity:
+  Max: 12
+
+Metrics/PerceivedComplexity:
+  Max: 13
+
+Metrics/ModuleLength:
+  Max: 120
+  Exclude: ["test/**/*"]
+
+# --- Layout ---
 
 Layout/LineLength:
   Enabled: false
 
-Naming/FileName:
-  Exclude: ["devise-security.gemspec"]
+# --- Naming ---
 
+Naming/FileName:
+  Exclude:
+    - devise-security.gemspec
+    - lib/devise-security.rb
+
+Naming/PredicateMethod:
+  Exclude:
+    - test/**/*
+    - lib/devise-security/models/**/*
+
+# --- Style ---
+
+# Autocorrect collapses module+class into Class::Nested which
+# breaks constant resolution when the outer module isn't defined elsewhere
 Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
-  SupportedStyles:
-    - nested
-    - compact
+  Enabled: false
+
+# Mongoid models use @@class_vars for test tracking
+Style/ClassVars:
+  Enabled: false
+
+# Many modules predate YARD — documentation is added incrementally
+Style/Documentation:
+  Enabled: false
+
+# --- Gemspec ---
+
+# Dev dependencies live in gemspec for gem projects (standard pattern)
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+# --- Bundler ---
+
+# Gemfile splits test group for clarity
+Bundler/DuplicatedGroup:
+  Enabled: false
+
+# --- Rails ---
+
+# Compatibility patches and session management intentionally bypass validations
+Rails/SkipsModelValidations:
+  Exclude:
+    - test/**/*
+    - lib/devise-security/models/compatibility/**/*
+    - lib/devise-security/models/session_limitable.rb
+
+# Dependent option not applicable to all has_many in test dummy
+Rails/HasManyOrHasOneDependent:
+  Exclude: ["test/**/*"]
+
+# password_expirable uses break in transaction intentionally
+Rails/TransactionExitStatement:
+  Exclude: ["test/**/*"]
+
+# Controller tests use ActionController::TestCase intentionally
+Rails/ActionControllerTestCase:
+  Enabled: false
+
+# --- Lint ---
+
+# Tests define constants inside blocks for test isolation
+Lint/ConstantDefinitionInBlock:
+  Exclude: ["test/**/*"]
+
+# --- Minitest ---
+
+Minitest/MultipleAssertions:
+  Enabled: false

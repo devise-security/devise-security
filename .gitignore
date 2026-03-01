@@ -1,3 +1,4 @@
+test/dummy/bin/*
 test/dummy/log/*
 test/dummy/tmp/*
 *~
