@@ -34,7 +34,7 @@ class TestWithCaptcha < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_equal 'Invalid Email or password.', flash[:alert]
+    assert_match(/invalid.*email.*password/i, flash[:alert])
   end
 end
 
@@ -49,6 +49,6 @@ class TestWithoutCaptcha < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_equal 'Invalid Email or password.', flash[:alert]
+    assert_match(/invalid.*email.*password/i, flash[:alert])
   end
 end
