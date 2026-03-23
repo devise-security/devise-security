@@ -25,3 +25,10 @@ group :test do
 end
 
 gemspec path: "../"
+
+# Pin Devise version when DEVISE_VERSION is set (used in CI matrix)
+if ENV["DEVISE_VERSION"] == "4"
+  gem "devise", "~> 4.9"
+elsif ENV["DEVISE_VERSION"] == "5"
+  gem "devise", "~> 5.0"
+end
