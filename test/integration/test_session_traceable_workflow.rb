@@ -93,6 +93,26 @@ class TestSessionTraceableWorkflow < ActionDispatch::IntegrationTest
       TraceableUser.remove_method(:accept_traceable_token?)
     end
   end
+
+  test 'before_logout does not crash when record is nil (expired session)' do
+    open_session do |session|
+      scope = sign_in(@user, session)
+
+      warden = session.controller.send(:warden)
+      token = warden.session(scope)['unique_traceable_token']
+
+      assert_predicate token, :present?, 'token should exist after sign in'
+
+      # Simulate expired session: user can't be deserialized but session
+      # data (including the traceable token) is still present in the cookie.
+      # Warden's proxy#logout passes nil for @users.delete(scope) in this case.
+      warden.instance_variable_get(:@users).delete(scope)
+
+      assert_nothing_raised do
+        warden.logout(scope)
+      end
+    end
+  end
 end
 
 class TestSessionTraceableWithLimitWorkflow < ActionDispatch::IntegrationTest

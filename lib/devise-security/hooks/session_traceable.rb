@@ -79,12 +79,17 @@ Warden::Manager.after_set_user only: :fetch do |record, warden, options|
 end
 
 # On sign out, expire the +SessionHistory+ record and remove the token.
+# Guard: +record+ can be nil when the session expired and Warden could not
+# deserialize the user (see Warden::Proxy#logout — +@users.delete(scope)+
+# returns nil). Matches the guard pattern in session_limitable's before_logout.
 Warden::Manager.before_logout do |record, warden, options|
   scope = options[:scope]
-  session = warden.request.session["warden.user.#{scope}.session"]
-  if session.present? && session['unique_traceable_token'].present?
-    Rails.logger.debug { "[devise-security][session_traceable] expiring session token for #{record.class}##{record.id}" }
-    record.expire_session_token!(session['unique_traceable_token'])
-    session.delete('unique_traceable_token')
+  if record&.devise_modules&.include?(:session_traceable)
+    session = warden.request.session["warden.user.#{scope}.session"]
+    if session.present? && session['unique_traceable_token'].present?
+      Rails.logger.debug { "[devise-security][session_traceable] expiring session token for #{record.class}##{record.id}" }
+      record.expire_session_token!(session['unique_traceable_token'])
+      session.delete('unique_traceable_token')
+    end
   end
 end
