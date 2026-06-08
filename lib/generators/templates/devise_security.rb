@@ -49,4 +49,25 @@ Devise.setup do |config|
 
   # paranoid_verification will regenerate verification code after failed attempt
   # config.paranoid_code_regenerate_after_attempt = 10
+
+  # ==> Configuration for :session_limitable
+  # Maximum number of concurrent sessions per user
+  # config.max_active_sessions = 1
+
+  # ==> Configuration for :session_traceable
+  # Verify IP address matches the session's original IP
+  # config.session_ip_verification = false
+
+  # ==> Configuration for :expirable
+  # Minimum interval between last_activity_at DB writes.
+  # Reduces DB load on high-frequency authenticated requests.
+  # config.last_activity_update_interval = nil
+
+  # ==> Configuration for :password_archivable
+  # Deny old passwords within a time period instead of by count
+  # config.deny_old_passwords_period = nil
+
+  # ==> Configuration for :secure_validatable
+  # Require current password when changing email address
+  # config.require_password_on_email_change = false
 end

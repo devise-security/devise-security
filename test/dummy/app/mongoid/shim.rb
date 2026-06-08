@@ -5,6 +5,7 @@ module Shim
 
   included do
     include ::Mongoid::Timestamps
+
     field :created_at, type: DateTime
   end
 

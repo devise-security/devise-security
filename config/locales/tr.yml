@@ -4,6 +4,7 @@ tr:
       taken_in_past: "daha önce kullanıldı."
       equal_to_current_password: "mevcut paroladan farklı olmalı."
       equal_to_email: "e-postadan farklı olmalı."
+      incorrect: 'is incorrect.'
       password_complexity:
         digit:
           one: en az bir rakam içermelidir

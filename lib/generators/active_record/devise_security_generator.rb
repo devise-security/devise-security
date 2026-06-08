@@ -4,7 +4,6 @@ require_relative '../devise_security/migration_generator'
 
 # nodoc
 module ActiveRecord
-  # nodoc
   module Generators
     # Generator migration for DeviseSecurity
     # Usage:
@@ -13,8 +12,11 @@ module ActiveRecord
       source_root File.expand_path('templates', __dir__)
 
       def create_migration_file
-        # TODO: Add some migration here
-        # add_devise_security_migration 'some_migration_template'
+        add_devise_security_migration 'create_session_histories'
+      end
+
+      def postgresql?
+        ar_config && ar_config['adapter'] == 'postgresql'
       end
     end
   end

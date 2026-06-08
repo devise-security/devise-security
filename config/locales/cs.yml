@@ -4,6 +4,7 @@ cs:
       taken_in_past: bylo již použito v minulosti.
       equal_to_current_password: se musí lišit od aktuálního hesla.
       equal_to_email: musí být jiný než e-mail.
+      incorrect: 'is incorrect.'
       password_complexity:
         digit:
           one: musí obsahovat alespoň jednu číslici

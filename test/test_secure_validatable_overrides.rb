@@ -18,7 +18,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
     end
   end
 
-  class User < ApplicationRecord
+  class User < ApplicationUserRecord
     devise :database_authenticatable, :secure_validatable
     include ::Mongoid::Mappings if DEVISE_ORM == :mongoid
   end
@@ -61,7 +61,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: email
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'email equal to password can be overridden at the instance level' do
@@ -72,7 +72,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: email
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'email validation can be overridden at the class level' do
@@ -82,7 +82,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: 'Pa3zZ1!!aaaaaa'
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'email validation can be overridden at the instance level' do
@@ -92,7 +92,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: 'Pa3zZ1!!aaaaaa'
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'password complexity can be overridden at the class level' do
@@ -102,7 +102,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: 'PASSwordddd'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must contain at least one punctuation mark or symbol'],
       user.errors.full_messages
@@ -116,7 +116,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: 'PASSwordddd'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must contain at least 2 punctuation marks or symbols'],
       user.errors.full_messages
@@ -130,7 +130,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: 'Pa3zZ1!'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password is too short (minimum is 10 characters)'],
       user.errors.full_messages
@@ -144,7 +144,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: 'Pa3zZ1!!'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password is too short (minimum is 11 characters)'],
       user.errors.full_messages
@@ -159,7 +159,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: password
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     # This validation error only occurs when the CustomInstancePasswordValidator
     # is used.
     assert_equal(
@@ -176,7 +176,7 @@ class TestSecureValidatableOverrides < ActiveSupport::TestCase
       password_confirmation: password
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     # This validation error only occurs when the CustomClassPasswordValidator
     # is used.
     assert_equal(

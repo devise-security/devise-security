@@ -18,16 +18,20 @@ module DeviseSecurity
 
     # Creates a devise security migration template.
     #
-    # @param template [String] The name of the migration template
-    # @param extra_options [Hash] The options Additional options for the migration template (default: {})
+    # @param migration_name [String] The output migration file name
+    # @param extra_options [Hash] Additional options for the migration template
+    # @option extra_options [String] :template_name Override the ERB template name
+    #   (defaults to migration_name). Useful when a shared template generates
+    #   different output migration names.
     # @return [void]
-    def add_devise_security_migration(template, extra_options = {})
+    def add_devise_security_migration(migration_name, extra_options = {})
       migration_dir = File.expand_path('db/migrate')
-      return if self.class.migration_exists?(migration_dir, template)
+      return if self.class.migration_exists?(migration_dir, migration_name)
 
+      template_name = extra_options.delete(:template_name) || migration_name
       migration_template(
-        "#{template}.rb.erb",
-        "db/migrate/#{template}.rb",
+        "#{template_name}.rb.erb",
+        "db/migrate/#{migration_name}.rb",
         { migration_version: migration_version }.merge(extra_options)
       )
     end

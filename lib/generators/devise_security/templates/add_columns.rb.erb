@@ -1,0 +1,14 @@
+class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version %>
+  def change
+<% columns.each do |col| -%>
+<% if col[:options] -%>
+    add_column :<%= table_name %>, :<%= col[:name] %>, :<%= col[:type] %>, <%= col[:options] %>
+<% else -%>
+    add_column :<%= table_name %>, :<%= col[:name] %>, :<%= col[:type] %>
+<% end -%>
+<% end -%>
+<% indexes.each do |idx| -%>
+    add_index :<%= table_name %>, :<%= idx[:column] %>
+<% end -%>
+  end
+end

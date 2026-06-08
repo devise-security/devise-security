@@ -25,11 +25,11 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_with_no_rules_anything_goes
-    assert(create_model('aaaa').valid?)
+    assert_predicate(create_model('aaaa'), :valid?)
   end
 
   def test_allows_blank
-    assert(create_model('', { upper: 1 }).valid?)
+    assert_predicate(create_model('', { upper: 1 }), :valid?)
   end
 
   def test_enforces_uppercase_invalid
@@ -43,7 +43,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_uppercase_valid
-    assert(create_model('Aaaa', { upper: 1 }).valid?)
+    assert_predicate(create_model('Aaaa', { upper: 1 }), :valid?)
   end
 
   def test_enforces_uppercase_count_invalid
@@ -57,7 +57,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_uppercase_count_valid
-    assert(create_model('AAaa', { upper: 2 }).valid?)
+    assert_predicate(create_model('AAaa', { upper: 2 }), :valid?)
   end
 
   def test_enforces_digit_invalid
@@ -70,7 +70,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_digit_valid
-    assert(create_model('1aaa', { digit: 1 }).valid?)
+    assert_predicate(create_model('1aaa', { digit: 1 }), :valid?)
   end
 
   def test_enforces_digit_count_invalid
@@ -83,7 +83,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_digit_count_valid
-    assert(create_model('11aa', { digit: 2 }).valid?)
+    assert_predicate(create_model('11aa', { digit: 2 }), :valid?)
   end
 
   def test_enforces_digits_invalid
@@ -96,7 +96,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_digits_valid
-    assert(create_model('1aaa', { digits: 1 }).valid?)
+    assert_predicate(create_model('1aaa', { digits: 1 }), :valid?)
   end
 
   def test_enforces_digits_count_invalid
@@ -109,7 +109,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_digits_count_valid
-    assert(create_model('11aa', { digits: 2 }).valid?)
+    assert_predicate(create_model('11aa', { digits: 2 }), :valid?)
   end
 
   def test_enforces_lower_invalid
@@ -123,7 +123,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_lower_valid
-    assert(create_model('aAAA', { lower: 1 }).valid?)
+    assert_predicate(create_model('aAAA', { lower: 1 }), :valid?)
   end
 
   def test_enforces_lower_count_invalid
@@ -137,7 +137,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_lower_count_valid
-    assert(create_model('aaAA', { lower: 2 }).valid?)
+    assert_predicate(create_model('aaAA', { lower: 2 }), :valid?)
   end
 
   def test_enforces_symbol_invalid
@@ -151,7 +151,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_symbol_valid
-    assert(create_model('!aaa', { symbol: 1 }).valid?)
+    assert_predicate(create_model('!aaa', { symbol: 1 }), :valid?)
   end
 
   def test_enforces_symbol_count_invalid
@@ -165,7 +165,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_symbol_count_valid
-    assert(create_model('!!aa', { symbol: 2 }).valid?)
+    assert_predicate(create_model('!!aa', { symbol: 2 }), :valid?)
   end
 
   def test_enforces_symbols_invalid
@@ -179,7 +179,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_symbols_valid
-    assert(create_model('!aaa', { symbols: 1 }).valid?)
+    assert_predicate(create_model('!aaa', { symbols: 1 }), :valid?)
   end
 
   def test_enforces_symbols_count_invalid
@@ -193,7 +193,7 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   end
 
   def test_enforces_symbols_count_valid
-    assert(create_model('!!aa', { symbols: 2 }).valid?)
+    assert_predicate(create_model('!!aa', { symbols: 2 }), :valid?)
   end
 
   def test_enforces_combination_only_lower_invalid
@@ -277,6 +277,6 @@ class PasswordComplexityValidatorTest < ActiveSupport::TestCase
   def test_enforces_combination_all_valid
     model = create_model('aA1!', { lower: 1, upper: 1, digit: 1, symbol: 1 })
 
-    assert(model.valid?)
+    assert_predicate(model, :valid?)
   end
 end

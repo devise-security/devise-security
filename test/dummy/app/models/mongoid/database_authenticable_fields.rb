@@ -11,7 +11,7 @@ module DatabaseAuthenticatableFields
     field :email, type: String, default: ''
 
     field :encrypted_password, type: String, default: ''
-    validates_presence_of :encrypted_password
+    validates :encrypted_password, presence: true
 
     include Mongoid::Timestamps
   end

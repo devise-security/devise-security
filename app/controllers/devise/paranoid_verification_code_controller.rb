@@ -17,6 +17,7 @@ class Devise::ParanoidVerificationCodeController < DeviseController
       bypass_sign_in resource, scope: scope
       respond_with({}, location: after_paranoid_verification_code_update_path_for(resource))
     else
+      resource.errors.add(:paranoid_verification_code, :incorrect)
       respond_with(resource, action: :show)
     end
   end

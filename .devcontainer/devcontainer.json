@@ -11,12 +11,13 @@
 	},
 
 	"containerEnv": {
+		"BUNDLE_GEMFILE": "${containerWorkspaceFolder}/Gemfile",
 		"PGHOST": "postgres",
 		"PGUSER": "postgres",
 		"PGPASSWORD": "postgres",
 		"DATABASE_URL": "postgres://postgres:postgres@postgres:5432/devise_security_test",
-		"MONGODB_URI": "mongodb://mongodb:mongodb@mongodb:27017",
-    "DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL": "true"
+		"DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL": "true",
+		"MONGODB_URI": "mongodb://mongodb:mongodb@mongodb:27017"
 	},
 
 	"postCreateCommand": ".devcontainer/boot.sh",

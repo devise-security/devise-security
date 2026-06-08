@@ -7,6 +7,7 @@ module SharedVerificationFields
 
   included do
     include SharedUser
+
     devise :paranoid_verification
 
     field :paranoid_verified_at, type: Time

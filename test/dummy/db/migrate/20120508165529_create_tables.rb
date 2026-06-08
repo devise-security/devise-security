@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateTables < MIGRATION_CLASS
-  def self.up # rubocop:disable Metrics/AbcSize
+  def self.up
     create_table :users do |t|
       t.string :username
       t.string :facebook_token

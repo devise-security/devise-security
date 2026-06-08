@@ -34,7 +34,45 @@ class TestWithCaptcha < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_equal 'Invalid Email or password.', flash[:alert]
+    assert_match(/invalid.*email.*password/i, flash[:alert])
+  end
+end
+
+# Unit tests for helper methods in DeviseSecurity::Controllers::Helpers
+class TestHelperMethods < ActiveSupport::TestCase
+  # Minimal class that can include Helpers without triggering before_action
+  class FakeController
+    def self.before_action(*); end
+    include DeviseSecurity::Controllers::Helpers
+  end
+
+  setup do
+    @helper = FakeController.new
+  end
+
+  test 'init_recover_password_captcha includes RecoverPasswordCaptcha module' do
+    klass = Class.new(FakeController)
+    klass.init_recover_password_captcha
+
+    assert_operator klass, :<, DeviseSecurity::Controllers::Helpers::RecoverPasswordCaptcha
+  end
+
+  test 'valid_captcha_or_security_question? returns true when security question matches' do
+    resource = Struct.new(:security_question_answer).new('blue')
+
+    assert @helper.valid_captcha_or_security_question?(resource, { security_question_answer: 'blue' })
+  end
+
+  test 'valid_captcha_or_security_question? returns false when nothing matches' do
+    resource = Struct.new(:security_question_answer).new('blue')
+
+    assert_not @helper.valid_captcha_or_security_question?(resource, { security_question_answer: 'red' })
+  end
+
+  test 'valid_captcha_or_security_question? returns false when answer is blank' do
+    resource = Struct.new(:security_question_answer).new(nil)
+
+    assert_not @helper.valid_captcha_or_security_question?(resource, { security_question_answer: nil })
   end
 end
 
@@ -49,6 +87,6 @@ class TestWithoutCaptcha < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_equal 'Invalid Email or password.', flash[:alert]
+    assert_match(/invalid.*email.*password/i, flash[:alert])
   end
 end

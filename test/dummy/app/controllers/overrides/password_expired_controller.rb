@@ -2,7 +2,7 @@
 
 class Overrides::PasswordExpiredController < Devise::PasswordExpiredController
   def update
-    super do |resource|
+    super do |_resource|
       @update_block_called = true
     end
   end

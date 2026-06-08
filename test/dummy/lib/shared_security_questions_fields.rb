@@ -7,6 +7,7 @@ module SharedSecurityQuestionsFields
 
   included do
     include SharedUser
+
     devise :lockable, :security_questionable
 
     field :locked_at, type: Time

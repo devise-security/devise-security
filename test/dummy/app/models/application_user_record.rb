@@ -7,6 +7,7 @@ if DEVISE_ORM == :active_record
 else
   class ApplicationUserRecord
     include Mongoid::Document
+
     store_in collection: 'users'
   end
 end

@@ -25,7 +25,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password: 'Password1!', password_confirmation: 'Password1!'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(["Email can't be blank"], user.errors.full_messages)
   end
 
@@ -34,7 +34,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password: 'Password1!', password_confirmation: 'Password1!'
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'email cannot be updated to be blank' do
@@ -44,11 +44,11 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'Password1!'
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
 
     user.email = nil
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(["Email can't be blank"], user.errors.full_messages)
   end
 
@@ -59,11 +59,11 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'Password1!'
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
 
     user.email = nil
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'email must be valid' do
@@ -71,7 +71,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       email: 'bob', password: 'Password1!', password_confirmation: 'Password1!'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(['Email is invalid'], user.errors.full_messages)
   end
 
@@ -82,7 +82,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'password1!'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       [
         'Email is invalid',
@@ -99,7 +99,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
     msgs << "Encrypted password can't be blank" if DEVISE_ORM == :mongoid
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(msgs, user.errors.full_messages)
   end
 
@@ -110,12 +110,12 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'Password1!'
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
 
     user.password = nil
     user.password_confirmation = nil
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(["Password can't be blank"], user.errors.full_messages)
   end
 
@@ -126,7 +126,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'not the same password'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ["Password confirmation doesn't match Password"],
       user.errors.full_messages
@@ -140,7 +140,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: ''
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ["Password confirmation doesn't match Password"],
       user.errors.full_messages
@@ -154,7 +154,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: nil
     )
 
-    assert user.valid?
+    assert_predicate user, :valid?
   end
 
   test 'password must have capital letter' do
@@ -164,7 +164,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'password1'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must contain at least one upper-case letter'],
       user.errors.full_messages
@@ -178,7 +178,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'PASSWORD1'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must contain at least one lower-case letter'],
       user.errors.full_messages
@@ -192,7 +192,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'PASSword'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must contain at least one digit'],
       user.errors.full_messages
@@ -206,7 +206,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'Pa3zZ'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password is too short (minimum is 7 characters)'],
       user.errors.full_messages
@@ -222,7 +222,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     User.create!(options)
     user = User.new(options)
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(['Email has already been taken'], user.errors.full_messages)
   end
 
@@ -237,7 +237,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
     options[:email] = email
     user = User.new(options)
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(['Email has already been taken'], user.errors.full_messages)
   end
 
@@ -248,7 +248,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'Bob1@microsoft.com'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must be different than the email.'],
       user.errors.full_messages
@@ -262,7 +262,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'BoB1@microsoft.com'
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must be different than the email.'],
       user.errors.full_messages
@@ -276,14 +276,14 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: 'Bob1@microsoft.com    '
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must be different than the email.'],
       user.errors.full_messages
     )
   end
 
-  test 'password cannot equal case sensitive version of email with spaces '\
+  test 'password cannot equal case sensitive version of email with spaces ' \
        'for new user' do
     user = User.new(
       email: 'Bob1@microsoft.com',
@@ -291,7 +291,7 @@ class TestSecureValidatable < ActiveSupport::TestCase
       password_confirmation: '  boB1@microsoft.com   '
     )
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must be different than the email.'],
       user.errors.full_messages
@@ -307,11 +307,17 @@ class TestSecureValidatable < ActiveSupport::TestCase
 
     user.password = 'Password1!'
 
-    assert user.invalid?
+    assert_predicate user, :invalid?
     assert_equal(
       ['Password must be different than the current password.'],
       user.errors.full_messages
     )
+  end
+
+  test 'validate_email_uniqueness? returns true by default' do
+    user = build(:user)
+
+    assert_predicate user, :validate_email_uniqueness?
   end
 
   test 'should not be included in objects with invalid API' do

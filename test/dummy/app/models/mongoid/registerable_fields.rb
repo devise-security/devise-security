@@ -8,10 +8,10 @@ module RegisterableFields
 
     ## Database authenticatable
     field :email, type: String, default: ''
-    validates_presence_of :email
+    validates :email, presence: true
 
     field :encrypted_password, type: String, default: ''
-    validates_presence_of :encrypted_password
+    validates :encrypted_password, presence: true
 
     field :password_changed_at, type: Time
     index({ password_changed_at: 1 }, {})

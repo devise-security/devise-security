@@ -7,6 +7,7 @@ module SharedVerificationColumns
 
   included do
     include SharedUser
+
     devise :expirable
 
     field :expired_at, type: Time

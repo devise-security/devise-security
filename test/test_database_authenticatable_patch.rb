@@ -4,11 +4,7 @@ require 'test_helper'
 
 class TestDatabaseAuthenticatablePatch < ActiveSupport::TestCase
   def create_user
-    User.create(
-      email: generate_unique_email,
-      password: 'Password1!',
-      password_confirmation: 'Password1!'
-    ) do |user|
+    create(:user, password: 'Password1!').tap do |user|
       user.extend(Devise::Models::DatabaseAuthenticatablePatch)
     end
   end

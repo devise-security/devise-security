@@ -1,0 +1,31 @@
+# Rails main branch (head) for nightly CI testing
+
+source "https://rubygems.org"
+
+gem "railties", github: "rails/rails", branch: "main"
+gem "activemodel", github: "rails/rails", branch: "main"
+gem "activerecord", github: "rails/rails", branch: "main"
+gem "activesupport", github: "rails/rails", branch: "main"
+gem "actionmailer", github: "rails/rails", branch: "main"
+gem "actionpack", github: "rails/rails", branch: "main"
+gem "bigdecimal", require: false
+gem "drb", require: false
+
+group :active_record do
+  gem "pg"
+  gem "sqlite3", "~> 2.1"
+end
+
+group :mongoid do
+  gem "mongoid", "~> 9.0"
+
+  group :test do
+    gem "database_cleaner-mongoid", "~> 2.0"
+  end
+end
+
+group :test do
+  gem "rails-controller-testing"
+end
+
+gemspec path: "../"

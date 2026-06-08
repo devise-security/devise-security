@@ -4,6 +4,7 @@ bg:
       taken_in_past: 'е използвана и преди.'
       equal_to_current_password: 'трябва да е различна от настоящата парола.'
       equal_to_email: 'трябва да е различна от e-mail адреса.'
+      incorrect: 'is incorrect.'
       password_complexity:
         digit:
           one: трябва да съдържа поне една цифра

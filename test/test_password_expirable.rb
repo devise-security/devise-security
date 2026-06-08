@@ -17,83 +17,97 @@ class TestPasswordExpirable < ActiveSupport::TestCase
 
   test 'does nothing if disabled' do
     Devise.expire_password_after = false
-    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+    user = create(:user)
+
     assert_not user.need_change_password?
     assert_not user.password_expired?
     user.need_change_password!
+
     assert_not user.need_change_password?
     assert_not user.password_expired?
   end
 
   test 'password change can be requested' do
     Devise.expire_password_after = true
-    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+    user = create(:user)
+
     assert_not user.need_change_password?
     assert_not user.password_expired?
     assert_not user.password_change_requested?
     user.need_change_password!
-    assert user.need_change_password?
+
+    assert_predicate user, :need_change_password?
     assert_not user.password_expired? # it's not too old because it's not set at all
-    assert user.password_change_requested?
+    assert_predicate user, :password_change_requested?
   end
 
   test 'password expires' do
-    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+    user = create(:user)
+
     assert_not user.need_change_password?
     assert_not user.password_expired?
     assert_not user.password_too_old?
     user.update(password_changed_at: Time.zone.now.ago(3.months))
-    assert user.password_too_old?
-    assert user.need_change_password?
-    assert user.password_expired?
+
+    assert_predicate user, :password_too_old?
+    assert_predicate user, :need_change_password?
+    assert_predicate user, :password_expired?
     assert_not user.password_change_requested?
   end
 
   test 'saving a record records the time the password was changed' do
-    user = User.new email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+    user = build(:user)
+
     assert_nil user.password_changed_at
     assert_not user.password_change_requested?
     assert_not user.password_expired?
     user.save
-    assert user.password_changed_at.present?
+
+    assert_predicate user.password_changed_at, :present?
     assert_not user.password_change_requested?
     assert_not user.password_expired?
   end
 
   test 'updating a record updates the time the password was changed if the password is changed' do
-    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+    user = create(:user)
     user.update(password_changed_at: Time.zone.now.ago(3.months))
     original_password_changed_at = user.password_changed_at
     user.expire_password!
-    assert user.password_change_requested?
+
+    assert_predicate user, :password_change_requested?
     user.password = 'NewPassword1'
     user.password_confirmation = 'NewPassword1'
     user.save
-    assert user.password_changed_at > original_password_changed_at
+
+    assert_operator user.password_changed_at, :>, original_password_changed_at
     assert_not user.password_change_requested?
   end
 
   test 'updating a record does not updates the time the password was changed if the password was not changed' do
-    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+    user = create(:user)
     user.expire_password!
-    assert user.password_change_requested?
+
+    assert_predicate user, :password_change_requested?
     user.save
+
     assert_not user.previous_changes.key?(:password_changed_at)
-    assert user.password_change_requested?
+    assert_predicate user, :password_change_requested?
   end
 
   test 'override expire after at runtime' do
-    user = User.create email: generate_unique_email, password: 'Password1', password_confirmation: 'Password1'
+    user = create(:user)
     user.instance_eval do
       def expire_password_after
         4.months
       end
     end
     user.password_changed_at = Time.zone.now.ago(3.months)
+
     assert_not user.need_change_password?
     assert_not user.password_expired?
     user.password_changed_at = Time.zone.now.ago(5.months)
-    assert user.need_change_password?
-    assert user.password_expired?
+
+    assert_predicate user, :need_change_password?
+    assert_predicate user, :password_expired?
   end
 end

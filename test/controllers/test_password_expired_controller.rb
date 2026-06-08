@@ -8,15 +8,14 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   setup do
     @controller.class.respond_to :json, :xml
     @request.env['devise.mapping'] = Devise.mappings[:user]
-    @user = User.create!(
-      username: 'hello',
-      email: generate_unique_email,
-      password: 'Password4',
-      password_changed_at: 4.months.ago,
-      confirmed_at: 5.months.ago
-    )
-    assert @user.valid?
-    assert @user.need_change_password?
+    @user = create_user({
+                          password: 'Password4',
+                          password_changed_at: 4.months.ago,
+                          confirmed_at: 5.months.ago
+                        })
+
+    assert_predicate @user, :valid?
+    assert_predicate @user, :need_change_password?
 
     sign_in(@user)
   end
@@ -24,29 +23,34 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
   test 'redirects on show if user not logged in' do
     sign_out(@user)
     get :show
+
     assert_redirected_to :root
   end
 
   test 'redirects on show if user does not need password change' do
     @user.update(password_changed_at: Time.zone.now)
     get :show
+
     assert_redirected_to :root
   end
 
   test 'should render show' do
     get :show
+
     assert_includes @response.body, 'Renew your password'
   end
 
   test 'redirects on update if user not logged in' do
     sign_out(@user)
     put :update
+
     assert_redirected_to :root
   end
 
   test 'redirects on update if user does not need password change' do
     @user.update(password_changed_at: Time.zone.now)
     put :update
+
     assert_redirected_to :root
   end
 
@@ -61,6 +65,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
         }
       }
     )
+
     assert_redirected_to root_path
     assert_equal('text/html', response.media_type)
   end
@@ -99,7 +104,7 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
       }
     )
 
-    assert_response 204
+    assert_response :no_content
     assert_equal root_url, response.location
     assert_nil response.media_type, 'No Content-Type header should be set for No Content response'
   end
@@ -116,7 +121,8 @@ class Devise::PasswordExpiredControllerTest < ActionController::TestCase
         }
       }
     )
-    assert_response 204
+
+    assert_response :no_content
     assert_equal root_url, response.location
     assert_nil response.media_type, 'No Content-Type header should be set for No Content response'
   end
@@ -124,20 +130,20 @@ end
 
 class PasswordExpiredCustomRedirectTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
+
   tests Overrides::PasswordExpiredController
 
   setup do
     @controller.class.respond_to :json, :xml
     @request.env['devise.mapping'] = Devise.mappings[:password_expired_user]
-    @user = PasswordExpiredUser.create!(
-      username: 'hello',
-      email: generate_unique_email,
-      password: 'Password4',
-      password_changed_at: 4.months.ago,
-      confirmed_at: 5.months.ago
-    )
-    assert @user.valid?
-    assert @user.need_change_password?
+    @user = create_user({
+                          password: 'Password4',
+                          password_changed_at: 4.months.ago,
+                          confirmed_at: 5.months.ago
+                        }, PasswordExpiredUser)
+
+    assert_predicate @user, :valid?
+    assert_predicate @user, :need_change_password?
 
     sign_in(@user)
   end
@@ -159,6 +165,7 @@ class PasswordExpiredCustomRedirectTest < ActionController::TestCase
 
   test 'yield resource to block on update' do
     put(:update, params: { password_expired_user: { current_password: '123' } })
-    assert @controller.update_block_called?, 'Update failed to yield resource to provided block'
+
+    assert_predicate @controller, :update_block_called?, 'Update failed to yield resource to provided block'
   end
 end

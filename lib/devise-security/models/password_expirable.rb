@@ -21,10 +21,12 @@ module Devise::Models
       scope :with_password_change_requested, -> { where(password_changed_at: nil) }
       scope :without_password_change_requested, -> { where.not(password_changed_at: nil) }
       scope :with_expired_password, -> { where('password_changed_at is NULL OR password_changed_at < ?', expire_password_after.seconds.ago) }
-      scope :without_expired_password, -> { without_password_change_requested.where('password_changed_at >= ?', expire_password_after.seconds.ago) }
+      scope :without_expired_password, -> { without_password_change_requested.where(password_changed_at: expire_password_after.seconds.ago..) }
       before_save :update_password_changed
     end
 
+    # @param _klass [Class] the model class including this module
+    # @return [Array<Symbol>] required database columns
     def self.required_fields(_klass)
       [:password_changed_at]
     end
@@ -47,7 +49,9 @@ module Devise::Models
       need_change_password
       save(validate: false)
     end
+    # @see #need_change_password!
     alias expire_password! need_change_password!
+    # @see #need_change_password!
     alias request_password_change! need_change_password!
 
     # Clear the +password_changed_at+ field so that the user will be required to
@@ -59,15 +63,15 @@ module Devise::Models
 
       self.password_changed_at = nil
     end
+    # @see #need_change_password
     alias expire_password need_change_password
+    # @see #need_change_password
     alias request_password_change need_change_password
 
     # @return [Integer] number of seconds passwords are valid for
     # @return [true] passwords are expired 'on demand' only.
     # @return [false] passwords never expire (this feature is disabled)
-    def expire_password_after
-      self.class.expire_password_after
-    end
+    delegate :expire_password_after, to: :class
 
     # When +password_changed_at+ is set to +NULL+ in the database
     # the user is required to change their password.  This only happens
@@ -89,24 +93,24 @@ module Devise::Models
 
       password_changed_at < expire_password_after.seconds.ago
     end
+    # @see #password_too_old?
     alias password_expired? password_too_old?
 
     private
 
     # Update +password_changed_at+ for new records and changed passwords.
     # @note called as a +before_save+ hook
+    # @return [void]
     def update_password_changed
-      if defined?(will_save_change_to_attribute?)
-        return unless (new_record? || will_save_change_to_encrypted_password?) && !will_save_change_to_password_changed_at?
-      else
-        return unless (new_record? || encrypted_password_changed?) && !password_changed_at_changed?
-      end
+      return unless (new_record? || will_save_change_to_encrypted_password?) && !will_save_change_to_password_changed_at?
 
       self.password_changed_at = Time.zone.now
     end
 
     # Enabled if configuration +expire_password_after+ is set to an {Integer},
-    # {Float}, or {true}
+    # {Float}, or {true}.
+    #
+    # @return [Boolean]
     def password_expiration_enabled?
       expire_password_after.is_a?(1.class) ||
         expire_password_after.is_a?(Float) ||
@@ -115,11 +119,13 @@ module Devise::Models
 
     # When +expire_password_after+ is set to +true+ then only expire passwords
     # on demand.
+    #
+    # @return [Boolean]
     def expire_password_on_demand?
       expire_password_after.present? && expire_password_after == true
     end
 
-    module ClassMethods
+    class_methods do
       ::Devise::Models.config(self, :expire_password_after)
     end
   end
