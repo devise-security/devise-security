@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
   }
 
   s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
-  s.test_files    = Dir['test/**/*']
   s.require_paths = ['lib']
   s.required_ruby_version = '>= 3.1.0'
 
