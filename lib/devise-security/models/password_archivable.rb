@@ -27,7 +27,7 @@ module Devise
         errors.add(:password, :taken_in_past) if will_save_change_to_encrypted_password? && password_archive_included?
       end
 
-      # @return [Integer] max number of old passwords to store and check
+      # @return [Integer] max number of old passwords to check
       def max_old_passwords
         case deny_old_passwords
         when true
@@ -37,6 +37,14 @@ module Devise
         else
           deny_old_passwords.to_i
         end
+      end
+
+      # The archive keeps +password_archiving_count+ passwords, but never fewer than are checked.
+      # @return [Integer] max number of old passwords to store
+      def max_archived_passwords
+        return 0 unless max_old_passwords.positive?
+
+        [archive_count.to_i, max_old_passwords].max
       end
 
       # validate if the password was used in the past
@@ -73,11 +81,11 @@ module Devise
       # @note we check to see if an old password has already been archived because
       #   mongoid will keep re-triggering this callback when we add an old password
       def archive_password
-        if max_old_passwords.positive?
+        if max_archived_passwords.positive?
           return true if old_passwords.where(encrypted_password: encrypted_password_was).exists?
 
           old_passwords.create!(encrypted_password: encrypted_password_was) if encrypted_password_was.present?
-          old_passwords.reorder(created_at: :desc).offset(max_old_passwords).destroy_all
+          old_passwords.reorder(created_at: :desc).offset(max_archived_passwords).destroy_all
         else
           old_passwords.destroy_all
         end
