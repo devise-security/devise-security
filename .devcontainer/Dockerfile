@@ -1,6 +1,6 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.191.1/containers/ruby/.devcontainer/base.Dockerfile
 
-# [Choice] Ruby version: 3, 3.3, 3.2, 3.1, 3.0, 2, 2.7, 2.6
+# [Choice] Image tag: 3-3.4-trixie, 3-3.3-trixie, 3-3.2-trixie
 ARG VARIANT="3-3.4-trixie"
 FROM mcr.microsoft.com/devcontainers/ruby:${VARIANT}
 
