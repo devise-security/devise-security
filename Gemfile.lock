@@ -134,14 +134,14 @@ GEM
       reline
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (1.1.2)
+    i18n-tasks (1.2.0)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
       erubi
       highline (>= 3.0.0)
       i18n
       parser (>= 3.2.2.1)
-      prism
+      prism (>= 0.28)
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.8, >= 1.8.1)
@@ -390,7 +390,7 @@ DEPENDENCIES
   devise-security!
   drb
   easy_captcha
-  i18n-tasks
+  i18n-tasks (>= 1.2)
   logger
   m
   minitest
