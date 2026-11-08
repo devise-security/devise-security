@@ -6,16 +6,16 @@ fr:
       equal_to_email: doit être différent de l'e-mail
       password_complexity:
         digit:
-          one: doit contenir au moins un chiffre
+          one: doit contenir au moins %{count} chiffre
           other: doit contenir au moins %{count} chiffres
         lower:
-          one: doit contenir au moins une lettre minuscule
+          one: doit contenir au moins %{count} lettre minuscule
           other: doit contenir au moins %{count} lettres minuscules
         symbol:
-          one: doit contenir au moins un signe de ponctuation
+          one: doit contenir au moins %{count} signe de ponctuation
           other: doit contenir au moins %{count} signes de ponctuation
         upper:
-          one: doit contenir au moins une lettre majuscule
+          one: doit contenir au moins %{count} lettre majuscule
           other: doit contenir au moins %{count} lettres majuscules
   devise:
     invalid_captcha: Le captcha n'est pas valide
