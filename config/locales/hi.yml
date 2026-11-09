@@ -7,16 +7,16 @@ hi:
       equal_to_email: ईमेल से अलग होना चाहिए
       password_complexity:
         digit:
-          one: एक अंक होना चाहिए
+          one: कम से कम %{count} अंक होना चाहिए
           other: कम से कम %{count} अंक होने चाहिए
         lower:
-          one: एक लोअर-केस अक्षर होना चाहिए
+          one: कम से कम %{count} लोअर-केस अक्षर होना चाहिए
           other: कम से कम %{count} अक्षर होने चाहिए
         symbol:
-          one: एक चिन्ह होना चाहिए
+          one: कम से कम %{count} चिन्ह होना चाहिए
           other: कम से कम %{count} चिन्ह होने चाहिए
         upper:
-          one: एक अपर-केस अक्षर होना चाहिए
+          one: कम से कम %{count} अपर-केस अक्षर होना चाहिए
           other: कम से कम %{count} अपर-केस अक्षर होने चाहिए
   devise:
     invalid_captcha: अमान्य कॅप्टचा

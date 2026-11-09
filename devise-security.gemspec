@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
   }
 
   s.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'app/**/*', 'config/**/*']
-  s.test_files    = Dir['test/**/*']
   s.require_paths = ['lib']
   s.required_ruby_version = '>= 3.1.0'
 
@@ -36,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'easy_captcha'
-  s.add_development_dependency 'i18n-tasks'
+  s.add_development_dependency 'i18n-tasks', '>= 1.2'
   s.add_development_dependency 'logger'
   s.add_development_dependency 'm'
   s.add_development_dependency 'minitest'
