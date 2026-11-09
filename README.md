@@ -97,6 +97,8 @@ Devise.setup do |config|
   # config.password_archiving_count = 5
 
   # Deny old password (true, false, count)
+  # true: deny all archived passwords, false: allow old passwords (and keep no archive),
+  # count: deny only the last `count` passwords
   # config.deny_old_passwords = true
 
   # captcha integration for recover form

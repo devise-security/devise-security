@@ -17,7 +17,7 @@ Devise.setup do |config|
 
   # Deny old passwords (true, false, number_of_old_passwords_to_check)
   # Examples:
-  # config.deny_old_passwords = false # allow old passwords
+  # config.deny_old_passwords = false # allow old passwords (and keep no archive)
   # config.deny_old_passwords = true # will deny all the old passwords
   # config.deny_old_passwords = 3 # will deny new passwords that matches with the last 3 passwords
   # config.deny_old_passwords = true
